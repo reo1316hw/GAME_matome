@@ -1,11 +1,11 @@
 # Prerequisites
 *.d
+*.exe
 
 # Compiled Object files
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -27,6 +27,10 @@
 *.lib
 
 # Executables
-*.exe
-*.out
-*.app
+BALLRUN/Action/Debug/
+BALLRUN/Action/Release/
+3dActionGame/Action/.vs/OpenGL/v16/ipch/AutoPCH/21987646fd77154d/MESHCOMPONENT.ipch
+3dActionGame/Action/.vs/
+3dActionGame/Action/Debug/
+3dActionGame/Action/Release/
+BALLRUN/Action/.vs/
