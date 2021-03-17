@@ -35,12 +35,6 @@ PlayerState PlayerObjectStateSprintLoop::Update(PlayerObject* _owner, float _del
 		return PlayerState::PLAYER_STATE_RUN_LOOP;
 	}
 
-	// 攻撃ボタンが押されたか？
-	if (mIsAttack)
-	{
-		return PlayerState::PLAYER_STATE_ATTACK1;
-	}
-
 	//// ジャンプボタンが押されたか？
 	//if (IsJump)
 	//{
@@ -68,9 +62,6 @@ void PlayerObjectStateSprintLoop::Inipt(PlayerObject* _owner, const InputState& 
 
 	//左Shiftキーが入力されたか
 	mIsRun = _keyState.Keyboard.GetKeyValue(SDL_SCANCODE_LSHIFT);
-
-	//Enterキーが入力されたか
-	mIsAttack = _keyState.Keyboard.GetKeyValue(SDL_SCANCODE_RETURN);
 
 	//bool IsJump = INPUT_INSTANCE.IsKeyPushdown(KEY_B);
 

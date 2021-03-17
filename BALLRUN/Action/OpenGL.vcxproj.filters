@@ -110,9 +110,6 @@
     <ClCompile Include="SandEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="tutorialEffect.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialVerticalEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
@@ -210,6 +207,9 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="TutorialEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -323,9 +323,6 @@
     <ClInclude Include="SandEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="tutorialEffect.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialVerticalEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
@@ -423,6 +420,9 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="TutorialEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

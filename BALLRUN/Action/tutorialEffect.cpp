@@ -1,4 +1,4 @@
-#include "tutorialEffect.h"
+#include "TutorialEffect.h"
 
 TutorialEffect::TutorialEffect(const Vector3& _pos, const Vector3& _velocity, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	:ParticleEffectBase(_pos, _velocity, 0, "Assets/operation.png", _sceneTag, _objectTag)

@@ -176,7 +176,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="tutorialEffect.cpp" />
+    <ClCompile Include="TutorialEffect.cpp" />
     <ClCompile Include="TutorialVerticalEffect.cpp" />
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -252,7 +252,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="tutorialEffect.h" />
+    <ClInclude Include="TutorialEffect.h" />
     <ClInclude Include="TutorialVerticalEffect.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameObject.h" />
