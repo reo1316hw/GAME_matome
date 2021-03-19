@@ -14,7 +14,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -23,14 +22,11 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
-*.lib
 
 # Executables
 BALLRUN/Action/.vs/
 BALLRUN/Action/Debug/
 BALLRUN/Action/Release/
-3dActionGame/Action/.vs/OpenGL/v16/ipch/AutoPCH/21987646fd77154d/MESHCOMPONENT.ipch
 3dActionGame/Action/.vs/
 3dActionGame/Action/Debug/
 3dActionGame/Action/Release/

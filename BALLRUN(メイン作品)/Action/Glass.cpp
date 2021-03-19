@@ -1,0 +1,95 @@
+#include "Glass.h"
+//#include "InvisibleMeshComponent.h"
+#include "MeshComponent.h"
+#include "Mesh.h"
+#include "Renderer.h"
+#include "BoxCollider.h"
+
+Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,const SceneBase::Scene _sceneTag) :
+	GameObject(_sceneTag,_objectTag)
+{
+	//GameObjectメンバ変数の初期化
+	mTag = _objectTag;
+	SetScale(_size);
+	SetPosition(_pos);
+
+	mDownCount = 0;
+
+	switch (_sceneTag)
+	{
+	case SceneBase::Scene::tutorial:
+
+		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		mMeshComponent = new MeshComponent(this);
+		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_02.gpmesh"));
+
+		// 当たり判定
+		mMesh = new Mesh;
+		mMesh = RENDERER->GetMesh("Assets/box_02.gpmesh");
+		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider->SetObjectBox(mMesh->GetBox());
+
+		break;
+	case SceneBase::Scene::stage01:
+
+		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		mMeshComponent = new MeshComponent(this);
+		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_09.gpmesh"));
+
+		// 当たり判定
+		mMesh = new Mesh;
+		mMesh = RENDERER->GetMesh("Assets/box_09.gpmesh");
+		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider->SetObjectBox(mMesh->GetBox());
+
+		break;
+	case SceneBase::Scene::stage02:
+
+		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		mMeshComponent = new MeshComponent(this);
+		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_14.gpmesh"));
+
+		// 当たり判定
+		mMesh = new Mesh;
+		mMesh = RENDERER->GetMesh("Assets/box_14.gpmesh");
+		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider->SetObjectBox(mMesh->GetBox());
+
+		break;
+	}
+}
+
+void Glass::UpdateGameObject(float _deltaTime)
+{
+	if (Player::GetRespawnFlag())
+	{
+		mHitFlag = false;
+		mDownCount = 0;
+		mVelocity.y = 0;
+		mPosition.y = 0;
+	}
+
+	if (mHitFlag)
+	{
+		mDownCount++;
+	}
+
+	if (mDownCount >= 15)
+	{
+		mVelocity.y = -DOWN_SPEED;
+	}
+
+	// 常に座標に速度を足すugjk
+	mPosition += mVelocity;
+
+	SetPosition(mPosition);
+}
+
+// 当たり判定
+void Glass::OnCollision(const GameObject& _hitObject)
+{
+	mHitFlag = true;
+}
