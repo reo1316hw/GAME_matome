@@ -1,10 +1,5 @@
 #pragma once
 #include "SceneBase.h"
-#include "MapCreate.h"
-#include "Player.h"
-#include "Goal.h"
-
-class HeartUI;
 
 class Stage02Scene : public SceneBase
 {
@@ -13,20 +8,15 @@ public:
 	~Stage02Scene();
 
 	SceneBase* update() override;
-	void       draw() override;
 
-	static bool GetContinueStage02Flag() { return sendContinueStage02Flag; };
-	static void SetContinueStage02Flag(bool _continue) { sendContinueStage02Flag = _continue; };
+	static bool GetContinueStage02Flag() { return mSendContinueStage02Flag; };
+	static void SetContinueStage02Flag(bool _continue) { mSendContinueStage02Flag = _continue; };
 
 private:
-	MapCreate*			mapCreate;
-	Player*				player;
-	Goal*				goal;
-	HeartUI*			heartUI;
 
-	static bool sendContinueStage02Flag;
+	static bool mSendContinueStage02Flag;
 
-	bool continueStage02Flag;
-	int count;
+	bool mContinueStage02Flag;
+	int mCount;
 };
 

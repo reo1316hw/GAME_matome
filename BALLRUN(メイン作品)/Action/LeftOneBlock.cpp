@@ -20,7 +20,7 @@ LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag&
 	{
 	case SceneBase::Scene::tutorial:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したLeftOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_07.gpmesh"));
@@ -35,7 +35,7 @@ LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag&
 
 	case SceneBase::Scene::stage02:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したLeftOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_19.gpmesh"));

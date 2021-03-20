@@ -19,7 +19,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 	{
 	case SceneBase::Scene::tutorial:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_02.gpmesh"));
@@ -33,7 +33,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 		break;
 	case SceneBase::Scene::stage01:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_09.gpmesh"));
@@ -47,7 +47,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 		break;
 	case SceneBase::Scene::stage02:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_14.gpmesh"));
@@ -82,7 +82,7 @@ void Glass::UpdateGameObject(float _deltaTime)
 		mVelocity.y = -DOWN_SPEED;
 	}
 
-	// 常に座標に速度を足すugjk
+	// 常に座標に速度を足す
 	mPosition += mVelocity;
 
 	SetPosition(mPosition);

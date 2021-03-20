@@ -10,30 +10,30 @@ GameClear::GameClear(const Scene& _scene)
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(1.0f, 0.7f, -0.7f);
+	dir.m_direction = Vector3(1.0f, 0.7f, -0.7f);
 	//dir.diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
-	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	SetScene(_scene);
 
-	inputSystem = new InputSystem();
-	inputSystem->Initialize();
+	mInputSystem = new InputSystem();
+	mInputSystem->Initialize();
 
-	sprite = new Sprite("Assets/GameClear.png");
+	mSprite = new Sprite("Assets/GameClear.png");
 
-	count = 0;
+	mNextSceneCount = 0;
 }
 
 GameClear::~GameClear()
 {
-	delete sprite;
+	delete mSprite;
 }
 
 SceneBase* GameClear::update()
 {
-	count++;
-	if (count >= 160)
+	mNextSceneCount++;
+	if (mNextSceneCount >= 160)
 	{
 		return new TitleScene(title);
 	}
@@ -46,9 +46,4 @@ SceneBase* GameClear::update()
 	//}
 
 	return this;
-}
-
-void GameClear::draw()
-{
-	RENDERER->Draw();
 }

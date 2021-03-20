@@ -13,13 +13,9 @@ public:
 	~ContinueScene();
 
 	SceneBase* update() override;
-	void       draw() override;
 private:
-	Tutorial* tutorial;
-	Stage01Scene* stage01;
-	Stage02Scene* stage02;
-
-	int scene;
-	int count;
+	Tutorial*	  mTutorial;
+	Stage01Scene* mStage01;
+	Stage02Scene* mStage02;
 };
 

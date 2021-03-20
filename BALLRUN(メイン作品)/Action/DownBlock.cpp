@@ -15,7 +15,7 @@ DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 
 	mEndPos = Vector3(_pos.x, _pos.y - 1600, _pos.z);
 
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したDownBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_13.gpmesh"));

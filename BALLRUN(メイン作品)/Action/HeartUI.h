@@ -14,6 +14,6 @@ public:
 
 private:
 
-	UIComponent* ui;
+	UIComponent* mUI;
 	Player* player;
 };

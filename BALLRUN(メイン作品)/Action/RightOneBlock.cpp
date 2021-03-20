@@ -20,7 +20,7 @@ RightOneBlock::RightOneBlock(const Vector3& _pos, const Vector3& _size, const Ta
 	{
 	case SceneBase::Scene::tutorial:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したRightOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_06.gpmesh"));
@@ -35,7 +35,7 @@ RightOneBlock::RightOneBlock(const Vector3& _pos, const Vector3& _size, const Ta
 
 	case SceneBase::Scene::stage02:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したRightOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_18.gpmesh"));

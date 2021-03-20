@@ -23,7 +23,7 @@ LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 	mEndPos = Vector3(_pos.x - 600, _pos.y, _pos.z);
 	mInversionPos = Vector3(_pos.x + 60, _pos.y, _pos.z);
 
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したLeftBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));

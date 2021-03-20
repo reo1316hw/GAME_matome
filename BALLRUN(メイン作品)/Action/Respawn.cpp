@@ -18,14 +18,17 @@ Respawn::Respawn(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 
 	if (mTag == respawn01)
 	{
+		//生成したRespawn01の生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mBoxcollider = new BoxCollider(this, ColliderTag::respawn01, GetOnCollisionFunc());
 	}
 	if (mTag == respawn02)
 	{
+		//生成したRespawn02の生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mBoxcollider = new BoxCollider(this, ColliderTag::respawn02, GetOnCollisionFunc());
 	}
 	if (mTag == respawn03)
 	{
+		//生成したRespawn03の生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mBoxcollider = new BoxCollider(this, ColliderTag::respawn03, GetOnCollisionFunc());
 	}
 

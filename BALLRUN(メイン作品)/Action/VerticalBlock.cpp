@@ -12,7 +12,7 @@ VerticalBlock::VerticalBlock(const Vector3& _pos, const Vector3& _size, const Ta
 	SetScale(_size);
 	SetPosition(_pos);
 
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したVerticalBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));

@@ -8,9 +8,6 @@ public:
 	~GameClear();
 
 	SceneBase* update() override;
-	void       draw() override;
 private:
-
-	int count;
 };
 

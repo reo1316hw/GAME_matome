@@ -16,7 +16,7 @@ UpBlock_02::UpBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
 	mEndPos = Vector3(_pos.x, _pos.y + 200, _pos.z);
 
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したUpBlock_02の生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));

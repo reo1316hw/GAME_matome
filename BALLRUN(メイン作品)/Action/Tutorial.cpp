@@ -7,106 +7,91 @@
 #include "ContinueScene.h"
 #include "EffectManager.h"
 #include "Sprite.h"
+#include "TutorialVerticalEffect.h"
+#include "TutorialEffect.h"
+#include "Goal.h"
+#include "MapCreate.h"
+#include "HeartUI.h"
 
-bool	Tutorial::sendContinueTutorialFlag = false;
+bool	Tutorial::mSendContinueTutorialFlag = false;
 
 Tutorial::Tutorial(const Scene& _scene)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, 1.0f, 0.0f);
+	dir.m_direction = Vector3(0.0f, 1.0f, 0.0f);
 	//dir.diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
-	dir.diffuseColor = Vector3(0.5f, 0.6f, 0.8f);
-	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+	dir.m_diffuseColor = Vector3(0.5f, 0.6f, 0.8f);
+	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	SetScene(_scene);
-	/*GameObject::CreateMainCamera();*/
 
-	/*
-	テストモデルの生成　解放はこのオブジェクトの継承元が自動でオブジェクト全体を管理しているクラスに追加されそのクラスで行われる
-	①TestObjectが生成される
-	②基底クラス内でGameObjectManager内のコンテナに追加される
-	③GameObjectManagerが解放される時に全てのゲームオブジェクトが解放される
-	*/
+	mTutorialEffect = new TutorialEffect(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mTutorialVertEffect = new TutorialVerticalEffect(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mGoalLine = new Goal(Vector3(800, 150, -75800), Vector3::Zero, Tag::Other, Scene::tutorial);
 
-	tutorialEffect = new TutorialEffect(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
-	tutorialVertEffect = new TutorialVerticalEffect(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);
-	goal = new Goal(Vector3(800, 150, -75800), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mSprite = new Sprite("Assets/forest.png");
 
-	sprite = new Sprite("Assets/forest.png");
-
-	mapCreate = new MapCreate();
-	if (!mapCreate->OpenFile())
+	mMapCreate = new MapCreate();
+	if (!mMapCreate->OpenFile())
 	{
-		mapCreate->CreateGround();
-		mapCreate->CreateGlass();
-		mapCreate->CreateBlock();
-		mapCreate->CreateVerticalMoveGround();
-		mapCreate->CreateJump();
-		mapCreate->CreateLateralMoveGround();
-		mapCreate->CreatePlayer();
-		mapCreate->CreateUpBlock();
-		mapCreate->CreateRightOneBlock();
-		mapCreate->CreateLeftOneBlock();
-		mapCreate->CreateGoal();
+		mMapCreate->CreateGround();
+		mMapCreate->CreateGlass();
+		mMapCreate->CreateBlock();
+		mMapCreate->CreateVerticalMoveGround();
+		mMapCreate->CreateJump();
+		mMapCreate->CreateLateralMoveGround();
+		mMapCreate->CreatePlayer();
+		mMapCreate->CreateUpBlock();
+		mMapCreate->CreateRightOneBlock();
+		mMapCreate->CreateLeftOneBlock();
+		mMapCreate->CreateGoal();
 	}
 
 	for (int i = 0; i < 3; i++)
 	{
-		heartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Scene::tutorial, Tag::Other);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Scene::tutorial, Tag::Other);
 	}
 
-	continueTutorialFlag = false;
-	count = 0;
+	mSendContinueTutorialFlag = false;
 }
 
 Tutorial::~Tutorial()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(tutorial);
-	delete sprite;
-	delete mapCreate;
+	delete mSprite;
+	delete mMapCreate;
 }
 
 SceneBase* Tutorial::update()
 {
-	if (player->GetClearFlag())
+	if (mPlayer->GetClearFlag())
 	{
-		count++;
+		mNextSceneCount++;
 
-		if (count >= 80)
+		if (mNextSceneCount >= 80)
 		{
-			player->SetClearFlag(false);
+			mPlayer->SetClearFlag(false);
 
 			/*return new GameClear(gameClear);*/
 			return new Stage01Scene(stage01);
 		}
 	}
 
-	if (player->GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
-		count++;
+		mNextSceneCount++;
 
-		if (count >= 80)
+		if (mNextSceneCount >= 80)
 		{
-			player->SetDeathFlag(false);
-			continueTutorialFlag = true;
-			sendContinueTutorialFlag = continueTutorialFlag;
+			mPlayer->SetDeathFlag(false);
+			mContinueTutorialFlag = true;
+			mSendContinueTutorialFlag = mContinueTutorialFlag;
 			
 			return new ContinueScene(Continue);
 		}
 	}
 
 	return this;
-}
-
-void Tutorial::draw()
-{
-
-	RENDERER->Draw();
-
-	/*for (int i = 0; i < 3; i++)
-	{
-		RENDERER->DrawTexture(uiTexture, Vector2((i + 1) * 60.0f, 50.0f));
-	}*/
 }

@@ -7,6 +7,7 @@
 @file ParticleEffectBase.h
 @brief 一定時間で消える、主にエフェクトの基底クラスとして使用されるクラス
 */
+
 class UIBase :
 	public GameObject
 {
@@ -34,6 +35,6 @@ private:
 protected:
 	
 	//画像の描画クラス
-	UIComponent* ui;
+	UIComponent* mUI;
 public:
 };

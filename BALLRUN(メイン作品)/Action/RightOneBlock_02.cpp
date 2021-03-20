@@ -17,7 +17,7 @@ RightOneBlock_02::RightOneBlock_02(const Vector3& _pos, const Vector3& _size, co
 	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
 	mEndPos = Vector3(_pos.x + 200, _pos.y, _pos.z);
 
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したRightOneBlock_02の生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));

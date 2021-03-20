@@ -222,7 +222,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	}
 
 	// 半径を2乗する
-	mRadius = Math::Sqrt(radius);
+	mRadius = Math::Sqrt(mRadius);
 
 	// 要素配列データのロード
 	const rapidjson::Value& indJson = doc["indices"];
@@ -278,19 +278,19 @@ Texture* Mesh::GetTexture(size_t _index)
 	}
 }
 
-int Mesh::GetTextureID(TextureStage stage)
+int Mesh::GetTextureID(TextureStage _stage)
 {
-	return mStageDefTexture[stage];
+	return mStageDefTexture[_stage];
 }
 
-int LoadStageTextures(const rapidjson::Document& doc, TextureStage texStage, const char* stgString)
+int LoadStageTextures(const rapidjson::Document& _doc, TextureStage _texStage, const char* _stgString)
 {
 	std::string noneTexture("none");
 	std::string texName;
 	Texture* t;
-	if (IsExistMember(doc, stgString))
+	if (IsExistMember(_doc, _stgString))
 	{
-		texName = doc[stgString].GetString();
+		texName = _doc[_stgString].GetString();
 		if (texName != noneTexture)
 		{
 			t = RENDERER->GetTexture(texName);

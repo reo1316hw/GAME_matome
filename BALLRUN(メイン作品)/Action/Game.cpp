@@ -9,16 +9,16 @@
 #include "GameObjectManager.h"
 #include "Stage01Scene.h"
 
-int Game::debug = 0;
+int Game::mDebug = 0;
 
 /*
 @brief  コンストラクタ
 */
 Game::Game()
-	: fps(nullptr)
-    , isRunning(true)
-	, isScene(false)
-	, inputSystem(0)
+	: mFps(nullptr)
+    , mRunningFlag(true)
+	, mSceneFlag(false)
+	, mInputSystem(0)
 {
 }
 
@@ -43,8 +43,8 @@ bool Game::Initialize()
 	}
 
     //入力管理クラスの初期化
-	inputSystem = new InputSystem();
-	if (!inputSystem->Initialize())
+	mInputSystem = new InputSystem();
+	if (!mInputSystem->Initialize())
 	{
 		SDL_Log("Failed to initialize input system");
 		return false;
@@ -63,7 +63,7 @@ bool Game::Initialize()
 	PhysicsWorld::CreateInstance();
 	
 	//FPS管理クラスの初期化
-	fps = new FPS();
+	mFps = new FPS();
 
     //ゲームオブジェクト管理クラスの初期化
     GameObjectManager::CreateInstance();
@@ -86,8 +86,8 @@ void Game::Termination()
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
     //クラスの解放処理
-    delete fps;
-    delete inputSystem;
+    delete mFps;
+    delete mInputSystem;
     //サブシステムの終了
 	SDL_Quit();
 }
@@ -102,7 +102,7 @@ void Game::SetFirstScene(SceneBase* firstScene)
 */
 void Game::GameLoop()
 {
-	while (isRunning)
+	while (mRunningFlag)
 	{
 		//入力関連の処理
 		ProcessInput();
@@ -128,7 +128,7 @@ void Game::GameLoop()
 		// 現在のシーンの描画処理
 		GenerateOutput();
 		//FPSの更新処理
-		fps->Update();
+		mFps->Update();
 	}
 }
 
@@ -149,7 +149,7 @@ void Game::UnloadData()
 */
 void Game::ProcessInput()
 {
-	inputSystem->PrepareForUpdate();
+	mInputSystem->PrepareForUpdate();
 
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -157,23 +157,23 @@ void Game::ProcessInput()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			isRunning = false;
+			mRunningFlag = false;
 			break;
 		case SDL_MOUSEWHEEL:
-			inputSystem->ProcessEvent(event);
+			mInputSystem->ProcessEvent(event);
 			break;
 		default:
 			break;
 		}
 	}
 
-	inputSystem->Update();
-	const InputState& state = inputSystem->GetState();
+	mInputSystem->Update();
+	const InputState& state = mInputSystem->GetState();
 
-	if (state.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK)  ||
-		state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
+	if (state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK)  ||
+		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
 	{
-		isRunning = false;
+		mRunningFlag = false;
 	}
 
 	GAME_OBJECT_MANAGER->ProcessInput(state);
@@ -192,7 +192,7 @@ void Game::GenerateOutput()
 */
 void Game::UpdateGame()
 {
-	float deltaTime = fps->GetDeltaTime();
+	float deltaTime = mFps->GetDeltaTime();
 	
 	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
 }

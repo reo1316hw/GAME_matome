@@ -8,9 +8,6 @@ public:
 	~GameOver();
 
 	SceneBase* update() override;
-	void       draw() override;
 private:
-
-	int count;
 };
 

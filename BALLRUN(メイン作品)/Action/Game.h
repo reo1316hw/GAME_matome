@@ -46,9 +46,9 @@ public:
 	void SetScene(bool _isScene) { isScene = _isScene; };*/
 
 	//シーンを切り替えるか
-	bool isScene;
+	bool mSceneFlag;
 
-	static int debug;
+	static int mDebug;
 private:
 	SceneBase* mNowScene;
 	/*Stage01Scene* stage01Scene;*/
@@ -73,10 +73,10 @@ private:
 	void UnloadData();
 
 	// FPS計測クラス
-	FPS* fps;
+	FPS* mFps;
     // 入力管理クラス
-	InputSystem* inputSystem;
+	InputSystem* mInputSystem;
 	//ゲームを続けるかどうか
-    bool isRunning;
+    bool mRunningFlag;
 };
 

@@ -7,7 +7,6 @@
 #include "TitleScene.h"
 #include "Windows.h"
 
-
 /*
 クラス内での宣言順番はpublic>protected>private>public(GetSet)の順
 */
@@ -53,19 +52,19 @@
 
 // ランチャー(Launcher.exe)呼び出し関数 
 // pathにはLauncher.exeへの相対パスへの文字列を入れる
-void runLauncher(const char* path)
+void runLauncher(const char* _path)
 {
 
 	char fullPathexe[512];
 #pragma warning (disable:4996)
-	sprintf(fullPathexe, "%s%s", path, "Launcher.exe");
+	sprintf(fullPathexe, "%s%s", _path, "Launcher.exe");
 
 	// プロセス起動準備
 	PROCESS_INFORMATION pi = { 0 };
 	STARTUPINFO si = { 0 };
 	si.cb = sizeof(STARTUPINFO);
 
-	CreateProcess(fullPathexe, (LPSTR)"", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, path, &si, &pi);
+	CreateProcess(fullPathexe, (LPSTR)"", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, _path, &si, &pi);
 }
 
 

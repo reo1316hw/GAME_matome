@@ -16,7 +16,7 @@ Block::Block(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, c
 	{
 	case SceneBase::Scene::tutorial:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_03.gpmesh"));
@@ -30,7 +30,7 @@ Block::Block(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, c
 		break;
 	case SceneBase::Scene::stage01:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_10.gpmesh"));
@@ -45,7 +45,7 @@ Block::Block(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, c
 
 	case SceneBase::Scene::stage02:
 
-		//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+		//生成したBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 		mMeshComponent = new MeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));

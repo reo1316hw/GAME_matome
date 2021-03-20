@@ -41,17 +41,13 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mLife	  = PLAYER_LIFE;
 	mRespawnState = RespawnState::respawnNone;
 
-	//更新の度に左に移動するコンポーネントを生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-	/*new TestComponent(this);*/
-
-	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
 
 	mEffectManager = new EffectManager(this, _sceneTag, _objectTag);
-
 
 	//プレイヤー自身の当たり判定
 	mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());

@@ -5,10 +5,10 @@
 HeartUI::HeartUI(const Vector2& _pos, SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	:UIBase(_pos, "Assets/heart02.png", _sceneTag, _objectTag)
 {
-	ui = new UIComponent(this);
-	ui->SetTexture(RENDERER->GetTexture("Assets/heart.png"));
+	mUI = new UIComponent(this);
+	mUI->SetTexture(RENDERER->GetTexture("Assets/heart.png"));
 
-	position = Vector3(_pos.x, _pos.y, 0.0f);
+	mPosition = Vector3(_pos.x, _pos.y, 0.0f);
 
 }
 
@@ -16,27 +16,27 @@ void HeartUI::UpdateGameObject(float _deltaTime)
 {
 	if (player->GetLife() == 2)
 	{
-		if (ui->GetUIid() == 2 || ui->GetUIid() == 5 || ui->GetUIid() == 8)
+		if (mUI->GetUIid() == 2 || mUI->GetUIid() == 5 || mUI->GetUIid() == 8)
 		{
-			ui->SetVisible(false);
+			mUI->SetVisible(false);
 
 		}
 	}
 
 	if (player->GetLife() == 1)
 	{
-		if (ui->GetUIid() == 1 || ui->GetUIid() == 4 || ui->GetUIid() == 7)
+		if (mUI->GetUIid() == 1 || mUI->GetUIid() == 4 || mUI->GetUIid() == 7)
 		{
-			ui->SetVisible(false);
+			mUI->SetVisible(false);
 
 		}
 	}
 
 	if (player->GetLife() == 0)
 	{
-		if (ui->GetUIid() == 0 || ui->GetUIid() == 3 || ui->GetUIid() == 6)
+		if (mUI->GetUIid() == 0 || mUI->GetUIid() == 3 || mUI->GetUIid() == 6)
 		{
-			ui->SetVisible(false);
+			mUI->SetVisible(false);
 		}
 	}
 }
