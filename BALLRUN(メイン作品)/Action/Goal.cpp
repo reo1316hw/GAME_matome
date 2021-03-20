@@ -5,9 +5,9 @@ Goal::Goal(const Vector3& _pos, const Vector3& _velocity, const Tag& _objectTag,
 {
 	mScale = 1000.0f;
 	mAlpha = 0.5f;
-	particle->SetScale(mScale);
-	particle->SetAlpha(mAlpha);
-	particle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
+	mParticle->SetScale(mScale);
+	mParticle->SetAlpha(mAlpha);
+	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 }
 
 void Goal::UpdateGameObject(float _deltaTime)

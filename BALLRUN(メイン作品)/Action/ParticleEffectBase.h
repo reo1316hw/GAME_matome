@@ -9,7 +9,6 @@ enum ParticleState
 	PARTICLE_DISABLE,
 };
 
-
 /*
 @file ParticleEffectBase.h
 @brief 一定時間で消える、主にエフェクトの基底クラスとして使用されるクラス
@@ -45,12 +44,17 @@ protected:
 	*/
 	void LifeCountDown();
 	//画像の描画クラス
-	ParticleComponent* particle;
+	ParticleComponent*	mParticle;
 
 	//生存時間
-	int lifeCount;
+	int					mLifeCount;
+	int					mScene;
 
-	ParticleState particleState;
+	float				mAlpha;
+	float				mScale;
+	float				mSpeed;
+
+	ParticleState		mParticleState;
 public:
 	void SetReverve(float _flag);
 };

@@ -7,62 +7,62 @@
 EffectManager::EffectManager(GameObject* _owner, SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	:GameObject(_sceneTag, _objectTag)
 {
-	owner = _owner;
-	state = ParticleState::PARTICLE_DISABLE;
-	prePos = Vector3::Zero;
-	sceneTag = _sceneTag;
-	tag = _objectTag;
+	mOwner = _owner;
+	mState = ParticleState::PARTICLE_DISABLE;
+	mPrePos = Vector3::Zero;
+	mSceneTag = _sceneTag;
+	mTag = _objectTag;
 
-	angle = 0.0f;
+	mAngle = 0.0f;
 
-	clearEffectFlag = false;
-	deathEffectFlag = false;
+	mClearEffectFlag = false;
+	mDeathEffectFlag = false;
 }
 
 void EffectManager::UpdateGameObject(float _deltaTime)
 {
-	if (prePos != owner->GetPosition())
+	if (mPrePos != mOwner->GetPosition())
 	{
-		state = ParticleState::PARTICLE_ACTIVE;
+		mState = ParticleState::PARTICLE_ACTIVE;
 	}
 	else
 	{
-		state = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	if (player->GetClearFlag())
+	if (mPlayer->GetClearFlag())
 	{
-		clearEffectFlag = true;
+		mClearEffectFlag = true;
 
 	}
 
-	if (player->GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
-		deathEffectFlag = true;
+		mDeathEffectFlag = true;
 	}
 
-	switch (state)
+	switch (mState)
 	{
 	case PARTICLE_DISABLE:
 		break;
 	case PARTICLE_ACTIVE:
 
-		++frameCount;
+		++mFrameCount;
 		Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
-		position = owner->GetPosition();
-		position.y -= 10.0f;
-		position.z -= 20.0f;
-		if (frameCount % 6 == 0)
+		mPosition = mOwner->GetPosition();
+		mPosition.y -= 10.0f;
+		mPosition.z -= 20.0f;
+		if (mFrameCount % 6 == 0)
 		{
 
 			vel = Vector3(0.0f, 0.0f, -1.0);
-			sandEffect = new SandEffect(position, vel, sceneTag, tag);
+			mSandEffect = new SandEffect(mPosition, vel, mSceneTag, mTag);
 			
 		}		
 
-		if (frameCount % 1 == 0)
+		if (mFrameCount % 1 == 0)
 		{
-			if (deathEffectFlag)
+			if (mDeathEffectFlag)
 			{
 				for (int i = 0; i < 50; i++)
 				{
@@ -85,17 +85,17 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 						randVel.z *= -1.0f;
 					}
 
-					deathEffect = new DeathEffect(position, randVel, sceneTag, tag);
+					mDeathEffect = new DeathEffect(mPosition, randVel, mSceneTag, mTag);
 				}
 
-				deathEffectFlag = false;
+				mDeathEffectFlag = false;
 
 			}
 			
-			if (clearEffectFlag)
+			if (mClearEffectFlag)
 			{
 
-				clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+				mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 
 				float x = 0.0f;
 				float y = 0.0f;
@@ -127,69 +127,69 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 					if (i % 12 == 0)
 					{
 						vel = Vector3(x = x + 0.1f, y = y + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 1)
 					{
 						vel = Vector3(x2 = x2 - 0.1f, y2 = y2 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 2)
 					{
 						vel = Vector3(x3 = x3 + 0.2f, y3 = y3 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 3)
 					{
 						vel = Vector3(x4 = x4 - 0.2f, y4 = y4 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 4)
 					{
 						vel = Vector3(x5 = x5 + 0.4f, y5 = y5 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 5)
 					{
 						vel = Vector3(x6 = x6 - 0.4f, y6 = y6 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 6)
 					{
 						vel = Vector3(x7 = x7 + 0.6f, y7 = y7 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 7)
 					{
 						vel = Vector3(x8 = x8 - 0.6f, y8 = y8 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 8)
 					{
 						vel = Vector3(x9 = x9 + 0.8f, y9 = y9 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 9)
 					{
 						vel = Vector3(x10 = x10 - 0.8f, y10 = y10 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 10)
 					{
 						vel = Vector3(x11 = x11 + 1.0f, y11 = y11 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 					if (i % 12 == 11)
 					{
 						vel = Vector3(x12 = x12 - 1.0f, y12 = y12 + 1.0f, 0.0f);
-						clearEffect = new ClearEffect(position, vel, sceneTag, tag);
+						mClearEffect = new ClearEffect(mPosition, vel, mSceneTag, mTag);
 					}
 
-					vel.y = sinf(angle);
-					angle += 10.0f;
+					vel.y = sinf(mAngle);
+					mAngle += 10.0f;
 				}
 
-				clearEffectFlag = false;
+				mClearEffectFlag = false;
 				SetState(State::Dead);
 			}
 		}
@@ -197,5 +197,5 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	}
 
-	prePos = owner->GetPosition();
+	mPrePos = mOwner->GetPosition();
 }

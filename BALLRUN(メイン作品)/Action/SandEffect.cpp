@@ -9,30 +9,30 @@ SandEffect::SandEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,co
 {
 	mAlpha = 0.5f;
 	mScale = 32.0f;
-	particle->SetAlpha(mAlpha);
-	particle->SetScale(mScale);
-	particle->SetColor(Vector3(0.95f, 0.95f, 0.95f));
-	particle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
-	speed = 1.0f;
+	mParticle->SetAlpha(mAlpha);
+	mParticle->SetScale(mScale);
+	mParticle->SetColor(Vector3(0.95f, 0.95f, 0.95f));
+	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
+	mSpeed = 1.0f;
 }
 
 void SandEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();
 
-	if (lifeCount > 0)
+	if (mLifeCount > 0)
 	{
 		mAlpha -= 0.01f;
 		mScale += 10.0f;
-		particle->SetAlpha(mAlpha);
-		particle->SetScale(mScale);
-		velocity = velocity * speed;
-		position = position + velocity;
-		SetPosition(position);
+		mParticle->SetAlpha(mAlpha);
+		mParticle->SetScale(mScale);
+		mVelocity = mVelocity * mSpeed;
+		mPosition = mPosition + mVelocity;
+		SetPosition(mPosition);
 	}
 
-	if (lifeCount <=0)
+	if (mLifeCount <=0)
 	{
-		particle->SetVisible(false);
+		mParticle->SetVisible(false);
 	}
 }

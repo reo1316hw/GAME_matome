@@ -16,23 +16,23 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 	
 private:
-	GameObject* owner;
-	ParticleState state;
-	Vector3 prePos;
-	SceneBase::Scene sceneTag;
-	Tag tag;
-	SandEffect* sandEffect;
-	DeathEffect* deathEffect;
-	ClearEffect* clearEffect;
-	Player* player;
+	GameObject*		 mOwner;
+	ParticleState	 mState;
+	Vector3			 mPrePos;
+	SceneBase::Scene mSceneTag;
+	Tag				 mTag;
+	SandEffect*		 mSandEffect;
+	DeathEffect*	 mDeathEffect;
+	ClearEffect*	 mClearEffect;
+	Player*			 mPlayer;
 
-	int frameCount;
-	int scene;
+	int				 mFrameCount;
+	int				 mScene;
 
 	// Šp“x
-	float		angle;
+	float			 mAngle;
 
-	bool clearEffectFlag;
-	bool deathEffectFlag;
+	bool			 mClearEffectFlag;
+	bool			 mDeathEffectFlag;
 };
 

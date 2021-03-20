@@ -5,73 +5,69 @@
 #include "BoxCollider.h"
 #include "Player.h"
 
-RightOneBlock_02::RightOneBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& objectTag, const SceneBase::Scene _sceneTag)
-	: GameObject(_sceneTag, objectTag)
+RightOneBlock_02::RightOneBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+	: GameObject(_sceneTag, _objectTag)
 	//, groundBox(Vector3::Zero,Vector3::Zero)
 {
 	//GameObjectメンバ変数の初期化
-	tag = objectTag;
+	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
 
-	initPos = Vector3(_pos.x, _pos.y, _pos.z);
-	tmpPos = Vector3(_pos.x + 200, _pos.y, _pos.z);
+	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
+	mEndPos = Vector3(_pos.x + 200, _pos.y, _pos.z);
 
 	//生成 TestObjectの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-	meshComponent = new MeshComponent(this);
+	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	meshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));
 
 	// 当たり判定
-	mesh = new Mesh;
-	mesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
-	boxcollider = new BoxCollider(this, ColliderTag::rightOneBlock_02Tag, GetOnCollisionFunc());
-	boxcollider->SetObjectBox(mesh->GetBox());
+	mMesh = new Mesh;
+	mMesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
+	mBoxcollider = new BoxCollider(this, ColliderTag::rightOneBlock_02Tag, GetOnCollisionFunc());
+	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
-	originalPosFlag = false;
-
-	hitFlag = false;
+	mOriginalPosFlag = false;
 }
 
 void RightOneBlock_02::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();
 
-	if (playerPos.z >= position.z - 1000.0f)
+	if (playerPos.z >= mPosition.z - 1000.0f)
 	{
-		velocity.x = RIGHT_SPEED;
+		mVelocity.x = RIGHT_SPEED;
 	}
 
-	if (initPos.x < position.x)
+	if (mInitPos.x < mPosition.x)
 	{
-		originalPosFlag = true;
+		mOriginalPosFlag = true;
 	}
 
-	if (position.x >= tmpPos.x)
+	if (mPosition.x >= mEndPos.x)
 	{
-		velocity.x = 0;
+		mVelocity.x = 0;
 	}
 
 	if (Player::GetDeathFlag())
 	{
-		velocity.x = 0;
-		originalPosFlag = false;
+		mVelocity.x = 0;
+		mOriginalPosFlag = false;
 	}
 
-	if (originalPosFlag)
+	if (mOriginalPosFlag)
 	{
 		if (Player::GetRespawnFlag())
 		{
-			velocity.x = 0;
-			position.x = initPos.x;
-			originalPosFlag = false;
+			mVelocity.x = 0;
+			mPosition.x = mInitPos.x;
+			mOriginalPosFlag = false;
 		}
 	}
 
-	aabb = boxcollider->GetWorldBox();
-
 	// 常に座標に速度を足す
-	position += velocity;
+	mPosition += mVelocity;
 
-	SetPosition(position);
+	SetPosition(mPosition);
 }

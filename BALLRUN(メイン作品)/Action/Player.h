@@ -17,37 +17,37 @@ enum class RespawnState
 class Player:public GameObject
 {
 public:
-	Player(const Vector3& _pos, const Vector3& _size, const Tag& objectTag, const SceneBase::Scene _sceneTag);
+	Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 	~Player();
 
 	void UpdateGameObject(float _deltaTime)override;
 	void GameObjectInput(const InputState& _keyState)override;
 
-	static Vector3 GetPos() { return sendPos; };
-	static bool GetDeathFlag() { return sendDeathFlag; };
-	static bool GetRespawnFlag() { return sendRespawnFlag; };
-	static bool GetClearFlag() { return sendClearFlag; };
-	static int GetLife() { return sendLife; };
+	static Vector3 GetPos()			{ return mSendPos; };
+	static bool GetDeathFlag()		{ return mSendDeathFlag; };
+	static bool GetRespawnFlag()	{ return mSendRespawnFlag; };
+	static bool GetClearFlag()		{ return mSendClearFlag; };
+	static int GetLife()			{ return mSendLife; };
 
-	void SetDeathFlag(bool _deathFlag) { sendDeathFlag = _deathFlag; };
-	void SetClearFlag(bool _clearFlag) { sendClearFlag = _clearFlag; };
+	void SetDeathFlag(bool _deathFlag) { mSendDeathFlag = _deathFlag; };
+	void SetClearFlag(bool _clearFlag) { mSendClearFlag = _clearFlag; };
 
 private:
-	SphereCollider* selfSphereCollider;
-	Sphere playerSphere;
-	Vector3 sandPos;
-	ParticleState state;
-	Vector3 prePos;
-	SceneBase::Scene sceneTag;
-	Tag sandTag;
-	EffectManager* effectManager;
-	LateralMoveGround* lateral;
+	SphereCollider*		mSelfSphereCollider;
+	Sphere				mPlayerSphere;
+	Vector3				mSandPos;
+	ParticleState		mState;
+	Vector3				mPrePos;
+	SceneBase::Scene	mSceneTag;
+	Tag					mSandTag;
+	EffectManager*		mEffectManager;
+	LateralMoveGround*	mLateral;
 
 	//リスポーンステートの値を格納する変数
-	RespawnState respawnState;
+	RespawnState		mRespawnState;
 
-	Vector3 moveVelocity;
-	Vector3 JumpPos;
+	//横移動床にあたった時の速度
+	Vector3				mLateralMoveVelocity;
 
 	// 重力
 	const float GRAVITY_ACCEL = 2.0f;
@@ -58,36 +58,36 @@ private:
 	// 体力
 	const int   PLAYER_LIFE = 3;
 
-	static Vector3 sendPos;
+	static Vector3 mSendPos;
 
-	static bool sendDeathFlag;
+	static bool mSendDeathFlag;
 
-	static bool sendRespawnFlag;
+	static bool mSendRespawnFlag;
 
-	static bool sendClearFlag;
+	static bool mSendClearFlag;
 
-	static int sendLife;
+	static int  mSendLife;
 
 	// 死んだか
-	bool		deathFlag;
+	bool		mDeathFlag;
 	// ダメージを受けたか
-	bool		damageFlag;
+	bool		mDamageFlag;
 	// リスポーン後の待機フラグ
-	bool		stopFlag;
+	bool		mStopFlag;
 	// クリアしたか
-	bool		clearFlag;
+	bool		mClearFlag;
 	// ジャンプするか
-	bool		jumpFlag;
+	bool		mJumpFlag;
 	// スケールを変えるか
-	bool		scaleFlag;
+	bool		mScaleFlag;
 
-	int frameCount;
+	int			mVisibleFrameCount;
 	// 現在のシーンはどれか
-	int			scene;
+	int			mScene;
 	// 体力	
-	int			life;
+	int			mLife;
 	// 角度
-	float		angle;
+	float		mAngle;
 	
 	void OnCollision(const GameObject& _hitObject)override;
 };

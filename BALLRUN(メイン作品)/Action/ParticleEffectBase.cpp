@@ -5,14 +5,14 @@
 
 ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag,const float& _scale)
 	: GameObject(_sceneTag,_objectTag)
-	 ,lifeCount(_lifeCount)
+	 ,mLifeCount(_lifeCount)
 {
-	velocity = _velocity;
+	mVelocity = _velocity;
+	mParticle = new ParticleComponent(this);
+	mParticle->SetTextureID(RENDERER->GetTexture(_spriteFileName)->GetTextureID());
+	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
+	mParticle->SetScale(_scale);
 	SetPosition(_pos);
-	particle = new ParticleComponent(this);
-	particle->SetTextureID(RENDERER->GetTexture(_spriteFileName)->GetTextureID());
-	particle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
-	particle->SetScale(_scale);
 }
 
 ParticleEffectBase::~ParticleEffectBase()
@@ -22,7 +22,7 @@ ParticleEffectBase::~ParticleEffectBase()
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)
 {
 	UpdateParticleObject(_deltaTime);
-	SetPosition(position + velocity);
+	SetPosition(mPosition + mVelocity);
 }
 
 void ParticleEffectBase::UpdateParticleObject(float _deltaTime)
@@ -33,22 +33,21 @@ void ParticleEffectBase::UpdateParticleObject(float _deltaTime)
 void ParticleEffectBase::LifeCountDown()
 {
 	//生存時間がゼロになるとこのオブジェクトを更新終了する
-	if (lifeCount <= 0)
+	if (mLifeCount <= 0)
 	{
-		particle->SetVisible(false);
+		mParticle->SetVisible(false);
 		SetState(State::Dead);
-
 	}
 	else
 	{
-		particle->SetVisible(true);
-		lifeCount--;
+		mParticle->SetVisible(true);
+		mLifeCount--;
 	}
 
 }
 
 void ParticleEffectBase::SetReverve(float _flag)
 {
-	particle->SetReverce(_flag);
+	mParticle->SetReverce(_flag);
 
 }

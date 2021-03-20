@@ -10,8 +10,5 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
-	GameObject* owner;
-	float mScale;
-	float mAlpha;
 };
 

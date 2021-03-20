@@ -4,30 +4,30 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
-Respawn::Respawn(const Vector3& _pos, const Vector3& _size, const Tag& objectTag, const SceneBase::Scene _sceneTag)
-	: GameObject(_sceneTag, objectTag)
+Respawn::Respawn(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
-	tag = objectTag;
+	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
 
 	// “–‚½‚è”»’è
-	mesh = new Mesh;
-	mesh = RENDERER->GetMesh("Assets/box.gpmesh");
+	mMesh = new Mesh;
+	mMesh = RENDERER->GetMesh("Assets/box.gpmesh");
 
-	if (tag == respawn01)
+	if (mTag == respawn01)
 	{
-		boxcollider = new BoxCollider(this, ColliderTag::respawn01, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::respawn01, GetOnCollisionFunc());
 	}
-	if (tag == respawn02)
+	if (mTag == respawn02)
 	{
-		boxcollider = new BoxCollider(this, ColliderTag::respawn02, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::respawn02, GetOnCollisionFunc());
 	}
-	if (tag == respawn03)
+	if (mTag == respawn03)
 	{
-		boxcollider = new BoxCollider(this, ColliderTag::respawn03, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::respawn03, GetOnCollisionFunc());
 	}
 
-	boxcollider->SetObjectBox(mesh->GetBox());
+	mBoxcollider->SetObjectBox(mMesh->GetBox());
 }
