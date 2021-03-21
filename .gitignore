@@ -1,11 +1,11 @@
 # Prerequisites
 *.d
-*.exe
 
 # Compiled Object files
 *.slo
 *.lo
 *.o
+*.obj
 
 # Precompiled Headers
 *.gch
@@ -24,6 +24,7 @@
 *.la
 
 # Executables
+*.exe
 BALLRUN/Action/.vs/
 BALLRUN/Action/Debug/
 BALLRUN/Action/Release/
