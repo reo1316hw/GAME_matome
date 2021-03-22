@@ -24,7 +24,6 @@
 *.la
 
 # Executables
-*.exe
 BALLRUN/Action/.vs/
 BALLRUN/Action/Debug/
 BALLRUN/Action/Release/
