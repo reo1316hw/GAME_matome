@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="FPS.cpp">
+      <Filter>FPS</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletalMeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneTransform.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJsonHelper.cpp">
+      <Filter>RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsWorld.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCameraObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage01Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StageSelectScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MapCreate.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage02Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffectBase.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialVerticalEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalMoveGround.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UpBlock_02.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UpBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RightOneBlock_02.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RightOneBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RightBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftOneBlock_02.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftOneBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LateralMoveGround.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Jump.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Glass.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="DownBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="AerialBlock.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="HDRRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Respawn.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="invisibleMeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="TutorialEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="FPS.h">
+      <Filter>FPS</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletalMeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneTransform.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixPalette.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidJsonHelper.h">
+      <Filter>RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsWorld.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCameraObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage02Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageSelectScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MapCreate.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage01Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffectBase.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialVerticalEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="RightBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalMoveGround.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UpBlock_02.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UpBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="RightOneBlock_02.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="RightOneBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftOneBlock_02.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftOneBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LateralMoveGround.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Jump.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Glass.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="DownBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="AerialBlock.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="HDRRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Respawn.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="invisibleMeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="TutorialEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{453546c5-e9de-4e3e-a25b-f98a2b7e8960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{82d6709d-ae31-4598-b249-044af437e576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPS">
+      <UniqueIdentifier>{f5cd1200-4d13-4894-b195-06cc32386c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{86dd1375-242a-47c5-b4ab-8c242a88e640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6a202267-f302-460a-bad2-773b2329bbdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{c8e606d2-bf2c-4f01-ad9d-28b803aa7d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RapidJson">
+      <UniqueIdentifier>{f0e3faca-e48a-4068-8bbf-2cbca8ba06c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collision">
+      <UniqueIdentifier>{8348fe14-c5e3-46d8-91ab-a2fd710d7e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{d9969020-af94-4f6a-952a-d4ea04a278b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{6d4c2c73-9c5e-4be8-a16e-117e13350bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{3a7470fa-f546-4170-98fb-da0544d9116c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleEffect">
+      <UniqueIdentifier>{9656ab2e-e719-46a6-af95-4502cf331d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c5e60b33-ce75-4c8d-a25d-da32103cd259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{393b5bfb-e08c-411b-b7c1-689fbb3a59e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\BasicMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\downsampling.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\gaussianblur.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\hdrBlurBlend.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Particle.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Skinned.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\HDRMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
