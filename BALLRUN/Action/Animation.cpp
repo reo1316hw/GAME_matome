@@ -156,7 +156,7 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 	size_t nextFrame = frame + 1;
 	// Calculate fractional value between frame and next frame
 	// フレームと次のフレームの間の小数値を計算します。
-	float pct = inTime / mFrameDuration - frame;
+	float pct = _inTime / mFrameDuration - frame;
 
 	// Setup the pose for the root
 	// ルートのポーズをセットアップ
@@ -189,6 +189,6 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 		}
 
 		// 出力ポーズ行列[bone] = ローカルポーズ行列 * 出力ポーズ行列[親bone]
-		_outPoses[bone] = localMat * outPoses[bones[bone].mParent];
+		_outPoses[bone] = localMat * _outPoses[bones[bone].mParent];
 	}
 }
