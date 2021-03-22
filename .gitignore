@@ -24,8 +24,7 @@
 *.la
 
 # Executables
-BALLRUN/Action/.vs/
-BALLRUN/Action/Debug/
-BALLRUN/Action/Release/
-Game_Project/Action/.vs/OpenGL/v16/.suo
-Game_Project/Action/.vs/OpenGL/v16/Browse.VC.db
+GameProject/Action/.exe
+GameProject/Action/.vs
+GameProject/Action/Debug
+GameProject/Action/Release
