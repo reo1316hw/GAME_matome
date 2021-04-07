@@ -30,6 +30,11 @@ public:
 	@brief	Transformのワールド変換
 	*/
 	virtual void OnUpdateWorldTransform() {}
+
+	///*
+	//@brief	Transformのワールド変換
+	//*/
+	//virtual void Refresh() {}
 protected:
 
 	//アタッチしているゲームオブジェクトのポインタ

@@ -35,16 +35,16 @@ SphereCollider::~SphereCollider()
 	PHYSICS->RemoveSphere(this);
 }
 
-/**
+/*
 @brief	Transformのワールド変換
 */
 void SphereCollider::OnUpdateWorldTransform()
 {
-	refresh();
+	Refresh();
 	PHYSICS->HitCheck(this);
 }
 
-void SphereCollider::refresh()
+void SphereCollider::Refresh()
 {
 	//ワールド座標での中心位置を更新する
 	mWorldSphere.m_center = mObjectSphere.m_center + mOwner->GetPosition();

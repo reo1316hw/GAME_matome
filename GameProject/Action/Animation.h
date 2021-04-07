@@ -1,8 +1,6 @@
 #pragma once
-#include "Math.h"
-#include "BoneTransform.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 /*
  @file Animation.h
@@ -30,7 +28,7 @@ private:
 	外側のベクトルの各インデックスはボーン、
 	内側のベクトルはフレーム。　　　　　　　
 	mTracks[ボーン][フレーム数]*/
-	std::vector<std::vector<BoneTransform>> mTracks;
+	std::vector<std::vector<class BoneTransform>> mTracks;
 public: //ゲッターセッター
 	/*
 	 @fn ボーン数
@@ -52,5 +50,5 @@ public: //ゲッターセッター
 	//指定された配列を、アニメーションの指定された時間に、
 	//各ボーンのグローバル（現在の）ポーズマトリックスで埋める。
 	//時間は > = 0.0fかつ <= 期間であると予想される
-	void GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
+	void GetGlobalPoseAtTime(std::vector<class Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
 };

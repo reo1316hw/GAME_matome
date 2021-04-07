@@ -25,29 +25,37 @@ public:
 	/**
 	@brief	コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
+	@param	アタッチするゲームオブジェクトの当たり判定のタグ
 	@param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
-	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
+	@param	コンポーネントの更新順番（数値が小さいほど早く更新される
 	@param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
 	*/
 	BoxCollider(GameObject* _owner, ColliderTag _tag,onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
 	
-	/**
+	/*
 	@brief	デストラクタ
 	*/
 	virtual ~BoxCollider();
-
-	/**
+	 
+	/*
 	@brief	Transformのワールド変換
 	*/
 	void OnUpdateWorldTransform() override;
-	void refresh();
-	/**
+
+	/*
+	@brief	ヒットしたオブジェクトは何か調べた後にまたTransformのワールド変換をする
+	@detail ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
+			それを防ぐためにもう一度Transformのワールド変換をする。
+	*/
+	void Refresh();
+
+	/*
 	@brief	当たり判定に使うAABBの設定
 	@param	オブジェクトの大きさに合わせたAABBの構造体
 	*/
 	void SetObjectBox(const AABB& _box) { mObjectBox = _box; }
 
-	/**
+	/*
 	@brief	当たり判定時に使うワールド空間でのAABBを取得する
 	@return 中心をワールド座標に合わせたAABBの構造体
 	*/
@@ -56,8 +64,11 @@ public:
 private:
 //===================== privateのメンバ変数 ======================//
 
-	AABB mObjectBox;			//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
-	AABB mWorldBox;			//当たり判定するときに使うボックス（中心をワールド座標の中心にする）
+	//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
+	AABB mObjectBox;
+	//当たり判定するときに使うボックス（中心をワールド座標の中心にする）
+	AABB mWorldBox; 
+	//回転させるか
 	bool mShouldRotate;
 };
 

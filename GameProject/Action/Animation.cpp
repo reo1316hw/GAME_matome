@@ -1,10 +1,10 @@
 #include "Animation.h"
 #include "Skeleton.h"
+#include "Math.h"
 #include <fstream>
 #include <sstream>
 #include <document.h>
 #include <SDL_log.h>
-
 
 /*
 @fn アニメーション読み込み

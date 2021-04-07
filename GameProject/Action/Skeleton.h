@@ -16,11 +16,11 @@ public:
 	struct Bone
 	{
 		// ローカルバインドポーズ
-		BoneTransform mLocalBindPose;                         
+		BoneTransform mLocalBindPose;
 		// ボーン名
-		std::string mName;                                                
+		std::string mName;
 		// 親ID
-		int mParent;                                                     
+		int mParent;
 	};
 
 	/*

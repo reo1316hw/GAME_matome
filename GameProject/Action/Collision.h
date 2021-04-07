@@ -131,9 +131,15 @@ struct AABB
 	*/
 	float MinDistanceSquared(const Vector3& _point)const;
 
+	/*
+	@fn	最小値と最大値を初期化
+	@param	任意の点
+	*/
 	void InitMinMax(const Vector3& _point) { m_min = m_max = _point; };
 
+	//矩形の最小値
     Vector3 m_min;
+	//矩形の最大値
     Vector3 m_max;
 };
 

@@ -5,10 +5,8 @@
 
 #pragma once
 
-#include <vector>
 #include <map>
 #include <functional>
-#include "Math.h"
 #include "Collision.h"
 
 #define PHYSICS PhysicsWorld::GetInstance()

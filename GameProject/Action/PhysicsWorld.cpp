@@ -63,7 +63,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_box->GetOwner()));
-			_box->refresh();
+			_box->Refresh();
 		}
 	}
 }
@@ -94,7 +94,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//ガラス床
@@ -112,7 +112,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//障害物
@@ -130,7 +130,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//縦移動床
@@ -148,7 +148,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//ジャンプ床
@@ -166,7 +166,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//横移動床
@@ -184,7 +184,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//上移動ブロック01
@@ -202,7 +202,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//上移動ブロック02
@@ -220,7 +220,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//縦長障害物
@@ -238,7 +238,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//空中ブロック
@@ -256,7 +256,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//右移動ブロック
@@ -274,7 +274,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//左移動ブロック
@@ -292,7 +292,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//1マス右移動床01
@@ -310,7 +310,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//1マス右移動床02
@@ -328,7 +328,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//1マス左移動床01
@@ -346,7 +346,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//1マス左移動床02
@@ -364,7 +364,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//落ちるブロック
@@ -382,7 +382,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//ゴール柱
@@ -400,7 +400,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//リスポーン地点01
@@ -418,7 +418,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//リスポーン地点02
@@ -436,7 +436,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 		//リスポーン地点03
@@ -454,7 +454,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
-				_sphere->refresh();
+				_sphere->Refresh();
 			}
 		}
 	}
@@ -477,7 +477,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_sphere->GetOwner()));
-			/*_sphere->refresh();*/
+			/*_sphere->Refresh();*/
 		}
 	}
 	for (auto itr : mBoxes)
@@ -494,7 +494,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_sphere->GetOwner()));
-			/*_sphere->refresh();*/
+			/*_sphere->Refresh();*/
 		}
 	}
 }

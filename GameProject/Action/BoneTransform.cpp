@@ -1,4 +1,3 @@
-
 #include "BoneTransform.h"
 
 /*

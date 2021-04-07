@@ -15,6 +15,7 @@
 /**
 @brief	コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
+@param	アタッチするゲームオブジェクトの当たり判定のタグ
 @param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
 @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 @param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
@@ -41,11 +42,11 @@ BoxCollider::~BoxCollider()
 */
 void BoxCollider::OnUpdateWorldTransform()
 {
-	refresh();
+	Refresh();
 	PHYSICS->HitCheck(this);
 }
 
-void BoxCollider::refresh()
+void BoxCollider::Refresh()
 {
 	mWorldBox = mObjectBox;
 
