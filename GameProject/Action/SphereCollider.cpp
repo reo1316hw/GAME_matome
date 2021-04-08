@@ -12,8 +12,8 @@
 #include "Collision.h"
 #include "Game.h"
 
-/**
-@brief	コンストラクタ
+/*
+@fn		コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
 @param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
 @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
@@ -27,8 +27,8 @@ SphereCollider::SphereCollider(GameObject* _owner, ColliderTag _tag, onCollision
 	PHYSICS->AddSphere(this, _func);
 }
 
-/**
-@brief	デストラクタ
+/*
+@fn	デストラクタ
 */
 SphereCollider::~SphereCollider()
 {
@@ -36,7 +36,7 @@ SphereCollider::~SphereCollider()
 }
 
 /*
-@brief	Transformのワールド変換
+@fn	Transformのワールド変換
 */
 void SphereCollider::OnUpdateWorldTransform()
 {
@@ -44,6 +44,12 @@ void SphereCollider::OnUpdateWorldTransform()
 	PHYSICS->HitCheck(this);
 }
 
+/*
+@fn		ヒットしたオブジェクトが二つ以上あった場合、どのオブジェクトと押し戻しをするか
+		タグで調べた後にまたTransformのワールド変換をする
+@detail ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
+		それを防ぐためにもう一度Transformのワールド変換をする
+*/
 void SphereCollider::Refresh()
 {
 	//ワールド座標での中心位置を更新する

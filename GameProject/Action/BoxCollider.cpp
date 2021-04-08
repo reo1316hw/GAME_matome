@@ -12,8 +12,8 @@
 #include "Collision.h"
 #include "Game.h"
 
-/**
-@brief	コンストラクタ
+/*
+@fn		コンストラクタ
 @param	アタッチするゲームオブジェクトのポインタ
 @param	アタッチするゲームオブジェクトの当たり判定のタグ
 @param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
@@ -29,16 +29,16 @@ BoxCollider::BoxCollider(GameObject* _owner, ColliderTag _tag,onCollisionFunc _f
 	PHYSICS->AddBox(this,_func);
 }
 
-/**
-@brief	デストラクタ
+/*
+@fn		デストラクタ
 */
 BoxCollider::~BoxCollider()
 {
 	PHYSICS->RemoveBox(this);
 }
 
-/**
-@brief	Transformのワールド変換
+/*
+@fn		Transformのワールド変換
 */
 void BoxCollider::OnUpdateWorldTransform()
 {
@@ -46,6 +46,12 @@ void BoxCollider::OnUpdateWorldTransform()
 	PHYSICS->HitCheck(this);
 }
 
+/*
+@fn		ヒットしたオブジェクトが二つ以上あった場合、どのオブジェクトと押し戻しをするか
+		タグで調べた後にまたTransformのワールド変換をする
+@brief	ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
+		それを防ぐためにもう一度Transformのワールド変換をする
+*/
 void BoxCollider::Refresh()
 {
 	mWorldBox = mObjectBox;

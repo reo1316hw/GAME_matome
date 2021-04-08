@@ -137,9 +137,9 @@ struct AABB
 	*/
 	void InitMinMax(const Vector3& _point) { m_min = m_max = _point; };
 
-	//矩形の最小値
+	//最小のx,y,zの値のポジション
     Vector3 m_min;
-	//矩形の最大値
+	//最大のx,y,zの値のポジション
     Vector3 m_max;
 };
 

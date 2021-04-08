@@ -41,19 +41,19 @@ private:
 	std::vector<Matrix4> mGlobalInvBindPoses;
 public: //ゲッターセッター
 	/*
-	@fn ボーン数
+	@return ボーン数
 	*/
 	size_t GetNumBones() const { return mBones.size(); }
 	/*
-	@fn idによるボーン
+	@return ボーンのid
 	*/
 	const Bone& GetBone(size_t _idx) const { return mBones[_idx]; }
 	/*
-	@fn ボーン配列
+	@return ボーン配列
 	*/
 	const std::vector<Bone>& GetBones() const { return mBones; }
 	/*
-	@fn グローバル逆バインド行列配列の取得
+	@return 逆バインドポーズ行列
 	*/
 	const std::vector<Matrix4>& GetGlobalInvBindPoses() const { return mGlobalInvBindPoses; }
 };

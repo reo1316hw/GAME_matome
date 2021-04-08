@@ -12,6 +12,7 @@ public:
 	Quaternion mRotation;
 	//移動
 	Vector3 mTranslation;
+
 	/*
 	@fn 行列を出力
 	@return 回転と平行移動から、行列を返す

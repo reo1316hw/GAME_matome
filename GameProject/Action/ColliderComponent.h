@@ -61,27 +61,14 @@ class ColliderComponent : public Component
 public:
 //===================== publicのメンバ関数 ======================//
 
-    /**
-	@brief	コンストラクタ
+    /*
+	@fn		コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	アタッチするゲームオブジェクトの当たり判定のタグ
     @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
     @param  当たり判定時に、めり込みから動かす処理の優先度を決める数値
     */
 	ColliderComponent(GameObject* _owner, ColliderTag _tag, int _updateOrder = 200,int _collisionOrder = 100);
-
-	/*
-	@brief	めり込み動かす際の優先度を示す数値を取得する
-	@return 優先度を示す数値(int)
-	*/
-	int GetCollisionOrder() const { return mCollisionOrder; }
-
-	/*
-	@brief	アタッチするゲームオブジェクトの当たり判定のタグを取得する
-	@return	タグの数値(ColliderTag)
-	*/
-	ColliderTag GetTag() const { return mTag; };
-
 protected:
 
 	//アタッチするゲームオブジェクトの当たり判定のタグ
@@ -94,5 +81,17 @@ private:
 	bool mTriggerFlag;
 	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない）
 	int	 mCollisionOrder;
+public: //ゲッターセッター
+	/*
+	@fn		めり込み動かす際の優先度を示す数値を取得する
+	@return 優先度を示す数値(int)
+	*/
+	int GetCollisionOrder() const { return mCollisionOrder; }
+
+	/*
+	@fn		アタッチするゲームオブジェクトの当たり判定のタグを取得する
+	@return	タグの番号(enum ColliderTag)
+	*/
+	ColliderTag GetTag() const { return mTag; };
 };
 

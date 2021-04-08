@@ -55,6 +55,10 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 	}
 }
 
+/*
+@brief	フレーム毎の処理
+@param	最後のフレームを完了するのに要した時間
+*/
 void SkeletalMeshComponent::Update(float deltaTime)
 {
 		if (mAnimation && mSkeleton)

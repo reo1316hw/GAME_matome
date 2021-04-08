@@ -11,6 +11,10 @@ class SkeletalMeshComponent : public MeshComponent
 public:
 	SkeletalMeshComponent(class GameObject* owner);
 
+	/*
+	@brief	フレーム毎の処理
+	@param	最後のフレームを完了するのに要した時間
+	*/
 	void Update(float deltaTime) override;
 
 	/*

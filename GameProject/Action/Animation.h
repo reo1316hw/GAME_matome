@@ -27,23 +27,24 @@ private:
 	トラック上の各フレームの変換情報。
 	外側のベクトルの各インデックスはボーン、
 	内側のベクトルはフレーム。　　　　　　　
-	mTracks[ボーン][フレーム数]*/
+	mTracks[ボーン][フレーム数]
+	*/
 	std::vector<std::vector<class BoneTransform>> mTracks;
 public: //ゲッターセッター
 	/*
-	 @fn ボーン数
+	@return ボーン数
 	*/
 	size_t GetNumBones() const { return mNumBones; }                                
 	/*
-	 @fn フレーム数
+	@return フレーム数
 	*/
 	size_t GetNumFrames() const { return mNumFrames; }                              
 	/*
-	 @fn アニメーション期間
+	@return 再生時間
 	*/
 	float GetDuration() const { return mDuration; }                               
 	/*
-	 @fn フレーム期間
+	@return	フレーム間の時刻
 	*/
 	float GetFrameDuration() const { return mFrameDuration; }                       
 

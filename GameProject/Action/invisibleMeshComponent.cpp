@@ -22,6 +22,9 @@ InvisibleMeshComponent::InvisibleMeshComponent(GameObject* _owner, bool _skelton
 	RENDERER->AddInvisibleMeshComponent(this);
 }
 
+/*
+@fn	デストラクタ
+*/
 InvisibleMeshComponent::~InvisibleMeshComponent()
 {
 	//レンダラーからポインタを削除する
@@ -29,7 +32,7 @@ InvisibleMeshComponent::~InvisibleMeshComponent()
 }
 
 /*
-@brief　描画処理
+@fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
 void InvisibleMeshComponent::Draw(Shader* _shader)
@@ -60,6 +63,9 @@ void InvisibleMeshComponent::Draw(Shader* _shader)
 		}
 	}
 }
+
+
+
 
 void InvisibleMeshComponent::SetTextureToShader(Shader* shader)
 {

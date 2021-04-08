@@ -8,33 +8,42 @@ class Component
 {
 public:
 	/*
+	@fn		コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
 	Component(GameObject* _owner,int _updateOrder = 100);
+
+	/*
+	@fn	デストラクタ
+	*/
 	virtual ~Component();
 
 	/*
-	@brief	フレーム毎の処理
+	@fn		フレーム毎の処理
 	@param	最後のフレームを完了するのに要した時間
 	*/
 	virtual void Update(float _deltaTime);
 
 	/*
-	@brief	入力処理
+	@fn		入力処理
 	@param	InputState構造体
 	*/
 	virtual void ProcessInput(const struct InputState& _state) {}
 
 	/*
-	@brief	Transformのワールド変換
+	@fn	Transformのワールド変換
 	*/
 	virtual void OnUpdateWorldTransform() {}
 
-	///*
-	//@brief	Transformのワールド変換
-	//*/
-	//virtual void Refresh() {}
+	/*
+	@fn		ヒットしたオブジェクトが二つ以上あった場合、どのオブジェクトと押し戻しをするか
+			タグで調べた後にまたTransformのワールド変換をする
+	@detail ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
+			それを防ぐためにもう一度Transformのワールド変換をする
+	*/
+	virtual void Refresh() {}
+
 protected:
 
 	//アタッチしているゲームオブジェクトのポインタ

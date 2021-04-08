@@ -125,4 +125,4 @@ public: //ゲッターセッター
 	void SetReverce(bool _flag) { mReverce = _flag; }
 };
 
-Matrix4 GetBillboardMatrix();
+//Matrix4 GetBillboardMatrix();

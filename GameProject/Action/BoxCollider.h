@@ -22,8 +22,8 @@ class BoxCollider final : public ColliderComponent
 public:
 //===================== publicのメンバ関数 ======================//
 
-	/**
-	@brief	コンストラクタ
+	/*
+	@fn		コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	アタッチするゲームオブジェクトの当たり判定のタグ
 	@param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
@@ -33,34 +33,22 @@ public:
 	BoxCollider(GameObject* _owner, ColliderTag _tag,onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
 	
 	/*
-	@brief	デストラクタ
+	@fn	デストラクタ
 	*/
 	virtual ~BoxCollider();
 	 
 	/*
-	@brief	Transformのワールド変換
+	@fn	Transformのワールド変換
 	*/
 	void OnUpdateWorldTransform() override;
 
 	/*
-	@brief	ヒットしたオブジェクトは何か調べた後にまたTransformのワールド変換をする
-	@detail ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
-			それを防ぐためにもう一度Transformのワールド変換をする。
+	@fn	ヒットしたオブジェクトが二つ以上あった場合、どのオブジェクトと押し戻しをするか
+			タグで調べた後にまたTransformのワールド変換をする
+	@brief ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
+			それを防ぐためにもう一度Transformのワールド変換をする
 	*/
-	void Refresh();
-
-	/*
-	@brief	当たり判定に使うAABBの設定
-	@param	オブジェクトの大きさに合わせたAABBの構造体
-	*/
-	void SetObjectBox(const AABB& _box) { mObjectBox = _box; }
-
-	/*
-	@brief	当たり判定時に使うワールド空間でのAABBを取得する
-	@return 中心をワールド座標に合わせたAABBの構造体
-	*/
-	AABB GetWorldBox() const { return mWorldBox; }
-
+	void Refresh() override;
 private:
 //===================== privateのメンバ変数 ======================//
 
@@ -70,5 +58,17 @@ private:
 	AABB mWorldBox; 
 	//回転させるか
 	bool mShouldRotate;
+public: //ゲッターセッター
+	/*
+	@fn		当たり判定時に使うワールド空間でのAABBを取得する
+	@return 中心をワールド座標に合わせたAABBの構造体
+	*/
+	AABB GetWorldBox() const { return mWorldBox; }
+
+	/*
+	@fn		当たり判定に使うAABBの設定
+	@param	オブジェクトの大きさに合わせたAABBの構造体
+	*/
+	void SetObjectBox(const AABB& _box) { mObjectBox = _box; }
 };
 

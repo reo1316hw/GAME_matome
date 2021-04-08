@@ -23,7 +23,7 @@ public:
 //===================== publicのメンバ関数 ======================//
 
 	/*
-	@brief	コンストラクタ
+	@fn		コンストラクタ
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
@@ -32,35 +32,22 @@ public:
 	SphereCollider(GameObject* _owner, ColliderTag _tag, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
 
 	/*
-	@brief	デストラクタ
+	@fn	デストラクタ
 	*/
 	virtual ~SphereCollider();
 
 	/*
-	@brief	Transformのワールド変換
+	@fn	Transformのワールド変換
 	*/
 	void OnUpdateWorldTransform() override;
 
 	/*
-	@brief	ヒットしたオブジェクトは何か調べた後にまたTransformのワールド変換をする
+	@fn		ヒットしたオブジェクトが二つ以上あった場合、どのオブジェクトと押し戻しをするか
+			タグで調べた後にまたTransformのワールド変換をする
 	@detail ヒットしたオブジェクト二つの間にいた場合、引っかかったり、すり抜けするので
-			それを防ぐためにもう一度Transformのワールド変換をする。
+			それを防ぐためにもう一度Transformのワールド変換をする
 	*/
-	void Refresh();
-
-	/*
-	@brief	当たり判定に使うSphereの設定
-	@param	オブジェクトの大きさに合わせたSphereの構造体
-	*/
-	void SetObjectSphere(const Sphere& _sphere) { mObjectSphere = _sphere; }
-
-	/*
-	@brief	当たり判定時に使うワールド空間でのSphereを取得する
-	@return 中心をワールド座標に合わせたSphereの構造体
-	*/
-	Sphere GetWorldSphere() const { return mWorldSphere; }
-
-
+	void Refresh() override;
 private:
 //===================== privateのメンバ変数 ======================//
 
@@ -68,6 +55,17 @@ private:
 	Sphere mObjectSphere;
 	//当たり判定するときに使う球（中心をワールド座標の中心にする）
 	Sphere mWorldSphere;
+public: //ゲッターセッター
+	/*
+	@fn		当たり判定に使うSphereの設定
+	@param	オブジェクトの大きさに合わせたSphereの構造体
+	*/
+	void SetObjectSphere(const Sphere& _sphere) { mObjectSphere = _sphere; }
 
+	/*
+	@fn		当たり判定時に使うワールド空間でのSphereを取得する
+	@return 中心をワールド座標に合わせたSphereの構造体
+	*/
+	Sphere GetWorldSphere() const { return mWorldSphere; }
 };
 
