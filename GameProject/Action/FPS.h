@@ -7,18 +7,27 @@
 class FPS
 {
 public:
+
+	/*
+	@fn	コンストラクタ
+	*/
 	FPS();
+
+	/*
+	@fn	デストラクタ
+	*/
 	~FPS();
 
 	/*
-	@brief	フレーム毎の処理
+	@fn	フレーム毎の処理
 	*/
 	void Update();
 private:
 	/*
-	@brief	FPSが設定値より大きくならないための制御
+	@fn	FPSが設定値より大きくならないための制御
 	*/
 	void Wait();
+
 	//フレームレートの最高値
 	const Uint32 mSetFps;				
 	//１フレームにかける時間

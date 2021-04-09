@@ -10,15 +10,19 @@
 #include "Skeleton.h"
 #include "GameObject.h"
 
-SkeletalMeshComponent::SkeletalMeshComponent(GameObject* owner)
-	: MeshComponent(owner, true)
+/*
+@fn		コンストラクタ
+@param	アタッチするゲームオブジェクトのポインタ
+*/
+SkeletalMeshComponent::SkeletalMeshComponent(GameObject* _owner)
+	: MeshComponent(_owner, true)
 	, mSkeleton(nullptr)
 	, mColor(Vector3(0,0,0))
 {
 }
 
 /*
-@brief　描画処理
+@fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
 void SkeletalMeshComponent::Draw(Shader* _shader)                 
@@ -56,14 +60,14 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 }
 
 /*
-@brief	フレーム毎の処理
+@fn		フレーム毎の処理
 @param	最後のフレームを完了するのに要した時間
 */
-void SkeletalMeshComponent::Update(float deltaTime)
+void SkeletalMeshComponent::Update(float _deltaTime)
 {
 		if (mAnimation && mSkeleton)
 		{
-			mAnimTime += deltaTime * mAnimPlayRate;
+			mAnimTime += _deltaTime * mAnimPlayRate;
 			//  アニメを巻き戻して再生
 			while (mAnimTime > mAnimation->GetDuration())
 			{
@@ -76,6 +80,12 @@ void SkeletalMeshComponent::Update(float deltaTime)
 	
 }
 
+/*
+@fn		アニメーションの再生
+@param	_anim アニメーションデータクラス
+@param	_playRate アニメーションの再生速度
+@return	アニメーションの残り時間
+*/
 float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRate) 
 {
 	mAnimation = _anim;
@@ -92,6 +102,9 @@ float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRa
 	return mAnimation->GetDuration();
 }
 
+/*
+@fn 行列パレットの計算
+*/
 void SkeletalMeshComponent::ComputeMatrixPalette()                             
 {
 	// グローバル逆バインド行列配列の取得

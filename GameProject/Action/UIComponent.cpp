@@ -7,6 +7,11 @@
 
 int UIComponent::mUIid = 0;
 
+/*
+@fn		コンストラクタ
+@param	アタッチするゲームオブジェクトのポインタ
+@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
+*/
 UIComponent::UIComponent(GameObject* _owner, int _drawOrder)
 	: Component(_owner)
 	, mTexture(nullptr)
@@ -21,6 +26,9 @@ UIComponent::UIComponent(GameObject* _owner, int _drawOrder)
 	RENDERER->AddUI(this);
 }
 
+/*
+@fn		デストラクタ
+*/
 UIComponent::~UIComponent()
 {
 	mUIid--;
@@ -29,8 +37,8 @@ UIComponent::~UIComponent()
 }
 
 /*
-@brief	描画処理
-@param _shader 使用するシェーダークラスのポインタ
+@fn		描画処理
+@param	_shader 使用するシェーダークラスのポインタ
 */
 void UIComponent::Draw(Shader* _shader, const Vector3& _offset)
 {
@@ -68,8 +76,8 @@ void UIComponent::Draw(Shader* _shader, const Vector3& _offset)
 }
 
 /*
-@fn テクスチャをセットし縦横の長さを計算する
-@param _texture 使用するテクスチャのポインタ
+@fn		テクスチャをセットし縦横の長さを計算する
+@param	_texture 使用するテクスチャのポインタ
 */
 void UIComponent::SetTexture(Texture* _texture)
 {

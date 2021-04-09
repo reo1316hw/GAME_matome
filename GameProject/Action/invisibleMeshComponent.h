@@ -3,7 +3,6 @@
 #include "Component.h"
 
 class GameObject;
-class Shader;
 class Mesh;
 
 /*
@@ -29,19 +28,17 @@ public:
 	@fn		描画処理
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
-	virtual void Draw(Shader* _shader);
+	virtual void Draw(class Shader* _shader);
 protected:
-
-
-
-
-
-	virtual void SetTextureToShader(class Shader* shader);
-
-
-
-
-
+	/*
+	@fn		テクスチャをステージごとにセット
+	@brief	ディフューズマップ	stage00
+			法線マップ			stage01
+			スペキュラーマップ	stage02
+			自己放射マップ		stage03
+	@param	_shader 使用するシェーダークラスのポインタ
+	*/
+	virtual void SetTextureToShader(class Shader* _shader);
 	//メッシュデータクラスへのポインタ
 	Mesh* mMesh;
 	//テクスチャサイズ
@@ -52,26 +49,9 @@ protected:
 	bool mSkeltonFlag;
 public: //ゲッターセッター
 	/*
-	@fn		メッシュコンポーネントが使うMeshの設定
-	@param	_mesh 設定するMeshクラスのポインタ
-	*/
-	virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
-
-	/*
 	@return 設定されたMeshクラスのポインタ
 	*/
 	virtual Mesh* GetMesh() { return mMesh; }
-
-	/*
-	@fn	メッシュコンポーネントが使うTextureインデックスの設定
-	*/
-	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
-
-	/*
-	@fn		描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
 
 	/*
 	@fn		描画をするかどうかを取得する
@@ -83,5 +63,22 @@ public: //ゲッターセッター
 	@return スケルトンデータを用いるか
 	*/
 	bool GetIsSkeltal()const { return mSkeltonFlag; }
+
+	/*
+	@fn		メッシュコンポーネントが使うMeshの設定
+	@param	_mesh 設定するMeshクラスのポインタ
+	*/
+	virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
+
+	/*
+	@fn	メッシュコンポーネントが使うTextureインデックスの設定
+	*/
+	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
+
+	/*
+	@fn		描画をするかどうかを設定
+	@param	true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
 };
 

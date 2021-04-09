@@ -19,16 +19,26 @@ public:
 	}PARTICLE_ENUM;
 
 	/*
-	 @param _offset 親オブジェクトクラスと画像を描画する位置の差
-	 @param _scale 画像の描画サイズ
+	@fn		コンストラクタ
+	@param	_offset 親オブジェクトクラスと画像を描画する位置の差
+	@param	_scale 画像の描画サイズ
+	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
 	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
+
+	/*
+	@fn	デストラクタ
+	*/
 	~ParticleComponent();
 
+	/*
+	@fn		フレーム毎の処理
+	@param	最後のフレームを完了するのに要した時間
+	*/
 	virtual void Update(float _deltaTime) override {};
 
 	/*
-	@brief　描画処理
+	@fn		描画処理
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
 	void Draw(class Shader* _shader);
@@ -64,55 +74,63 @@ public: //ゲッターセッター
 	@return テクスチャID
 	*/
 	int GetTextureID() { return mTextureID; }
-	/*
-	@param _texId テクスチャID
-	*/
-	void SetTextureID(int _texId) { mTextureID = _texId; }
+
 	/*
 	@return ブレンドタイプ
 	*/
 	PARTICLE_ENUM GetBlendType() { return mBlendType; }
-	/*
-	@param _color 画像に乗算する色
-	*/
-	void SetColor(const Vector3& _color) { mColor = _color; }
-	/*
-	@param _alfa 透明度0~1
-	*/
-	void SetAlpha(float _alpha) { mAlpha = _alpha; }
-	/*
-	@param サイズ
-	*/
-	void SetScale(float _scale) { mScale = _scale; }
-	/*
-	@param _mat ビルボード行列
-	*/
-	void SetBillboardMat(const Matrix4& _mat) {	mStaticBillboardMat = _mat;	}
-	/*
-	@param _brendType カメラのワールド座標
-	*/
-	void SetBlendMode(PARTICLE_ENUM _blendType){mBlendType = _blendType;	}
-	/*
-	@brief　描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
 
 	/*
-	@brief　描画をするかどうかを取得する
+	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない
 	*/
 	bool GetVisible() const { return mVisible; }
 
 	/*
-	@param _drawOrder 描画順
-	*/
-	void SetDrawOrder(int _drawOrder) { mDrawOrder = _drawOrder; }
-
-	/*
 	@return 描画順
 	*/
 	int GetDrawOrder() { return mDrawOrder; }
+
+	/*
+	@param _texId テクスチャID
+	*/
+	void SetTextureID(int _texId) { mTextureID = _texId; }
+	
+	/*
+	@param _color 画像に乗算する色
+	*/
+	void SetColor(const Vector3& _color) { mColor = _color; }
+
+	/*
+	@param _alfa 透明度0~1
+	*/
+	void SetAlpha(float _alpha) { mAlpha = _alpha; }
+
+	/*
+	@param サイズ
+	*/
+	void SetScale(float _scale) { mScale = _scale; }
+
+	/*
+	@param _mat ビルボード行列
+	*/
+	void SetBillboardMat(const Matrix4& _mat) {	mStaticBillboardMat = _mat;	}
+
+	/*
+	@param _brendType カメラのワールド座標
+	*/
+	void SetBlendMode(PARTICLE_ENUM _blendType){mBlendType = _blendType;	}
+
+	/*
+	@fn		描画をするかどうかを設定
+	@param	true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
+
+	/*
+	@param _drawOrder 描画順
+	*/
+	void SetDrawOrder(int _drawOrder) { mDrawOrder = _drawOrder; }
 
 	/*
 	@param _offset 親オブジェクトの座標と描画位置の差

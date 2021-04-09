@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-//class InvisibleMeshComponent;
+class InvisibleMeshComponent;
 
 class Glass : public GameObject
 {
@@ -11,7 +11,7 @@ public:
 
 	void UpdateGameObject(float _deltaTime)override;
 private:
-	//InvisibleMeshComponent* invisibleMeshComponent;
+	InvisibleMeshComponent* mInvisibleMeshComponent;
 
 	//—Ž‚¿‚é‚Ü‚Å‚ÌƒJƒEƒ“ƒg
 	int mDownCount;

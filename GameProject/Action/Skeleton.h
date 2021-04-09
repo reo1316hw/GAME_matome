@@ -4,22 +4,22 @@
 #include <vector>
 
 /*
- @file Skeleton.h 
- @fn 骨格
+@file Skeleton.h 
+@fn 骨格
 */
 class Skeleton
 {
 public:
 	/*
-	 @struct それぞれのボーンの骨格定義
+	@struct それぞれのボーンの骨格定義
 	*/
 	struct Bone
 	{
-		// ローカルバインドポーズ
+		//ローカルバインドポーズ
 		BoneTransform mLocalBindPose;
-		// ボーン名
+		//ボーン名
 		std::string mName;
-		// 親ID
+		//親ID
 		int mParent;
 	};
 

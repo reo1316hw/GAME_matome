@@ -57,15 +57,15 @@ private:
 	Sphere mWorldSphere;
 public: //ゲッターセッター
 	/*
-	@fn		当たり判定に使うSphereの設定
-	@param	オブジェクトの大きさに合わせたSphereの構造体
-	*/
-	void SetObjectSphere(const Sphere& _sphere) { mObjectSphere = _sphere; }
-
-	/*
 	@fn		当たり判定時に使うワールド空間でのSphereを取得する
 	@return 中心をワールド座標に合わせたSphereの構造体
 	*/
 	Sphere GetWorldSphere() const { return mWorldSphere; }
+
+	/*
+	@fn		当たり判定に使うSphereの設定
+	@param	オブジェクトの大きさに合わせたSphereの構造体
+	*/
+	void SetObjectSphere(const Sphere& _sphere) { mObjectSphere = _sphere; }
 };
 

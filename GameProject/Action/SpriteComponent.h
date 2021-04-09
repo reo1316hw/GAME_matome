@@ -13,12 +13,21 @@ class Texture;
 class SpriteComponent : public Component
 {
 public:
+	/*
+	@fn		コンストラクタ
+	@param	アタッチするゲームオブジェクトのポインタ
+	@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
+	*/
     SpriteComponent(GameObject* _owner, int _drawOrder = 100);
+
+	/*
+	@fn		デストラクタ
+	*/
     ~SpriteComponent();
 
 	/*
-	@brief	描画処理
-	@param _shader 使用するシェーダークラスのポインタ
+	@fn		描画処理
+	@param	_shader 使用するシェーダークラスのポインタ
 	*/
     virtual void Draw(Shader* _shader);
 protected:
@@ -37,17 +46,9 @@ protected:
 	int mEmissiveTextureWidth;
 	//テクスチャの縦幅
 	int mEmissiveTextureHeight;
-
 	//描画を行うか
 	bool mVisible;
 public://ゲッターセッター
-	/*
-	@fn テクスチャをセットし縦横の長さを計算する
-	@param _texture 使用するテクスチャのポインタ
-	*/
-	//virtual void SetTexture(Texture* _texture , Texture* _emissiveTexture);
-	virtual void SetTexture(Texture* _texture);
-
 	/*
 	@return テクスチャの横幅
 	*/
@@ -64,15 +65,22 @@ public://ゲッターセッター
 	int GetDrawOrder() { return mDrawOrder; }
 
 	/*
-	@brief　描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
-
-	/*
-	@brief　描画をするかどうかを取得する
+	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない
 	*/
 	bool GetVisible() const { return mVisible; }
+
+	/*
+	@fn テクスチャをセットし縦横の長さを計算する
+	@param _texture 使用するテクスチャのポインタ
+	*/
+	virtual void SetTexture(Texture* _texture);
+	//virtual void SetTexture(Texture* _texture , Texture* _emissiveTexture);
+
+	/*
+	@fn		描画をするかどうかを設定
+	@param	true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
 };
 

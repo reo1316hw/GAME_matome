@@ -9,8 +9,10 @@ Matrix4 ParticleComponent::mStaticBillboardMat;
 Vector3 ParticleComponent::mStaticCameraWorldPos;
 
 /*
- @param _offset 親オブジェクトクラスと画像を描画する位置の差
- @param _scale 画像の描画サイズ
+@fn		コンストラクタ
+@param	_offset 親オブジェクトクラスと画像を描画する位置の差
+@param	_scale 画像の描画サイズ
+@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 */
 ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
@@ -29,6 +31,9 @@ ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset,
 	RENDERER->AddParticle(this);
 }
 
+/*
+@fn	デストラクタ
+*/
 ParticleComponent::~ParticleComponent()
 {
 	//レンダラーからポインタを削除する
@@ -36,7 +41,7 @@ ParticleComponent::~ParticleComponent()
 }
 
 /*
-@brief　描画処理
+@fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
 void ParticleComponent::Draw(Shader* _shader)

@@ -8,8 +8,9 @@
 #include "Texture.h"
 
 /*
-@param _skelton スケルトンデータを用いるか。
-@sa SkeletalMeshComponent.h
+@fn		コンストラクタ
+@param	_skelton スケルトンデータを用いるか。
+@sa	SkeletalMeshComponent.h
 */
 InvisibleMeshComponent::InvisibleMeshComponent(GameObject* _owner, bool _skelton)
 	: Component(_owner)
@@ -64,39 +65,44 @@ void InvisibleMeshComponent::Draw(Shader* _shader)
 	}
 }
 
-
-
-
-void InvisibleMeshComponent::SetTextureToShader(Shader* shader)
+/*
+@fn		テクスチャをステージごとにセット
+@brief	ディフューズマップ	stage00
+		法線マップ			stage01
+		スペキュラーマップ	stage02
+		自己放射マップ		stage03
+@param	_shader 使用するシェーダークラスのポインタ
+*/
+void InvisibleMeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット
 	int texID, stageCount = 0;
-	texID = mMesh->GetTextureID(TextureStage::DiffuseMap); // ディフューズ
+	texID = mMesh->GetTextureID(TextureStage::DiffuseMap); // ディフューズマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uDiffuseMap", stageCount);
+		_shader->SetIntUniform("uDiffuseMap", stageCount);
 		stageCount++;
 	}
 	texID = mMesh->GetTextureID(TextureStage::NormalMap); // 法線マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uNormalMap", stageCount);
+		_shader->SetIntUniform("uNormalMap", stageCount);
 		stageCount++;
 	}
 	texID = mMesh->GetTextureID(TextureStage::SpecularMap); // スペキュラーマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uSpecularMap", stageCount);
+		_shader->SetIntUniform("uSpecularMap", stageCount);
 		stageCount++;
 	}
 	texID = mMesh->GetTextureID(TextureStage::EmissiveMap); // 自己放射マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
-		shader->SetIntUniform("uEmissiveMap", stageCount);
+		_shader->SetIntUniform("uEmissiveMap", stageCount);
 		stageCount++;
 	}
 }

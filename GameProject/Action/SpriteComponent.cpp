@@ -5,6 +5,11 @@
 #include "Game.h"
 #include "Renderer.h"
 
+/*
+@fn		コンストラクタ
+@param	アタッチするゲームオブジェクトのポインタ
+@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
+*/
 SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
     : Component(_owner)
     , mTexture(nullptr)
@@ -17,6 +22,9 @@ SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
 	RENDERER->AddSprite(this);
 }
 
+/*
+@fn		デストラクタ
+*/
 SpriteComponent::~SpriteComponent()
 {
 	//レンダラーからポインタを削除する
@@ -72,6 +80,10 @@ void SpriteComponent::Draw(Shader * _shader)
 //	emissiveTextureHeight = emissiveTexture->GetHeight();
 //}
 
+/*
+@fn		テクスチャをセットし縦横の長さを計算する
+@param	_texture 使用するテクスチャのポインタ
+*/
 void SpriteComponent::SetTexture(Texture* _texture)
 {
 	mTexture = _texture;

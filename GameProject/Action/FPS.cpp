@@ -2,6 +2,9 @@
 #include "FPS.h"
 #include "stdio.h"
 
+/*
+@fn	コンストラクタ
+*/
 FPS::FPS()
 	: mSetFps(60)
 	, mOneFrameTickCount(1000 / mSetFps)
@@ -14,12 +17,15 @@ FPS::FPS()
 
 }
 
+/*
+@fn	デストラクタ
+*/
 FPS::~FPS()
 {
 }
 
 /*
-@brief	フレーム毎の処理
+@fn	フレーム毎の処理
 */
 void FPS::Update()
 {
@@ -49,7 +55,7 @@ void FPS::Update()
 }
 
 /*
-@brief	FPSが設定値より大きくならないための制御
+@fn	FPSが設定値より大きくならないための制御
 */
 void FPS::Wait()
 {

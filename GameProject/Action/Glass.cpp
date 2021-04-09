@@ -1,5 +1,5 @@
 #include "Glass.h"
-//#include "InvisibleMeshComponent.h"
+#include "InvisibleMeshComponent.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
@@ -20,9 +20,9 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 	case SceneBase::Scene::tutorial:
 
 		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
+		mInvisibleMeshComponent = new InvisibleMeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_02.gpmesh"));
+		mInvisibleMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_02.gpmesh"));
 
 		// 当たり判定
 		mMesh = new Mesh;
@@ -34,9 +34,9 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 	case SceneBase::Scene::stage01:
 
 		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
+		mInvisibleMeshComponent = new InvisibleMeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_09.gpmesh"));
+		mInvisibleMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_09.gpmesh"));
 
 		// 当たり判定
 		mMesh = new Mesh;
@@ -48,9 +48,9 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 	case SceneBase::Scene::stage02:
 
 		//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
+		mInvisibleMeshComponent = new InvisibleMeshComponent(this);
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_14.gpmesh"));
+		mInvisibleMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_14.gpmesh"));
 
 		// 当たり判定
 		mMesh = new Mesh;

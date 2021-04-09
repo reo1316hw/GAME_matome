@@ -8,6 +8,7 @@
 #include "Texture.h"
 
 /*
+@fn		コンストラクタ
 @param _skelton スケルトンデータを用いるか。
 @sa SkeletalMeshComponent.h
 */
@@ -22,6 +23,9 @@ MeshComponent::MeshComponent(GameObject* _owner, bool _skelton)
 	RENDERER->AddMeshComponent(this);
 }
 
+/*
+@fn		デストラクタ
+*/
 MeshComponent::~MeshComponent()
 {
 	//レンダラーからポインタを削除する
@@ -29,7 +33,7 @@ MeshComponent::~MeshComponent()
 }
 
 /*
-@brief　描画処理
+@fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
 void MeshComponent::Draw(Shader* _shader)
@@ -61,6 +65,14 @@ void MeshComponent::Draw(Shader* _shader)
 	}
 }
 
+/*
+@fn		テクスチャをステージごとにセット
+@brief	ディフューズマップ	stage00
+		法線マップ			stage01
+		スペキュラーマップ	stage02
+		自己放射マップ		stage03
+@param	_shader 使用するシェーダークラスのポインタ
+*/
 void MeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット

@@ -11,12 +11,14 @@ class Vector3;
 class Matrix4;
 class Component;
 class ColliderComponent;
+class InvisibleMeshComponent;
 class MeshComponent;
 class Mesh;
 class BoxCollider;
 struct InputState;
 
 /*
+@enum	GameObjectステート
 @brief	ゲームオブジェクトの状態
 */
 enum State
@@ -30,9 +32,9 @@ enum State
 };
 
 /*
-	@enum　GameObjectタグ
-	衝突相手を判別するために使用
-	*/
+@enum	GameObjectタグ
+@brief	衝突相手を判別するために使用
+*/
 enum Tag
 {
 	Other = 0,
@@ -63,7 +65,7 @@ enum Tag
 };
 
 /*
-@enum ゲームオブジェクトの更新を停止するイベント名
+@enum	ゲームオブジェクトの更新を停止するイベント名
 */
 enum PauzingEvent
 {
@@ -82,8 +84,8 @@ enum PauzingEvent
 class GameObject
 {
 public:
-
 	/*
+	@fn		コンストラクタ
 	@param	ゲームクラスのポインタ
 	*/
 	GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag , bool _reUseGameObject = false);

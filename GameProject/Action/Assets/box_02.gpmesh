@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/tutorialGlass3D.png"
+		"Assets/stage04Glass3D03.png"
 	],
 	"specularPower":100,
 	"alpha":"0.5",

@@ -14,17 +14,23 @@ class Vector3;
 class UIComponent : public Component
 {
 public:
+	/*
+	@fn		コンストラクタ
+	@param	アタッチするゲームオブジェクトのポインタ
+	@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
+	*/
 	UIComponent(GameObject* _owner, int _drawOrder = 100);
+
+	/*
+	@fn		デストラクタ
+	*/
 	~UIComponent();
 
 	/*
-	@brief	描画処理
+	@fn		描画処理
 	@param _shader 使用するシェーダークラスのポインタ
 	*/
 	virtual void Draw(Shader* _shader, const Vector3& _offset);
-
-	int GetUIid() { return mMyUIid; }
-
 protected:
 	//クラスのポインタ
 	Texture* mTexture;
@@ -44,12 +50,6 @@ protected:
 
 public://ゲッターセッター
 	/*
-	@fn テクスチャをセットし縦横の長さを計算する
-	@param _texture 使用するテクスチャのポインタ
-	*/
-	virtual void SetTexture(Texture* _texture);
-
-	/*
 	@return テクスチャの横幅
 	*/
 	int GetTexWidth() const { return mTextureWidth; }
@@ -65,16 +65,26 @@ public://ゲッターセッター
 	int GetDrawOrder() { return mDrawOrder; }
 
 	/*
-	@brief　描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
-
-	/*
-	@brief　描画をするかどうかを取得する
+	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない
 	*/
 	bool GetVisible() const { return mVisible; }
-private:
+
+	/*
+	@return	UIのid
+	*/
+	int GetUIid() { return mMyUIid; }
+
+	/*
+	@fn		テクスチャをセットし縦横の長さを計算する
+	@param	_texture 使用するテクスチャのポインタ
+	*/
+	virtual void SetTexture(Texture* _texture);
+
+	/*
+	@fn		描画をするかどうかを設定
+	@param	true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
 };
 

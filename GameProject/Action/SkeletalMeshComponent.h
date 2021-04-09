@@ -9,16 +9,20 @@
 class SkeletalMeshComponent : public MeshComponent
 {
 public:
-	SkeletalMeshComponent(class GameObject* owner);
+	/*
+	@fn		コンストラクタ
+	@param	アタッチするゲームオブジェクトのポインタ
+	*/
+	SkeletalMeshComponent(class GameObject* _owner);
 
 	/*
-	@brief	フレーム毎の処理
+	@fn		フレーム毎の処理
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void Update(float deltaTime) override;
+	void Update(float _deltaTime) override;
 
 	/*
-	@brief　描画処理
+	@fn		描画処理
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
 	void Draw(class Shader* _shader) override;
@@ -34,17 +38,18 @@ protected:
 	/*
 	@fn 行列パレットの計算
 	*/
-	void ComputeMatrixPalette();                                       
+	void ComputeMatrixPalette();
+
 	// 行列パレット
-	MatrixPalette mPalette;                                    
+	MatrixPalette mPalette;
 	// スケルトンデータ
-	const class Skeleton* mSkeleton;                                       
+	const class Skeleton* mSkeleton;
 	// アニメーションデータ
-	const class Animation* mAnimation;                                     
+	const class Animation* mAnimation;
 	// アニメーションの再生速度
-	float mAnimPlayRate;                                                  
+	float mAnimPlayRate;
 	// アニメーション時間
-	float mAnimTime;                                                       
+	float mAnimTime;
 	//スケルトンデータに乗算する色
 	Vector3 mColor;
 public://ゲッターセッター

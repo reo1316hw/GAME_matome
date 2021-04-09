@@ -249,30 +249,6 @@ void Renderer::Draw()
 			}
 		}
 
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-
-		// メッシュコンポーネントの描画
-		// 基本的なメッシュシェーダーをアクティブにする
-		mMeshShader->SetActive();
-		// ビュー射影行列を更新する
-		mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
-		// シェーダーに渡すライティング情報を更新する
-		SetLightUniforms(mMeshShader, mView);
-		// すべてのメッシュの描画
-		for (auto mc : mMeshComponents)
-		{
-			if (mc->GetVisible())
-			{
-				mc->Draw(mMeshShader);
-			}
-		}
-
-		//アルファブレンディングを有効にする
-		glEnable(GL_BLEND);
-		//デプスバッファ法を無効にする
-		glDisable(GL_DEPTH_TEST);
-
 		// RGB成分とα成分のブレンディング方法を別々に設定
 		glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
 		// RGB成分とアルファ成分に別々の混合係数を設定
@@ -297,6 +273,21 @@ void Renderer::Draw()
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
 
+		// メッシュコンポーネントの描画
+		// 基本的なメッシュシェーダーをアクティブにする
+		mMeshShader->SetActive();
+		// ビュー射影行列を更新する
+		mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+		// シェーダーに渡すライティング情報を更新する
+		SetLightUniforms(mMeshShader, mView);
+		// すべてのメッシュの描画
+		for (auto mc : mMeshComponents)
+		{
+			if (mc->GetVisible())
+			{
+				mc->Draw(mMeshShader);
+			}
+		}
 
 		//DrawParticle();
 
@@ -735,7 +726,7 @@ bool Renderer::LoadShaders()
 	// ビュー行列の設定
 	mView = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	mProjection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-		mScreenWidth, mScreenHeight, 25.0f, 7000.0f);
+		mScreenWidth, mScreenHeight, 25.0f, 10000.0f);
 	mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
 
 	// インビジブルメッシュ
@@ -743,7 +734,7 @@ bool Renderer::LoadShaders()
 	// ビュー行列の設定
 	mView = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	mProjection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-		mScreenWidth, mScreenHeight, 25.0f, 7000.0f);
+		mScreenWidth, mScreenHeight, 25.0f, 10000.0f);
 	mInvisibleMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
 
 	mBasicShader->SetActive();
