@@ -7,7 +7,7 @@
 
 /*
 @fn		コンストラクタ
-@param	アタッチするゲームオブジェクトのポインタ
+@param	_owner アタッチするゲームオブジェクトのポインタ
 @param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
 */
 SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)

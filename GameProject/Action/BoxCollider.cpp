@@ -1,11 +1,11 @@
-﻿//=============================================================================
-//	@file	BoxCollider.h
-//	@brief	ボックスの当たり判定を行うコンポーネント
-//=============================================================================
+﻿/*
+@file	BoxCollider.h
+@brief	ボックスの当たり判定を行うコンポーネント
+*/
 
-//-----------------------------------------------------------------------------
-//	@brief	インクルード
-//-----------------------------------------------------------------------------
+/*
+@brief	インクルード
+*/
 #include "BoxCollider.h"
 #include "Math.h"
 #include "GameObject.h"
@@ -14,13 +14,13 @@
 
 /*
 @fn		コンストラクタ
-@param	アタッチするゲームオブジェクトのポインタ
-@param	アタッチするゲームオブジェクトの当たり判定のタグ
-@param	他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
-@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
-@param	当たり判定時に、めり込みから動かす処理の優先度を決める数値
+@param	_owner アタッチするゲームオブジェクトのポインタ
+@param	_tag アタッチするゲームオブジェクトの当たり判定のタグ
+@param	_func 他のオブジェクトと当たった時に呼ばれる関数ポインタ(GetOnCollisionFuncを呼ぶ)
+@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
+@param	_collisionOrder 当たり判定時に、めり込みから動かす処理の優先度を決める数値
 */
-BoxCollider::BoxCollider(GameObject* _owner, ColliderTag _tag,onCollisionFunc _func, int _updateOrder, int _collisionOrder)
+BoxCollider::BoxCollider(GameObject* _owner, ColliderTag _tag,OnCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner,_tag, _updateOrder, _collisionOrder)
 	, mObjectBox(Vector3::Zero,Vector3::Zero)
 	, mWorldBox(Vector3::Zero,Vector3::Zero)

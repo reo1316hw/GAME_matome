@@ -1,8 +1,11 @@
-﻿//=============================================================================
-//	@file	PhysicsWorld.cpp
-//	@brief	当たり判定を行う
-//=============================================================================
+﻿/*
+@file	PhysicsWorld.h
+@brief	当たり判定を行う
+*/
 
+/*
+@brief	インクルード
+*/
 #include "PhysicsWorld.h"
 #include <algorithm>
 #include <SDL.h>
@@ -59,7 +62,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		bool hit = Intersect(itr->GetWorldSphere(),_box->GetWorldBox());
 		if (hit)
 		{
-			onCollisionFunc func = mCollisionFunction.at(_box);
+			OnCollisionFunc func = mCollisionFunction.at(_box);
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_box->GetOwner()));
@@ -90,7 +93,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -108,7 +111,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -126,7 +129,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -144,7 +147,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -162,7 +165,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -180,7 +183,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -198,7 +201,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -216,7 +219,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -234,7 +237,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -252,7 +255,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -270,7 +273,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -288,7 +291,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -306,7 +309,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -324,7 +327,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -342,7 +345,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -360,7 +363,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -378,7 +381,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -396,7 +399,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -414,7 +417,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -432,7 +435,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -450,7 +453,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
 			if (hit)
 			{
-				onCollisionFunc func = mCollisionFunction.at(_sphere);
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
 				func(*(itr->GetOwner()));
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
@@ -473,7 +476,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		bool hit = Intersect(itr->GetWorldSphere(), _sphere->GetWorldSphere());
 		if (hit)
 		{
-			onCollisionFunc func = mCollisionFunction.at(_sphere);
+			OnCollisionFunc func = mCollisionFunction.at(_sphere);
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_sphere->GetOwner()));
@@ -490,7 +493,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		bool hit = Intersect(_sphere->GetWorldSphere(),itr->GetWorldBox());
 		if (hit)
 		{
-			onCollisionFunc func = mCollisionFunction.at(_sphere);
+			OnCollisionFunc func = mCollisionFunction.at(_sphere);
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
 			func(*(_sphere->GetOwner()));
@@ -499,7 +502,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	}
 }
 
-void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
+void PhysicsWorld::AddBox(BoxCollider * _box, OnCollisionFunc _func)
 {
 	mBoxes.emplace_back(_box);
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -517,7 +520,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
     mCollisionFunction.erase(_box);
 }
 
-void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
+void PhysicsWorld::AddSphere(SphereCollider * _sphere, OnCollisionFunc _func)
 {
 	mSpheres.emplace_back(_sphere);
     //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
@@ -622,7 +625,7 @@ void PhysicsWorld::SphereAndBox()
 @param _fixedBox 移動しない物体
 @param _calcFixVec 移動物体の補正差分ベクトル
 */
-void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
+void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec)
 {
 	_calcFixVec = Vector3(0, 0, 0);
 	float dx1 = _fixedBox.m_min.x - _movableBox.m_max.x;

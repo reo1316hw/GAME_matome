@@ -14,6 +14,7 @@ class InvisibleMeshComponent : public Component
 public:
 	/*
 	@fn		コンストラクタ
+	@param	_owner アタッチするゲームオブジェクトのポインタ
 	@param	_skelton スケルトンデータを用いるか。
 	@sa	SkeletalMeshComponent.h
 	*/
@@ -72,12 +73,13 @@ public: //ゲッターセッター
 
 	/*
 	@fn	メッシュコンポーネントが使うTextureインデックスの設定
+	@param _index テクスチャサイズ
 	*/
 	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
 
 	/*
 	@fn		描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
+	@param	_visible true : 描画する , false : 描画しない
 	*/
 	void SetVisible(bool _visible) { mVisible = _visible; }
 };

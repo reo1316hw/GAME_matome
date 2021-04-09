@@ -5,7 +5,6 @@
 #include "Collision.h"
 #include "SceneBase.h"
 
-
 class Game;
 class Vector3;
 class Matrix4;
@@ -86,26 +85,32 @@ class GameObject
 public:
 	/*
 	@fn		コンストラクタ
-	@param	ゲームクラスのポインタ
+	@param	_sceneTag シーンのタグ
+	@param	_objectTag ゲームオブジェクトのタグ
+	@param	_reUseGameObject
 	*/
 	GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag , bool _reUseGameObject = false);
+
+	/*
+	@fn	デストラクタ
+	*/
 	virtual ~GameObject();
 
 	/*
-	@brief	フレーム毎の処理
-	@param	最後のフレームを完了するのに要した時間
+	@fn		フレーム毎の処理
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void Update(float _deltaTime);
 
 	/*
-	@brief	アタッチされてるコンポーネントのアップデート
-	@param	最後のフレームを完了するのに要した時間
+	@fn		アタッチされてるコンポーネントのアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void UpdateComponents(float _deltaTime);
 
 	/*
-	@brief	ゲームオブジェクトのアップデート
-	@param	最後のフレームを完了するのに要した時間
+	@fn		ゲームオブジェクトのアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	virtual void UpdateGameObject(float _deltaTime);
 
@@ -127,119 +132,26 @@ public:
 	virtual void GameObjectInput(const InputState& _keyState);
 
 	/*
-	@brief	コンポーネントを追加する
-	@param	追加するコンポーネントのポインタ
+	@fn		コンポーネントを追加する
+	@param	_component 追加するコンポーネントのポインタ
 	*/
 	void AddComponent(Component* _component);
 
 	/*
-	@brief	コンポーネントを削除する
-	@param	削除するコンポーネントのポインタ
+	@fn		コンポーネントを削除する
+	@param	_component 削除するコンポーネントのポインタ
 	*/
 	void RemoveComponent(Component* _component);
 
 	/*
-	@fn 現在の仕様上行うことができない処理を外部から強引に行うための関数
-	@exsample ゲームオブジェクト全体の更新が停止中に対象のゲームオブジェクトを更新する
+	@fn			現在の仕様上行うことができない処理を外部から強引に行うための関数
+	@exsample	ゲームオブジェクト全体の更新が停止中に対象のゲームオブジェクトを更新する
 	*/
 	void ExceptionUpdate();
 	/*
-	@brief	Transformのワールド変換
+	@fn	Transformのワールド変換
 	*/
 	void ComputeWorldTransform();
-
-	/*
-	@brief　オブジェクトのポジションを取得する
-	@return	position
-	*/
-	const Vector3& GetPosition() const { return mPosition; }
-
-	/*
-	@brief　オブジェクトのポジションを設定する
-	@param	position
-	*/
-	virtual void SetPosition(const Vector3& _pos) { mPosition = _pos; mRecomputeWorldTransform = true; }
-	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
-
-	/*
-	@brief　オブジェクトのスケールを取得する
-	@return	scale
-	*/
-	Vector3 GetScaleFloat() const { return mScale; }
-
-	/*
-	@brief　オブジェクトのスケールを設定する
-	@param	scale
-	*/
-	void SetScale(float _scale) { mScale.x = _scale; mScale.y = _scale; mScale.z = _scale; mRecomputeWorldTransform = true; }
-	void SetScale(Vector3 _scale) { mScale.x = _scale.x; mScale.y = _scale.y; mScale.z = _scale.z; mRecomputeWorldTransform = true; }
-
-	float GetScale() { return mScale.x; }
-	/*
-	@brief　オブジェクトのクォータニオンを取得する
-	@return	rotation（Quaternion型）
-	*/
-	const Quaternion& GetRotation() const { return mRotation; }
-
-	/*
-	@brief　オブジェクトのクォータニオンを設定する
-	@param	rotation（Quaternion型）
-	*/
-	virtual void SetRotation(const Quaternion& _qotation) { mRotation = _qotation;  mRecomputeWorldTransform = true; }
-
-	/*
-	@brief　オブジェクトの状態を取得する
-	@return	state
-	*/
-	State GetState() const { return mState; }
-
-	/*
-	@brief　オブジェクトの状態を設定する
-	@param	state
-	*/
-	virtual void SetState(State _state) { mState = _state; }
-
-	/*
-	@brief　オブジェクトのワールド行列を取得する
-	@return	worldTransform
-	*/
-	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
-
-	/*
-	@brief　オブジェクトの前方を表すベクトルを取得する
-	@param	forward(Vector3型)
-	*/
-	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, mRotation); }
-
-	/*
-	@brief　オブジェクトの右を表すベクトルを取得する
-	@param	right(Vector3型)
-	*/
-	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
-
-	/*
-	@brief　オブジェクトの上を表すベクトルを取得する
-	@param	up(Vector3型)
-	*/
-	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, mRotation); };
-	
-	/*
-	@brief　オブジェクトのタグを取得する
-	@return	tag
-	*/
-	Tag GetTag() const { return mTag; };
-
-	/*
-	@brief　オブジェクトのidを取得する
-	@return	myObjectId(int型)
-	*/
-	int GetObjectId() { return mMyObjectId; };
-
-	/*
-	@brief　解放されるオブジェクトを取得する
-	@return	reUseObject(bool型)
-	*/
-	bool GetReUseGameObject() { return mReUseObject; };
 
 	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag);
 
@@ -249,18 +161,6 @@ public:
 	@fn 静的なmainCameraを生成する
 	*/
 	static void CreateMainCamera();
-
-	/*
-	@brief　シーンのタグを取得する
-	@return	sceneTag
-	*/
-	SceneBase::Scene GetScene() { return mSceneTag; };
-
-	///*
-	//@brief　オブジェクトのAABBを取得する
-	//@return	aabb
-	//*/
-	//AABB GetObjectAABB() { return mAabb; };
 
 protected:
 	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
@@ -275,8 +175,8 @@ protected:
 	//衝突時のリアクション関数(ColliderComponentにこの関数のアドレスを渡す) Enter...衝突した Stay...衝突している
 	virtual void OnTriggerStay(ColliderComponent* _colliderPair) {};
 
-	////オブジェクトのAABB
-	//AABB mAabb;
+	//オブジェクトのAABB
+	AABB mAabb;
 
 	//ゲームオブジェクトの状態
 	State mState;
@@ -322,7 +222,112 @@ protected:
 	//アタッチされているコンポーネント
 	std::vector<class Component*>mComponents;
 private:
+
 	//シーンを跨ぐ際に解放されるオブジェクトかどうか、カメラなどが対象になる
 	bool mReUseObject;
+
+public://ゲッターセッター
+
+	/*
+	@return	オブジェクトのポジション
+	*/
+	const Vector3& GetPosition() const { return mPosition; }
+
+	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
+
+	/*
+	@return	オブジェクトのスケール
+	*/
+	Vector3 GetScaleFloat() const { return mScale; }
+
+	float GetScale() { return mScale.x; }
+	/*
+	@brief　オブジェクトのクォータニオンを取得する
+	@return	rotation（Quaternion型）
+	*/
+	const Quaternion& GetRotation() const { return mRotation; }
+
+	/*
+	@brief　オブジェクトの状態を取得する
+	@return	state
+	*/
+	State GetState() const { return mState; }
+
+	/*
+	@brief　オブジェクトのワールド行列を取得する
+	@return	worldTransform
+	*/
+	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
+
+	/*
+	@brief　オブジェクトの前方を表すベクトルを取得する
+	@param	forward(Vector3型)
+	*/
+	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, mRotation); }
+
+	/*
+	@brief　オブジェクトの右を表すベクトルを取得する
+	@param	right(Vector3型)
+	*/
+	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
+
+	/*
+	@brief　オブジェクトの上を表すベクトルを取得する
+	@param	up(Vector3型)
+	*/
+	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, mRotation); };
+
+	/*
+	@brief　オブジェクトのタグを取得する
+	@return	tag
+	*/
+	Tag GetTag() const { return mTag; };
+
+	/*
+	@brief　オブジェクトのidを取得する
+	@return	myObjectId(int型)
+	*/
+	int GetObjectId() { return mMyObjectId; };
+
+	/*
+	@brief　解放されるオブジェクトを取得する
+	@return	reUseObject(bool型)
+	*/
+	bool GetReUseGameObject() { return mReUseObject; };
+
+	/*
+	@brief　シーンのタグを取得する
+	@return	sceneTag
+	*/
+	SceneBase::Scene GetScene() { return mSceneTag; };
+
+	/*
+	@brief　オブジェクトのAABBを取得する
+	@return	aabb
+	*/
+	AABB GetObjectAABB() { return mAabb; };
+
+	/*
+	@param	_scale オブジェクトのスケール
+*/
+	void SetScale(Vector3 _scale) { mScale.x = _scale.x; mScale.y = _scale.y; mScale.z = _scale.z; mRecomputeWorldTransform = true; }
+
+	/*
+	@brief　オブジェクトのクォータニオンを設定する
+	@param	rotation（Quaternion型）
+	*/
+	virtual void SetRotation(const Quaternion& _qotation) { mRotation = _qotation;  mRecomputeWorldTransform = true; }
+
+
+	/*
+	@param	_state オブジェクトの状態
+	*/
+	virtual void SetState(State _state) { mState = _state; }
+
+	/*
+	@param	_pos オブジェクトのポジション
+	*/
+	virtual void SetPosition(const Vector3& _pos) { mPosition = _pos; mRecomputeWorldTransform = true; }
+
 };
 

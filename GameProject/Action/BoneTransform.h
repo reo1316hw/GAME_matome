@@ -20,7 +20,10 @@ public:
 	Matrix4 ToMatrix() const;
 	
 	/*
-	@fn ボーン補間
+	@fn		ボーン補間
+	@param	_nowFrameBone	現在のフレームのポーズ
+	@param	_nextFrameBone	次のフレームのポーズ
+	@param	_interpolation	補間値
 	*/
-	static BoneTransform Interpolate(const BoneTransform& _a, const BoneTransform& _b, float _f); 
+	static BoneTransform Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, float _interpolation);
 };

@@ -15,7 +15,7 @@ class SpriteComponent : public Component
 public:
 	/*
 	@fn		コンストラクタ
-	@param	アタッチするゲームオブジェクトのポインタ
+	@param	_owner アタッチするゲームオブジェクトのポインタ
 	@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
 	*/
     SpriteComponent(GameObject* _owner, int _drawOrder = 100);
@@ -79,7 +79,7 @@ public://ゲッターセッター
 
 	/*
 	@fn		描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
+	@param	_visible true : 描画する , false : 描画しない
 	*/
 	void SetVisible(bool _visible) { mVisible = _visible; }
 };

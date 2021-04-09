@@ -25,7 +25,7 @@ public:
 
 	/*
 	@fn スケルトンのファイルからのロード
-	@param _filename
+	@param _filename ファイルの名前
 	@return 成功、失敗
 	*/
 	bool Load(const std::string& _filename);
@@ -45,6 +45,7 @@ public: //ゲッターセッター
 	*/
 	size_t GetNumBones() const { return mBones.size(); }
 	/*
+	@param	_idx ボーンのid
 	@return ボーンのid
 	*/
 	const Bone& GetBone(size_t _idx) const { return mBones[_idx]; }

@@ -20,6 +20,7 @@ public:
 
 	/*
 	@fn		コンストラクタ
+	@param	_owner アタッチするゲームオブジェクトのポインタ
 	@param	_offset 親オブジェクトクラスと画像を描画する位置の差
 	@param	_scale 画像の描画サイズ
 	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
@@ -33,7 +34,7 @@ public:
 
 	/*
 	@fn		フレーム毎の処理
-	@param	最後のフレームを完了するのに要した時間
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	virtual void Update(float _deltaTime) override {};
 
@@ -107,7 +108,7 @@ public: //ゲッターセッター
 	void SetAlpha(float _alpha) { mAlpha = _alpha; }
 
 	/*
-	@param サイズ
+	@param _scale スケール
 	*/
 	void SetScale(float _scale) { mScale = _scale; }
 
@@ -123,7 +124,7 @@ public: //ゲッターセッター
 
 	/*
 	@fn		描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
+	@param	_visible true : 描画する , false : 描画しない
 	*/
 	void SetVisible(bool _visible) { mVisible = _visible; }
 

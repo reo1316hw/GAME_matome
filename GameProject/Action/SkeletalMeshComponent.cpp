@@ -12,7 +12,7 @@
 
 /*
 @fn		コンストラクタ
-@param	アタッチするゲームオブジェクトのポインタ
+@param	_owner アタッチするゲームオブジェクトのポインタ
 */
 SkeletalMeshComponent::SkeletalMeshComponent(GameObject* _owner)
 	: MeshComponent(_owner, true)
@@ -61,7 +61,7 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 
 /*
 @fn		フレーム毎の処理
-@param	最後のフレームを完了するのに要した時間
+@param	_deltaTime 最後のフレームを完了するのに要した時間
 */
 void SkeletalMeshComponent::Update(float _deltaTime)
 {

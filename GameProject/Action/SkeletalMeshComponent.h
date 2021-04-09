@@ -11,13 +11,13 @@ class SkeletalMeshComponent : public MeshComponent
 public:
 	/*
 	@fn		コンストラクタ
-	@param	アタッチするゲームオブジェクトのポインタ
+	@param	_owner アタッチするゲームオブジェクトのポインタ
 	*/
 	SkeletalMeshComponent(class GameObject* _owner);
 
 	/*
 	@fn		フレーム毎の処理
-	@param	最後のフレームを完了するのに要した時間
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void Update(float _deltaTime) override;
 

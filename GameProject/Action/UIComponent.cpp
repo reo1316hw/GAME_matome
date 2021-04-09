@@ -9,7 +9,7 @@ int UIComponent::mUIid = 0;
 
 /*
 @fn		コンストラクタ
-@param	アタッチするゲームオブジェクトのポインタ
+@param	_owner アタッチするゲームオブジェクトのポインタ
 @param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
 */
 UIComponent::UIComponent(GameObject* _owner, int _drawOrder)

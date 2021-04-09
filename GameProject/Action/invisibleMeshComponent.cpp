@@ -9,6 +9,7 @@
 
 /*
 @fn		コンストラクタ
+@param	_owner アタッチするゲームオブジェクトのポインタ
 @param	_skelton スケルトンデータを用いるか。
 @sa	SkeletalMeshComponent.h
 */

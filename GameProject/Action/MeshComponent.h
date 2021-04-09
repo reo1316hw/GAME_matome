@@ -15,6 +15,7 @@ class MeshComponent : public Component
 public:
 	/*
 	@fn		コンストラクタ
+	@param	_owner アタッチするゲームオブジェクトのポインタ
 	@param	_skelton スケルトンデータを用いるか。
 	@sa		SkeletalMeshComponent.h
 	*/
@@ -49,23 +50,6 @@ protected:
 	bool mSkeltonFlag;
 public: //ゲッターセッター
 	/*
-	@fn		メッシュコンポーネントが使うMeshの設定
-	@param	_mesh 設定するMeshクラスのポインタ
-	*/
-	virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
-
-	/*
-	@fn　メッシュコンポーネントが使うTextureインデックスの設定
-	*/
-	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
-
-	/*
-	@fn		描画をするかどうかを設定
-	@param	true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
-
-	/*
 	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない
 	*/
@@ -80,5 +64,23 @@ public: //ゲッターセッター
 	@return 設定されたMeshクラスのポインタ
 	*/
 	virtual Mesh* GetMesh() { return mMesh; }
+
+	/*
+	@fn		メッシュコンポーネントが使うMeshの設定
+	@param	_mesh 設定するMeshクラスのポインタ
+	*/
+	virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
+
+	/*
+	@fn		メッシュコンポーネントが使うTextureインデックスの設定
+	@param _index テクスチャサイズ
+	*/
+	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
+
+	/*
+	@fn		描画をするかどうかを設定
+	@param	_visible true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
 };
 

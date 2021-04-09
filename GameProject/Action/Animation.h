@@ -11,7 +11,7 @@ class Animation
 public:
 	/*
 	@fn アニメーション読み込み
-	@param アニメーションへのパス
+	@param _fileName アニメーションへのパス
 	*/
 	bool Load(const std::string& _fileName);                                          
 private:
@@ -34,11 +34,11 @@ public: //ゲッターセッター
 	/*
 	@return ボーン数
 	*/
-	size_t GetNumBones() const { return mNumBones; }                                
+	size_t GetNumBones() const { return mNumBones; }
 	/*
 	@return フレーム数
 	*/
-	size_t GetNumFrames() const { return mNumFrames; }                              
+	size_t GetNumFrames() const { return mNumFrames; }
 	/*
 	@return 再生時間
 	*/

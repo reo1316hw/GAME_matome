@@ -9,8 +9,8 @@ class Component
 public:
 	/*
 	@fn		コンストラクタ
-	@param	アタッチするゲームオブジェクトのポインタ
-	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
+	@param	_owner アタッチするゲームオブジェクトのポインタ
+	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される
 	*/
 	Component(GameObject* _owner,int _updateOrder = 100);
 
@@ -21,13 +21,13 @@ public:
 
 	/*
 	@fn		フレーム毎の処理
-	@param	最後のフレームを完了するのに要した時間
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	virtual void Update(float _deltaTime);
 
 	/*
 	@fn		入力処理
-	@param	InputState構造体
+	@param	_state InputState構造体
 	*/
 	virtual void ProcessInput(const struct InputState& _state) {}
 

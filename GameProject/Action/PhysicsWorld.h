@@ -1,10 +1,16 @@
-﻿//=============================================================================
-//	@file	PhysicsWorld.h
-//	@brief	当たり判定を行う
-//=============================================================================
+﻿/*
+@file	PhysicsWorld.h
+@brief	当たり判定を行う
+*/
 
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include <map>
 #include <functional>
 #include "Collision.h"
@@ -17,38 +23,78 @@ class BoxCollider;
 class SphereCollider;
 class ColliderComponent;
 
-typedef std::function<void(GameObject&)> onCollisionFunc;
-typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> onCollisionMap;
+typedef std::function<void(GameObject&)> OnCollisionFunc;
+typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> OnCollisionMap;
 
 class PhysicsWorld
 {
 public:
-	static PhysicsWorld* GetInstance() { return mPhysics; }
+
+	/*
+	@fn	インスタンスを作成する
+	*/
 	static void CreateInstance();
+
+	/*
+	@fn	インスタンスを削除する
+	*/
 	static void DeleteInstance();
 
-	//当たり判定
+	/*
+	@fn	当たり判定
+	*/
     void HitCheck();
+
+	/*
+	@fn		矩形の当たり判定
+	@brief	矩形の当たり判定がどのオブジェクトと当たったかタグで調べる
+	@param _box BoxColliderクラスのポインタ
+	*/
     void HitCheck(BoxCollider* _box);
+
+	/*
+	@fn		球の当たり判定
+	@brief	球の当たり判定がどのオブジェクトと当たったかタグで調べる
+	@param _sphere SphereColliderクラスのポインタ
+	*/
     void HitCheck(SphereCollider* _sphere);
 
-    void AddBox(BoxCollider* _box, onCollisionFunc _func);
+	/*
+	@fn		矩形の当たり判定を追加
+	@param	_box　追加するBoxColliderクラスのポインタ
+	*/
+    void AddBox(BoxCollider* _box, OnCollisionFunc _func);
+
+	/*
+	@fn		矩形の当たり判定を削除
+	@param	_box　削除するBoxColliderクラスのポインタ
+	*/
     void RemoveBox(BoxCollider* _box);
-	void AddSphere(SphereCollider* _sphere, onCollisionFunc _func);
+
+	/*
+	@fn		球の当たり判定を追加
+	@param	_sphere　追加するSphereColliderクラスのポインタ
+	*/
+	void AddSphere(SphereCollider* _sphere, OnCollisionFunc _func);
+
+	/*
+	@fn		球の当たり判定を削除
+	@param	_sphere　削除するSphereColliderクラスのポインタ
+	*/
 	void RemoveSphere(SphereCollider* _sphere);
 
-
-	void SphereAndBox();
-
-
 private:
-	//コンストラクタの隠蔽
+
+	/*
+	@fn	コンストラクタの隠蔽
+	*/
 	PhysicsWorld();
 
 	static PhysicsWorld* mPhysics;
 
-	void SphereAndSphere();
 	void BoxAndBox();
+	void SphereAndSphere();
+	void SphereAndBox();
 
     std::vector<BoxCollider*> mBoxes;
 	std::vector<BoxCollider*> mGroundBoxes;
@@ -75,8 +121,15 @@ private:
 	std::vector<BoxCollider*> mRespawn03Boxes;
 	std::vector<SphereCollider*> mSpheres;
 	std::vector<SphereCollider*> mPlayerSpheres;
-	onCollisionMap mCollisionFunction;
 
+	OnCollisionMap mCollisionFunction;
+
+public://ゲッターセッター
+
+	/*
+	@return PhysicsWorldクラスのインスタンス
+	*/
+	static PhysicsWorld* GetInstance() { return mPhysics; }
 };
 
 /*
@@ -85,4 +138,4 @@ private:
 @param _fixedBox 移動しない物体
 @param _calcFixVec 移動物体の補正差分ベクトル
 */
-void calcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
+void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);

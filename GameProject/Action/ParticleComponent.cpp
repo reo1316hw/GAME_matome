@@ -10,6 +10,7 @@ Vector3 ParticleComponent::mStaticCameraWorldPos;
 
 /*
 @fn		コンストラクタ
+@param	_owner アタッチするゲームオブジェクトのポインタ
 @param	_offset 親オブジェクトクラスと画像を描画する位置の差
 @param	_scale 画像の描画サイズ
 @param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
