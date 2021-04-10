@@ -2,7 +2,9 @@
 #include "Renderer.h"
 #include "ColliderComponent.h"
 
-
+/*
+@fn	コンストラクタ
+*/
 MainCameraObject::MainCameraObject() 
 	: GameObject(SceneBase::other,Tag::Camera,true)
 {
@@ -10,10 +12,17 @@ MainCameraObject::MainCameraObject()
 	mTag = Tag::Camera;
 }
 
+/*
+@fn	デストラクタ
+*/
 MainCameraObject::~MainCameraObject()
 {
 }
 
+/*
+@fn		このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	Vector3 pos = mOffsetPos + mPosition;

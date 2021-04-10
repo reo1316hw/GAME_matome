@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include <limits.h>
 
+//コントローラーが接続されたかのフラグの初期化
 bool InputSystem::mControllerConnected = 0;
 
 /*
-@brief	現在のキーの入力状態のみを取得する
-@param	SDL_Scancodeのキーコード
-@return	true : 押されている , false : 押されていない
+@fn		現在のキーの入力状態のみを取得する
+@param	_keyCode SDL_Scancodeのキーコード
+@return	true : 押されている , false : 押されていない(bool型)
 */
 bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 {
@@ -17,9 +18,9 @@ bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 }
 
 /*
-@brief	現在と1フレーム前の状態からButtonStateを返す
-@param	SDL_Scancodeのキーコード
-@return	ButtonState型の現在の状態
+@fn		現在と1フレーム前の状態からButtonStateを返す
+@param	_keyCode SDL_Scancodeのキーコード
+@return	ButtonState型の現在の状態(enum型 ButtonState)
 */
 ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 {
@@ -48,9 +49,9 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 }
 
 /*
-@brief	現在の入力状態のみを取得する
-@param	SDL_BUTTON定数
-@return	true : 押されている , false : 押されていない
+@fn		現在の入力状態のみを取得する
+@param	_button SDL_BUTTON定数
+@return	true : 押されている , false : 押されていない(bool型)
 */
 bool MouseState::GetButtonValue(int _button) const
 {
@@ -58,9 +59,9 @@ bool MouseState::GetButtonValue(int _button) const
 }
 
 /*
-@brief	現在と1フレーム前の状態からButtonStateを返す
-@param	SDL_BUTTON定数
-@return	ButtonState型の現在の状態
+@fn		現在と1フレーム前の状態からButtonStateを返す
+@param	_button SDL_BUTTON定数
+@return	ButtonState型の現在の状態(enum型 ButtonState)
 */
 ButtonState MouseState::GetButtonState(int _button) const
 {
@@ -91,8 +92,8 @@ ButtonState MouseState::GetButtonState(int _button) const
 
 /*
 @brief	現在の入力状態のみを取得する
-@param	SDL_GameControllerButtonのボタンコード
-@return	true : 押されている , false : 押されていない
+@param	_button SDL_GameControllerButtonのボタンコード
+@return	true : 押されている , false : 押されていない(bool型)
 */
 bool ControllerState::GetButtonValue(SDL_GameControllerButton _button) const
 {
@@ -101,8 +102,8 @@ bool ControllerState::GetButtonValue(SDL_GameControllerButton _button) const
 
 /*
 @brief	現在と1フレーム前の状態からButtonStateを返す
-@param	SDL_GameControllerButtonのボタンコード
-@return	ButtonState型の現在の状態
+@param	_button SDL_GameControllerButtonのボタンコード
+@return	ButtonState型の現在の状態(enum型 ButtonState)
 */
 ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) const
 {
@@ -130,14 +131,20 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) co
 	}
 }
 
+/*
+@fn		スティックの入力を0~32767で返す
+@param	_iAxis どのスティックのどの値を取得するか
+	    (左スティックのXを取得...SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_LEFTX)
+@return スティックの入力情報(float型)
+*/
 float ControllerState::GetAxisValue(const SDL_GameControllerAxis _iAxis) const
 {
 	return mAxisValues[_iAxis];
 }
 
 /*
-@brief  初期化処理
-@return true : 成功 , false : 失敗
+@fn		初期化処理
+@return true : 成功 , false : 失敗(bool型)
 */
 bool InputSystem::Initialize()
 {
@@ -183,7 +190,7 @@ bool InputSystem::Initialize()
 }
 
 /*
-@brief  終了処理
+@fn	終了処理
 */
 void InputSystem::Shutdown()
 {
@@ -195,7 +202,7 @@ void InputSystem::Shutdown()
 }
 
 /*
-@brief  Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
+@fn	Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
 */
 void InputSystem::PrepareForUpdate()
 {
@@ -217,7 +224,7 @@ void InputSystem::PrepareForUpdate()
 }
 
 /*
-@brief  フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
+@fn	フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
 */
 void InputSystem::Update()
 {
@@ -282,7 +289,8 @@ void InputSystem::Update()
 }
 
 /*
-@brief  SDLイベントをInputSystemに渡す
+@fn		SDLイベントをInputSystemに渡す
+@param	_event SDLイベント
 */
 void InputSystem::ProcessEvent(SDL_Event& _event)
 {
@@ -299,8 +307,8 @@ void InputSystem::ProcessEvent(SDL_Event& _event)
 }
 
 /*
-@brief  マウスのモードを設定する
-@param	true : 相対モード , false : デフォルトモード
+@fn		マウスのモードを設定する
+@param	_value true : 相対モード , false : デフォルトモード
 */
 void InputSystem::SetRelativeMouseMode(bool _value)
 {
@@ -312,8 +320,8 @@ void InputSystem::SetRelativeMouseMode(bool _value)
 
 /*
 @brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
-@param	入力された値（int）
-@return	フィルタリングされた値
+@param	_input 入力された値（int）
+@return	フィルタリングされた値(float型)
 */
 float InputSystem::Filter1D(int _input)
 {
@@ -343,9 +351,9 @@ float InputSystem::Filter1D(int _input)
 
 /*
 @brief  入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
-@param	入力された値のx（int）
-@param	入力された値のy（int）
-@return	フィルタリングされた値
+@param	_inputX 入力された値のx（int）
+@param	_inputY 入力された値のy（int）
+@return	フィルタリングされた値(Vector2型)
 */
 Vector2 InputSystem::Filter2D(int _inputX, int _inputY)
 {

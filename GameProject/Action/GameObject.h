@@ -90,6 +90,7 @@ enum PauzingEvent
 class GameObject
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_sceneTag シーンのタグ

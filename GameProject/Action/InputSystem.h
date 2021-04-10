@@ -1,5 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include <SDL_scancode.h>
 #include <SDL_gamecontroller.h>
 #include <SDL_mouse.h>
@@ -22,7 +28,8 @@ enum ButtonState
 };
 
 /*
-@file KeyboardState.hキーボードの入力管理クラス
+@file KeyboardState.h
+@brief キーボードの入力管理クラス
 */
 class KeyboardState
 {
@@ -30,24 +37,28 @@ public:
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
 private:
+
 	//現在のキーボードの入力状態
 	const Uint8* mCurrState;
 	//１フレーム前のキーボードの入力状態
 	Uint8 mPrevState[SDL_NUM_SCANCODES];
+
 public://ゲッターセッター
+
 	/*
-	@brief	現在のキーの入力状態のみを取得する
-	@param	SDL_Scancodeのキーコード
-	@return	true : 押されている , false : 押されていない
+	@fn		現在のキーの入力状態のみを取得する
+	@param	_keyCode SDL_Scancodeのキーコード
+	@return	true : 押されている , false : 押されていない(bool型)
 	*/
 	bool GetKeyValue(SDL_Scancode _keyCode) const;
 
 	/*
-	@brief	現在と1フレーム前の状態からButtonStateを返す
-	@param	SDL_Scancodeのキーコード
-	@return	ButtonState型の現在の状態
+	@fn		現在と1フレーム前の状態からButtonStateを返す
+	@param	_keyCode SDL_Scancodeのキーコード
+	@return	ButtonState型の現在の状態(bool型)
 	*/
 	ButtonState GetKeyState(SDL_Scancode _keyCode) const;
+
 };
 
 /*
@@ -57,9 +68,12 @@ public://ゲッターセッター
 class MouseState
 {
 public:
-	// InputSystemから容易に更新できるようにする
+
+	//InputSystemから容易に更新できるようにする
 	friend class InputSystem;
+
 private:
+
 	//マウスのポジション
 	Vector2 mMousePos;
 	//スクロールホイールのスクロール量
@@ -70,37 +84,38 @@ private:
 	Uint32 mPrevButtons;
 	// 相対マウスモードかどうか
 	bool mRelativeFlag;
+
 public://ゲッターセッター
 
 	/*
-	@brief	相対マウスモードかどうかを取得する
-	@return	true : 相対モード , false , 通常モード
+	@fn		相対マウスモードかどうかを取得する
+	@return	true : 相対モード , false , 通常モード(bool型)
 	*/
 	bool IsRelative() const { return mRelativeFlag; }
 
 	/*
-	@brief	現在のマウスのポジションを取得する
-	@return	Position
+	@fn		現在のマウスのポジションを取得する
+	@return	Position(Vector2型)
 	*/
 	const Vector2& GetPosition() const { return mMousePos; }
 
 	/*
-	@brief	現在のマウスのスクロールホイールの状態を取得する
-	@return	スクロール量（Vector2）
+	@fn		現在のマウスのスクロールホイールの状態を取得する
+	@return	スクロール量(Vector2型)
 	*/
 	const Vector2& GetScrollWheel() const { return mScrollWheel; }
 
 	/*
-	@brief	現在の入力状態のみを取得する
-	@param	SDL_BUTTON定数
-	@return	true : 押されている , false : 押されていない
+	@fn		現在の入力状態のみを取得する
+	@param	_button SDL_BUTTON定数
+	@return	true : 押されている , false : 押されていない(bool型)
 	*/
 	bool GetButtonValue(int _button) const;
 
 	/*
-	@brief	現在と1フレーム前の状態からButtonStateを返す
-	@param	SDL_BUTTON定数
-	@return	ButtonState型の現在の状態
+	@fn		現在と1フレーム前の状態からButtonStateを返す
+	@param	_button SDL_BUTTON定数
+	@return	ButtonState型の現在の状態(enum型 ButtonState)
 	*/
 	ButtonState GetButtonState(int _button) const;
 };
@@ -112,9 +127,12 @@ public://ゲッターセッター
 class ControllerState
 {
 public:
+
 	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
+
 private:
+
 	//現在のボタンの入力状態
 	Uint8 mCurrButtons[SDL_CONTROLLER_BUTTON_MAX];
 	//１フレーム前のボタンの入力状態
@@ -123,37 +141,41 @@ private:
 	//両スティックの情報
 	float mAxisValues[SDL_CONTROLLER_AXIS_MAX];
 	Vector2 mLAxis;
+
 public://ゲッターセッター
+
 	/*
-	@brief	現在の入力状態のみを取得する
-	@param	SDL_GameControllerButtonのボタンコード
-	@return	true : 押されている , false : 押されていない
+	@fn		現在の入力状態のみを取得する
+	@param	_button SDL_GameControllerButtonのボタンコード
+	@return	true : 押されている , false : 押されていない(bool型)
 	*/
 	bool GetButtonValue(SDL_GameControllerButton _button) const;
 
 	/*
-	@brief	現在と1フレーム前の状態からButtonStateを返す
-	@param	SDL_GameControllerButtonのボタンコード
-	@return	ButtonState型の現在の状態
+	@fn		現在と1フレーム前の状態からButtonStateを返す
+	@param	_button SDL_GameControllerButtonのボタンコード
+	@return	ButtonState型の現在の状態(enum型 ButtonState)
 	*/
 	ButtonState GetButtonState(SDL_GameControllerButton _button) const;
 
 	/*
-	@brief スティックの入力を0~32767で返す
-	@param iAxis どのスティックのどの値を取得するか
+	@fn		 スティックの入力を0~32767で返す
+	@param _iAxis どのスティックのどの値を取得するか
 		   (左スティックのXを取得...SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_LEFTX)
-	@return スティックの入力情報
+	@return スティックの入力情報(float型)
 	*/
 	float GetAxisValue(const SDL_GameControllerAxis _iAxis) const;
+
 	/*
-	@brief スティックの入力を0~1で返す
-	@return スティックの入力情報
+	@fn		スティックの入力を0~1で返す
+	@return スティックの入力情報(Vector2型)
 	*/
 	const Vector2& GetLAxisVec() const { return mLAxis; }
+
 };
 
 /*
-@struct InputState 
+@struct InputState
 各入力機器の入力状態をまとめたラッパー構造体
 */
 struct InputState
@@ -162,6 +184,7 @@ struct InputState
 	MouseState m_mouse;
 	ControllerState m_controller;
 };
+
 /*
 @file InputSystem.h
 @brief 入力情報を管理
@@ -169,45 +192,48 @@ struct InputState
 class InputSystem
 {
 public:
+
 	/*
-	@brief  初期化処理
-	@return true : 成功 , false : 失敗
+	@fn		初期化処理
+	@return true : 成功 , false : 失敗(bool型)
 	*/
 	bool Initialize();
 
 	/*
-	@brief  終了処理
+	@fn	終了処理
 	*/
 	void Shutdown();
 
 	/*
-	@brief  Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
+	@fn	Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
 	*/
 	void PrepareForUpdate();
 
 	/*
-	@brief  フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
+	@fn  フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
 	*/
 	void Update();
 
 	/*
-	@brief  SDLイベントをInputSystemに渡す
+	@fn		SDLイベントをInputSystemに渡す
+	@param	_event SDLイベント
 	*/
 	void ProcessEvent(union SDL_Event& _event);
 
 private:
+
 	/*
-	@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
-	@param	入力された値（int）
-	@return	フィルタリングされた値
+	@fn		入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+	@param	_input 入力された値（int）
+	@return	フィルタリングされた値(float型)
 	*/
 	float Filter1D(int _input);
 
 	/*
-	@brief  入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
-	@param	入力された値のx（int）
-	@param	入力された値のy（int）
-	@return	フィルタリングされた値
+	@fn		入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
+	@param	_inputX 入力された値のx（int）
+	@param	_inputY 入力された値のy（int）
+	@return	フィルタリングされた値(Vector2型)
 	*/
 	Vector2 Filter2D(int _inputX, int _inputY);
 
@@ -219,17 +245,21 @@ private:
 	static bool mControllerConnected;
 
 public://ゲッターセッター
+
 	/*
-	@brief  現在の入力状態を取得する
-	@return （InputState）各入力情報をまとめた構造体
+	@fn		現在の入力状態を取得する
+	@return 各入力情報をまとめた構造体(struct InputState)
 	*/
 	const InputState& GetState() const { return mState; }
 
 	/*
-	@brief  マウスのモードを設定する
-	@param	true : 相対モード , false : デフォルトモード
+	@return コントローラーが接続されたか(bool型)
+	*/
+	static bool GetConnectedController() { return mControllerConnected; }
+
+	/*
+	@fn		マウスのモードを設定する
+	@param	_value true : 相対モード , false : デフォルトモード
 	*/
 	void SetRelativeMouseMode(bool _value);
-
-	static bool GetConnectedController() { return mControllerConnected; }
 };

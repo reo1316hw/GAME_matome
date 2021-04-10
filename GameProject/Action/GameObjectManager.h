@@ -84,7 +84,10 @@ public:
 	*/
 	GameObject* FindGameObject(Tag _tag);
 
-
+	/*
+	@fn		特定のゲームオブジェクトを探す
+	@param	_tag ゲームオブジェクトのタグ
+	*/
 	std::vector<GameObject*> FindGameObjects(Tag _tag);
 
 private:

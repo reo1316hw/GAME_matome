@@ -1,9 +1,19 @@
+/*
+@brief	インクルード
+*/
 #include "Block.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos ゲームオブジェクトの座標
+@param	_size ゲームオブジェクトのサイズ
+@param	_objectTag ゲームオブジェクトのタグ
+@param	_sceneTag シーンのタグ
+*/
 Block::Block(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag) :
 	GameObject(_sceneTag,_objectTag)
 {
