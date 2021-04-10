@@ -1,3 +1,11 @@
+/*
+@file	ParticleComponent.h
+@brief	画像を管理しそれを3D空間上に描画するクラス。
+*/
+
+/*
+@brief	インクルード
+*/
 #include "ParticleComponent.h"
 #include "Shader.h"
 #include "Renderer.h"

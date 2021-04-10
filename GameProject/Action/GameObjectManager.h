@@ -1,6 +1,18 @@
+/*
+@file	GameObjectManager.h
+@brief	ゲームオブジェクトの更新を行う
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
 #define GAME_OBJECT_MANAGER GameObjectManager::GetInstance()
 
+/*
+@brief	インクルード
+*/
 #include "SDL.h"
 #include <unordered_map>
 #include <vector>
@@ -10,62 +22,84 @@
 class GameObject;
 struct InputState;
 
-/*
-@file GameObjectManager.h
-@brief ゲームオブジェクトの更新を行う
-*/
 class GameObjectManager
 {
 public:
+
 	/*
 	@return 自身のインスタンスを返す
 	*/
 	static GameObjectManager* GetInstance() { return mManager; }
+
 	/*
 	@fn インスタンスを生成
 	*/
 	static void CreateInstance();
+
 	/*
 	@fn インスタンスを削除
 	*/
 	static void DeleteInstance();
 
 	/*
-	@brief  ゲームオブジェクトのアップデート処理
+	@fn		ゲームオブジェクトのアップデート処理
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime);
 
 	/*
-	@brief  ゲームオブジェクトの入力処理
+	@fn		ゲームオブジェクトの入力処理
+	@param	_state 各入力機器の入力状態
+	@brief	キーボード、マウス、コントローラー
 	*/
 	void ProcessInput(const InputState& _state);
 
 	/*
-	@brief  ゲームオブジェクトの追加
-	@param	追加するGameObjectクラスのポインタ
+	@fn		ゲームオブジェクトの追加
+	@param	_object 追加するGameObjectクラスのポインタ
 	*/
 	void AddGameObject(GameObject* _object);
 
 	/*
-	@brief  ゲームオブジェクトの削除
-	@param	削除するGameObjectクラスのポインタ
+	@fn		ゲームオブジェクトの削除
+	@param	_object 削除するGameObjectクラスのポインタ
 	*/
 	void RemoveGameObject(GameObject* _object);
+
+	/*
+	@fn		シーンごとの全てのゲームオブジェクトの削除
+	@param	_scene 削除するシーンのタグ
+	*/
 	void RemoveGameObjects(SceneBase::Scene _scene);
 
 	/*
-	@brief 使用したすべてのゲームオブジェクトを解放する
+	@fn		使用したすべてのゲームオブジェクトを解放する
 	@detail シーン遷移の際に使用される。GameObject内の再利用フラグが建っているオブジェクトは解放しない
 	*/
 	void RemoveAllUsedGameObject();
 
+	/*
+	@fn		特定のゲームオブジェクトを探す
+	@param	_tag ゲームオブジェクトのタグ
+	*/
 	GameObject* FindGameObject(Tag _tag);
+
+
 	std::vector<GameObject*> FindGameObjects(Tag _tag);
 
 private:
+
+	/*
+	@fn	コンストラクタ
+	*/
 	GameObjectManager();
+
+	/*
+	@fn	デストラクタ
+	*/
 	~GameObjectManager();
 
+	//自身のインスタンス
 	static GameObjectManager* mManager;
 
 	//ゲームオブジェクトのポインタの可変長コンテナ
@@ -77,7 +111,6 @@ private:
 	std::vector<GameObject*> mStage01Objects;
 	//ステージ2の時の全てのゲームオブジェクトを格納するための可変長コンテナ
 	std::vector<GameObject*> mStage02Objects;
-
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
 	std::vector<GameObject*> mPendingGameObjects;
 

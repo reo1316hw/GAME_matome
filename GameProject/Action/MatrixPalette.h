@@ -1,4 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "Math.h"
 
 //ボーンの最大数

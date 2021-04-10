@@ -14,6 +14,7 @@
 #include "GameObject.h"
 #include "ColliderComponent.h"
 
+//自分のインスタンスの初期化
 PhysicsWorld* PhysicsWorld::mPhysics = nullptr;
 
 PhysicsWorld::PhysicsWorld()

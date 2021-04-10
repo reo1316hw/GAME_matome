@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Game.h"
 #include "Math.h"
 #include "GameObject.h"
@@ -7,8 +10,11 @@
 #include "PhysicsWorld.h"
 #include "MainCameraObject.h"
 
+//ゲームオブジェクトのID、カウント用の初期化
 int GameObject::mGameObjectId = 0;
+//メインカメラの初期化　生成はGameObjectManager生成時に行われる
 MainCameraObject* GameObject::mMainCamera = nullptr;
+//ゲームオブジェクトの更新を止めるイベント状態の初期化
 PauzingEvent GameObject::mPauzingEvent = PauzingEvent::NoneEvent;
 
 /*
@@ -211,7 +217,7 @@ void GameObject::ComputeWorldTransform()
 void GameObject::FixCollision(const AABB & _myAABB, const AABB & _pairAABB, const Tag& _pairTag)
 {
 	Vector3 ment = Vector3(0, 0, 0);
-	calcCollisionFixVec(_myAABB, _pairAABB, ment);
+	CalcCollisionFixVec(_myAABB, _pairAABB, ment);
 	SetPosition(GetPosition() + (ment));
 }
 
@@ -220,8 +226,10 @@ void GameObject::CreateMainCamera()
 	mMainCamera = new MainCameraObject();
 }
 
-// forwardベクトルの向きに回転する
-// in forward : 向かせたい前方方向ベクトル
+/*
+@fn		前方ベクトルの向きに回転する
+@param	_forward 向かせたい前方方向ベクトル
+*/
 void GameObject::RotateToNewForward(const Vector3& _forward)
 {
 	// X軸ベクトル(1,0,0)とforwardの間の角度を求める

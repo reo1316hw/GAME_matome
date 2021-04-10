@@ -1,3 +1,11 @@
+/*
+@file	Animation.h
+@brief	Skeletonを用いたアニメーションのデータクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Animation.h"
 #include "Skeleton.h"
 #include "Math.h"
@@ -9,7 +17,8 @@
 /*
 @fn アニメーション読み込み
 @param アニメーションへのパス
-*/bool Animation::Load(const std::string& _fileName)
+*/
+bool Animation::Load(const std::string& _fileName)
 {
 	// filenameからテキストファイルとして読み込み、rapidJSONに解析させる
 	std::ifstream file(_fileName);

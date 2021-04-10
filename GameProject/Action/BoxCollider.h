@@ -59,7 +59,7 @@ public: //ゲッターセッター
 
 	/*
 	@fn		当たり判定時に使うワールド空間でのAABBを取得する
-	@return 中心をワールド座標に合わせたAABBの構造体
+	@return 中心をワールド座標に合わせたAABBの構造体(AABB型)
 	*/
 	AABB GetWorldBox() const { return mWorldBox; }
 

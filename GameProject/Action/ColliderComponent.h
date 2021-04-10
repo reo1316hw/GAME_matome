@@ -81,13 +81,13 @@ private:
 public: //ゲッターセッター
 	/*
 	@fn		めり込み動かす際の優先度を示す数値を取得する
-	@return 優先度を示す数値(int)
+	@return 優先度を示す数値(int型)
 	*/
 	int GetCollisionOrder() const { return mCollisionOrder; }
 
 	/*
 	@fn		アタッチするゲームオブジェクトの当たり判定のタグを取得する
-	@return	タグの番号(enum ColliderTag)
+	@return	タグの番号(enum型 ColliderTag)
 	*/
 	ColliderTag GetTag() const { return mTag; };
 };

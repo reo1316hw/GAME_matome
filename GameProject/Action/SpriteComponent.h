@@ -1,15 +1,22 @@
+/*
+@file	SpriteComponent.h
+@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include "Component.h"
 
 class GameObject;
 class Shader;
 class Texture;
 
-/*
-@file SpriteComponent.h
-@brief 画像データクラスを管理し、スクリーン上に描画するクラス
-*/
 class SpriteComponent : public Component
 {
 public:
@@ -30,7 +37,9 @@ public:
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
     virtual void Draw(Shader* _shader);
+
 protected:
+
 	//クラスのポインタ
     Texture* mTexture;
 	// emisiiveテクスチャのポインタ
@@ -48,25 +57,26 @@ protected:
 	int mEmissiveTextureHeight;
 	//描画を行うか
 	bool mVisible;
+
 public://ゲッターセッター
 	/*
-	@return テクスチャの横幅
+	@return テクスチャの横幅(int型)
 	*/
 	int GetTexWidth() const { return mTextureWidth; }
 
 	/*
-	@return テクスチャの縦幅
+	@return テクスチャの縦幅(int型)
 	*/
 	int GetTexHeight() const { return mTextureHeight; }
 
 	/*
-	@return 描画順
+	@return 描画順(int型)
 	*/
 	int GetDrawOrder() { return mDrawOrder; }
 
 	/*
 	@fn		描画をするかどうかを取得する
-	@return	true : 描画する , false : 描画しない
+	@return	true : 描画する , false : 描画しない(bool型)
 	*/
 	bool GetVisible() const { return mVisible; }
 

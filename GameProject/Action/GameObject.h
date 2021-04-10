@@ -1,4 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include <vector>
 #include <functional>
 #include "Math.h"
@@ -115,19 +122,23 @@ public:
 	virtual void UpdateGameObject(float _deltaTime);
 
 	/*
-	@fn ゲームオブジェクトが静止中に更新されるアップデート関数
-	@brief pauzingUpdateがtrueのときだけ呼ばれる更新関数
+	@fn		ゲームオブジェクトが静止中に更新されるアップデート関数
+	@brief	pauzingUpdateがtrueのときだけ呼ばれる更新関数
 	*/
 	virtual void PausingUpdateGameObject();
 
 	/*
-	@fn 入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
+	@fn		入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
+	@param	_keyState 各入力機器の入力状態
+	@brief	キーボード、マウス、コントローラー
 	*/
 	void ProcessInput(const InputState& _keyState);
 
 	/*
-	@fn 入力を引数で受け取る更新関数
-	@brief 基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@fn		入力を引数で受け取る更新関数
+	@brief	基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 各入力機器の入力状態
+	@brief	キーボード、マウス、コントローラー
 	*/
 	virtual void GameObjectInput(const InputState& _keyState);
 
@@ -148,13 +159,24 @@ public:
 	@exsample	ゲームオブジェクト全体の更新が停止中に対象のゲームオブジェクトを更新する
 	*/
 	void ExceptionUpdate();
+
 	/*
 	@fn	Transformのワールド変換
 	*/
 	void ComputeWorldTransform();
 
+	/*
+	@fn		矩形と矩形の押し戻し
+	@param	_myAABB	基準にするオブジェクトの矩形当たり判定
+	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
+	@param	_pairTag ヒットするオブジェクトのタグ
+	*/
 	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag);
 
+	/*
+	@fn		前方ベクトルの向きに回転する
+	@param	_forward 向かせたい前方方向ベクトル
+	*/
 	void RotateToNewForward(const Vector3& _forward);
 
 	/*
@@ -177,7 +199,6 @@ protected:
 
 	//オブジェクトのAABB
 	AABB mAabb;
-
 	//ゲームオブジェクトの状態
 	State mState;
 	//ゲームオブジェクトのタグ
@@ -198,11 +219,13 @@ protected:
 	Vector3 mPosition;
 	Vector3 mVelocity;
 	Vector3 mScale;
-	//　移動先
+	//移動先
 	Vector3 mEndPos;
-	//　初期座標
+	//初期座標
 	Vector3		mInitPos;
+	//オブジェクトのクォータニオン
 	Quaternion  mRotation;
+	//オブジェクトのワールド行列
 	Matrix4		mWorldTransform;
 	// 移動速度
 	float mMoveSpeed;
@@ -229,95 +252,84 @@ private:
 public://ゲッターセッター
 
 	/*
-	@return	オブジェクトのポジション
+	@return	オブジェクトのポジション(Vector3型)
 	*/
 	const Vector3& GetPosition() const { return mPosition; }
 
+	/*
+	@return	ワールド変換の処理を行う必要性があるかのフラグ(bool型)
+	*/
 	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
 
 	/*
-	@return	オブジェクトのスケール
+	@return	オブジェクトのスケール(Vector3型)
 	*/
 	Vector3 GetScaleFloat() const { return mScale; }
 
-	float GetScale() { return mScale.x; }
 	/*
-	@brief　オブジェクトのクォータニオンを取得する
-	@return	rotation（Quaternion型）
+	@return	オブジェクトのクォータニオン(Quaternion型)
 	*/
 	const Quaternion& GetRotation() const { return mRotation; }
 
 	/*
-	@brief　オブジェクトの状態を取得する
-	@return	state
+	@return	オブジェクトの状態(enum型 State)
 	*/
 	State GetState() const { return mState; }
 
 	/*
-	@brief　オブジェクトのワールド行列を取得する
-	@return	worldTransform
+	@return	オブジェクトのワールド行列(Matrix4型)
 	*/
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
 
 	/*
-	@brief　オブジェクトの前方を表すベクトルを取得する
-	@param	forward(Vector3型)
+	@return	オブジェクトの前方を表すベクトル(Vector3型)
 	*/
 	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, mRotation); }
 
 	/*
-	@brief　オブジェクトの右を表すベクトルを取得する
-	@param	right(Vector3型)
+	@return	オブジェクトの右を表すベクトル(Vector3型)
 	*/
 	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
 
 	/*
-	@brief　オブジェクトの上を表すベクトルを取得する
-	@param	up(Vector3型)
+	@return	オブジェクトの上を表すベクトル(Vector3型)
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, mRotation); };
 
 	/*
-	@brief　オブジェクトのタグを取得する
-	@return	tag
+	@return	オブジェクトのタグ(enum型 Tag)
 	*/
 	Tag GetTag() const { return mTag; };
 
 	/*
-	@brief　オブジェクトのidを取得する
-	@return	myObjectId(int型)
+	@return	オブジェクトのid(int型)
 	*/
 	int GetObjectId() { return mMyObjectId; };
 
 	/*
-	@brief　解放されるオブジェクトを取得する
-	@return	reUseObject(bool型)
+	@return	解放されるオブジェクト(bool型)
 	*/
 	bool GetReUseGameObject() { return mReUseObject; };
 
 	/*
-	@brief　シーンのタグを取得する
-	@return	sceneTag
+	@return	シーンのタグ
 	*/
 	SceneBase::Scene GetScene() { return mSceneTag; };
 
 	/*
-	@brief　オブジェクトのAABBを取得する
-	@return	aabb
+	@return	オブジェクトのAABB
 	*/
 	AABB GetObjectAABB() { return mAabb; };
 
 	/*
 	@param	_scale オブジェクトのスケール
-*/
+	*/
 	void SetScale(Vector3 _scale) { mScale.x = _scale.x; mScale.y = _scale.y; mScale.z = _scale.z; mRecomputeWorldTransform = true; }
 
 	/*
-	@brief　オブジェクトのクォータニオンを設定する
-	@param	rotation（Quaternion型）
+	@param	_qotation オブジェクトのクォータニオン
 	*/
 	virtual void SetRotation(const Quaternion& _qotation) { mRotation = _qotation;  mRecomputeWorldTransform = true; }
-
 
 	/*
 	@param	_state オブジェクトの状態

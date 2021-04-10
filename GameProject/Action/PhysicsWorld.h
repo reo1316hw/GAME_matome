@@ -90,36 +90,68 @@ private:
 	*/
 	PhysicsWorld();
 
+	//自分のインスタンス
 	static PhysicsWorld* mPhysics;
 
+	/*
+	@fn	矩形と矩形の当たり判定
+	*/
 	void BoxAndBox();
+
+	/*
+	@fn	球と球の当たり判定
+	*/
 	void SphereAndSphere();
+
+	/*
+	@fn	球と矩形の当たり判定
+	*/
 	void SphereAndBox();
 
+	//矩形の当たり判定を全て格納するための可変長コンテナ
     std::vector<BoxCollider*> mBoxes;
+
+	//床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mGroundBoxes;
+	//ガラス床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mGlassBoxes;
+	//障害物の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mBlockBoxes;
+	//縦移動床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mVerticalMoveGroundBoxes;
+	//ジャンプ床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mJumpBoxes;
+	//横移動床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mLateralMoveGroundBoxes;
-	std::vector<BoxCollider*> mPlayerBoxes;
+	//上移動ブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mUpBlockBoxes;
 	std::vector<BoxCollider*> mUpBlock_02Boxes;
+	//縦長障害物の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mVerticalBlockBoxes;
+	//空中ブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mAerialBlockBoxes;
+	//右移動ブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mRightBlockBoxes;
+	//左移動ブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mLeftBlockBoxes;
+	//1マス右移動床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mRightOneBlockBoxes;
 	std::vector<BoxCollider*> mRightOneBlock_02Boxes;
+	//1マス右移動床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mLeftOneBlockBoxes;
 	std::vector<BoxCollider*> mLeftOneBlock_02Boxes;
+	//落ちるブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mDownBlockBoxes;
+	//ゴール柱の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mGoalBlockBoxes;
+	//リスポーン地点の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mRespawn01Boxes;
 	std::vector<BoxCollider*> mRespawn02Boxes;
 	std::vector<BoxCollider*> mRespawn03Boxes;
+
+	//球の当たり判定を全て格納するための可変長コンテナ
 	std::vector<SphereCollider*> mSpheres;
+	//プレイヤーの球当たり判定を全て格納するための可変長コンテナ
 	std::vector<SphereCollider*> mPlayerSpheres;
 
 	OnCollisionMap mCollisionFunction;
@@ -127,7 +159,7 @@ private:
 public://ゲッターセッター
 
 	/*
-	@return PhysicsWorldクラスのインスタンス
+	@return PhysicsWorldクラスのインスタンス(PhysicsWorld型)
 	*/
 	static PhysicsWorld* GetInstance() { return mPhysics; }
 };

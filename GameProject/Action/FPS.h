@@ -1,9 +1,13 @@
-#pragma once
+/*
+@file	FPS.h
+@brief	フレームにかかった時間を計測し上限を設けるクラス
+*/
 
 /*
-@file FPS.h
-@brief フレームにかかった時間を計測し上限を設けるクラス
+@brief	プリプロセッサ
 */
+#pragma once
+
 class FPS
 {
 public:
@@ -44,7 +48,7 @@ private:
 	float mDeltaTime;					
 public://ゲッターセッター
 	/*
-	@return 現在のフレームにかかった時間
+	@return 現在のフレームにかかった時間(float型)
 	*/
 	float GetDeltaTime() { return mDeltaTime; }
 };

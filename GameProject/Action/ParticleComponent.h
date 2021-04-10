@@ -1,11 +1,19 @@
+/*
+@file ParticleComponent.h
+@brief 画像を管理しそれを3D空間上に描画するクラス。
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "Component.h"
 #include "Math.h"
 
-/*
- @file ParticleComponent.h
- @brief 画像を管理しそれを3D空間上に描画するクラス。
-*/
 class ParticleComponent :
 	public Component
 {
@@ -72,23 +80,23 @@ private:
 	bool mReverce;
 public: //ゲッターセッター
 	/*
-	@return テクスチャID
+	@return テクスチャID(int型)
 	*/
 	int GetTextureID() { return mTextureID; }
 
 	/*
-	@return ブレンドタイプ
+	@return ブレンドタイプ(enum型 PARTICLE_ENUM)
 	*/
 	PARTICLE_ENUM GetBlendType() { return mBlendType; }
 
 	/*
 	@fn		描画をするかどうかを取得する
-	@return	true : 描画する , false : 描画しない
+	@return	true : 描画する , false : 描画しない(bool型)
 	*/
 	bool GetVisible() const { return mVisible; }
 
 	/*
-	@return 描画順
+	@return 描画順(int型)
 	*/
 	int GetDrawOrder() { return mDrawOrder; }
 
@@ -115,12 +123,12 @@ public: //ゲッターセッター
 	/*
 	@param _mat ビルボード行列
 	*/
-	void SetBillboardMat(const Matrix4& _mat) {	mStaticBillboardMat = _mat;	}
+	void SetBillboardMat(const Matrix4& _mat) {	mStaticBillboardMat = _mat; }
 
 	/*
 	@param _brendType カメラのワールド座標
 	*/
-	void SetBlendMode(PARTICLE_ENUM _blendType){mBlendType = _blendType;	}
+	void SetBlendMode(PARTICLE_ENUM _blendType){mBlendType = _blendType; }
 
 	/*
 	@fn		描画をするかどうかを設定

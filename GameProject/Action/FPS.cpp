@@ -1,3 +1,11 @@
+/*
+@file	FPS.h
+@brief	フレームにかかった時間を計測し上限を設けるクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "SDL.h"
 #include "FPS.h"
 #include "stdio.h"

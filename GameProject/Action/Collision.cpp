@@ -1,3 +1,11 @@
+/*
+@file Collision.h
+@brief 正方形や線、三角形等のオブジェクト宣言
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Collision.h"
 #include <algorithm>
 #include <array>

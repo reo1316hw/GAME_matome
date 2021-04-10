@@ -1,3 +1,11 @@
+/*
+@file	Skeleton.h
+@brief	骨格
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Skeleton.h"
 #include <fstream>
 #include <sstream>

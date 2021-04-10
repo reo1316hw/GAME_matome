@@ -1,5 +1,16 @@
+/*
+@file	Component.h
+@brief	全てのコンポーネントの管理を行う
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include <cstdint>
 
 class GameObject;
@@ -50,14 +61,16 @@ protected:
 	GameObject* mOwner;			
 	// コンポーネントの更新順番（数値が小さいほど早く更新される）
 	int mUpdateOrder;
+
 public: //ゲッターセッター
+
 	/*
-	@return 更新順番
+	@return 更新順番(int型)
 	*/
 	int GetUpdateOder() { return mUpdateOrder; }
 
 	/*
-	@return アタッチしているゲームオブジェクトへのポインタ
+	@return アタッチしているゲームオブジェクトへのポインタ(GameObject型)
 	*/
 	GameObject* GetOwner() { return mOwner; };
 };

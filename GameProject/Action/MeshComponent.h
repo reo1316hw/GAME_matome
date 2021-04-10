@@ -1,15 +1,22 @@
+/*
+@file	MeshComponent.h
+@brief	メッシュデータの管理と描画を行う
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include "Component.h"
 
 class GameObject;
 class Shader;
 class Mesh;
 
-/*
- @file MeshComponent.h
- @brief メッシュデータの管理と描画を行う
-*/
 class MeshComponent : public Component
 {
 public:
@@ -20,6 +27,7 @@ public:
 	@sa		SkeletalMeshComponent.h
 	*/
     MeshComponent(GameObject* _owner,bool _skelton = false);
+
 	/*
 	@fn		デストラクタ
 	*/
@@ -51,17 +59,17 @@ protected:
 public: //ゲッターセッター
 	/*
 	@fn		描画をするかどうかを取得する
-	@return	true : 描画する , false : 描画しない
+	@return	true : 描画する , false : 描画しない(bool型)
 	*/
 	bool GetVisible() const { return mVisible; }
 
 	/*
-	@return スケルトンデータを用いるか
+	@return スケルトンデータを用いるか(bool型)
 	*/
 	bool GetIsSkeltal()const { return mSkeltonFlag; }
 
 	/*
-	@return 設定されたMeshクラスのポインタ
+	@return 設定されたMeshクラスのポインタ(bool型)
 	*/
 	virtual Mesh* GetMesh() { return mMesh; }
 

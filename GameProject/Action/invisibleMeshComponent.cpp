@@ -1,3 +1,11 @@
+/*
+@file	InvisibleMeshComponent.h
+@brief	アルファブレンドメッシュデータの管理と描画を行う
+*/
+
+/*
+@brief	インクルード
+*/
 #include "InvisibleMeshComponent.h"
 #include "GameObject.h"
 #include "Game.h"

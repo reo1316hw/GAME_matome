@@ -1,12 +1,20 @@
+/*
+@file	Skeleton.h
+@brief	骨格
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "BoneTransform.h"
 #include <string>
 #include <vector>
 
-/*
-@file Skeleton.h 
-@fn 骨格
-*/
 class Skeleton
 {
 public:
@@ -41,20 +49,20 @@ private:
 	std::vector<Matrix4> mGlobalInvBindPoses;
 public: //ゲッターセッター
 	/*
-	@return ボーン数
+	@return ボーン数(unsigned int型)
 	*/
 	size_t GetNumBones() const { return mBones.size(); }
 	/*
 	@param	_idx ボーンのid
-	@return ボーンのid
+	@return ボーンのid(Bone型)
 	*/
 	const Bone& GetBone(size_t _idx) const { return mBones[_idx]; }
 	/*
-	@return ボーン配列
+	@return ボーン配列(Bone型)
 	*/
 	const std::vector<Bone>& GetBones() const { return mBones; }
 	/*
-	@return 逆バインドポーズ行列
+	@return 逆バインドポーズ行列(Matrix4型)
 	*/
 	const std::vector<Matrix4>& GetGlobalInvBindPoses() const { return mGlobalInvBindPoses; }
 };

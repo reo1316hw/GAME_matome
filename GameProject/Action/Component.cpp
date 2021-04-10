@@ -1,3 +1,11 @@
+/*
+@file	Component.h
+@brief	全てのコンポーネントの管理を行う
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Component.h"
 #include "GameObject.h"
 

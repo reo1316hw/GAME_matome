@@ -1,11 +1,19 @@
+/*
+@fil	Animation.h
+@brief	Skeletonを用いたアニメーションのデータクラス
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include <string>
 #include <vector>
 
-/*
- @file Animation.h
- @fn Skeletonを用いたアニメーションのデータクラス
-*/
 class Animation
 {
 public:
@@ -32,19 +40,19 @@ private:
 	std::vector<std::vector<class BoneTransform>> mTracks;
 public: //ゲッターセッター
 	/*
-	@return ボーン数
+	@return ボーン数(unsigned int型)
 	*/
 	size_t GetNumBones() const { return mNumBones; }
 	/*
-	@return フレーム数
+	@return フレーム数(unsigned int型)
 	*/
 	size_t GetNumFrames() const { return mNumFrames; }
 	/*
-	@return 再生時間
+	@return 再生時間(float型)
 	*/
 	float GetDuration() const { return mDuration; }                               
 	/*
-	@return	フレーム間の時刻
+	@return	フレーム間の時刻(float型)
 	*/
 	float GetFrameDuration() const { return mFrameDuration; }                       
 

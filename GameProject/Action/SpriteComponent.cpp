@@ -1,3 +1,11 @@
+/*
+@file	SpriteComponent.h
+@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "SpriteComponent.h"
 #include "Texture.h"
 #include "Shader.h"

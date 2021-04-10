@@ -1,3 +1,11 @@
+/*
+@file	SpriteComponent.h
+@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "UIComponent.h"
 #include "Texture.h"
 #include "Shader.h"
@@ -5,6 +13,7 @@
 #include "Game.h"
 #include "Renderer.h"
 
+//UIのID、カウント用の初期化
 int UIComponent::mUIid = 0;
 
 /*

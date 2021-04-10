@@ -1,11 +1,19 @@
+/*
+@file	SkeletalMeshComponent.h
+@brief	スケルトンデータの描画とアニメーション
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "MeshComponent.h"
 #include "MatrixPalette.h"
 
-/*
-@file SkeletalMeshComponent.h
-@brief スケルトンデータの描画とアニメーション
-*/
 class SkeletalMeshComponent : public MeshComponent
 {
 public:
@@ -28,10 +36,10 @@ public:
 	void Draw(class Shader* _shader) override;
 
    	/*
-	@fn アニメーションの再生
-	@param _anim アニメーションデータクラス
-	@param _playRate アニメーションの再生速度
-	@return アニメーションの残り時間
+	@fn		アニメーションの再生
+	@param	_anim アニメーションデータクラス
+	@param	_playRate アニメーションの再生速度
+	@return	アニメーションの残り時間(float型)
 	*/
 	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
 protected:

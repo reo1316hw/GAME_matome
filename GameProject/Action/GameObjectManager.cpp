@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "GameObjectManager.h"
 #include "GameObject.h"
 #include "InputSystem.h"
@@ -5,6 +8,7 @@
 #include "MainCameraObject.h"
 #include "SceneBase.h"
 
+//自身のインスタンスの初期化
 GameObjectManager* GameObjectManager::mManager = nullptr;
 
 /*

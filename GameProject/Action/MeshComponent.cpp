@@ -1,3 +1,11 @@
+/*
+@file	MeshComponent.h
+@brief	メッシュデータの管理と描画を行う
+*/
+
+/*
+@brief	インクルード
+*/
 #include "MeshComponent.h"
 #include "GameObject.h"
 #include "Game.h"

@@ -1,3 +1,11 @@
+/*
+@file	SkeletalMeshComponent.h
+@brief	スケルトンデータの描画とアニメーション
+*/
+
+/*
+@brief	インクルード
+*/
 #include "SkeletalMeshComponent.h"
 #include "Shader.h"
 #include "Mesh.h"

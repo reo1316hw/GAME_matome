@@ -1,10 +1,18 @@
-#pragma once
-#include "Math.h"
-
 /*
  @file BoneTransform.h
- @fn モデルのボーン変換
+ @brief モデルのボーン変換
 */
+
+/*
+@brief	プリプロセッサ
+*/
+#pragma once
+
+/*
+@brief	インクルード
+*/
+#include "Math.h"
+
 class BoneTransform
 {
 public:
