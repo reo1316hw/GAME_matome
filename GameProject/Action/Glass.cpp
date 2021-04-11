@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Glass.h"
 #include "InvisibleMeshComponent.h"
 #include "MeshComponent.h"
@@ -5,6 +8,13 @@
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos ガラス床の座標
+@param	_size ガラス床のサイズ
+@param	_objectTag ガラス床のタグ
+@param	_sceneTag シーンのタグ
+*/
 Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,const SceneBase::Scene _sceneTag) :
 	GameObject(_sceneTag,_objectTag)
 {
@@ -62,6 +72,10 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 	}
 }
 
+/*
+@fn		ガラス床のアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void Glass::UpdateGameObject(float _deltaTime)
 {
 	if (Player::GetRespawnFlag())
@@ -88,7 +102,10 @@ void Glass::UpdateGameObject(float _deltaTime)
 	SetPosition(mPosition);
 }
 
-// 当たり判定
+/*
+@fn		ガラス床がヒットした時の処理
+@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
 void Glass::OnCollision(const GameObject& _hitObject)
 {
 	mHitFlag = true;

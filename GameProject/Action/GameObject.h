@@ -187,6 +187,11 @@ public:
 
 protected:
 	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
+
+	/*
+	@fn		ゲームオブジェクトがヒットした時の処理
+	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+	*/
 	virtual void OnCollision(const GameObject& _hitObject) {}
 
 	//メインカメラ　生成はGameObjectManager生成時に行われる
@@ -263,9 +268,9 @@ public://ゲッターセッター
 	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
 
 	/*
-	@return	オブジェクトのスケール(Vector3型)
+	@return	オブジェクトのスケール(float型)
 	*/
-	Vector3 GetScaleFloat() const { return mScale; }
+	float GetScale() const { return mScale.x; }
 
 	/*
 	@return	オブジェクトのクォータニオン(Quaternion型)

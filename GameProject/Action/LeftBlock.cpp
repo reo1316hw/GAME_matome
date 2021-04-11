@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "LeftBlock.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -5,6 +8,13 @@
 #include "BoxCollider.h"
 #include "Player.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 左移動床の座標
+@param	_size 左移動床のサイズ
+@param	_objectTag 左移動床のタグ
+@param	_sceneTag シーンのタグ
+*/
 LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mElapseTime(0.0f)
@@ -37,6 +47,10 @@ LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		左移動床のアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void LeftBlock::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();

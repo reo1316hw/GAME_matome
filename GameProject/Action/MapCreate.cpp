@@ -353,7 +353,7 @@ bool MapCreate::OpenFile()
 			return true;
 		}
 
-		//落ちるブロックデータの読み込み
+		//落下ブロックデータの読み込み
 		if (!readTiledJson(mDownBlockMapData, "Assets/Config/RunMap02.json", "DownBlock"))
 		{
 			printf("don't have Layer/DownBlock\n");

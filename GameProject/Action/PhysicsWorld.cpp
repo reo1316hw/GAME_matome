@@ -371,7 +371,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				_sphere->Refresh();
 			}
 		}
-		//落ちるブロック
+		//落下ブロック
 		for (auto itr : mDownBlockBoxes)
 		{
 			//コライダーの親オブジェクトがActiveじゃなければ終了する

@@ -140,7 +140,7 @@ private:
 	//1マス右移動床の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mLeftOneBlockBoxes;
 	std::vector<BoxCollider*> mLeftOneBlock_02Boxes;
-	//落ちるブロックの矩形当たり判定を全て格納するための可変長コンテナ
+	//落下ブロックの矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mDownBlockBoxes;
 	//ゴール柱の矩形当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mGoalBlockBoxes;

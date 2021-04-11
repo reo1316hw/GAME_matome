@@ -68,7 +68,7 @@ private:
 	//1マス左移動床
 	std::vector<std::vector<int>> mLeftOneBlockMapData;
 	std::vector<std::vector<int>> mLeftOneBlock02MapData;
-	//落ちるブロック
+	//落下ブロック
 	std::vector<std::vector<int>> mDownBlockMapData;
 	//ゴール柱
 	std::vector<std::vector<int>> mGoalBlockMapData;

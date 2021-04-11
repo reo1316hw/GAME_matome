@@ -1,11 +1,27 @@
+/*
+@brief	インクルード
+*/
 #include "LateralMoveGround.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+
+
 Vector3 LateralMoveGround::mSendVel = Vector3::Zero;
 
+
+
+
+/*
+@fn		コンストラクタ
+@param	_pos 横移動床の座標
+@param	_size 横移動床のサイズ
+@param	_objectTag 横移動床のタグ
+@param	_sceneTag シーンのタグ
+@param _distance 横移動床の移動する距離
+*/
 LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance)
 	: GameObject(_sceneTag, _objectTag)
 {
@@ -71,6 +87,10 @@ LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, 
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		横移動床のアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void LateralMoveGround::UpdateGameObject(float _deltaTime)
 {
 	if (mInitPos.x != mPosition.x)
