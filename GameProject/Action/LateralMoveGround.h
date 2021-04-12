@@ -48,7 +48,7 @@ public://ゲッターセッター
 	
 
 
-	Vector3 GetVelocity() { return mVelocity; };
+	Vector3 GetVelocity() { return mSendVel; };
 
 
 

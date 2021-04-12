@@ -27,22 +27,31 @@ class Mesh
 {
 public:
 
+	/*
+	@fn	コンストラクタ
+	*/
     Mesh();
 
-    ~Mesh();
 	/*
-	@brief  メッシュデータの読み込み
+	@fn	デストラクタ
+	*/
+	~Mesh() {};
+
+	/*
+	@fn		メッシュデータの読み込み
 	@param	_fileName ロードしたいメッシュのファイル名
 	@param	_renderer Rendererクラスのポインタ
-	@return true : 成功 , false : 失敗
+	@return true : 成功 , false : 失敗(bool型)
 	*/
     bool Load(const std::string& _fileName, Renderer* _renderer);
 
 	/*
-	@brief  ロードしたメッシュデータの解放
+	@fn	ロードしたメッシュデータの解放
 	*/
     void Unload();
+
 private:
+
     //このメッシュに使うテクスチャのポインタの可変長コンテナ
     std::vector<Texture*> mTextures;
 	//このメッシュに使う頂点データ
@@ -61,53 +70,63 @@ private:
 	// 透明度
 	float mAlpha;
 
+	//メッシュの矩形当たり判定
 	AABB mBox;
 
 	// テクスチャステージに割り当てられたテクスチャ
 	std::unordered_map<TextureStage, int> mStageDefTexture;
 
 public://ゲッターセッター
+
 	/*
-	@return	VertexArray型のポインタ
+	@return	VertexArray型のポインタ(class VertexArray)
 	*/
 	VertexArray* GetVertexArray() { return mVertexArray; }
 
 	/*
-	@return Textureクラスのポインタ
+	@param	_index テクスチャサイズ
+	@return Textureクラスのポインタ(class Texture)
 	*/
 	Texture* GetTexture(size_t _index);
 
+	/*
+	@param	_stage テクスチャステージ
+	@return テクスチャのID(int型)
+	*/
 	int GetTextureID(TextureStage _stage);
 
 	/*
-	@return Textureクラスのポインタ
+	@return Textureクラスのポインタ(std::string型)
 	*/
 	const std::string& GetShaderName() const { return mShaderName; }
 
 	/*
-	@return 半径
+	@return 半径(float型)
 	*/
 	float GetRadius() const { return mRadius; }
 
 	/*
-	@return 鏡面反射成分
+	@return 鏡面反射成分(float型)
 	*/
 	float GetSpecPower() const { return mSpecPower; }
 
 	/*
-	@return 自己発光強度
+	@return 自己発光強度(float型)
 	*/
 	float GetLuminace() const { return mLuminance; }
 
 	/*
-	@return 透明度
+	@return 透明度(float型)
 	*/
 	float GetAlpha() const { return mAlpha; }
 
+	/*
+	@return メッシュの矩形当たり判定(struct AABB)
+	*/
 	const AABB& GetBox() const { return mBox; }
 
 	/*
-	@return 頂点データ
+	@return 頂点データ(Vector3型)
 	*/
 	std::vector<Vector3> GetVerts() { return mVerts; }
 };

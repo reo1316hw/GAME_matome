@@ -1,4 +1,16 @@
+/*
+@file Renderer.h
+@brief 描画の進行を行うクラス
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -20,6 +32,9 @@ struct DirectionalLight
 	Vector3 m_specColor;
 };
 
+/*
+@enum テクスチャステージ
+*/
 enum class TextureStage
 {
 	DiffuseMap,
@@ -42,53 +57,49 @@ class UIComponent;
 class HeartUI;
 class HDRRenderer;
 
-/*
-@file Renderer.h
-@brief 描画の進行を行うクラス
-*/
 class Renderer
 {
 public:
+
 	/*
-	@brief  インスタンスを取得する
-	@return Rendererクラスのインスタンス
+	@fn		インスタンスを取得する
+	@return Rendererクラスのインスタンス(class Renderer)
 	*/
 	static Renderer* GetInstance() { return mRenderer; }
 
 	/*
-	@brief  インスタンスを作成する
+	@fn	インスタンスを作成する
 	*/
 	static void CreateInstance();
 
 	/*
-	@brief  インスタンスを削除する
+	@fn	インスタンスを削除する
 	*/
 	static void DeleteInstance();
 
 	/*
-	@brief  初期化処理
-	@return true : 成功 , false : 失敗
+	@fn		初期化処理
+	@return true : 成功 , false : 失敗(bool型)
 	*/
 	bool Initialize(float _screenWidth, float _screenHeight, bool _fullScreen);
+
 	/*
-	@brief  終了処理
+	@fn		終了処理
 	*/
 	void Shutdown();
 
 	/*
-	@brief  ロードしたデータの解放
+	@fn		ロードしたデータの解放
 	*/
 	void UnloadData();
 
 	/*
-	@brief  描画処理
+	@fn		描画処理
 	*/
 	void Draw();
-
-	/*void DrawTexture(class Texture* texture, const Vector2& offset = Vector2::Zero, float scale = 1.0f, float alpha = 1.0f);*/
 	   
 	/*
-	@brief  スプライトの追加
+	@fn		スプライトの追加
 	@param	_spriteComponent　追加するSpriteComponentクラスのポインタ
 	*/
 	void AddSprite(SpriteComponent* _spriteComponent);
@@ -100,123 +111,55 @@ public:
 	void RemoveSprite(SpriteComponent* _spriteComponent);
 
 	/*
-	@brief  UIの追加
+	@fn		UIの追加
 	@param	_ui　追加するUIクラスのポインタ
 	*/
 	void AddUI(UIComponent* _ui);
 
 	/*
-	@brief UIの削除
+	@fn		UIの削除
 	@param	_ui　削除するUIクラスのポインタ
 	*/
 	void RemoveUI(UIComponent* _ui);
 
 	/*
-	@brief  パーティクルの追加
+	@fn		パーティクルの追加
 	@param	_particleComponent　追加するParticleObjectクラスのポインタ
 	*/
 	void AddParticle(ParticleComponent* _particleComponent);
 
 	/*
-	@brief  スプライトの削除
+	@fn		スプライトの削除
 	@param	削除するParticleObjectクラスのポインタ
 	*/
 	void RemoveParticle(ParticleComponent* _particleComponent);
 	
 	/*
-	@brief  メッシュコンポーネントの追加
+	@fn		メッシュコンポーネントの追加
 	@param	_meshComponent　追加するMeshComponentクラスのポインタ
 	*/
 	void AddMeshComponent(MeshComponent* _meshComponent);
 
 	/*
-	@brief  メッシュコンポーネントの削除
+	@fn		メッシュコンポーネントの削除
 	@param	_meshComponent　削除するMeshComponentクラスのポインタ
 	*/
 	void RemoveMeshComponent(MeshComponent* _meshComponent);
 
 	/*
-	@brief  メッシュコンポーネントの追加
+	@fn		メッシュコンポーネントの追加
 	@param	_meshComponent　追加するMeshComponentクラスのポインタ
 	*/
 	void AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent);
 
 	/*
-	@brief  メッシュコンポーネントの削除
+	@fn		メッシュコンポーネントの削除
 	@param	_meshComponent　削除するMeshComponentクラスのポインタ
 	*/
 	void RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent);
 
-
-	/*
-	@brief  テクスチャの取得
-	@param	_fileName　取得したいテクスチャのファイル名
-	@return Textureクラスのポインタ
-	*/
-	Texture* GetTexture(const std::string& _fileName);
-	   
-	/*
-	@param _fileName モデルへのアドレス
-	@return スケルトンモデルの取得
-	*/
-	const class Skeleton* GetSkeleton(const char* _fileName);                       
-	/*
-	@param _fileName アニメーションへのアドレス
-	@return スケルトンアニメーションの取得
-	*/
-	const class Animation* GetAnimation(const char* _fileName);                     // スケルタルアニメーションの取得
-
-	/*
-	@brief  メッシュの取得
-	@param	_fileName 取得したいメッシュのファイル名
-	@return Meshクラスのポインタ
-	*/
-	Mesh* GetMesh(const std::string& _fileName);
-
-	/*
-	@brief	ビュー行列を設定する
-	@param	_view ビュー行列
-	*/
-	void SetViewMatrix(const Matrix4& _view) { mView = _view; }
-
-	/*
-	@brief	環境光を設定する
-	@param	_ambient Vector3（環境光を表す）
-	*/
-	void SetAmbientLight(const Vector3& _ambient) { mAmbientLight = _ambient; }
-
-	/*
-	@brief	平行光源の構造体を取得する
-	@return	DirectionalLight（平行光源の構造体）
-	*/
-	DirectionalLight& GetDirectionalLight() { return mDirLight; }
-
-	/*
-	@brief	スクリーンの横幅を取得する
-	@return	スクリーンの横幅
-	*/
-	float GetScreenWidth() const { return mScreenWidth; }
-
-	/*
-	@brief	スクリーンの縦幅を取得する
-	@return	スクリーンの縦幅
-	*/
-	float GetScreenHeight() const { return mScreenHeight; }
-
-	Matrix4 GetViewMatrix() const { return mView; };
-
-	void SetParticleVertex();
-
-	Matrix4 GetProjectionMatrix() { return mProjection; }
-
-	SDL_Renderer* GetSDLRenderer() { return mSdlRenderer; }
-
-	unsigned int GetUndefineTexID() { return mUndefineTexID; }
-
-	/*void DrawTexture(Texture* texture, const Vector2& offset, float scale = 1.0f, float alpha = 1.0f);
-	void DrawTexture(class Texture* texture, int index, int xDyvNum, int yDivNum, const Vector2& offset, float scale = 1.0f, float alpha = 1.0f);*/
-
 private:
+
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
 	~Renderer();
@@ -230,6 +173,7 @@ private:
 
 	//自分のインスタンス
 	static Renderer* mRenderer;
+
 	SDL_Renderer* mSdlRenderer;
 
 	/*
@@ -323,4 +267,65 @@ private:
 
 	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
 	unsigned int mUndefineTexID;
+
+public://ゲッターセッター
+
+	/*
+	@param	_fileName　取得したいテクスチャのファイル名
+	@return Textureクラスのポインタ(class Texture)
+	*/
+	Texture* GetTexture(const std::string& _fileName);
+
+	/*
+	@param _fileName モデルへのアドレス
+	@return スケルトンモデルの取得(class Skeleton)
+	*/
+	const class Skeleton* GetSkeleton(const char* _fileName);
+
+	/*
+	@param _fileName アニメーションへのアドレス
+	@return スケルトンアニメーションの取得(class Animation)
+	*/
+	const class Animation* GetAnimation(const char* _fileName);                     // スケルタルアニメーションの取得
+
+	/*
+	@param	_fileName 取得したいメッシュのファイル名
+	@return Meshクラスのポインタ(class Mesh)
+	*/
+	Mesh* GetMesh(const std::string& _fileName);
+
+	/*
+	@param	_view ビュー行列
+	*/
+	void SetViewMatrix(const Matrix4& _view) { mView = _view; }
+
+	/*
+	@param	_ambient Vector3（環境光を表す）
+	*/
+	void SetAmbientLight(const Vector3& _ambient) { mAmbientLight = _ambient; }
+
+	/*
+	@return	平行光源の構造体(struct DirectionalLight）
+	*/
+	DirectionalLight& GetDirectionalLight() { return mDirLight; }
+
+	/*
+	@return	スクリーンの横幅(float型)
+	*/
+	float GetScreenWidth() const { return mScreenWidth; }
+
+	/*
+	@return	スクリーンの縦幅(float型)
+	*/
+	float GetScreenHeight() const { return mScreenHeight; }
+
+	Matrix4 GetViewMatrix() const { return mView; };
+
+	void SetParticleVertex();
+
+	Matrix4 GetProjectionMatrix() { return mProjection; }
+
+	SDL_Renderer* GetSDLRenderer() { return mSdlRenderer; }
+
+	unsigned int GetUndefineTexID() { return mUndefineTexID; }
 };

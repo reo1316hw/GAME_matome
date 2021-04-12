@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Mesh.h"
 #include "Renderer.h"
 #include "Texture.h"
@@ -10,6 +13,13 @@
 #include "Collision.h"
 #include "RapidJsonHelper.h"
 
+/*
+@fn		テクスチャステージを読み込み
+@param	_doc rapidJsonオブジェクト
+@param	_texStage テクスチャステージ
+@param	_stgString メンバ名
+@return	テクスチャのID(int型)
+*/
 int LoadStageTextures(const rapidjson::Document& _doc, TextureStage _texStage, const char* _stgString);
 
 namespace
@@ -21,6 +31,9 @@ namespace
 	};
 }
 
+/*
+@fn	コンストラクタ
+*/
 Mesh::Mesh()
 	: mVertexArray(nullptr)
 	, mRadius(0.0f)
@@ -35,16 +48,11 @@ Mesh::Mesh()
 	mStageDefTexture.emplace(TextureStage::EmissiveMap, 0);
 }
 
-Mesh::~Mesh()
-{
-}
-
-
 /*
-@brief  メッシュデータの読み込み
-@param _fileName	ロードしたいメッシュのファイル名
-@param _renderer Rendererクラスのポインタ
-@return true : 成功 , false : 失敗
+@fn		メッシュデータの読み込み
+@param	_fileName ロードしたいメッシュのファイル名
+@param	_renderer Rendererクラスのポインタ
+@return true : 成功 , false : 失敗(bool型)
 */
 bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 {
@@ -254,7 +262,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 }
 
 /*
-@brief  ロードしたメッシュデータの解放
+@fn	ロードしたメッシュデータの解放
 */
 void Mesh::Unload()
 {
@@ -263,7 +271,8 @@ void Mesh::Unload()
 }
 
 /*
-@brief  テクスチャのGetter
+@param	_index テクスチャサイズ
+@return Textureクラスのポインタ(class Texture)
 */
 Texture* Mesh::GetTexture(size_t _index)
 {
@@ -277,11 +286,22 @@ Texture* Mesh::GetTexture(size_t _index)
 	}
 }
 
+/*
+@param	_stage テクスチャステージ
+@return テクスチャのID(int型)
+*/
 int Mesh::GetTextureID(TextureStage _stage)
 {
 	return mStageDefTexture[_stage];
 }
 
+/*
+@fn		テクスチャステージを読み込み
+@param	_doc rapidJsonオブジェクト
+@param	_texStage テクスチャステージ
+@param	_stgString メンバ名
+@return	テクスチャのID(int型)
+*/
 int LoadStageTextures(const rapidjson::Document& _doc, TextureStage _texStage, const char* _stgString)
 {
 	std::string noneTexture("none");
