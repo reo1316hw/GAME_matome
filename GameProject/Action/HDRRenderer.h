@@ -1,10 +1,19 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "Game.h"
 #include "Math.h"
 
 class HDRRenderer
 {
 public:
+
+
 	HDRRenderer(int _fbowidth, int _fboheight, int _bloomLevel);
 	~HDRRenderer();
 
@@ -35,14 +44,19 @@ private:
 	unsigned int              mBloomBufferLevel;
 	unsigned int              mBloomBufferNum;
 
-	unsigned int              mHdrFBO;              // 浮動小数点FBO
+	//浮動小数点FBO
+	unsigned int              mHdrFBO;
+
 	unsigned int              mHdrRBO;
 	unsigned int              mHdrColorBuffers[2];
 
-	std::vector<unsigned int> mBlurFBOs;            // ブラー用のフレームバッファオブジェクト
-	std::vector<unsigned int> mBlurBufferTexs;      // ブラー結果のテクスチャID
+	//ブラー用のフレームバッファオブジェクト
+	std::vector<unsigned int> mBlurFBOs;
+	// ブラー結果のテクスチャID
+	std::vector<unsigned int> mBlurBufferTexs;
 
-	const int                 mSampleCount = 15;    // ガウスぼかしのサンプリング点
-	Vector3                   mOffset[15];          // サンプリング点の座標(u,v) & w:重み
-
+	//ガウスぼかしのサンプリング点
+	const int                 mSampleCount = 15;
+	//サンプリング点の座標(u,v) & w:重み
+	Vector3                   mOffset[15];
 };

@@ -216,7 +216,7 @@ protected:
 
 	//ゲームオブジェクトのメッシュ
 	MeshComponent* mMeshComponent;
-	//ゲームオブジェクトの当たり判定
+	//ゲームオブジェクトの矩形当たり判定
 	BoxCollider* mBoxcollider;
 	//当たり判定をmeshにするためのインスタンス
 	Mesh* mMesh;
@@ -228,11 +228,11 @@ protected:
 	//移動先
 	Vector3 mEndPos;
 	//初期座標
-	Vector3		mInitPos;
+	Vector3	mInitPos;
 	//オブジェクトのクォータニオン
 	Quaternion  mRotation;
 	//オブジェクトのワールド行列
-	Matrix4		mWorldTransform;
+	Matrix4	mWorldTransform;
 	// 移動速度
 	float mMoveSpeed;
 	//重力
@@ -250,6 +250,7 @@ protected:
 	SceneBase::Scene mSceneTag;
 	//アタッチされているコンポーネント
 	std::vector<class Component*>mComponents;
+
 private:
 
 	//シーンを跨ぐ際に解放されるオブジェクトかどうか、カメラなどが対象になる

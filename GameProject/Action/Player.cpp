@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "player.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -16,6 +19,13 @@ bool	Player::mSendDeathFlag = false;
 bool    Player::mSendRespawnFlag = false;
 int     Player::mSendLife = 0;
 
+/*
+@fn		コンストラクタ
+@param	_pos プレイヤーの座標
+@param	_size プレイヤーのサイズ
+@param	_objectTag プレイヤーのタグ
+@param	_sceneTag シーンのタグ
+*/
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mPlayerSphere(Vector3::Zero,0.0f)
@@ -57,10 +67,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mLateralMoveVelocity = Vector3::Zero;
 }
 
-Player::~Player()
-{
-}
-
+/*
+@fn		プレイヤーのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void Player::UpdateGameObject(float _deltaTime)
 {
 	mMainCamera->SetViewMatrixLerpObject(Vector3(0, 500, -550), mPosition);
@@ -331,6 +341,12 @@ void Player::UpdateGameObject(float _deltaTime)
 	SetPosition(mPosition);
 }
 
+/*
+@fn		入力を引数で受け取る更新関数
+@brief	基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+@param	_keyState 各入力機器の入力状態
+@brief	キーボード、マウス、コントローラー
+*/
 void Player::GameObjectInput(const InputState& _keyState)
 {
 	// 常に前に進む
@@ -389,6 +405,10 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}
 }
 
+/*
+@fn		プレイヤーがヒットした時の処理
+@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
 void Player::OnCollision(const GameObject& _hitObject)
 {
 	// 重力を消す

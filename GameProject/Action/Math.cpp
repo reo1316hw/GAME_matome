@@ -6,6 +6,9 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
+/*
+@brief	インクルード
+*/
 #include "Math.h"
 
 const Vector2 Vector2::Zero(0.0f, 0.0f);
@@ -42,7 +45,7 @@ static float m4Ident[4][4] =
 
 /////////////////////////////////////
 //イージング 
-// 参考元→ http://nakamura001.hatenablog.com/entry/20111117/1321539246
+//参考元→ http://nakamura001.hatenablog.com/entry/20111117/1321539246
 
 //イーズイン
 float Quintic::EaseIn(float _elapseTime, float _initpos, float _differencePos, float _totalTime)

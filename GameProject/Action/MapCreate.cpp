@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "MapCreate.h"
 #include "Ground.h"
 #include "Glass.h"
@@ -21,6 +24,9 @@
 #include "Respawn.h"
 #include "SceneBase.h"
 
+/*
+@fn	コンストラクタ
+*/
 MapCreate::MapCreate() :GameObject(SceneBase::other,Tag::Other)
 {
 	mSizeX = 0;
@@ -29,6 +35,9 @@ MapCreate::MapCreate() :GameObject(SceneBase::other,Tag::Other)
 	mOffset = 200;
 }
 
+/*
+@fn	デストラクタ
+*/
 MapCreate::~MapCreate()
 {
 	mGroundMapData.clear();
@@ -55,6 +64,10 @@ MapCreate::~MapCreate()
 	mRespawn03MapData.clear();
 }
 
+/*
+@fn		jsonファイルをRapidJsonで読み込んでマップデータを各配列に格納する
+@return	ファイルを開けたか(bool型)
+*/
 bool MapCreate::OpenFile()
 {
 	mScene = SceneBase::GetScene();
@@ -399,6 +412,9 @@ bool MapCreate::OpenFile()
 	return false;
 }
 
+/*
+@fn	床を生成する
+*/
 void MapCreate::CreateGround()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -445,6 +461,9 @@ void MapCreate::CreateGround()
 	}
 }
 
+/*
+@fn	ガラス床を生成する
+*/
 void MapCreate::CreateGlass()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -491,7 +510,9 @@ void MapCreate::CreateGlass()
 	}
 }
 
-
+/*
+@fn	障害物を生成する
+*/
 void MapCreate::CreateBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -539,6 +560,9 @@ void MapCreate::CreateBlock()
 	}
 }
 
+/*
+@fn	縦移動床を生成する
+*/
 void MapCreate::CreateVerticalMoveGround()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -585,6 +609,9 @@ void MapCreate::CreateVerticalMoveGround()
 	}
 }
 
+/*
+@fn	ジャンプ中を生成する
+*/
 void MapCreate::CreateJump()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -633,6 +660,9 @@ void MapCreate::CreateJump()
 	}
 }
 
+/*
+@fn	横移動床を生成する
+*/
 void MapCreate::CreateLateralMoveGround()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -679,6 +709,9 @@ void MapCreate::CreateLateralMoveGround()
 	}
 }
 
+/*
+@fn	プレイヤーを生成する
+*/
 void MapCreate::CreatePlayer()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -726,6 +759,9 @@ void MapCreate::CreatePlayer()
 
 }
 
+/*
+@fn	上移動ブロックを生成する
+*/
 void MapCreate::CreateUpBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -762,6 +798,9 @@ void MapCreate::CreateUpBlock()
 	}
 }
 
+/*
+@fn	上移動ブロックを生成する
+*/
 void MapCreate::CreateUpBlock_02()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -786,6 +825,9 @@ void MapCreate::CreateUpBlock_02()
 	}
 }
 
+/*
+@fn	縦長障害物を生成する
+*/
 void MapCreate::CreateVerticalBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -812,6 +854,9 @@ void MapCreate::CreateVerticalBlock()
 	}
 }
 
+/*
+@fn	空中ブロックを生成する
+*/
 void MapCreate::CreateAerialBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -835,6 +880,9 @@ void MapCreate::CreateAerialBlock()
 	}
 }
 
+/*
+@fn	右移動ブロックを生成する
+*/
 void MapCreate::CreateRightBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -858,6 +906,9 @@ void MapCreate::CreateRightBlock()
 	}
 }
 
+/*
+@fn	左移動ブロックを生成する
+*/
 void MapCreate::CreateLeftBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -880,6 +931,9 @@ void MapCreate::CreateLeftBlock()
 	}
 }
 
+/*
+@fn	1マス右移動床を生成する
+*/
 void MapCreate::CreateRightOneBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -917,6 +971,9 @@ void MapCreate::CreateRightOneBlock()
 	}
 }
 
+/*
+@fn	1マス右移動床を生成する
+*/
 void MapCreate::CreateRightOneBlock_02()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -941,6 +998,9 @@ void MapCreate::CreateRightOneBlock_02()
 	}
 }
 
+/*
+@fn	1マス左移動床を生成する
+*/
 void MapCreate::CreateLeftOneBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -978,6 +1038,9 @@ void MapCreate::CreateLeftOneBlock()
 	}
 }
 
+/*
+@fn	1マス左移動床を生成する
+*/
 void MapCreate::CreateLeftOneBlock_02()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -1003,6 +1066,9 @@ void MapCreate::CreateLeftOneBlock_02()
 	}
 }
 
+/*
+@fn	落下ブロックを生成する
+*/
 void MapCreate::CreateDownBlock()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -1028,6 +1094,9 @@ void MapCreate::CreateDownBlock()
 	}
 }
 
+/*
+@fn	ゴール柱を生成する
+*/
 void MapCreate::CreateGoal()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -1078,6 +1147,9 @@ void MapCreate::CreateGoal()
 	}
 }
 
+/*
+@fn	リスポーン地点を生成する
+*/
 void MapCreate::CreateRespawn01()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -1114,6 +1186,9 @@ void MapCreate::CreateRespawn01()
 	}
 }
 
+/*
+@fn	リスポーン地点を生成する
+*/
 void MapCreate::CreateRespawn02()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
@@ -1150,6 +1225,9 @@ void MapCreate::CreateRespawn02()
 	}
 }
 
+/*
+@fn	リスポーン地点を生成する
+*/
 void MapCreate::CreateRespawn03()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)

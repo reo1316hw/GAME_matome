@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "UpBlock_02.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -5,6 +8,13 @@
 #include "BoxCollider.h"
 #include "Player.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 上移動ブロックの座標
+@param	_size 上移動ブロックのサイズ
+@param	_objectTag 上移動ブロックのタグ
+@param	_sceneTag シーンのタグ
+*/
 UpBlock_02::UpBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {
@@ -30,6 +40,10 @@ UpBlock_02::UpBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		上移動ブロックのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void UpBlock_02::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();

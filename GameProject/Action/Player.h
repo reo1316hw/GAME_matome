@@ -1,4 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
@@ -6,6 +13,10 @@ class EffectManager;
 class SphereCollider;
 class LateralMoveGround;
 
+/*
+@enum	プレイヤーのリスポーンステート
+@brief	どのリスポーン地点で復活するか
+*/
 enum class RespawnState
 {
 	respawnNone = 0,
@@ -17,32 +28,45 @@ enum class RespawnState
 class Player:public GameObject
 {
 public:
-	Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
-	~Player();
 
+	/*
+	@fn		コンストラクタ
+	@param	_pos プレイヤーの座標
+	@param	_size プレイヤーのサイズ
+	@param	_objectTag プレイヤーのタグ
+	@param	_sceneTag シーンのタグ
+	*/
+	Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+
+	/*
+	@fn	デストラクタ
+	*/
+	~Player() {};
+
+	/*
+	@fn		プレイヤーのアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
 	void UpdateGameObject(float _deltaTime)override;
+
+	/*
+	@fn		入力を引数で受け取る更新関数
+	@brief	基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
+	@param	_keyState 各入力機器の入力状態
+	@brief	キーボード、マウス、コントローラー
+	*/
 	void GameObjectInput(const InputState& _keyState)override;
 
-	static Vector3 GetPos()			{ return mSendPos; };
-	static bool GetDeathFlag()		{ return mSendDeathFlag; };
-	static bool GetRespawnFlag()	{ return mSendRespawnFlag; };
-	static bool GetClearFlag()		{ return mSendClearFlag; };
-	static int GetLife()			{ return mSendLife; };
-
-	void SetDeathFlag(bool _deathFlag) { mSendDeathFlag = _deathFlag; };
-	void SetClearFlag(bool _clearFlag) { mSendClearFlag = _clearFlag; };
-
 private:
-	SphereCollider*		mSelfSphereCollider;
-	Sphere				mPlayerSphere;
-	Vector3				mSandPos;
-	ParticleState		mState;
-	Vector3				mPrePos;
-	SceneBase::Scene	mSceneTag;
-	Tag					mSandTag;
-	EffectManager*		mEffectManager;
-	LateralMoveGround*	mLateral;
 
+	//プレイヤーの球当たり判定を生成
+	SphereCollider*		mSelfSphereCollider;
+	//プレイヤーの球当たり判定の大きさ
+	Sphere				mPlayerSphere;
+	//プレイヤーのエフェクト
+	EffectManager*		mEffectManager;
+	//横移動床のポインタ
+	LateralMoveGround*	mLateral;
 	//リスポーンステートの値を格納する変数
 	RespawnState		mRespawnState;
 
@@ -81,14 +105,32 @@ private:
 	// スケールを変えるか
 	bool		mScaleFlag;
 
+	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
 	// 現在のシーンはどれか
 	int			mScene;
 	// 体力	
 	int			mLife;
+
 	// 角度
 	float		mAngle;
 	
+	/*
+	@fn		プレイヤーがヒットした時の処理
+	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+	*/
 	void OnCollision(const GameObject& _hitObject)override;
+
+public://ゲッターセッター
+
+	static Vector3 GetPos() { return mSendPos; };
+	static bool GetDeathFlag() { return mSendDeathFlag; };
+	static bool GetRespawnFlag() { return mSendRespawnFlag; };
+	static bool GetClearFlag() { return mSendClearFlag; };
+	static int GetLife() { return mSendLife; };
+
+	void SetDeathFlag(bool _deathFlag) { mSendDeathFlag = _deathFlag; };
+	void SetClearFlag(bool _clearFlag) { mSendClearFlag = _clearFlag; };
+
 };
 

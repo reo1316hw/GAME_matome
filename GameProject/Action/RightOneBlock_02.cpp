@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "RightOneBlock_02.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -5,6 +8,13 @@
 #include "BoxCollider.h"
 #include "Player.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 1マス右移動床の座標
+@param	_size 1マス右移動床のサイズ
+@param	_objectTag 1マス右移動床のタグ
+@param	_sceneTag シーンのタグ
+*/
 RightOneBlock_02::RightOneBlock_02(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	//, groundBox(Vector3::Zero,Vector3::Zero)
@@ -31,6 +41,10 @@ RightOneBlock_02::RightOneBlock_02(const Vector3& _pos, const Vector3& _size, co
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		1マス右移動床のアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void RightOneBlock_02::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();

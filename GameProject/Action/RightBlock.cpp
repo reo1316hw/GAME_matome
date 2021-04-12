@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "RightBlock.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -5,6 +8,13 @@
 #include "BoxCollider.h"
 #include "Player.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 右移動ブロックの座標
+@param	_size 右移動ブロックのサイズ
+@param	_objectTag 右移動ブロックのタグ
+@param	_sceneTag シーンのタグ
+*/
 RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mElapseTime(0.0f)
@@ -36,6 +46,10 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		右移動ブロックのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void RightBlock::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();

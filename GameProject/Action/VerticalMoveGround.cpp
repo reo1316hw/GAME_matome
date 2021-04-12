@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "VerticalMoveGround.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
@@ -5,6 +8,13 @@
 #include "BoxCollider.h"
 #include <iostream>
 
+/*
+@fn		コンストラクタ
+@param	_pos 縦移動床の座標
+@param	_size 縦移動床のサイズ
+@param	_objectTag 縦移動床のタグ
+@param	_sceneTag シーンのタグ
+*/
 VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag) :
 	GameObject(_sceneTag,_objectTag)
 {
@@ -65,6 +75,10 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size
 	mOriginalPosFlag = false;
 }
 
+/*
+@fn		縦移動床のアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void VerticalMoveGround::UpdateGameObject(float _deltaTime)
 {
 	if (mPosition == mEndPos)
@@ -87,7 +101,10 @@ void VerticalMoveGround::UpdateGameObject(float _deltaTime)
 	SetPosition(mPosition);
 }
 
-// 当たり判定
+/*
+@fn		縦移動床がヒットした時の処理
+@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
 void VerticalMoveGround::OnCollision(const GameObject& _hitObject)
 {
 	mOriginalPosFlag = true;

@@ -1,9 +1,19 @@
+/*
+@brief	インクルード
+*/
 #include "Respawn.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos リスポーン地点の座標
+@param	_size リスポーン地点のサイズ
+@param	_objectTag リスポーン地点のタグ
+@param	_sceneTag シーンのタグ
+*/
 Respawn::Respawn(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {

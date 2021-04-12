@@ -1,5 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include <cmath>
 #include <memory.h>
 #include <limits>

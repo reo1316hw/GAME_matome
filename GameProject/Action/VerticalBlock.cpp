@@ -1,9 +1,19 @@
+/*
+@brief	インクルード
+*/
 #include "VerticalBlock.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "BoxCollider.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 縦長障害物の座標
+@param	_size 縦長障害物のサイズ
+@param	_objectTag 縦長障害物のタグ
+@param	_sceneTag シーンのタグ
+*/
 VerticalBlock::VerticalBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {

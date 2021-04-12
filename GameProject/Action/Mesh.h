@@ -1,5 +1,16 @@
+/*
+@file	Mesh.h
+@brief	メッシュデータ
+*/
+
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
+/*
+@brief	インクルード
+*/
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -12,14 +23,12 @@ class Texture;
 
 enum class TextureStage;
 
-	/*
-@file Mesh.h
-@brief メッシュデータ
-*/
 class Mesh
 {
 public:
+
     Mesh();
+
     ~Mesh();
 	/*
 	@brief  メッシュデータの読み込み
