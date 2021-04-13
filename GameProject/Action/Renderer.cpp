@@ -848,6 +848,14 @@ void Renderer::DrawParticle()
 	glDepthMask(GL_TRUE);
 }
 
+/*
+@fn	Particleの描画
+@param	_framebuffer フレームバッファ
+@param	_view ビュー行列
+@param	_proj プロジェクション行列
+@param	_viewPortScale 表示領域スケール
+@param	_lit 光源情報をシェーダーの変数にセットするかのフラグ
+*/
 void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, const Matrix4 & _proj, float _viewPortScale, bool _lit)
 {
 	// Set the current frame buffer
@@ -886,33 +894,6 @@ void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, con
 	}
 
 }
-
-//void Renderer::DrawTexture(class Texture* texture,int index, int xDyvNum , int yDivNum, const Vector2& offset, float scale, float alpha)
-//{
-//	// テクスチャの幅・高さでスケーリング
-//	Matrix4 scaleMat = Matrix4::CreateScale(
-//		static_cast<float>(texture->GetWidth()) * scale,
-//		static_cast<float>(texture->GetHeight()) * scale,
-//		1.0f);
-//	// スクリーン位置の平行移動
-//	Matrix4 transMat = Matrix4::CreateTranslation(
-//		Vector3(offset.x - (mScreenWidth * 0.5f),
-//			(mScreenHeight * 0.5f) - offset.y, 0.0f));
-//	// ワールド変換
-//	Matrix4 world = scaleMat * transMat;
-//	mSpriteShader->SetMatrixUniform("uWorldTransform", world);
-//	mSpriteShader->SetFloatUniform("alpha", alpha);
-//	// テクスチャセット
-//	texture->SetActive();
-//	// 四角形描画
-//	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-//
-//}
-
-//void Renderer::DrawTexture(Texture* texture, const Vector2& offset, float scale, float alpha)
-//{
-//	DrawTexture(texture, 0, 1, 1, offset, scale, alpha);
-//}
 
 /*
 @brief  光源情報をシェーダーの変数にセットする

@@ -84,17 +84,17 @@ public:
 	bool Initialize(float _screenWidth, float _screenHeight, bool _fullScreen);
 
 	/*
-	@fn		終了処理
+	@fn	終了処理
 	*/
 	void Shutdown();
 
 	/*
-	@fn		ロードしたデータの解放
+	@fn	ロードしたデータの解放
 	*/
 	void UnloadData();
 
 	/*
-	@fn		描画処理
+	@fn	描画処理
 	*/
 	void Draw();
 	   
@@ -173,30 +173,48 @@ private:
 
 	//自分のインスタンス
 	static Renderer* mRenderer;
-
+	//レンダリング状態を表す構造体
 	SDL_Renderer* mSdlRenderer;
 
 	/*
-	@brief  シェーダーの読み込み
-	@return true : 成功 , false : 失敗
+	@fn		シェーダーの読み込み
+	@return true : 成功 , false : 失敗(bool型)
 	*/
 	bool LoadShaders();
+
 	/*
-	@brief  Sprite用の頂点バッファとインデックスバッファの作成
+	@fn	Sprite用の頂点バッファとインデックスバッファの作成
 	*/
 	void CreateSpriteVerts();
+
+	/*
+	@fn	Particle用の頂点バッファとインデックスバッファの作成
+	*/
 	void CreateParticleVerts();
 
+	/*
+	@fn	Particleの描画
+	*/
 	void DrawParticle();
 
+	/*
+	@fn	Particleの描画
+	@param	_framebuffer フレームバッファ
+	@param	_view ビュー行列
+	@param	_proj プロジェクション行列
+	@param	_viewPortScale 表示領域スケール
+	@param	_lit 光源情報をシェーダーの変数にセットするかのフラグ
+	*/
 	void Draw3DScene(unsigned int _framebuffer, const Matrix4& _view, const Matrix4& _proj,
 		float _viewPortScale = 1.0f, bool _lit = true);
 
 	/*
-	@brief  光源情報をシェーダーの変数にセットする
+	@fn		光源情報をシェーダーの変数にセットする
 	@param  _shader セットするShaderクラスのポインタ
+	@param	_view ビュー行列
 	*/
 	void SetLightUniforms(Shader* _shader, const Matrix4& _view);
+
 
 	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType);
 	void ChangeTexture(int _changeTextureID);

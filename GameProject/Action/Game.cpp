@@ -49,6 +49,7 @@ bool Game::Initialize()
 		SDL_Log("Failed to initialize input system");
 		return false;
 	}
+
 	//ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
 	Renderer::CreateInstance();
 	//‰æ–Êì¬
