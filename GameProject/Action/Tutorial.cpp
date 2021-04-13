@@ -15,7 +15,7 @@
 
 bool	Tutorial::mSendContinueTutorialFlag = false;
 
-Tutorial::Tutorial(const Scene& _scene)
+Tutorial::Tutorial(const Scene& _nowScene)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -25,7 +25,7 @@ Tutorial::Tutorial(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.5f, 0.6f, 0.8f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mTutorialEffect = new TutorialEffect(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
 	mTutorialVertEffect = new TutorialVerticalEffect(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);

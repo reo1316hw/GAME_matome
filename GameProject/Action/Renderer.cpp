@@ -1,7 +1,14 @@
+/*
+@file Renderer.h
+@brief 描画の進行を行うクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Renderer.h"
 #include "Texture.h"
 #include "Mesh.h"
-#include <algorithm>
 #include "Shader.h"
 #include "VertexArray.h"
 #include "SpriteComponent.h"
@@ -9,25 +16,30 @@
 #include "MeshComponent.h"
 #include "InvisibleMeshComponent.h"
 #include "HeartUI.h"
+#include "Skeleton.h"
+#include "Animation.h"
+#include "SkeletalMeshComponent.h"
+#include "HDRRenderer.h"
+#include <algorithm>
 #include <glew.h>
 #include <fstream>
 #include <sstream>
 #include <document.h>
 
-#include "Skeleton.h"
-#include "Animation.h"
-#include "SkeletalMeshComponent.h"
-#include "HDRRenderer.h"
-
-
+//自分のインスタンスの初期化
 Renderer* Renderer::mRenderer = nullptr;
-static bool saveFlag = false;
 
+/*
+@fn	パーティクル用頂点を設定
+*/
 void Renderer::SetParticleVertex()
 {
 	mParticleVertex->SetActive();
 }
 
+/*
+@fn	コンストラクタ
+*/
 Renderer::Renderer()
 	: mSpriteShader(nullptr)
 	, mSpriteVerts(nullptr)
@@ -48,13 +60,16 @@ Renderer::Renderer()
 {
 }
 
+/*
+@fn	デストラクタ
+*/
 Renderer::~Renderer()
 {
 	delete mHDRRenderer;
 }
 
 /*
-@brief  インスタンスを作成する
+@fn		インスタンスを作成する
 */
 void Renderer::CreateInstance()
 {
@@ -65,7 +80,7 @@ void Renderer::CreateInstance()
 }
 
 /*
-@brief  インスタンスを削除する
+@fn		インスタンスを削除する
 */
 void Renderer::DeleteInstance()
 {
@@ -77,8 +92,8 @@ void Renderer::DeleteInstance()
 }
 
 /*
-@brief  初期化処理
-@return true : 成功 , false : 失敗
+@fn		初期化処理
+@return true : 成功 , false : 失敗(bool型)
 */
 bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScreen)
 {
@@ -166,7 +181,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 }
 
 /*
-@brief  終了処理
+@fn	終了処理
 */
 void Renderer::Shutdown()
 {
@@ -187,7 +202,7 @@ void Renderer::Shutdown()
 }
 
 /*
-@brief  ロードしたデータの解放
+@fn	ロードしたデータの解放
 */
 void Renderer::UnloadData()
 {
@@ -220,7 +235,7 @@ void Renderer::UnloadData()
 }
 
 /*
-@brief  描画処理
+@fn	描画処理
 */
 void Renderer::Draw()
 {
@@ -373,7 +388,7 @@ void Renderer::Draw()
 }
 
 /*
-@brief  スプライトの追加
+@fn		スプライトの追加
 @param	_spriteComponent　追加するSpriteComponentクラスのポインタ
 */
 void Renderer::AddSprite(SpriteComponent* _spriteComponent)
@@ -397,7 +412,7 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 }
 
 /*
-@brief スプライトの削除
+@fn		スプライトの削除
 @param	_spriteComponent　削除するSpriteComponentクラスのポインタ
 */
 void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
@@ -406,6 +421,10 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 	mSprites.erase(iter);
 }
 
+/*
+@fn		UIの追加
+@param	_ui　追加するUIクラスのポインタ
+*/
 void Renderer::AddUI(UIComponent* _ui)
 {
 	// 今あるスプライトから挿入する場所の検索
@@ -426,6 +445,10 @@ void Renderer::AddUI(UIComponent* _ui)
 	mUis.insert(iterUi, _ui);
 }
 
+/*
+@fn		UIの削除
+@param	_ui　削除するUIクラスのポインタ
+*/
 void Renderer::RemoveUI(UIComponent* _ui)
 {
 	auto iterUi = std::find(mUis.begin(), mUis.end(), _ui);
@@ -433,7 +456,7 @@ void Renderer::RemoveUI(UIComponent* _ui)
 }
 
 /*
-@brief  パーティクルの追加
+@fn		パーティクルの追加
 @param	_particleComponent　追加するParticleObjectクラスのポインタ
 */
 void Renderer::AddParticle(ParticleComponent* _particleComponent)
@@ -453,8 +476,8 @@ void Renderer::AddParticle(ParticleComponent* _particleComponent)
 }
 
 /*
-@brief  スプライトの削除
-@param	削除するParticleObjectクラスのポインタ
+@fn		パーティクルの削除
+@param	_particleComponent 削除するParticleObjectクラスのポインタ
 */
 void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 {
@@ -463,7 +486,7 @@ void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 }
 
 /*
-@brief  メッシュコンポーネントの追加
+@fn		メッシュコンポーネントの追加
 @param	_meshComponent　追加するMeshComponentクラスのポインタ
 */
 void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
@@ -480,7 +503,7 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 }
 
 /*
-@brief  メッシュコンポーネントの削除
+@fn		メッシュコンポーネントの削除
 @param	_meshComponent　削除するMeshComponentクラスのポインタ
 */
 void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
@@ -499,8 +522,8 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 }
 
 /*
-@brief  インビジブルメッシュコンポーネントの追加
-@param	_invisibleMeshComponent　追加するInvisibleMeshComponentクラスのポインタ
+@fn		半透明メッシュコンポーネントの追加
+@param	_meshComponent　追加するMeshComponentクラスのポインタ
 */
 void Renderer::AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent)
 {
@@ -518,8 +541,8 @@ void Renderer::AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshC
 }
 
 /*
-@brief  インビジブルメッシュコンポーネントの削除
-@param	_invisibleMeshComponent　削除するInvisibleMeshComponentクラスのポインタ
+@fn		半透明メッシュコンポーネントの削除
+@param	_meshComponent　削除するMeshComponentクラスのポインタ
 */
 void Renderer::RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent)
 {
@@ -541,7 +564,7 @@ void Renderer::RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMe
 
 /*
 @param _fileName モデルへのアドレス
-@return スケルトンモデルの取得
+@return スケルトンモデルの取得(class Skeleton)
 */
 const Skeleton * Renderer::GetSkeleton(const char* _fileName)
 {
@@ -569,7 +592,7 @@ const Skeleton * Renderer::GetSkeleton(const char* _fileName)
 
 /*
 @param _fileName アニメーションへのアドレス
-@return スケルトンアニメーションの取得
+@return スケルトンアニメーションの取得(class Animation)
 */
 const Animation * Renderer::GetAnimation(const char* _fileName)
 {
@@ -595,9 +618,8 @@ const Animation * Renderer::GetAnimation(const char* _fileName)
 }
 
 /*
-@brief  テクスチャの取得
 @param	_fileName　取得したいテクスチャのファイル名
-@return Textureクラスのポインタ
+@return Textureクラスのポインタ(class Texture)
 */
 Texture* Renderer::GetTexture(const std::string& _fileName)
 {
@@ -627,9 +649,8 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 }
 
 /*
-@brief  メッシュの取得
 @param	_fileName 取得したいメッシュのファイル名
-@return Meshクラスのポインタ
+@return Meshクラスのポインタ(class Mesh)
 */
 Mesh* Renderer::GetMesh(const std::string& _fileName)
 {
@@ -658,8 +679,8 @@ Mesh* Renderer::GetMesh(const std::string& _fileName)
 }
 
 /*
-@brief  シェーダーの読み込み
-@return true : 成功 , false : 失敗
+@fn		シェーダーの読み込み
+@return true : 成功 , false : 失敗(bool型)
 */
 bool Renderer::LoadShaders()
 {
@@ -743,7 +764,7 @@ bool Renderer::LoadShaders()
 }
 
 /*
-@brief  Sprite用の頂点バッファとインデックスバッファの作成
+@fn	Sprite用の頂点バッファとインデックスバッファの作成
 */
 void Renderer::CreateSpriteVerts()
 {
@@ -763,7 +784,9 @@ void Renderer::CreateSpriteVerts()
 	mUiVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
-// パーティクル頂点作成
+/*
+@fn	Particle用の頂点バッファとインデックスバッファの作成
+*/
 void Renderer::CreateParticleVerts()
 {
 	float vertices[] = {
@@ -780,6 +803,9 @@ void Renderer::CreateParticleVerts()
 	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
+/*
+@fn	Particleの描画
+*/
 void Renderer::DrawParticle()
 {
 
@@ -896,8 +922,9 @@ void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, con
 }
 
 /*
-@brief  光源情報をシェーダーの変数にセットする
-@param _shader セットするShaderクラスのポインタ
+@fn		光源情報をシェーダーの変数にセットする
+@param  _shader セットするShaderクラスのポインタ
+@param	_view ビュー行列
 */
 void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 {
@@ -916,6 +943,10 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 		mDirLight.m_specColor);
 }
 
+/*
+@fn		光源情報をシェーダーの変数にセットする
+@param  _blendType パーティクルに対するブレンドの種類
+*/
 void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
 {
 	switch (_blendType)
@@ -934,11 +965,18 @@ void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType
 	}
 }
 
+/*
+@fn		テクスチャの変更
+@param	_changeTextureID 変更するテクスチャのid
+*/
 void Renderer::ChangeTexture(int _changeTextureID)
 {
 	glBindTexture(GL_TEXTURE_2D, _changeTextureID);
 }
 
+/*
+@fn	ワールド空間のカメラ座標を計算
+*/
 Vector3 Renderer::CalcCameraPos()
 {
 	// ビュー行列よりワールドでのカメラ位置算出

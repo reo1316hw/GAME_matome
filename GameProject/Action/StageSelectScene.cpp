@@ -2,7 +2,7 @@
 #include "Stage01Scene.h"
 #include "Renderer.h"
 
-StageSelectScene::StageSelectScene(const Scene& _scene)
+StageSelectScene::StageSelectScene(const Scene& _nowScene)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -12,7 +12,7 @@ StageSelectScene::StageSelectScene(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mNextSceneCount = 0;
 }

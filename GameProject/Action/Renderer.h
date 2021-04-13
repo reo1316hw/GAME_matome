@@ -60,13 +60,6 @@ class HDRRenderer;
 class Renderer
 {
 public:
-
-	/*
-	@fn		インスタンスを取得する
-	@return Rendererクラスのインスタンス(class Renderer)
-	*/
-	static Renderer* GetInstance() { return mRenderer; }
-
 	/*
 	@fn	インスタンスを作成する
 	*/
@@ -105,7 +98,7 @@ public:
 	void AddSprite(SpriteComponent* _spriteComponent);
 
 	/*
-	@brief スプライトの削除
+	@fn		スプライトの削除
 	@param	_spriteComponent　削除するSpriteComponentクラスのポインタ
 	*/
 	void RemoveSprite(SpriteComponent* _spriteComponent);
@@ -129,8 +122,8 @@ public:
 	void AddParticle(ParticleComponent* _particleComponent);
 
 	/*
-	@fn		スプライトの削除
-	@param	削除するParticleObjectクラスのポインタ
+	@fn		パーティクルの削除
+	@param	_particleComponent 削除するParticleObjectクラスのポインタ
 	*/
 	void RemoveParticle(ParticleComponent* _particleComponent);
 	
@@ -147,13 +140,13 @@ public:
 	void RemoveMeshComponent(MeshComponent* _meshComponent);
 
 	/*
-	@fn		メッシュコンポーネントの追加
+	@fn		半透明メッシュコンポーネントの追加
 	@param	_meshComponent　追加するMeshComponentクラスのポインタ
 	*/
 	void AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent);
 
 	/*
-	@fn		メッシュコンポーネントの削除
+	@fn		半透明メッシュコンポーネントの削除
 	@param	_meshComponent　削除するMeshComponentクラスのポインタ
 	*/
 	void RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent);
@@ -167,14 +160,22 @@ private:
 	// スケルトンデータ
 	std::unordered_map<std::string, class Skeleton*> mSkeletons;
 	// アニメーションデータ
-	std::unordered_map<std::string, class Animation*> mAnims;    
+	std::unordered_map<std::string, class Animation*> mAnims;
 	// スケルトンメッシュの描画に使われる
-	std::vector<class SkeletalMeshComponent*>       mSkeletalMeshes;   
+	std::vector<class SkeletalMeshComponent*>       mSkeletalMeshes;
 
 	//自分のインスタンス
 	static Renderer* mRenderer;
-	//レンダリング状態を表す構造体
+	//レンダラーの状態を含む構造体
 	SDL_Renderer* mSdlRenderer;
+
+	/*
+	@fn		光源情報をシェーダーの変数にセットする
+	@param  _shader セットするShaderクラスのポインタ
+	@param	_view ビュー行列
+	*/
+	void SetLightUniforms(Shader* _shader, const Matrix4& _view);
+
 
 	/*
 	@fn		シェーダーの読み込み
@@ -201,7 +202,7 @@ private:
 	@fn	Particleの描画
 	@param	_framebuffer フレームバッファ
 	@param	_view ビュー行列
-	@param	_proj プロジェクション行列
+	@param	_proj 射影行列
 	@param	_viewPortScale 表示領域スケール
 	@param	_lit 光源情報をシェーダーの変数にセットするかのフラグ
 	*/
@@ -210,15 +211,19 @@ private:
 
 	/*
 	@fn		光源情報をシェーダーの変数にセットする
-	@param  _shader セットするShaderクラスのポインタ
-	@param	_view ビュー行列
+	@param  _blendType パーティクルに対するブレンドの種類
 	*/
-	void SetLightUniforms(Shader* _shader, const Matrix4& _view);
-
-
 	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType);
+
+	/*
+	@fn		テクスチャの変更
+	@param	_changeTextureID 変更するテクスチャのid 
+	*/
 	void ChangeTexture(int _changeTextureID);
 
+	/*
+	@fn	ワールド空間のカメラ座標を計算
+	*/
 	Vector3 CalcCameraPos();
 
 	//ファイル名でメッシュを取得するための連想配列
@@ -239,25 +244,26 @@ private:
 	//クラスのポインタ
 	//スプライト
 	Shader* mSpriteShader;
+	//スプライト用頂点
 	VertexArray* mSpriteVerts;
 	//UI
 	Shader* mUiShader;
+	//UI用頂点
 	VertexArray* mUiVerts;
 	//メッシュ
 	Shader* mMeshShader;
 	//スキンメッシュ
-	class Shader*  mSkinnedShader;  
+	class Shader*  mSkinnedShader;
 	//インビジブルメッシュ
 	Shader* mInvisibleMeshShader;
 	Shader* mBasicShader;
 	//パーティクル
 	Shader* mParticleShader;
-	// パーティクル用頂点定義
-	VertexArray* mParticleVertex;   
-	// プレイヤー
+	//パーティクル用頂点
+	VertexArray* mParticleVertex; 
+	//プレイヤー
 	Player* mPlayer;
-
-	// HDR レンダラー
+	//HDRレンダラー
 	HDRRenderer* mHDRRenderer;
 
 	//ビュー行列
@@ -280,13 +286,19 @@ private:
 	SDL_GLContext mContext;
 	// UIの初期座標に加算される座標
 	Vector2 mAddPosition;
-
+	//プレイヤーの体力UI
 	HeartUI* mHeartUI;
 
-	// 未設定テクスチャの場合に割り当てられる黒色テクスチャ
+	//未設定テクスチャの場合に割り当てられる黒色テクスチャ
 	unsigned int mUndefineTexID;
 
 public://ゲッターセッター
+
+	/*
+	@fn		インスタンスを取得する
+	@return Rendererクラスのインスタンス(class Renderer)
+	*/
+	static Renderer* GetInstance() { return mRenderer; }
 
 	/*
 	@param	_fileName　取得したいテクスチャのファイル名
@@ -313,16 +325,6 @@ public://ゲッターセッター
 	Mesh* GetMesh(const std::string& _fileName);
 
 	/*
-	@param	_view ビュー行列
-	*/
-	void SetViewMatrix(const Matrix4& _view) { mView = _view; }
-
-	/*
-	@param	_ambient Vector3（環境光を表す）
-	*/
-	void SetAmbientLight(const Vector3& _ambient) { mAmbientLight = _ambient; }
-
-	/*
 	@return	平行光源の構造体(struct DirectionalLight）
 	*/
 	DirectionalLight& GetDirectionalLight() { return mDirLight; }
@@ -337,13 +339,38 @@ public://ゲッターセッター
 	*/
 	float GetScreenHeight() const { return mScreenHeight; }
 
+	/*
+	@return	ビュー行列(class Matrix4)
+	*/
 	Matrix4 GetViewMatrix() const { return mView; };
 
-	void SetParticleVertex();
-
+	/*
+	@return	射影行列(class Matrix4)
+	*/
 	Matrix4 GetProjectionMatrix() { return mProjection; }
 
+	/*
+	@return	射影行列(class Matrix4)
+	*/
 	SDL_Renderer* GetSDLRenderer() { return mSdlRenderer; }
 
+	/*
+	@return	未設定テクスチャの場合に割り当てられる黒色テクスチャ(unsigned int型)
+	*/
 	unsigned int GetUndefineTexID() { return mUndefineTexID; }
+
+	/*
+	@param	_view ビュー行列
+	*/
+	void SetViewMatrix(const Matrix4& _view) { mView = _view; }
+
+	/*
+	@param	_ambient（環境光を表す）
+	*/
+	void SetAmbientLight(const Vector3& _ambient) { mAmbientLight = _ambient; }
+
+	/*
+	@fn	パーティクル用頂点を設定
+	*/
+	void SetParticleVertex();
 };

@@ -7,7 +7,7 @@ class TutorialEffect;
 class Tutorial : public SceneBase
 {
 public:
-	Tutorial(const Scene& _scene);
+	Tutorial(const Scene& _nowScene);
 	~Tutorial();
 
 	SceneBase* update() override;

@@ -12,11 +12,9 @@ class SceneBase
 public:
     SceneBase() {};
 
-    // 純粋仮想関数でポリモーフィズムさせるとき、
-    // デストラクタは必ずvirtualにする
     virtual ~SceneBase() {};
 
-    virtual SceneBase* update() = 0; // 純粋仮想関数 virtual 戻り値　メソッド名() = 0;
+    virtual SceneBase* update() = 0;
 
     static int  GetScene() { return mIsScene; };
     virtual void SetScene(int _isScene) { mIsScene = _isScene; }; //シーンをセット

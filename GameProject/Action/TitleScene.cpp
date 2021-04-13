@@ -7,7 +7,7 @@
 #include "InputSystem.h"
 #include "Sprite.h"
 
-TitleScene::TitleScene(const Scene& _scene)
+TitleScene::TitleScene(const Scene& _nowScene)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -17,7 +17,7 @@ TitleScene::TitleScene(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mInputSystem = new InputSystem();
 	mInputSystem->Initialize();

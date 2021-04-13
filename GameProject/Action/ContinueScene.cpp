@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "ContinueScene.h"
 #include "Tutorial.h"
 #include "Stage01Scene.h"
@@ -9,7 +12,11 @@
 #include "Sprite.h"
 #include "InputSystem.h"
 
-ContinueScene::ContinueScene(const Scene& _scene)
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
+ContinueScene::ContinueScene(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -19,7 +26,7 @@ ContinueScene::ContinueScene(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mInputSystem = new InputSystem();
 	mInputSystem->Initialize();
@@ -27,11 +34,17 @@ ContinueScene::ContinueScene(const Scene& _scene)
 	mSprite = new Sprite("Assets/continue.png");
 }
 
+/*
+@fn	デストラクタ
+*/
 ContinueScene::~ContinueScene()
 {
 	delete mSprite;
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* ContinueScene::update()
 {
 	mInputSystem->PrepareForUpdate();

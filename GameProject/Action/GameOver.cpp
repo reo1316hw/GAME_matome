@@ -4,7 +4,7 @@
 #include "Sprite.h"
 #include "InputSystem.h"
 
-GameOver::GameOver(const Scene& _scene)
+GameOver::GameOver(const Scene& _nowScene)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -14,7 +14,7 @@ GameOver::GameOver(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mInputSystem = new InputSystem();
 	mInputSystem->Initialize();

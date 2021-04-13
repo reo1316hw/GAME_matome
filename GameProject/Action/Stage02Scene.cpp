@@ -12,7 +12,7 @@
 
 bool	Stage02Scene::mSendContinueStage02Flag = false;
 
-Stage02Scene::Stage02Scene(const Scene& _scene)
+Stage02Scene::Stage02Scene(const Scene& _nowScene)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -22,7 +22,7 @@ Stage02Scene::Stage02Scene(const Scene& _scene)
 	dir.m_diffuseColor = Vector3(0.5f, 0.6f, 0.8f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_scene);
+	SetScene(_nowScene);
 
 	mGoalLine = new Goal(Vector3(800, 150, -2200), Vector3::Zero, Tag::Other, Scene::stage02);
 

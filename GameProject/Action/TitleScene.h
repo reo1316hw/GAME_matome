@@ -4,7 +4,7 @@
 class TitleScene : public SceneBase
 {
 public:
-	TitleScene(const Scene& _scene);
+	TitleScene(const Scene& _nowScene);
 	~TitleScene();
 
 	SceneBase* update() override;

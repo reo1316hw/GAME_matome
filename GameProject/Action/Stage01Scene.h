@@ -4,7 +4,7 @@
 class Stage01Scene : public SceneBase
 {
 public:
-	Stage01Scene(const Scene& _scene);
+	Stage01Scene(const Scene& _nowScene);
 	~Stage01Scene();
  
 	SceneBase* update() override;

@@ -14,10 +14,10 @@
 #include "Component.h"
 #include "Math.h"
 
-class ParticleComponent :
-	public Component
+class ParticleComponent : public Component
 {
 public:
+
 	//パーティクルに対するブレンドの種類
 	typedef enum PARTICLE_BLEND_ENUM
 	{

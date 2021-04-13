@@ -4,7 +4,7 @@
 class GameOver : public SceneBase
 {
 public:
-	GameOver(const Scene& _scene);
+	GameOver(const Scene& _nowScene);
 	~GameOver();
 
 	SceneBase* update() override;

@@ -1,9 +1,15 @@
-﻿#include "Texture.h"
+﻿/*
+@brief	インクルード
+*/
+#include "Texture.h"
 #include <glew.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include "Renderer.h"
 
+/*
+@fn	コンストラクタ
+*/
 Texture::Texture()
 	: mTextureID(0)
 	, mWidth(0)
@@ -12,14 +18,17 @@ Texture::Texture()
 {
 }
 
+/*
+@fn	デストラクタ
+*/
 Texture::~Texture()
 {
 }
 
 /*
-@brief	テクスチャのロード
+@fn		テクスチャのロード
 @param	_fileName テクスチャのファイル名
-@return	true : 成功 , false : 失敗
+@return	true : 成功 , false : 失敗(bool型)
 */
 bool Texture::Load(const std::string& _fileName)
 {
@@ -85,13 +94,17 @@ bool Texture::Load(const std::string& _fileName)
 }
 
 /*
-@brief	ロードしたテクスチャの解放
+@fn	ロードしたテクスチャの解放
 */
 void Texture::Unload()
 {
 	glDeleteTextures(1, &mTextureID);
 }
 
+/*
+@fn		サーフェイスから作成
+@param	_surface コピーで使われるピクセルの集まりの構造体
+*/
 void Texture::CreateFromSurface(SDL_Surface * _surface)
 {
 	mWidth = _surface->w;
@@ -109,10 +122,10 @@ void Texture::CreateFromSurface(SDL_Surface * _surface)
 }
 
 /*
-@brief	レンダリング用のテクスチャを作成
-@param	テクスチャの横幅
-@param	テクスチャの縦幅
-@param	ピクセルデータのフォーマット
+@fn		レンダリング用のテクスチャを作成
+@param	_width テクスチャの横幅
+@param	_height テクスチャの縦幅
+@param	_format ピクセルデータのフォーマット
 */
 void Texture::CreateForRendering(int _width, int _height, unsigned int _format)
 {
@@ -131,20 +144,10 @@ void Texture::CreateForRendering(int _width, int _height, unsigned int _format)
 }
 
 /*
-@brief	テクスチャをアクティブにする
+@fn	テクスチャをアクティブにする
 */
 void Texture::SetActive()
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
-}
-
-bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
-	, const unsigned int _widthNum, const unsigned int _heightNum
-	, const unsigned int _width, const unsigned int _height
-	, std::vector<Texture*> textures)
-{
-	textures.clear();
-
-	return false;
 }

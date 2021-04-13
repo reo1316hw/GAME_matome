@@ -1,9 +1,20 @@
+/*
+@file Shader.h
+@brief シェーダーデータ
+*/
+
+/*
+@brief	インクルード
+*/
 #include "Shader.h"
 #include "Texture.h"
 #include <SDL.h>
 #include <fstream>
 #include <sstream>
 
+/*
+@fn	コンストラクタ
+*/
 Shader::Shader()
 	: mVertexShader(0)
 	, mFragShader(0)
@@ -11,15 +22,18 @@ Shader::Shader()
 {
 }
 
+/*
+@fn	デストラクタ
+*/
 Shader::~Shader()
 {
 }
 
 /*
-@brief	頂点シェーダーとフラグメントシェーダーのロード
+@fn		頂点シェーダーとフラグメントシェーダーのロード
 @param	_vertName 頂点シェーダーのファイル名
 @param	_fragName 頂点シェーダーのファイル名
-@return	true : 成功 , false : 失敗
+@return	true : 成功 , false : 失敗(bool型)
 */
 bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
 {
@@ -43,7 +57,7 @@ bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
 }
 
 /*
-@brief	ロードしたシェーダーの解放
+@fn	ロードしたシェーダーの解放
 */
 void Shader::Unload()
 {
@@ -53,7 +67,7 @@ void Shader::Unload()
 }
 
 /*
-@brief	シェーダープログラムをアクティブにする
+@fn	シェーダープログラムをアクティブにする
 */
 void Shader::SetActive()
 {
@@ -61,9 +75,9 @@ void Shader::SetActive()
 }
 
 /*
-	@brief	行列のUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_matrix 設定する行列
+@fn		行列のUniform変数を設定する
+@param	_name 設定するUniform変数名
+@param	_matrix 設定する行列
 */
 void Shader::SetMatrixUniform(const char * _name, const Matrix4 & _matrix)
 {
@@ -72,6 +86,12 @@ void Shader::SetMatrixUniform(const char * _name, const Matrix4 & _matrix)
 	glUniformMatrix4fv(loc, 1, GL_TRUE, _matrix.GetAsFloatPtr());
 }
 
+/*
+@fn		行列のUniform変数を設定する
+@param	_name 設定するUniform変数名
+@param	_matrices 設定する行列
+@param	_count 行列の数
+*/
 void Shader::SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count)
 {
 	GLuint loc = glGetUniformLocation(mShaderProgram, _name);
@@ -80,7 +100,7 @@ void Shader::SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _
 }
 
 /*
-@brief	Vector3のUniform変数を設定する
+@fn		Vector3のUniform変数を設定する
 @param	_name 設定するUniform変数名
 @param	_vector 設定するVector3
 */
@@ -92,9 +112,9 @@ void Shader::SetVectorUniform(const char * _name, const Vector3 & _vector)
 }
 
 /*
-@brief	floatのUniform変数を設定する
+@fn		Vector3のUniform変数を設定する
 @param	_name 設定するUniform変数名
-@param	_value 設定するfloat
+@param	_vector 設定するVector3
 */
 void Shader::SetFloatUniform(const char * _name, const float & _value)
 {
@@ -103,6 +123,11 @@ void Shader::SetFloatUniform(const char * _name, const float & _value)
     glUniform1f(loc, _value);
 }
 
+/*
+@fn		intのUniform変数を設定する
+@param	_name 設定するUniform変数名
+@param	_value 設定するint
+*/
 void Shader::SetIntUniform(const char* _name, const int _value)
 {
 	GLuint loc = glGetUniformLocation(mShaderProgram, _name);
@@ -111,11 +136,11 @@ void Shader::SetIntUniform(const char* _name, const int _value)
 }
 
 /*
-@brief	シェーダーをコンパイルする
+@fn		シェーダーをコンパイルする
 @param	_fileName コンパイルするシェーダーのファイル名
 @param	_shaderType シェーダーの種類
 @param	_outShader シェーダーのID用の参照変数
-@return	true : 成功 , false : 失敗
+@return	true : 成功 , false : 失敗(bool型)
 */
 bool Shader::CompileShader(const std::string & _fileName, GLenum _shaderType, GLuint & _outShader)
 {
@@ -149,9 +174,9 @@ bool Shader::CompileShader(const std::string & _fileName, GLenum _shaderType, GL
 }
 
 /*
-@brief	シェーダーがコンパイル出来ているか確認
+@fn		シェーダーがコンパイル出来ているか確認
 @param	_shader シェーダーのID
-@return	true : 成功 , false : 失敗
+@return	true : 成功 , false : 失敗(bool型)
 */
 bool Shader::IsCompiled(GLuint _shader)
 {
@@ -171,9 +196,8 @@ bool Shader::IsCompiled(GLuint _shader)
 }
 
 /*
-@brief	シェーダーがリンク出来ているか確認
-@param	シェーダーのID
-@return	true : 成功 , false : 失敗
+@fn		シェーダーがリンク出来ているか確認
+@return	true : 成功 , false : 失敗(bool型)
 */
 bool Shader::IsVaildProgram()
 {

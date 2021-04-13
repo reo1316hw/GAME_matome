@@ -1,11 +1,15 @@
-﻿#include "VertexArray.h"
+﻿/*
+@brief	インクルード
+*/
+#include "VertexArray.h"
 #include <glew.h>
 
 /*
-@param	頂点バッファの配列のポインタ
-@param	頂点数
-@param	インデックスバッファの配列のポインタ
-@param	インデックスの数
+@fn		コンストラクタ
+@param	_verts 頂点バッファの配列のポインタ
+@param	_numVerts 頂点数
+@param	_indices インデックスバッファの配列のポインタ
+@param	_numIndices インデックスの数
 */
 VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
 	const unsigned int* _indices, unsigned int _numIndices)
@@ -56,6 +60,14 @@ VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
         reinterpret_cast<void*>(sizeof(float) * 6));	//オフセットポインタ
 }
 
+/*
+@fn		頂点配列コンストラクタ
+@param	_verts 頂点バッファの配列のポインタ
+@param	_numVerts 頂点数
+@param	_layout 頂点レイアウト
+@param	_indices インデックスバッファの配列のポインタ
+@param	_numIndices インデックスの数
+*/
 VertexArray::VertexArray(const void * _verts, unsigned int _numVerts, Layout _layout, const unsigned int * _indices, unsigned int _numIndices)
 	: mNumVerts(_numVerts)
 	, mNumIndices(_numIndices)
@@ -120,7 +132,9 @@ VertexArray::VertexArray(const void * _verts, unsigned int _numVerts, Layout _la
 	}
 }
 
-
+/*
+@fn	デストラクタ
+*/
 VertexArray::~VertexArray()
 {
 	glDeleteBuffers(1, &mVertexBuffer);
@@ -129,7 +143,7 @@ VertexArray::~VertexArray()
 }
 
 /*
-@brief	頂点配列をアクティブにする
+@fn 頂点配列をアクティブにする（描画に使用できるようにする）
 */
 void VertexArray::SetActive()
 {

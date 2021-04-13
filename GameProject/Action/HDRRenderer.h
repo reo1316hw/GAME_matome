@@ -13,7 +13,6 @@ class HDRRenderer
 {
 public:
 
-
 	HDRRenderer(int _fbowidth, int _fboheight, int _bloomLevel);
 	~HDRRenderer();
 
