@@ -8,7 +8,7 @@
 */
 #include "SceneBase.h"
 
-class Tutorial;
+class TutorialScene;
 class Stage01Scene;
 class Stage02Scene;
 
@@ -34,11 +34,11 @@ public:
 
 private:
 
-	//チュートリアルシーン
-	Tutorial*	  mTutorial;
-	//ステージ01シーン
+	//チュートリアルシーンのポインタ
+	TutorialScene*	  mTutorial;
+	//ステージ01シーンのポインタ
 	Stage01Scene* mStage01;
-	//ステージ02シーン
+	//ステージ02シーンのポインタ
 	Stage02Scene* mStage02;
 };
 

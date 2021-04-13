@@ -2,7 +2,7 @@
 @brief	インクルード
 */
 #include "ContinueScene.h"
-#include "Tutorial.h"
+#include "TutorialScene.h"
 #include "Stage01Scene.h"
 #include "Stage02Scene.h"
 #include "GameOver.h"
@@ -63,7 +63,7 @@ SceneBase* ContinueScene::update()
 			sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
 		{
 			mTutorial->SetContinueTutorialFlag(false);
-			return new Tutorial(SceneBase::tutorial);
+			return new TutorialScene(SceneBase::tutorial);
 		}
 	}
 

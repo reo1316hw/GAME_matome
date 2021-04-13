@@ -83,9 +83,6 @@
     <ClCompile Include="Stage01Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="StageSelectScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="MapCreate.cpp">
       <Filter>Map</Filter>
     </ClCompile>
@@ -99,9 +96,6 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Tutorial.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEffectBase.cpp">
@@ -210,6 +204,9 @@
     <ClCompile Include="TutorialEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -296,9 +293,6 @@
     <ClInclude Include="Stage02Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="StageSelectScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="MapCreate.h">
       <Filter>Map</Filter>
     </ClInclude>
@@ -312,9 +306,6 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Tutorial.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEffectBase.h">
@@ -422,6 +413,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="TutorialEffect.h">
       <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

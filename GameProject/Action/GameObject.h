@@ -233,7 +233,7 @@ protected:
 	Quaternion  mRotation;
 	//オブジェクトのワールド行列
 	Matrix4	mWorldTransform;
-	// 移動速度
+	//移動速度
 	float mMoveSpeed;
 	//重力
 	float mGravity;

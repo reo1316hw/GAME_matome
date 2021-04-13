@@ -216,11 +216,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Stage02Scene.cpp" />
-    <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="Stage01Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Tutorial.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="UpBlock.cpp" />
@@ -292,11 +291,10 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Stage02Scene.h" />
-    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="Stage01Scene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Tutorial.h" />
+    <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="UpBlock.h" />

@@ -1,4 +1,7 @@
-#include "Tutorial.h"
+/*
+@brief	インクルード
+*/
+#include "TutorialScene.h"
 #include "Stage01Scene.h"
 #include "Renderer.h"
 #include "GameObjectManager.h"
@@ -13,9 +16,13 @@
 #include "MapCreate.h"
 #include "HeartUI.h"
 
-bool	Tutorial::mSendContinueTutorialFlag = false;
+bool	TutorialScene::mSendContinueTutorialFlag = false;
 
-Tutorial::Tutorial(const Scene& _nowScene)
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
+TutorialScene::TutorialScene(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -57,14 +64,20 @@ Tutorial::Tutorial(const Scene& _nowScene)
 	mSendContinueTutorialFlag = false;
 }
 
-Tutorial::~Tutorial()
+/*
+@fn	デストラクタ
+*/
+TutorialScene::~TutorialScene()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(tutorial);
 	delete mSprite;
 	delete mMapCreate;
 }
 
-SceneBase* Tutorial::update()
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
+SceneBase* TutorialScene::update()
 {
 	if (mPlayer->GetClearFlag())
 	{

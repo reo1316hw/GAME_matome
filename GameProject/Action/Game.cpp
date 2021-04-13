@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Game.h"
 #include "SDL.h"
 #include <glew.h>
@@ -12,7 +15,7 @@
 int Game::mDebug = 0;
 
 /*
-@brief  コンストラクタ
+@fn	コンストラクタ
 */
 Game::Game()
 	: mFps(nullptr)
@@ -23,15 +26,8 @@ Game::Game()
 }
 
 /*
-@brief  デストラクタ
-*/
-Game::~Game()
-{
-}
-
-/*
-@brief  初期化処理
-@return true : 成功 , false : 失敗
+@fn		初期化処理
+@return true : 成功 , false : 失敗(bool型)
 */
 bool Game::Initialize()
 {
@@ -76,7 +72,7 @@ bool Game::Initialize()
 }
 
 /*
-@brief  終了処理
+@fn	終了処理
 */
 void Game::Termination()
 {
@@ -93,13 +89,17 @@ void Game::Termination()
 	SDL_Quit();
 }
 
+/*
+@fn		最初のシーンを決める関数
+@param	_firstScene 最初のシーン
+*/
 void Game::SetFirstScene(SceneBase* _firstScene)
 {
 	mNowScene = _firstScene;
 }
 
 /*
-@brief  ゲームループ
+@fn	ゲームループ
 */
 void Game::GameLoop()
 {
@@ -134,7 +134,7 @@ void Game::GameLoop()
 }
 
 /*
-@brief   ロードしたデータの解放
+@fn	ロードしたデータの解放
 */
 void Game::UnloadData()
 {
@@ -146,7 +146,7 @@ void Game::UnloadData()
 }
 
 /*
-@brief  入力関連の処理
+@fn	入力関連の処理
 */
 void Game::ProcessInput()
 {
@@ -181,7 +181,7 @@ void Game::ProcessInput()
 }
 
 /*
-@brief  描画関連の処理
+@fn	描画関連の処理
 */
 void Game::GenerateOutput()
 {
@@ -189,7 +189,7 @@ void Game::GenerateOutput()
 }
 
 /*
-@brief  ゲームの更新処理
+@fn	ゲームの更新処理
 */
 void Game::UpdateGame()
 {

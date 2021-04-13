@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Stage01Scene.h"
 #include "Stage02Scene.h"
 #include "Renderer.h"
@@ -12,6 +15,10 @@
 
 bool	Stage01Scene::mSendContinueStage01Flag = false;
 
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
 Stage01Scene::Stage01Scene(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
@@ -53,6 +60,9 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 	mNextSceneCount = 0;
 }
 
+/*
+@fn	デストラクタ
+*/
 Stage01Scene::~Stage01Scene()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(stage01);
@@ -61,6 +71,9 @@ Stage01Scene::~Stage01Scene()
 	/*GAME_OBJECT_MANAGER->RemoveGameObject();*/
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* Stage01Scene::update()
 {
 	if (mPlayer->GetClearFlag())

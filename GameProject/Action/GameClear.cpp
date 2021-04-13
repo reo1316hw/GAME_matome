@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "GameClear.h"
 #include "TitleScene.h"
 #include "Stage01Scene.h"
@@ -5,6 +8,10 @@
 #include "Sprite.h"
 #include "InputSystem.h"
 
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
 GameClear::GameClear(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
@@ -25,11 +32,17 @@ GameClear::GameClear(const Scene& _nowScene)
 	mNextSceneCount = 0;
 }
 
+/*
+@fn	デストラクタ
+*/
 GameClear::~GameClear()
 {
 	delete mSprite;
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* GameClear::update()
 {
 	mNextSceneCount++;
@@ -37,13 +50,6 @@ SceneBase* GameClear::update()
 	{
 		return new TitleScene(title);
 	}
-
-	//const InputState& sceneState = inputSystem->GetState();
-
-	//if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_E) == Pressed)
-	//{
-	//	return new TitleScene(title);
-	//}
 
 	return this;
 }

@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include "Stage02Scene.h"
 #include "GameClear.h"
 #include "GameOver.h"
@@ -12,6 +15,10 @@
 
 bool	Stage02Scene::mSendContinueStage02Flag = false;
 
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
 Stage02Scene::Stage02Scene(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
@@ -66,6 +73,9 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 	mNextSceneCount = 0;
 }
 
+/*
+@fn	デストラクタ
+*/
 Stage02Scene::~Stage02Scene()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(stage02);
@@ -73,6 +83,9 @@ Stage02Scene::~Stage02Scene()
 	delete mMapCreate;
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* Stage02Scene::update()
 {
 	if (mPlayer->GetClearFlag())

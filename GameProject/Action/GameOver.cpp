@@ -1,9 +1,16 @@
+/*
+@brief	インクルード
+*/
 #include "GameOver.h"
 #include "TitleScene.h"
 #include "Renderer.h"
 #include "Sprite.h"
 #include "InputSystem.h"
 
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
 GameOver::GameOver(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
@@ -24,11 +31,17 @@ GameOver::GameOver(const Scene& _nowScene)
 	mNextSceneCount = 0;
 }
 
+/*
+@fn	デストラクタ
+*/
 GameOver::~GameOver()
 {
 	delete mSprite;
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* GameOver::update()
 {
 	mNextSceneCount++;
@@ -36,22 +49,6 @@ SceneBase* GameOver::update()
 	{
 		return new TitleScene(title);
 	}
-
-	/*inputSystem->PrepareForUpdate();
-	inputSystem->Update();
-
-	const InputState& sceneState = inputSystem->GetState();
-
-	if (sceneState.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
-		sceneState.Keyboard.GetKeyValue(SDL_SCANCODE_E) == 1)
-	{
-		return new TitleScene(title);
-	}*/
-
-	/*if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_E) == Pressed)
-	{
-		return new TitleScene(title);
-	}*/
 
 	return this;
 }

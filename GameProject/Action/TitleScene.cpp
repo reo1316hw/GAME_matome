@@ -1,5 +1,8 @@
+/*
+@brief	インクルード
+*/
 #include "TitleScene.h"
-#include "Tutorial.h"
+#include "TutorialScene.h"
 #include "Stage01Scene.h"
 #include "Stage02Scene.h"
 #include "Renderer.h"
@@ -7,6 +10,10 @@
 #include "InputSystem.h"
 #include "Sprite.h"
 
+/*
+@fn		コンストラクタ
+@param	_nowScene 現在のシーン
+*/
 TitleScene::TitleScene(const Scene& _nowScene)
 {
 	// ライトを設定(設定しないと何も映らない)
@@ -31,6 +38,9 @@ TitleScene::TitleScene(const Scene& _nowScene)
 	mNextSceneCount = 0;
 }
 
+/*
+@fn	デストラクタ
+*/
 TitleScene::~TitleScene()
 {
 	delete mSprite;
@@ -38,6 +48,9 @@ TitleScene::~TitleScene()
 	/*GAME_OBJECT_MANAGER->RemoveGameObject();*/
 }
 
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
 SceneBase* TitleScene::update()
 {
 	mInputSystem->PrepareForUpdate();
@@ -56,7 +69,7 @@ SceneBase* TitleScene::update()
 	if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
 		sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
 	{
-		return new Tutorial(tutorial);
+		return new TutorialScene(tutorial);
 		//return new Stage01Scene(stage01);
 		//return new Stage02Scene(stage02);
 	}

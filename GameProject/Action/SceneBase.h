@@ -1,3 +1,6 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
 
 class Sprite;
@@ -10,15 +13,25 @@ class Player;
 class SceneBase
 {
 public:
+
+    /*
+    @fn	コンストラクタ
+    */
     SceneBase() {};
 
+    /*
+    @fn	デストラクタ
+    */
     virtual ~SceneBase() {};
 
+    /*
+    @fn	現在のシーン時に毎フレーム更新処理をする
+    */
     virtual SceneBase* update() = 0;
 
-    static int  GetScene() { return mIsScene; };
-    virtual void SetScene(int _isScene) { mIsScene = _isScene; }; //シーンをセット
-
+    /*
+    @enum シーンの種類
+    */
     enum Scene
     {
         // その他
@@ -42,19 +55,38 @@ public:
     };
 
 protected:
+
+    //背景
     Sprite*      mSprite;
     //入力管理クラス
     InputSystem* mInputSystem;
-
+    //マップ生成
     MapCreate*   mMapCreate;
+    //プレイヤーのポインタ
     Player*      mPlayer;
+    //ゴールライン
     Goal*        mGoalLine;
+    //プレイヤーの体力UI
     HeartUI*     mHeartUI;
-
+    //ゲームクリアしたか
     bool         mClearFlag;
-
+    //次のシーンに遷移する時の待機時間
     int          mNextSceneCount;
 
 private:
+
+    //現在のシーン
     static int   mIsScene;
+
+public://ゲッターセッター
+
+    /*
+    @return 現在のシーン(int型)
+    */
+    static int  GetScene() { return mIsScene; };
+
+    /*
+    @param _isScene 現在のシーン
+    */
+    virtual void SetScene(int _isScene) { mIsScene = _isScene; };
 };
