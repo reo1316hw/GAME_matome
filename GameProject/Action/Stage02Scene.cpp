@@ -64,7 +64,7 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Scene::stage02, Tag::Other);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02);
 	}
 
 	mClearFlag = false;

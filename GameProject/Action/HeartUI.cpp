@@ -1,8 +1,17 @@
+/*
+@brief	インクルード
+*/
 #include "HeartUI.h"
 #include "Renderer.h"
 #include "Player.h"
 
-HeartUI::HeartUI(const Vector2& _pos, SceneBase::Scene _sceneTag, const Tag& _objectTag)
+/*
+@fn		コンストラクタ
+@param	_pos プレイヤーの体力UIの生成場所(スクリーン座標)
+@param	_objectTag アタッチしたゲームオブジェクトのタグ
+@param	_sceneTag シーンのタグ
+*/
+HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag)
 	:UIBase(_pos, "Assets/heart02.png", _sceneTag, _objectTag)
 {
 	mUI = new UIComponent(this);
@@ -12,6 +21,10 @@ HeartUI::HeartUI(const Vector2& _pos, SceneBase::Scene _sceneTag, const Tag& _ob
 
 }
 
+/*
+@fn		プレイヤーの体力UIのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void HeartUI::UpdateGameObject(float _deltaTime)
 {
 	if (player->GetLife() == 2)

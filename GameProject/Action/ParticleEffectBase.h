@@ -35,12 +35,12 @@ public:
 	@param	_pos エフェクトの生成場所
 	@param	_vel エフェクトの速度
 	@param	_lifeCount エフェクトの生存時間
-	@param	_spriteFileName 画像へのアドレス
+	@param	_particleFileName 画像へのアドレス
 	@param	_objectTag アタッチしたゲームオブジェクトのタグ
 	@param	_sceneTag シーンのタグ
 	@param	_scale 画像の拡大サイズ
 	*/
-	ParticleEffectBase(const Vector3& _pos, const Vector3& _velocity, const int& _lifeCount, const std::string& _spriteFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag,const float& _scale = 10);
+	ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag,const float& _scale = 10);
 
 	/*
 	@fn	デストラクタ

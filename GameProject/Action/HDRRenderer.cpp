@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "Shader.h"
 
-HDRRenderer::HDRRenderer(int _fbowidth, int _fboheight, int _bloomLevel)
+HDRRenderer::HDRRenderer(int _fboWidth, int _fboHeight, int _bloomLevel)
 	: mGaussianBlurShader(nullptr)
 	, mDownSamplingShader(nullptr)
 	, mHdrToneAndBlurBlendShader(nullptr)
@@ -13,8 +13,8 @@ HDRRenderer::HDRRenderer(int _fbowidth, int _fboheight, int _bloomLevel)
 	, mQuadScreenVBO(0)
 	, mHdrFBO(0)
 	, mHdrRBO(0)
-	, mBufferWidth(_fbowidth)
-	, mBufferHeight(_fboheight)
+	, mBufferWidth(_fboWidth)
+	, mBufferHeight(_fboHeight)
 	, mBloomBufferLevel(_bloomLevel)
 {
 	// HDR バッファとBlur用バッファを作成
@@ -211,11 +211,12 @@ void HDRRenderer::HdrTonemapAndBrightBlurCombine()
 	}
 }
 
+
 void HDRRenderer::CopyDepthToScreen()
 {
 	// gBufferの深度をデフォルトの深度バッファにコピーする
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, mHdrFBO);  // 読み込みバッファをgBufferに指定
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);        // 書き込みバッファをスクリーンに指定
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, mHdrFBO);  //読み込みバッファをgBufferに指定
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);        //書き込みバッファをスクリーンに指定
 	// 深度情報をスクリーンの深度バッファにコピー
 	glBlitFramebuffer(
 		0, 0, mBufferWidth, mBufferHeight, 0, 0, mBufferWidth, mBufferHeight, GL_DEPTH_BUFFER_BIT, GL_NEAREST
@@ -329,7 +330,6 @@ void HDRRenderer::InitScreenQuadVAO()
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-
 }
 
 float HDRRenderer::GaussianDistribution(const Vector2& _pos, float _rho)
