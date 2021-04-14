@@ -107,7 +107,7 @@
     <ClCompile Include="TutorialVerticalEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Goal.cpp">
+    <ClCompile Include="GoalLine.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="UIComponent.cpp">
@@ -317,7 +317,7 @@
     <ClInclude Include="TutorialVerticalEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Goal.h">
+    <ClInclude Include="GoalLine.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="UIComponent.h">

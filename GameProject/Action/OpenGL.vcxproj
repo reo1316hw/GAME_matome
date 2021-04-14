@@ -164,7 +164,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="ContinueScene.cpp" />
     <ClCompile Include="DownBlock.cpp" />
     <ClCompile Include="DeathEffect.cpp" />
-    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="GoalLine.cpp" />
     <ClCompile Include="GoalBlock.cpp" />
     <ClCompile Include="HDRRenderer.cpp" />
     <ClCompile Include="invisibleMeshComponent.cpp" />
@@ -239,7 +239,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="ContinueScene.h" />
     <ClInclude Include="DownBlock.h" />
     <ClInclude Include="DeathEffect.h" />
-    <ClInclude Include="Goal.h" />
+    <ClInclude Include="GoalLine.h" />
     <ClInclude Include="GoalBlock.h" />
     <ClInclude Include="HDRRenderer.h" />
     <ClInclude Include="invisibleMeshComponent.h" />

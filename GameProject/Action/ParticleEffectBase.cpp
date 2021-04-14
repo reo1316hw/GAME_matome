@@ -1,3 +1,11 @@
+/*
+@file ParticleEffectBase.h
+@brief 一定時間で消える、主にエフェクトの基底クラスとして使用されるクラス
+*/
+
+/*
+@brief	インクルード
+*/
 #include "ParticleEffectBase.h"
 #include "Renderer.h"
 #include "Texture.h"
@@ -15,19 +23,10 @@ ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _velo
 	SetPosition(_pos);
 }
 
-ParticleEffectBase::~ParticleEffectBase()
-{
-}
-
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)
 {
-	UpdateParticleObject(_deltaTime);
-	SetPosition(mPosition + mVelocity);
-}
-
-void ParticleEffectBase::UpdateParticleObject(float _deltaTime)
-{
 	LifeCountDown();
+	SetPosition(mPosition + mVelocity);
 }
 
 void ParticleEffectBase::LifeCountDown()
@@ -49,5 +48,4 @@ void ParticleEffectBase::LifeCountDown()
 void ParticleEffectBase::SetReverve(float _flag)
 {
 	mParticle->SetReverce(_flag);
-
 }

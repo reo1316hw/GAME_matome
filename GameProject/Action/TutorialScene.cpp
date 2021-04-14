@@ -12,7 +12,7 @@
 #include "Sprite.h"
 #include "TutorialVerticalEffect.h"
 #include "TutorialEffect.h"
-#include "Goal.h"
+#include "GoalLine.h"
 #include "MapCreate.h"
 #include "HeartUI.h"
 
@@ -36,7 +36,7 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 
 	mTutorialEffect = new TutorialEffect(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
 	mTutorialVertEffect = new TutorialVerticalEffect(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);
-	mGoalLine = new Goal(Vector3(800, 150, -75800), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mGoalLine = new GoalLine(Vector3(800, 150, -75800), Vector3::Zero, Tag::Other, Scene::tutorial);
 
 	mSprite = new Sprite("Assets/forest.png");
 

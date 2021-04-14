@@ -1,10 +1,20 @@
+/*
+@brief	インクルード
+*/
 #include "DeathEffect.h"
 #include "Renderer.h"
 #include "ParticleComponent.h"
 #include "SceneBase.h"
 #include "GameObject.h"
 
-DeathEffect::DeathEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag, const Tag& _objectTag)
+/*
+@fn		コンストラクタ
+@param	_pos デスエフェクトの生成場所
+@param	_vel クリアエフェクトの速度
+@param	_objectTag アタッチしたゲームオブジェクトのタグ
+@param	_sceneTag シーンのタグ
+*/
+DeathEffect::DeathEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
 	:ParticleEffectBase(_pos, _vel, 40, "Assets/miniGlass.png", _sceneTag, _objectTag)
 {
 	mAlpha = 1.0f;
@@ -18,6 +28,10 @@ DeathEffect::DeathEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,
 	mSpeed = 1.15f;
 }
 
+/*
+@fn		デスエフェクトのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void DeathEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();

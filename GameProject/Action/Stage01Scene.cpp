@@ -10,7 +10,7 @@
 #include "ContinueScene.h"
 #include "HeartUI.h"
 #include "Sprite.h"
-#include "Goal.h"
+#include "GoalLine.h"
 #include "MapCreate.h"
 
 bool	Stage01Scene::mSendContinueStage01Flag = false;
@@ -31,7 +31,7 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 
 	SetScene(_nowScene);
 
-	mGoalLine = new Goal(Vector3(800, 150, -9000), Vector3::Zero, Tag::Other, Scene::stage01);
+	mGoalLine = new GoalLine(Vector3(800, 150, -9000), Vector3::Zero, Tag::Other, Scene::stage01);
 
 	mSprite = new Sprite("Assets/sea.png");
 

@@ -7,7 +7,7 @@ class Sprite;
 class InputSystem;
 class MapCreate;
 class HeartUI;
-class Goal;
+class GoalLine;
 class Player;
 
 class SceneBase
@@ -65,7 +65,7 @@ protected:
     //プレイヤーのポインタ
     Player*      mPlayer;
     //ゴールライン
-    Goal*        mGoalLine;
+    GoalLine*        mGoalLine;
     //プレイヤーの体力UI
     HeartUI*     mHeartUI;
     //ゲームクリアしたか

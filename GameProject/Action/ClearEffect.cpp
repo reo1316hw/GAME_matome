@@ -1,10 +1,20 @@
+/*
+@brief	インクルード
+*/
 #include "ClearEffect.h"
 #include "Renderer.h"
 #include "ParticleComponent.h"
 #include "SceneBase.h"
 #include "GameObject.h"
 
-ClearEffect::ClearEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag, const Tag& _objectTag)
+/*
+@fn		コンストラクタ
+@param	_pos クリアエフェクトの生成場所
+@param	_vel クリアエフェクトの速度
+@param	_objectTag アタッチしたゲームオブジェクトのタグ
+@param	_sceneTag シーンのタグ
+*/
+ClearEffect::ClearEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
 	:ParticleEffectBase(_pos, _vel, 30, "Assets/miniGlass.png", _sceneTag, _objectTag)
 {
 	mAlpha = 0.5f;
@@ -16,6 +26,10 @@ ClearEffect::ClearEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,
 	mSpeed = 1.0f;
 }
 
+/*
+@fn		クリアエフェクトのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void ClearEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();
