@@ -36,9 +36,9 @@ public:
 
 private:
 
-	//チュートリアルシーン中の縦移動床の説明パーティクル
+	//チュートリアルシーン中の縦移動床の説明パネル
 	TutorialVerticalEffect* mTutorialVertEffect;
-	//チュートリアルシーン中の操作説明パーティクル
+	//チュートリアルシーン中の操作説明パネル
 	TutorialEffect* mTutorialEffect;
 
 	static bool mSendContinueTutorialFlag;

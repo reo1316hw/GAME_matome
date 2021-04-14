@@ -1,9 +1,19 @@
+/*
+@brief	インクルード
+*/
 #include "SandEffect.h"
 #include "Renderer.h"
 #include "ParticleComponent.h"
 #include "SceneBase.h"
 #include "GameObject.h"
 
+/*
+@fn		コンストラクタ
+@param	_pos 砂ぼこりの座標
+@param	_vel 砂ぼこりの速度
+@param	_objectTag アタッチしたゲームオブジェクトのタグ
+@param	_sceneTag シーンのタグ
+*/
 SandEffect::SandEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,const Tag& _objectTag)
 	:ParticleEffectBase(_pos,_vel,30,"Assets/PhotonB.png", _sceneTag, _objectTag)
 {
@@ -16,6 +26,10 @@ SandEffect::SandEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,co
 	mSpeed = 1.0f;
 }
 
+/*
+@fn		砂ぼこりのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
 void SandEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();

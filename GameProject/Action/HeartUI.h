@@ -1,4 +1,11 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
+
+/*
+@brief	インクルード
+*/
 #include "UIComponent.h"
 #include "UIBase.h"
 
