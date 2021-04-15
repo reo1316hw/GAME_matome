@@ -53,5 +53,5 @@ private:
 	const float TOTAL_TIME = 1.0f;
 
 	//¶ˆÚ“®°‚Ì¶‚ÉˆÚ“®‚·‚é‘¬“x
-	const float LEFT_SPEED = 20;
+	const float LEFT_SPEED = 1500.0f;
 };

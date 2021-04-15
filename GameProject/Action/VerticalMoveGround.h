@@ -35,7 +35,7 @@ public:
 private:
 
 	//縦移動床の前に移動する速度
-	const float FORWARD_SPEED = 10.0f;
+	const float FORWARD_SPEED = 650.0f;
 
 	/*
 	@fn		縦移動床がヒットした時の処理

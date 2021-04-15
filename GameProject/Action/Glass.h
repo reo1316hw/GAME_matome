@@ -43,7 +43,7 @@ private:
 	int mDownCount;
 
 	// 落ちるスピード
-	const float DOWN_SPEED = 100.0f;
+	const float DOWN_SPEED = 1500.0f;
 
 	/*
 	@fn		ガラス床がヒットした時の処理

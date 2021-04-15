@@ -125,12 +125,12 @@ void LateralMoveGround::UpdateGameObject(float _deltaTime)
 
 	if (mReversFlag == true )
 	{
-		mVelocity.x = 10.0f;
+		mVelocity.x = MOVE_SPEED;
 		
 	}
 	else if(mReversFlag == false)
 	{
-		mVelocity.x = -10.0f;
+		mVelocity.x = -MOVE_SPEED;
 	}
 
 	mSendVel = mVelocity;

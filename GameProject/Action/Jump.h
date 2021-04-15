@@ -26,6 +26,20 @@ public:
 	*/
 	~Jump() {};
 
+	/*
+	@fn		ジャンプ床のアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	void UpdateGameObject(float _deltaTime)override;
+
+	/*
+	@fn		ジャンプ床がヒットした時の処理
+	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+	*/
+	void OnCollision(const GameObject& _hitObject)override;
+
 private:
 
+	//角度
+	float degree;
 };

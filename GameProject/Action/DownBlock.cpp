@@ -50,7 +50,7 @@ void DownBlock::UpdateGameObject(float _deltaTime)
 		mVelocity.y = -DOWN_SPEED;
 	}
 
-	if (mPosition == mEndPos)
+	if (mPosition.y <= mEndPos.y)
 	{
 		mVelocity.y = 0;
 	}
@@ -61,7 +61,7 @@ void DownBlock::UpdateGameObject(float _deltaTime)
 	}
 
 	// í‚ÉÀ•W‚É‘¬“x‚ð‘«‚·
-	mPosition += mVelocity;
+	mPosition += mVelocity * _deltaTime;
 
 	SetPosition(mPosition);
 }

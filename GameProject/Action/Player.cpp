@@ -191,7 +191,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = 40.0f;
+			mVelocity.y = JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -325,7 +325,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	
 
 	// 常に座標に速度を足す
-	mPosition += mVelocity + mLateralMoveVelocity;
+	mPosition += (mVelocity + mLateralMoveVelocity) * _deltaTime;
 
 	mVelocity.y -= mGravity;
 
@@ -352,28 +352,28 @@ void Player::GameObjectInput(const InputState& _keyState)
 	// 常に前に進む
 	if (mStopFlag == false)
 	{
-		mVelocity.z = mMoveSpeed;
+		//mVelocity.z = mMoveSpeed;
 
-		//// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-		//if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-		//	_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-		//{
-		//	mVelocity.z = mMoveSpeed;
-		//}
-		//// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-		//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-		//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-		//{
-		//	mVelocity.z = -mMoveSpeed;
-		//}
-		//// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-		//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-		//		 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0  ||
-		//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-		//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-		//{
-		//	mVelocity.z *= 0;
-		//}
+		// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+		if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+		{
+			mVelocity.z = mMoveSpeed;
+		}
+		// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+		else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+				 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+		{
+			mVelocity.z = -mMoveSpeed;
+		}
+		// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+		else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
+				 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0  ||
+				 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+				 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+		{
+			mVelocity.z *= 0;
+		}
 
 		 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 		if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
@@ -430,7 +430,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 
 	if (mTag == lateralMoveGround)
 	{
-		mLateralMoveVelocity = mLateral->GetVelocity();
+		mLateralMoveVelocity = mLateral->GetVelocity() * 60.0f;
 	}
 	else
 	{

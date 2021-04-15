@@ -52,5 +52,5 @@ private:
 	//全体の時間
 	const float TOTAL_TIME = 1.0f;
 	//右移動ブロックの右に移動する速度
-	const float RIGHT_SPEED = 20.0f;
+	const float RIGHT_SPEED = 1500.0f;
 };

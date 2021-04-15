@@ -35,5 +35,5 @@ public:
 private:
 
 	//落下ブロックの落ちる速度
-	const float DOWN_SPEED = 20;
+	const float DOWN_SPEED = 1500.0f;
 };

@@ -22,6 +22,9 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	SetScale(_size);
 	SetPosition(_pos);
 
+	degree = 0.0f;
+	mVelocity = Vector3::Zero;
+
 	switch (_sceneTag)
 	{
 	case SceneBase::Scene::tutorial:
@@ -68,4 +71,24 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 
 		break;
 	}
+}
+
+void Jump::UpdateGameObject(float _deltaTime)
+{
+	if (mHitFlag)
+	{
+		// sinカーブ
+		mVelocity.y = sinf(degree) * 500.0f;
+		degree += 0.5f;
+	}
+
+	// 常に座標に速度を足す
+	mPosition += mVelocity * _deltaTime;
+
+	SetPosition(mPosition);
+}
+
+void Jump::OnCollision(const GameObject& _hitObject)
+{
+	mHitFlag = true;
 }

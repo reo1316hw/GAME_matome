@@ -102,7 +102,7 @@ void LeftOneBlock::UpdateGameObject(float _deltaTime)
 	}
 
 	// í‚ÉÀ•W‚É‘¬“x‚ğ‘«‚·
-	mPosition += mVelocity;
+	mPosition += mVelocity * _deltaTime;
 
 	SetPosition(mPosition);
 }

@@ -60,6 +60,7 @@ class HDRRenderer;
 class Renderer
 {
 public:
+
 	/*
 	@fn	インスタンスを作成する
 	*/

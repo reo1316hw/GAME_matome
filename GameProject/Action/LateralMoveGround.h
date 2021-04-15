@@ -44,6 +44,9 @@ private:
 	//反転フラグ
 	bool mReversFlag;
 
+	//横移動するときの速度
+	const float MOVE_SPEED = 10.0f;
+
 public://ゲッターセッター
 	
 

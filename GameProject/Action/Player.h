@@ -74,11 +74,13 @@ private:
 	Vector3				mLateralMoveVelocity;
 
 	// 重力
-	const float GRAVITY_ACCEL = 2.0f;
+	const float GRAVITY_ACCEL = 120.0f;
+
+	const float JUMP_SPEED = 2500.0f;
 	// 移動速度
-	const float PLAYER_SPEED = 20.0f;
+	const float PLAYER_SPEED = 1250.0f;
 	// チュートリアル時の移動速度
-	const float TUTORIAL_MOVE_SPEED = 13.0f;
+	const float TUTORIAL_MOVE_SPEED = 800.0f;
 	// 体力
 	const int   PLAYER_LIFE = 3;
 

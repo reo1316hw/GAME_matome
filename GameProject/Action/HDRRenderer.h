@@ -69,10 +69,17 @@ private:
 	void  InitScreenQuadVAO();
 
 	float GaussianDistribution(const Vector2& _pos, float _rho);
+
+	/*
+	@fn	ガウスぼかし計算
+	*/
 	void  CalcGaussBlurParam(int _w, int _h, Vector2 _dir, float _deviation);
 
+	//ガウスぼかしシェーダー
 	class Shader*             mGaussianBlurShader;
+	//ダウンサンプリングシェーダー
 	class Shader*             mDownSamplingShader;
+	//トーンマップ&ブルーム処理シェーダー
 	class Shader*             mHdrToneAndBlurBlendShader;
 
 	//画面全体を描く四角形用頂点配列
@@ -101,9 +108,4 @@ private:
 	const int                 mSampleCount = 15;
 	//サンプリング点の座標(u,v) & w:重み
 	Vector3                   mOffset[15];
-
-public://ゲッターセッター
-
-	unsigned int GetColorTexID() { return mHdrColorBuffers[0]; }
-	unsigned int GetHDRTexID() { return mHdrColorBuffers[1]; }
 };
