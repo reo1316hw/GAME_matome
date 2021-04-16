@@ -70,8 +70,8 @@ SceneBase* TitleScene::update()
 		sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
 	{
 		//return new TutorialScene(tutorial);
-		//return new Stage01Scene(stage01);
-		return new Stage02Scene(stage02);
+		return new Stage01Scene(stage01);
+		//return new Stage02Scene(stage02);
 	}
 
 	return this;

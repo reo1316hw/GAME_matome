@@ -73,17 +73,6 @@ private:
 	//横移動床にあたった時の速度
 	Vector3				mLateralMoveVelocity;
 
-	// 重力
-	const float GRAVITY_ACCEL = 120.0f;
-
-	const float JUMP_SPEED = 2500.0f;
-	// 移動速度
-	const float PLAYER_SPEED = 1250.0f;
-	// チュートリアル時の移動速度
-	const float TUTORIAL_MOVE_SPEED = 800.0f;
-	// 体力
-	const int   PLAYER_LIFE = 3;
-
 	static Vector3 mSendPos;
 
 	static bool mSendDeathFlag;
@@ -94,28 +83,48 @@ private:
 
 	static int  mSendLife;
 
-	// 死んだか
+	//死んだか
 	bool		mDeathFlag;
-	// ダメージを受けたか
+	//ダメージを受けたか
 	bool		mDamageFlag;
-	// リスポーン後の待機フラグ
+	//リスポーン後の待機フラグ
 	bool		mStopFlag;
-	// クリアしたか
+	//クリアしたか
 	bool		mClearFlag;
-	// ジャンプするか
+	//ジャンプするか
 	bool		mJumpFlag;
-	// スケールを変えるか
+	//スケールを変えるか
 	bool		mScaleFlag;
+	//ボタンが入力されたか
+	bool		mButtonFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
-	// 現在のシーンはどれか
+	//現在のシーンはどれか
 	int			mScene;
-	// 体力	
+	//体力	
 	int			mLife;
 
-	// 角度
+	//角度
 	float		mAngle;
+
+	//重力
+	const float GRAVITY_ACCEL = 120.0f;
+	//ジャンプ力
+	const float JUMP_SPEED = 2500.0f;
+	//等速速度
+	const float PLAYER_CONSTANT_SPEED = 1250.0f;
+	//加速度
+	const float PLAYER_SPEED_UP = 500.0f;
+	//減速度
+	const float PLAYER_SPEED_DOWN = 200.0f;
+	//最大速度
+	const float PLAYER_MAX_SPEED = 1500.0f;
+
+	//チュートリアル時の移動速度
+	const float TUTORIAL_MOVE_SPEED = 800.0f;
+	//体力
+	const int   PLAYER_LIFE = 3;
 	
 	/*
 	@fn		プレイヤーがヒットした時の処理
