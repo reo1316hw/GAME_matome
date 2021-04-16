@@ -79,7 +79,14 @@ void Jump::UpdateGameObject(float _deltaTime)
 	{
 		// sinカーブ
 		mVelocity.y = sinf(degree) * 500.0f;
-		degree += 0.5f;
+		degree += 0.2f;
+
+		if (degree >= 6.5f)
+		{
+			degree = 0.0f;
+			mVelocity.y = 0.0f;
+			mHitFlag = false;
+		}
 	}
 
 	// 常に座標に速度を足す
