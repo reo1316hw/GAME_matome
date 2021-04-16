@@ -79,12 +79,14 @@ void Jump::UpdateGameObject(float _deltaTime)
 	{
 		// sinƒJ[ƒu
 		mVelocity.y = sinf(degree) * 500.0f;
+		mVelocity.z = sinf(degree) * 500.0f;
 		degree += 0.2f;
 
 		if (degree >= 6.5f)
 		{
 			degree = 0.0f;
 			mVelocity.y = 0.0f;
+			mVelocity.z = 0.0f;
 			mHitFlag = false;
 		}
 	}

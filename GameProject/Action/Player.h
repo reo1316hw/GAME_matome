@@ -109,15 +109,17 @@ private:
 	float		mAngle;
 
 	//重力
-	const float GRAVITY_ACCEL = 120.0f;
+	const float GRAVITY_ACCEL = 130.0f;
 	//ジャンプ力
 	const float JUMP_SPEED = 2500.0f;
+	//チュートリアル時のジャンプ力
+	const float TUTORIAL_JUMP_SPEED = 3100.0f;
 	//等速速度
 	const float PLAYER_CONSTANT_SPEED = 1250.0f;
 	//加速度
-	const float PLAYER_SPEED_UP = 500.0f;
+	const float PLAYER_SPEED_UP = 600.0f;
 	//減速度
-	const float PLAYER_SPEED_DOWN = 200.0f;
+	const float PLAYER_SPEED_DOWN = 250.0f;
 	//最大速度
 	const float PLAYER_MAX_SPEED = 1500.0f;
 
