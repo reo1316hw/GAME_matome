@@ -34,7 +34,7 @@ GoalBlock::GoalBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_03.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::goalBlockTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -48,7 +48,7 @@ GoalBlock::GoalBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_10.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::goalBlockTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -63,7 +63,7 @@ GoalBlock::GoalBlock(const Vector3& _pos, const Vector3& _size, const Tag& _obje
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::goalBlockTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;

@@ -37,7 +37,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_02.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::glassTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -51,7 +51,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_09.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::glassTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -65,7 +65,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,co
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_14.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::glassTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;

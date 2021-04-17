@@ -37,7 +37,7 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_05.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -51,7 +51,7 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_12.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -66,7 +66,7 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 		// “–‚½‚è”»’è
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_17.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::blockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;

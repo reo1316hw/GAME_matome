@@ -97,6 +97,10 @@ private:
 	bool		mScaleFlag;
 	//ボタンが入力されたか
 	bool		mButtonFlag;
+	//接地したか
+	bool		mGroundFlag;
+	//当たり判定を行うか
+	bool		mCollisionFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
@@ -109,11 +113,17 @@ private:
 	float		mAngle;
 
 	//重力
+	//const float GRAVITY_ACCEL = 2.0f;
 	const float GRAVITY_ACCEL = 130.0f;
+	//const float GRAVITY_ACCEL = 8150.0f;
 	//ジャンプ力
-	const float JUMP_SPEED = 2500.0f;
+	//const float JUMP_SPEED = 40.0f;
+	const float JUMP_SPEED = 2550.0f;
+	//const float JUMP_SPEED = 155000.0f;
 	//チュートリアル時のジャンプ力
+	//const float TUTORIAL_JUMP_SPEED = 50.0f;
 	const float TUTORIAL_JUMP_SPEED = 3100.0f;
+	//const float TUTORIAL_JUMP_SPEED = 192200.0f;
 	//等速速度
 	const float PLAYER_CONSTANT_SPEED = 1250.0f;
 	//加速度
@@ -122,7 +132,6 @@ private:
 	const float PLAYER_SPEED_DOWN = 250.0f;
 	//最大速度
 	const float PLAYER_MAX_SPEED = 1500.0f;
-
 	//チュートリアル時の移動速度
 	const float TUTORIAL_MOVE_SPEED = 800.0f;
 	//体力

@@ -39,6 +39,8 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mClearFlag(false)
 	, mJumpFlag(false)
 	, mScaleFlag(false)
+	, mGroundFlag(false)
+	, mCollisionFlag(true)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -104,7 +106,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = TUTORIAL_JUMP_SPEED;
+			mVelocity.y = TUTORIAL_JUMP_SPEED /** _deltaTime*/;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -131,7 +133,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED;
+			mVelocity.y = JUMP_SPEED/* * _deltaTime*/;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -193,7 +195,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED;
+			mVelocity.y = JUMP_SPEED/* * _deltaTime*/;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -253,6 +255,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	if (mRespawnFlag)
 	{
 		mLateralMoveVelocity = Vector3::Zero;
+		mCollisionFlag = true;
 
 		if (mLife >= 1)
 		{
@@ -315,10 +318,10 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 	else
 	{
-		//回転処理
 		mAngle = 10.0f;
 	}
 
+	//回転処理
 	float radian = Math::ToRadians(mAngle);
 	Quaternion rot = this->GetRotation();
 	Quaternion inc(Vector3::UnitX, radian);
@@ -336,11 +339,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.x = -PLAYER_MAX_SPEED;
 	}
 
-	//// 常に前に進む
-	//if (mStopFlag == false)
-	//{
-	//	mVelocity.z = mMoveSpeed;
-	//}
+	// 常に前に進む
+	if (mStopFlag == false)
+	{
+		mVelocity.z = mMoveSpeed;
+	}
 
 	//ボタンを押していないときの減速処理
 	if (mButtonFlag == false)
@@ -365,10 +368,20 @@ void Player::UpdateGameObject(float _deltaTime)
 
 	}
 
+	//接地していないかつリスポーン時の待機時間じゃない時に重力処理を行う
+	if (mGroundFlag == false && mStopFlag == false)
+	{
+		mVelocity.y -= mGravity/* * _deltaTime*/;
+	}
+
+	if (mPosition.y < 80.0f)
+	{
+		mCollisionFlag = false;
+	}
+
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity) * _deltaTime;
 
-	mVelocity.y -= mGravity;
 
 	mSendPos			= mPosition;
 	mSendClearFlag		= mClearFlag;
@@ -377,9 +390,11 @@ void Player::UpdateGameObject(float _deltaTime)
 	mSendLife			= mLife;
 
 	mRespawnFlag = false;
+	mGroundFlag = false;
 
 	// 座標をセット
 	SetPosition(mPosition);
+
 }
 
 /*
@@ -391,26 +406,26 @@ void Player::UpdateGameObject(float _deltaTime)
 void Player::GameObjectInput(const InputState& _keyState)
 {
 
-	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	{
-		mVelocity.z = mMoveSpeed;
-	}
-	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	{
-		mVelocity.z = -mMoveSpeed;
-	}
-	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-			 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0  ||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	{
-		mVelocity.z *= 0;
-	}
+	//// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+	//if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+	//	_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+	//{
+	//	mVelocity.z = mMoveSpeed;
+	//}
+	//// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+	//{
+	//	mVelocity.z = -mMoveSpeed;
+	//}
+	//// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
+	//		 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0  adadadadaadadadadaaaaaaaaa
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+	//{
+	//	mVelocity.z *= 0;
+	//}
 
 	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
@@ -447,47 +462,62 @@ void Player::GameObjectInput(const InputState& _keyState)
 */
 void Player::OnCollision(const GameObject& _hitObject)
 {
-	// 重力を消す
-	mVelocity.y = 0;
+	if (mCollisionFlag)
+	{
+		// 重力を消す
+		mVelocity.y = 0;
 
-	mTag = _hitObject.GetTag();
+		mTag = _hitObject.GetTag();
 
-	if (mTag == block ||
-		mTag == verticalBlock ||
-		mTag == rightBlock ||
-		mTag == leftBlock ||
-		mTag == rightOneBlock_02 ||
-		mTag == leftOneBlock_02 ||
-		mTag == aerialBlock ||
-		mTag == upBlock)
-	{
-		mDamageFlag = true;
-	}
+		if (mTag == ground ||
+			mTag == glass ||
+			mTag == verticalMoveGround ||
+			mTag == rightOneBlock ||
+			mTag == leftOneBlock ||
+			mTag == lateralMoveGround ||
+			mTag == jump ||
+			mTag == downBlock)
+		{
+			mGroundFlag = true;
+		}
 
-	if (mTag == lateralMoveGround)
-	{
-		mLateralMoveVelocity = mLateral->GetVelocity() * 60.0f;
-	}
-	else
-	{
-		mLateralMoveVelocity = Vector3::Zero;
-	}
+		if (mTag == block ||
+			mTag == verticalBlock ||
+			mTag == rightBlock ||
+			mTag == leftBlock ||
+			mTag == rightOneBlock_02 ||
+			mTag == leftOneBlock_02 ||
+			mTag == aerialBlock ||
+			mTag == upBlock)
+		{
+			mDamageFlag = true;
+		}
 
-	if (mTag == jump)
-	{
-		mJumpFlag = true;
-	}
+		if (mTag == jump)
+		{
+			mJumpFlag = true;
+		}
 
-	if (mTag == respawn01)
-	{
-		mRespawnState = RespawnState::respawnComplete01;
-	}
-	if (mTag == respawn02)
-	{
-		mRespawnState = RespawnState::respawnComplete02;
-	}
-	if (mTag == respawn03)
-	{
-		mRespawnState = RespawnState::respawnComplete03;
+		if (mTag == lateralMoveGround)
+		{
+			mLateralMoveVelocity = mLateral->GetVelocity() * 60.0f;
+		}
+		else
+		{
+			mLateralMoveVelocity = Vector3::Zero;
+		}
+
+		if (mTag == respawn01)
+		{
+			mRespawnState = RespawnState::respawnComplete01;
+		}
+		if (mTag == respawn02)
+		{
+			mRespawnState = RespawnState::respawnComplete02;
+		}
+		if (mTag == respawn03)
+		{
+			mRespawnState = RespawnState::respawnComplete03;
+		}
 	}
 }
