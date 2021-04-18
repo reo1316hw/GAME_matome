@@ -77,21 +77,25 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 */
 void Player::UpdateGameObject(float _deltaTime)
 {
+	//プレイヤーの斜め後ろにカメラをセット
 	mMainCamera->SetViewMatrixLerpObject(Vector3(0, 500, -550), mPosition);
 
 	mScene = SceneBase::GetScene();
 
+	//ステージクリアしたらプレイヤーの更新を止める
 	if (mClearFlag)
 	{
 		SetState(State::Dead);
 	}
 
-	if (mPosition.y <= -700)
+	//プレイヤーがある一定の座標まで落ちたらダメージを受ける
+	if (mPosition.y <= -700.0f)
 	{
 		mPosition.y = -699.0f;
 		mDamageFlag = true;
 	}
 
+	//ダメージを受けたら体力を減らす
 	if (mDamageFlag)
 	{
 		mLife -= 1;
@@ -99,10 +103,12 @@ void Player::UpdateGameObject(float _deltaTime)
 		mDamageFlag  = false;
 	}
 
+	//チュートリアル
 	if (mScene == SceneBase::tutorial)
 	{
+		//チュートリアル時の前方移動速度
 		mMoveSpeed = TUTORIAL_MOVE_SPEED;
-
+		//チュートリアル時のジャンプ力
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
@@ -111,6 +117,7 @@ void Player::UpdateGameObject(float _deltaTime)
 			mJumpFlag = false;
 		}
 
+		//チュートリアル時のリスポーン処理
 		if (mRespawnState == RespawnState::respawnNone)
 		{
 			if (mRespawnFlag)
@@ -122,14 +129,17 @@ void Player::UpdateGameObject(float _deltaTime)
 			}
 		}
 
+		//チュートリアル時のゴールの座標
 		if (mPosition.z >= -75700)
 		{
 			mClearFlag = true;
 		}
 	}
 
+	//ステージ01
 	if (mScene == SceneBase::stage01)
 	{
+		//ステージ01のジャンプ力
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
@@ -138,8 +148,10 @@ void Player::UpdateGameObject(float _deltaTime)
 			mJumpFlag = false;
 		}
 
+		//ステージ01のリスポーン処理
 		switch (mRespawnState)
 		{
+		//ステージ01の初期リスポーン地点
 		case RespawnState::respawnNone:
 			if (mRespawnFlag)
 			{
@@ -149,6 +161,7 @@ void Player::UpdateGameObject(float _deltaTime)
 				}
 			}
 			break;
+		//ステージ01のリスポーン地点01
 		case RespawnState::respawnComplete01:
 
 			if (mRespawnFlag)
@@ -160,6 +173,7 @@ void Player::UpdateGameObject(float _deltaTime)
 			}
 
 			break;
+		//ステージ01のリスポーン地点02
 		case RespawnState::respawnComplete02:
 
 			if (mRespawnFlag)
@@ -171,6 +185,7 @@ void Player::UpdateGameObject(float _deltaTime)
 			}
 
 			break;
+		//ステージ01のリスポーン地点03
 		case RespawnState::respawnComplete03:
 
 			if (mRespawnFlag)
@@ -184,14 +199,17 @@ void Player::UpdateGameObject(float _deltaTime)
 			break;
 		}
 
+		//ステージ01のゴール座標
 		if (mPosition.z >= -8900)
 		{
 			mClearFlag = true;
 		}
 	}
 
+	//ステージ02
 	if (mScene == SceneBase::stage02)
 	{
+		//ステージ02のジャンプ力
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
@@ -200,8 +218,10 @@ void Player::UpdateGameObject(float _deltaTime)
 			mJumpFlag = false;
 		}
 
+		//ステージ02のリスポーン処理
 		switch (mRespawnState)
 		{
+		//ステージ02の初期リスポーン地点
 		case RespawnState::respawnNone:
 			if (mRespawnFlag)
 			{
@@ -211,6 +231,7 @@ void Player::UpdateGameObject(float _deltaTime)
 				}
 			}
 			break;
+		//ステージ02のリスポーン地点01
 		case RespawnState::respawnComplete01:
 
 			if (mRespawnFlag)
@@ -222,6 +243,7 @@ void Player::UpdateGameObject(float _deltaTime)
 			}
 
 			break;
+		//ステージ02のリスポーン地点02
 		case RespawnState::respawnComplete02:
 
 			if (mRespawnFlag)
@@ -233,6 +255,7 @@ void Player::UpdateGameObject(float _deltaTime)
 			}
 
 			break;
+		//ステージ02のリスポーン地点03
 		case RespawnState::respawnComplete03:
 
 			if (mRespawnFlag)
@@ -246,12 +269,14 @@ void Player::UpdateGameObject(float _deltaTime)
 			break;
 		}
 
+		//ステージ02のゴールの座標
 		if (mPosition.z >= -2100)
 		{
 			mClearFlag = true;
 		}
 	}
 
+	//全ステージ共通のリスポーン処理
 	if (mRespawnFlag)
 	{
 		mLateralMoveVelocity = Vector3::Zero;
@@ -263,6 +288,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		}
 	}
 
+	//リスポーン後の待機時間中処理
 	if (mStopFlag)
 	{
 		mAngle = 0.0f;
@@ -290,12 +316,15 @@ void Player::UpdateGameObject(float _deltaTime)
 		}
 	}
 	
+	//体力0になった時の処理
 	if (mLife <= 0)
 	{
 		mDeathFlag = true;
 		SetState(State::Dead);
 	}
 
+	///////////////////////////////////////////////////////
+	//スケール縮小処理
 	if (mScaleFlag)
 	{
 		mScale.y = 1.2f + (mPosition.y - 120.0f) * 0.0015f;
@@ -308,7 +337,9 @@ void Player::UpdateGameObject(float _deltaTime)
 		mScale.y = 1.2f;
 		mScale.z = 1.2f;
 	}
+	///////////////////////////////////////////////////////
 
+	//ジャンプしたときに回転を遅くする処理
 	if (mPosition.y >= 200)
 	{
 		if (mStopFlag == false)
@@ -339,11 +370,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.x = -PLAYER_MAX_SPEED;
 	}
 
-	// 常に前に進む
-	if (mStopFlag == false)
-	{
-		mVelocity.z = mMoveSpeed;
-	}
+	//// 常に前に進む
+	//if (mStopFlag == false)
+	//{
+	//	mVelocity.z = mMoveSpeed;
+	//}
 
 	//ボタンを押していないときの減速処理
 	if (mButtonFlag == false)
@@ -374,7 +405,8 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.y -= mGravity/* * _deltaTime*/;
 	}
 
-	if (mPosition.y < 80.0f)
+	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
+	if (mPosition.y < 30.0f)
 	{
 		mCollisionFlag = false;
 	}
@@ -406,26 +438,26 @@ void Player::UpdateGameObject(float _deltaTime)
 void Player::GameObjectInput(const InputState& _keyState)
 {
 
-	//// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	//if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-	//	_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	//{
-	//	mVelocity.z = mMoveSpeed;
-	//}
-	//// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	//{
-	//	mVelocity.z = -mMoveSpeed;
-	//}
-	//// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-	//		 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0  adadadadaadadadadaaaaaaaaa
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	//{
-	//	mVelocity.z *= 0;
-	//}
+	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+	{
+		mVelocity.z = mMoveSpeed;
+	}
+	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+	{
+		mVelocity.z = -mMoveSpeed;
+	}
+	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
+			 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0||
+			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+	{
+		mVelocity.z *= 0;
+	}
 
 	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
@@ -449,11 +481,11 @@ void Player::GameObjectInput(const InputState& _keyState)
 		mButtonFlag = false;
 	}
 
-	/*if (_keyState.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1  ||
-		_keyState.Keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
+	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1  ||
+		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
 	{
-		mVelocity.y = 40.0f;
-	}*/
+		mVelocity.y = JUMP_SPEED;
+	}
 }
 
 /*
@@ -464,11 +496,13 @@ void Player::OnCollision(const GameObject& _hitObject)
 {
 	if (mCollisionFlag)
 	{
-		// 重力を消す
+		//重力を消す
 		mVelocity.y = 0;
 
+		//ヒットしたオブジェクトのタグを取得
 		mTag = _hitObject.GetTag();
 
+		//接地判定
 		if (mTag == ground ||
 			mTag == glass ||
 			mTag == verticalMoveGround ||
@@ -481,6 +515,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 			mGroundFlag = true;
 		}
 
+		//ダメージ判定
 		if (mTag == block ||
 			mTag == verticalBlock ||
 			mTag == rightBlock ||
@@ -493,13 +528,16 @@ void Player::OnCollision(const GameObject& _hitObject)
 			mDamageFlag = true;
 		}
 
+		//ジャンプ判定
 		if (mTag == jump)
 		{
 			mJumpFlag = true;
 		}
 
+		//横移動床の判定
 		if (mTag == lateralMoveGround)
 		{
+			//横移動床の速度を取得
 			mLateralMoveVelocity = mLateral->GetVelocity() * 60.0f;
 		}
 		else
@@ -507,6 +545,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 			mLateralMoveVelocity = Vector3::Zero;
 		}
 
+		//リスポーン判定
 		if (mTag == respawn01)
 		{
 			mRespawnState = RespawnState::respawnComplete01;

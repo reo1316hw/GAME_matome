@@ -58,8 +58,7 @@ SceneBase* TitleScene::update()
 
 	const InputState& sceneState = mInputSystem->GetState();
 
-	
-	//if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_E) == Released)
+	//if (sceneState.m_keyboard.GetKeyState(SDL_SCANCODE_E) == Released)
 	//{
 	//	/*return new Tutorial(tutorial);*/
 	//	/*return new Stage01Scene(stage01);*/
@@ -69,8 +68,8 @@ SceneBase* TitleScene::update()
 	if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
 		sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
 	{
-		return new TutorialScene(tutorial);
-		//return new Stage01Scene(stage01);
+		//return new TutorialScene(tutorial);
+		return new Stage01Scene(stage01);
 		//return new Stage02Scene(stage02);
 	}
 
