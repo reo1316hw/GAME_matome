@@ -113,7 +113,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = TUTORIAL_JUMP_SPEED /** _deltaTime*/;
+			mVelocity.y = TUTORIAL_JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -144,7 +144,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED/* * _deltaTime*/;
+			mVelocity.y = JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -214,7 +214,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mJumpFlag)
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED/* * _deltaTime*/;
+			mVelocity.y = JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
@@ -403,7 +403,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	//接地していないかつリスポーン時の待機時間じゃない時に重力処理を行う
 	if (mGroundFlag == false && mStopFlag == false)
 	{
-		mVelocity.y -= mGravity/* * _deltaTime*/;
+		mVelocity.y -= mGravity;
 	}
 
 	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
@@ -413,7 +413,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	// 常に座標に速度を足す
- 	mPosition += (mVelocity + mLateralMoveVelocity) * _deltaTime;
+ 	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
 
 
 	mSendPos			= mPosition;
@@ -539,7 +539,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 		if (mTag == lateralMoveGround)
 		{
 			//横移動床の速度を取得
-			mLateralMoveVelocity = mLateral->GetVelocity() * 60.0f;
+			mLateralMoveVelocity = mLateral->GetVelocity();
 		}
 		else
 		{

@@ -90,7 +90,7 @@ void LeftBlock::UpdateGameObject(float _deltaTime)
 		mShakeFlag = false;
 		mElapseTime += _deltaTime;
 		mDifferencePos = mEndPos.x - mInitPos.x;
-		mVelocity.x = -Quartic::EaseIn(mElapseTime, mStart, -mDifferencePos, TOTAL_TIME);
+		mVelocity.x = -Quartic::EaseIn(mElapseTime, mStart, -mDifferencePos, TOTAL_TIME) * 0.02f;
 	}
 
 
@@ -123,7 +123,7 @@ void LeftBlock::UpdateGameObject(float _deltaTime)
 	}
 	
 	// èÌÇ…ç¿ïWÇ…ë¨ìxÇë´Ç∑
-	mPosition += mVelocity * _deltaTime;
+	mPosition += mVelocity;
 
 	SetPosition(mPosition);
 }

@@ -81,7 +81,7 @@ void LeftOneBlock_02::UpdateGameObject(float _deltaTime)
 	}
 
 	// í‚ÉÀ•W‚É‘¬“x‚ğ‘«‚·
-	mPosition += mVelocity * _deltaTime;
+	mPosition += mVelocity;
 
 	SetPosition(mPosition);
 }

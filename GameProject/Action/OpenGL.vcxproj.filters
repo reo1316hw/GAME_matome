@@ -98,18 +98,6 @@
     <ClCompile Include="GameOver.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleEffectBase.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="SandEffect.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="VerticalMoveGroundExplanationBoard.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="GoalLine.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="UIComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -118,15 +106,6 @@
     </ClCompile>
     <ClCompile Include="HeartUI.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="DeathEffect.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearEffect.cpp">
-      <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="ContinueScene.cpp">
       <Filter>Scene</Filter>
@@ -201,13 +180,36 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="OperationExplanationBoard.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CheckpointBoard.cpp" />
+    <ClCompile Include="GoalLine.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationExplanationBoard.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalMoveGroundExplanationBoard.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckpointBoard.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffectBase.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -309,18 +311,6 @@
     <ClInclude Include="GameOver.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleEffectBase.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="SandEffect.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="VerticalMoveGroundExplanationBoard.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalLine.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
     <ClInclude Include="UIComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -329,15 +319,6 @@
     </ClInclude>
     <ClInclude Include="HeartUI.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="DeathEffect.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectManager.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearEffect.h">
-      <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="ContinueScene.h">
       <Filter>Scene</Filter>
@@ -412,13 +393,36 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="OperationExplanationBoard.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CheckpointBoard.h" />
+    <ClInclude Include="GoalLine.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationExplanationBoard.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalMoveGroundExplanationBoard.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckpointBoard.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffectBase.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -454,14 +458,14 @@
     <Filter Include="Map">
       <UniqueIdentifier>{3a7470fa-f546-4170-98fb-da0544d9116c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleEffect">
-      <UniqueIdentifier>{9656ab2e-e719-46a6-af95-4502cf331d97}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{c5e60b33-ce75-4c8d-a25d-da32103cd259}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{393b5bfb-e08c-411b-b7c1-689fbb3a59e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleEffect">
+      <UniqueIdentifier>{542238fb-7704-4339-b7cb-13b1aa265e12}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
