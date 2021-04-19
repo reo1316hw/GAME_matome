@@ -10,8 +10,8 @@
 #include "ContinueScene.h"
 #include "EffectManager.h"
 #include "Sprite.h"
-#include "TutorialVerticalEffect.h"
-#include "TutorialEffect.h"
+#include "VerticalMoveGroundExplanationBoard.h"
+#include "OperationExplanationBoard.h"
 #include "GoalLine.h"
 #include "MapCreate.h"
 #include "HeartUI.h"
@@ -34,8 +34,8 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 
 	SetScene(_nowScene);
 
-	mTutorialEffect = new TutorialEffect(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
-	mTutorialVertEffect = new TutorialVerticalEffect(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::Zero, Tag::Other, Scene::tutorial);
+	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200,-92000), Vector3::Zero, Tag::Other, Scene::tutorial);
 	mGoalLine = new GoalLine(Vector3(800, 150, -75800), Vector3::Zero, Tag::Other, Scene::tutorial);
 
 	mSprite = new Sprite("Assets/forest.png");

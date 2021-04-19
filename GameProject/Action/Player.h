@@ -101,6 +101,8 @@ private:
 	bool		mGroundFlag;
 	//当たり判定を行うか
 	bool		mCollisionFlag;
+	//チェックポイント通過時のエフェクトを発生させるか
+	bool		mCheckpointEfectFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;

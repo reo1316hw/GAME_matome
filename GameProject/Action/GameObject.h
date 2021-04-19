@@ -67,7 +67,8 @@ enum Tag
 	respawn01 = 21,
 	respawn02 = 22,
 	respawn03 = 23,
-	Swith = 24
+	checkpoint = 24,
+	Swith = 25
 };
 
 /*

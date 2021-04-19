@@ -104,7 +104,7 @@
     <ClCompile Include="SandEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialVerticalEffect.cpp">
+    <ClCompile Include="VerticalMoveGroundExplanationBoard.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="GoalLine.cpp">
@@ -201,12 +201,13 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="TutorialEffect.cpp">
+    <ClCompile Include="OperationExplanationBoard.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="CheckpointBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -314,7 +315,7 @@
     <ClInclude Include="SandEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialVerticalEffect.h">
+    <ClInclude Include="VerticalMoveGroundExplanationBoard.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="GoalLine.h">
@@ -411,12 +412,13 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="TutorialEffect.h">
+    <ClInclude Include="OperationExplanationBoard.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="TutorialScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CheckpointBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

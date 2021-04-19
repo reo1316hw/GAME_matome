@@ -719,7 +719,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz + 80000);
+			Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
 			Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
 
 			switch (mScene)

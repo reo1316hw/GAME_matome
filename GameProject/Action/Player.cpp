@@ -41,6 +41,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mScaleFlag(false)
 	, mGroundFlag(false)
 	, mCollisionFlag(true)
+	, mCheckpointEfectFlag(false)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	mTag = _objectTag;
@@ -557,6 +558,11 @@ void Player::OnCollision(const GameObject& _hitObject)
 		if (mTag == respawn03)
 		{
 			mRespawnState = RespawnState::respawnComplete03;
+		}
+
+		if (mTag == checkpoint)
+		{
+			mCheckpointEfectFlag = true;
 		}
 	}
 }
