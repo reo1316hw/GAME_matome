@@ -5,6 +5,7 @@
 #include "SandEffect.h"
 #include "DeathEffect.h"
 #include "ClearEffect.h"
+#include "CheckpointEffect.h"
 #include "Player.h"
 
 /*
@@ -26,6 +27,7 @@ EffectManager::EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBas
 
 	mClearEffectFlag = false;
 	mDeathEffectFlag = false;
+	mCheckpointFlag = false;
 }
 
 /*
@@ -46,12 +48,16 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 	if (mPlayer->GetClearFlag())
 	{
 		mClearEffectFlag = true;
-
 	}
 
 	if (mPlayer->GetDeathFlag())
 	{
 		mDeathEffectFlag = true;
+	}
+
+	if (mPlayer->GetCheckpointFlag())
+	{
+		mCheckpointFlag = true;
 	}
 
 	switch (mState)
@@ -205,6 +211,11 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 				mClearEffectFlag = false;
 				SetState(State::Dead);
 			}
+		}
+
+		if (mCheckpointFlag)
+		{
+			mCheckpointEffect = new CheckpointEffect();
 		}
 
 		break;

@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="CheckpointBoard.cpp" />
+    <ClCompile Include="CheckpointEffect.cpp" />
     <ClCompile Include="ClearEffect.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -235,6 +236,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="Block.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="CheckpointBoard.h" />
+    <ClInclude Include="CheckpointEffect.h" />
     <ClInclude Include="ClearEffect.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />

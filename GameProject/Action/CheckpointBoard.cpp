@@ -11,8 +11,8 @@
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
 */
-CheckpointBoard::CheckpointBoard(const Vector3& _pos, const Vector3& _vel, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 0, "Assets/checkpoint.png", _sceneTag, _objectTag)
+CheckpointBoard::CheckpointBoard(const Vector3& _pos, const Vector3& _vel, const std::string& _particleFileName ,const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+	:ParticleEffectBase(_pos, _vel, 0, _particleFileName, _sceneTag, _objectTag)
 	, mCehckpointBoardAABB(Vector3::Zero, Vector3::Zero)
 {
 	mScale = 3000.0f;

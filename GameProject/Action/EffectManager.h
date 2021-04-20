@@ -11,6 +11,7 @@
 class SandEffect;
 class DeathEffect;
 class ClearEffect;
+class CheckpointEffect;
 class Player;
 
 class EffectManager : public GameObject
@@ -54,6 +55,8 @@ private:
 	DeathEffect*	 mDeathEffect;
 	//クリアエフェクト
 	ClearEffect*	 mClearEffect;
+	//チェックポイントエフェクト
+	CheckpointEffect* mCheckpointEffect;
 	//プレイヤーのポインタ
 	Player*			 mPlayer;
 
@@ -67,5 +70,7 @@ private:
 	bool			 mClearEffectFlag;
 	//デスエフェクトを生成するかのフラグ
 	bool			 mDeathEffectFlag;
+	//チェックポイントエフェクトを生成するかのフラグ
+	bool			 mCheckpointFlag;
 };
 

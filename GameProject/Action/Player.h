@@ -75,11 +75,13 @@ private:
 
 	static Vector3 mSendPos;
 
+	static bool mSendClearFlag;
+
 	static bool mSendDeathFlag;
 
 	static bool mSendRespawnFlag;
 
-	static bool mSendClearFlag;
+	static bool mSendCheckpointFlag;
 
 	static int  mSendLife;
 
@@ -142,9 +144,10 @@ private:
 public://ゲッターセッター
 
 	static Vector3 GetPos() { return mSendPos; };
+	static bool GetClearFlag() { return mSendClearFlag; };
 	static bool GetDeathFlag() { return mSendDeathFlag; };
 	static bool GetRespawnFlag() { return mSendRespawnFlag; };
-	static bool GetClearFlag() { return mSendClearFlag; };
+	static bool GetCheckpointFlag() { return mSendCheckpointFlag; };
 	static int GetLife() { return mSendLife; };
 
 	void SetDeathFlag(bool _deathFlag) { mSendDeathFlag = _deathFlag; };

@@ -210,6 +210,9 @@
     <ClCompile Include="SandEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
+    <ClCompile Include="CheckpointEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -421,6 +424,9 @@
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="SandEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckpointEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
