@@ -96,8 +96,6 @@ SceneBase* Stage01Scene::update()
 
 		if (mNextSceneCount >= 80)
 		{
-			mPlayer->SetClearFlag(false);
-
 			/*return new GameClear(gameClear);*/
 			return new Stage02Scene(stage02);
 		}
@@ -109,7 +107,6 @@ SceneBase* Stage01Scene::update()
 
 		if (mNextSceneCount >= 80)
 		{
-			mPlayer->SetDeathFlag(false);
 			mContinueStage01Flag = true;
 			mSendContinueStage01Flag = mContinueStage01Flag;
 

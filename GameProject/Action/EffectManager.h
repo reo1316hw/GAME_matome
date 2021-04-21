@@ -55,13 +55,13 @@ private:
 	DeathEffect*	 mDeathEffect;
 	//クリアエフェクト
 	ClearEffect*	 mClearEffect;
-	//チェックポイントエフェクト
-	CheckpointEffect* mCheckpointEffect;
 	//プレイヤーのポインタ
 	Player*			 mPlayer;
 
-	//任意のタイミングでエフェクトを生成するためのカウント
-	int				 mCreateCount;
+	//任意のタイミングで砂ぼこりエフェクトを生成するためのカウント
+	int				 mCreateSandEffectCount;
+	//任意のタイミングでデスエフェクトを生成するためのカウント
+	int				 mCreateDeathEffectCount;
 
 	//角度
 	float			 mAngle;
@@ -70,7 +70,5 @@ private:
 	bool			 mClearEffectFlag;
 	//デスエフェクトを生成するかのフラグ
 	bool			 mDeathEffectFlag;
-	//チェックポイントエフェクトを生成するかのフラグ
-	bool			 mCheckpointFlag;
 };
 

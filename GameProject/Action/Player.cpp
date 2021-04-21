@@ -11,12 +11,14 @@
 #include "BoxCollider.h"
 #include "SphereCollider.h"
 #include "EffectManager.h"
+#include "CheckpointEffectManager.h"
 #include "LateralMoveGround.h"
 
 Vector3 Player::mSendPos = Vector3::Zero;
 bool	Player::mSendClearFlag = false;
 bool	Player::mSendDeathFlag = false;
 bool    Player::mSendRespawnFlag = false;
+bool	Player::mSendCheckpointFlag = false;
 int     Player::mSendLife = 0;
 
 /*
@@ -31,6 +33,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mPlayerSphere(Vector3::Zero,0.0f)
 	, mVisibleFrameCount(0)
 	, mLife(0)
+	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
 	, mScene(SceneBase::other)
 	, mDeathFlag(false)
@@ -41,7 +44,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mScaleFlag(false)
 	, mGroundFlag(false)
 	, mCollisionFlag(true)
-	, mCheckpointEfectFlag(false)
+	, mCheckpointFlag(false)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -61,6 +64,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
 
 	mEffectManager = new EffectManager(this, _objectTag, _sceneTag);
+	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
 
 	//プレイヤー自身の当たり判定
 	mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -371,11 +375,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.x = -PLAYER_MAX_SPEED;
 	}
 
-	//// 常に前に進む
-	//if (mStopFlag == false)
-	//{
-	//	mVelocity.z = mMoveSpeed;
-	//}
+	// 常に前に進む
+	if (mStopFlag == false)
+	{
+		mVelocity.z = mMoveSpeed;
+	}
 
 	//ボタンを押していないときの減速処理
 	if (mButtonFlag == false)
@@ -412,15 +416,29 @@ void Player::UpdateGameObject(float _deltaTime)
 		mCollisionFlag = false;
 	}
 
+	//チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
+	if (mCheckpointEffectCount == 1)
+	{
+		mCheckpointFlag = false;
+		mCheckpointEffectCount = 0;
+	}
+
+	//チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
+	if (mCheckpointFlag)
+	{
+		mCheckpointEffectCount++;
+	}
+
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
 
 
-	mSendPos			= mPosition;
-	mSendClearFlag		= mClearFlag;
-	mSendDeathFlag		= mDeathFlag;
-	mSendRespawnFlag	= mRespawnFlag;
-	mSendLife			= mLife;
+	mSendPos					= mPosition;
+	mSendClearFlag				= mClearFlag;
+	mSendDeathFlag				= mDeathFlag;
+	mSendRespawnFlag			= mRespawnFlag;
+	mSendCheckpointFlag			= mCheckpointFlag;
+	mSendLife					= mLife;
 
 	mRespawnFlag = false;
 	mGroundFlag = false;
@@ -482,11 +500,11 @@ void Player::GameObjectInput(const InputState& _keyState)
 		mButtonFlag = false;
 	}
 
-	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1  ||
+	/*if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1  ||
 		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
 	{
 		mVelocity.y = JUMP_SPEED;
-	}
+	}*/
 }
 
 /*
@@ -562,7 +580,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 
 		if (mTag == checkpoint)
 		{
-			mCheckpointEfectFlag = true;
+			mCheckpointFlag = true;
 		}
 	}
 }

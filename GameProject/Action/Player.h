@@ -10,8 +10,10 @@
 #include "ParticleEffectBase.h"
 
 class EffectManager;
+class CheckpointEffectManager;
 class SphereCollider;
 class LateralMoveGround;
+class EffectManager;
 
 /*
 @enum	プレイヤーのリスポーンステート
@@ -65,6 +67,8 @@ private:
 	Sphere				mPlayerSphere;
 	//プレイヤーのエフェクト
 	EffectManager*		mEffectManager;
+	//プレイヤーのチェックポイントエフェクト
+	CheckpointEffectManager* mCheckpointEffectManager;
 	//横移動床のポインタ
 	LateralMoveGround*	mLateral;
 	//リスポーンステートの値を格納する変数
@@ -103,8 +107,8 @@ private:
 	bool		mGroundFlag;
 	//当たり判定を行うか
 	bool		mCollisionFlag;
-	//チェックポイント通過時のエフェクトを発生させるか
-	bool		mCheckpointEfectFlag;
+	//チェックポイント通過したか
+	bool		mCheckpointFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
@@ -112,6 +116,8 @@ private:
 	int			mScene;
 	//体力	
 	int			mLife;
+	//チェックポイントエフェクトを生存時間
+	int			mCheckpointEffectCount;
 
 	//角度
 	float		mAngle;
@@ -149,9 +155,6 @@ public://ゲッターセッター
 	static bool GetRespawnFlag() { return mSendRespawnFlag; };
 	static bool GetCheckpointFlag() { return mSendCheckpointFlag; };
 	static int GetLife() { return mSendLife; };
-
-	void SetDeathFlag(bool _deathFlag) { mSendDeathFlag = _deathFlag; };
-	void SetClearFlag(bool _clearFlag) { mSendClearFlag = _clearFlag; };
 
 };
 

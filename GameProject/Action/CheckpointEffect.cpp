@@ -15,10 +15,10 @@
 @param	_sceneTag シーンのタグ
 */
 CheckpointEffect::CheckpointEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 30, "Assets/miniGlass.png", _sceneTag, _objectTag)
+	:ParticleEffectBase(_pos, _vel, 40, "Assets/star.png", _sceneTag, _objectTag)
 {
 	mAlpha = 1.0f;
-	mScale = 8.0f;
+	mScale = 60.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::Yellow);

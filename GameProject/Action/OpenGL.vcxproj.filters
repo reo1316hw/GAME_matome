@@ -201,9 +201,6 @@
     <ClCompile Include="DeathEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleEffectBase.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
@@ -211,6 +208,12 @@
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="CheckpointEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckpointEffectManager.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
   </ItemGroup>
@@ -427,6 +430,9 @@
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="CheckpointEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckpointEffectManager.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
