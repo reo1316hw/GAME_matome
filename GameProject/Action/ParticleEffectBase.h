@@ -45,7 +45,7 @@ public:
 	/*
 	@fn	デストラクタ
 	*/
-	~ParticleEffectBase() {};
+	virtual ~ParticleEffectBase() {};
 
 	/*
 	@fn		派生クラスの更新関数を呼び座標に移動量を足し続ける

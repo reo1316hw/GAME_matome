@@ -15,15 +15,16 @@
 @param	_sceneTag シーンのタグ
 */
 CheckpointEffect::CheckpointEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 40, "Assets/star.png", _sceneTag, _objectTag)
+	:ParticleEffectBase(_pos, _vel, 60, "Assets/star.png", _sceneTag, _objectTag)
 {
-	mAlpha = 1.0f;
-	mScale = 60.0f;
+	mAlpha = ALPHA_INITIAL_VALUE;
+	mScale = SCALE_INITIAL_VALUE;
+	mVelocity.y = VELOCITY_INITIAL_VALUE;
+	mSpeed = ACCELERATION_INITIAL_VALUE;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::Yellow);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
-	mSpeed = 1.0f;
 }
 
 /*
@@ -32,16 +33,27 @@ CheckpointEffect::CheckpointEffect(Vector3 _pos, Vector3 _vel, const Tag& _objec
 */
 void CheckpointEffect::UpdateGameObject(float _deltaTime)
 {
+	//生存時間をカウント
 	ParticleEffectBase::LifeCountDown();
 
+	//ライフカウントが0より大きかったら速度、透明度、スケールの値を更新
 	if (mLifeCount > 0)
 	{
 		mVelocity = mVelocity * mSpeed;
 		mPosition = mPosition + mVelocity;
 
+		mVelocity.y -= VELOCITY_MINUS_VALUE;
+		
+		if (mScale <= SCALE_MAX_VALUE)
+		{
+			mScale += SCALE_PLUS_VALUE;
+		}
+
+		mParticle->SetScale(mScale);
 		SetPosition(mPosition);
 	}
 
+	//ライフカウントが0以下だったら見えなくする
 	if (mLifeCount <= 0)
 	{
 		mParticle->SetVisible(false);

@@ -265,6 +265,11 @@ public://ゲッターセッター
 	const Vector3& GetPosition() const { return mPosition; }
 
 	/*
+	@return	オブジェクトの速度(Vector3型)
+	*/
+	const Vector3& GetVelocity() const { return mVelocity; }
+
+	/*
 	@return	ワールド変換の処理を行う必要性があるかのフラグ(bool型)
 	*/
 	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }

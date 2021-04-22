@@ -457,26 +457,26 @@ void Player::UpdateGameObject(float _deltaTime)
 void Player::GameObjectInput(const InputState& _keyState)
 {
 
-	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	{
-		mVelocity.z = mMoveSpeed;
-	}
-	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	{
-		mVelocity.z = -mMoveSpeed;
-	}
-	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-			 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-			 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	{
-		mVelocity.z *= 0;
-	}
+	//// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+	//if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+	//	_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+	//{
+	//	mVelocity.z = mMoveSpeed;
+	//}
+	//// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+	//{
+	//	mVelocity.z = -mMoveSpeed;
+	//}
+	//// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
+	//		 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0||
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+	//{
+	//	mVelocity.z *= 0;
+	//}
 
 	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||

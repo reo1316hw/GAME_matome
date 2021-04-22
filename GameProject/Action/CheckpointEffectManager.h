@@ -49,13 +49,9 @@ private:
 	//プレイヤーのポインタ
 	Player* mPlayer;
 
-	//任意のタイミングでチェックポイントエフェクトを生成するためのカウント
-	int				 mCreateCheckpointEffectCount;
-
-	//チェックポイントエフェクトを生成するかのフラグ
-	bool			 mCheckpointFlag;
-
-	const float SPEED = 5.0f;
+	//速度
+	const float SPEED = 10.0f;
+	//向き
 	const float DIRECTION = 1.0f;
 };
 
