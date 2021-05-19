@@ -231,14 +231,56 @@ void HDRRenderer::InitHDRBuffers()
 	/////////////////////////////////////////////////
 	// 浮動小数点フレームバッファ（カラーバッファ２つ）の作成
 	/////////////////////////////////////////////////
+
+	/*
+	* @fn フレームバッファのオブジェクト名を生成
+	* 1.生成するフレームバッファ・オブジェクト名の数を指定
+	* 2.生成されたフレームバッファのオブジェクト名を格納する配列を指定
+	*/
 	glGenFramebuffers(1, &mHdrFBO);
+
+	/*
+	 * @fn フレームバッファをフレームバッファのターゲットにバインドする
+	 * 1.バインディング操作の対象となるフレームバッファを指定
+	 * 2.バインドするフレームバッファ・オブジェクトの名前を指定
+	 */
 	glBindFramebuffer(GL_FRAMEBUFFER, mHdrFBO);
 	{
+		/*
+		 * @fn テクスチャ名を生成する
+		 * 1.生成するテクスチャ名の数を指定
+		 * 2.生成されたテクスチャ名を格納する配列を指定
+		 */
 		glGenTextures(2, mHdrColorBuffers);
 		for (unsigned int i = 0; i < 2; i++)
 		{
+			/*
+			 * @fn 指定されたテクスチャをテクスチャリングターゲットにバインドする
+			 * 1.テクスチャーがバインドされるターゲットを指定
+			 * 2.テクスチャーの名前を指定
+			 */
 			glBindTexture(GL_TEXTURE_2D, mHdrColorBuffers[i]);
+
+			/*
+			 * @fn 2次元のテクスチャ・イメージを指定
+			 * 1.ターゲットテクスチャを指定
+			 * 2.レベルオブディテールの番号を指定。レベル0はベース画像のレベル。レベルnは、n番目のミップマップ縮小画像。
+			 * 3.テクスチャー内の色成分の数を指定
+			 * 4.テクスチャイメージの幅を指定
+			 * 5.テクスチャ画像の高さ、またはテクスチャ配列のレイヤー数を指定
+			 * 6.この値は0でなければなりません。
+			 * 7.画素データのフォーマットを指定
+			 * 8.画素データのデータタイプを指定
+			 * 9.メモリ上の画像データへのポインタを指定
+			 */
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, mBufferWidth, mBufferHeight, 0, GL_RGBA, GL_FLOAT, NULL);
+			
+			/*
+			 * @fn テクスチャのパラメータを設定
+			 * 1.テクスチャをバインドするターゲットを指定
+			 * 2.テクスチャパラメータのシンボリック名を指定
+			 * 3.スカラコマンドの場合は、pnameの値を指定
+			 */
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
