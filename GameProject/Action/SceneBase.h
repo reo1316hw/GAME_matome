@@ -8,6 +8,7 @@ class InputSystem;
 class MapCreate;
 class HeartUI;
 class GoalLine;
+class CheckpointBoard;
 class Player;
 
 class SceneBase
@@ -66,6 +67,8 @@ protected:
     Player*      mPlayer;
     //ゴールライン
     GoalLine*        mGoalLine;
+    //チェックポイントボード
+    CheckpointBoard* mCheckPointBoard;
     //プレイヤーの体力UI
     HeartUI*     mHeartUI;
     //ゲームクリアしたか

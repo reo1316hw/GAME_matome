@@ -67,7 +67,8 @@ enum Tag
 	respawn01 = 21,
 	respawn02 = 22,
 	respawn03 = 23,
-	Swith = 24
+	checkpoint = 24,
+	Swith = 25
 };
 
 /*
@@ -262,6 +263,11 @@ public://ゲッターセッター
 	@return	オブジェクトのポジション(Vector3型)
 	*/
 	const Vector3& GetPosition() const { return mPosition; }
+
+	/*
+	@return	オブジェクトの速度(Vector3型)
+	*/
+	const Vector3& GetVelocity() const { return mVelocity; }
 
 	/*
 	@return	ワールド変換の処理を行う必要性があるかのフラグ(bool型)

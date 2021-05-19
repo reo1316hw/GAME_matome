@@ -158,6 +158,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="CheckpointBoard.cpp" />
+    <ClCompile Include="CheckpointEffect.cpp" />
+    <ClCompile Include="CheckpointEffectManager.cpp" />
     <ClCompile Include="ClearEffect.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -176,8 +179,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TutorialEffect.cpp" />
-    <ClCompile Include="TutorialVerticalEffect.cpp" />
+    <ClCompile Include="OperationExplanationBoard.cpp" />
+    <ClCompile Include="VerticalMoveGroundExplanationBoard.cpp" />
     <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOver.cpp" />
@@ -233,6 +236,9 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="CheckpointBoard.h" />
+    <ClInclude Include="CheckpointEffect.h" />
+    <ClInclude Include="CheckpointEffectManager.h" />
     <ClInclude Include="ClearEffect.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
@@ -251,8 +257,8 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TutorialEffect.h" />
-    <ClInclude Include="TutorialVerticalEffect.h" />
+    <ClInclude Include="OperationExplanationBoard.h" />
+    <ClInclude Include="VerticalMoveGroundExplanationBoard.h" />
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOver.h" />

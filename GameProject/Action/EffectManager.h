@@ -11,6 +11,7 @@
 class SandEffect;
 class DeathEffect;
 class ClearEffect;
+class CheckpointEffect;
 class Player;
 
 class EffectManager : public GameObject
@@ -57,8 +58,10 @@ private:
 	//プレイヤーのポインタ
 	Player*			 mPlayer;
 
-	//任意のタイミングでエフェクトを生成するためのカウント
-	int				 mCreateCount;
+	//任意のタイミングで砂ぼこりエフェクトを生成するためのカウント
+	int				 mCreateSandEffectCount;
+	//任意のタイミングでデスエフェクトを生成するためのカウント
+	int				 mCreateDeathEffectCount;
 
 	//角度
 	float			 mAngle;

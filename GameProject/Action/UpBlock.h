@@ -35,5 +35,5 @@ public:
 private:
 
 	//上移動ブロックの上に移動する速度
-	const float UP_SPEED = 650.0f;
+	const float UP_SPEED = 10.0f;
 };

@@ -35,5 +35,5 @@ public:
 private:
 
 	//1ƒ}ƒX¶ˆÚ“®°‚Ì¶‚ÉˆÚ“®‚·‚é‘¬“x
-	const float LEFT_SPEED = 650.0f;
+	const float LEFT_SPEED = 10.0f;
 };

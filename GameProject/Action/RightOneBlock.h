@@ -35,5 +35,5 @@ public:
 private:
 
 	//1マス右移動床の右に移動する速度
-	const float RIGHT_SPEED = 650.0f;
+	const float RIGHT_SPEED = 10.0f;
 };

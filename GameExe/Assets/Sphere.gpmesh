@@ -6,8 +6,6 @@
 		"Assets/Sphere.png"
 	],
 	"diffusemap":"Assets/Sphere.png",
-	"nomalmap":"none",
-    "specularmap":"none",
     "emissivemap":"Assets/SphereEmissive.png",
 	"specularPower":200.0,
     "luminance":"0.3",

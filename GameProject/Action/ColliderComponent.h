@@ -50,7 +50,8 @@ enum class ColliderTag
 	respawn01 = 22,
 	respawn02 = 23,
 	respawn03 = 24,
-	SwithTag = 25
+	checkpoint = 25,
+	SwithTag = 26
 };
 
 class ColliderComponent : public Component

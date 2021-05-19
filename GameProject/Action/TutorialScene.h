@@ -8,8 +8,8 @@
 */
 #include "SceneBase.h"
 
-class TutorialVerticalEffect;
-class TutorialEffect;
+class VerticalMoveGroundExplanationBoard;
+class OperationExplanationBoard;
 
 class TutorialScene : public SceneBase
 {
@@ -37,9 +37,9 @@ public:
 private:
 
 	//チュートリアルシーン中の縦移動床の説明パネル
-	TutorialVerticalEffect* mTutorialVertEffect;
+	VerticalMoveGroundExplanationBoard* mVerticalMoveGroundExplanationBoard;
 	//チュートリアルシーン中の操作説明パネル
-	TutorialEffect* mTutorialEffect;
+	OperationExplanationBoard* mOperationExplanationBoard;
 
 	static bool mSendContinueTutorialFlag;
 

@@ -78,8 +78,8 @@ void Jump::UpdateGameObject(float _deltaTime)
 	if (mHitFlag)
 	{
 		// sinカーブ
-		mVelocity.y = sinf(degree) * 500.0f;
-		mVelocity.z = sinf(degree) * 500.0f;
+		mVelocity.y = sinf(degree) * 8.0f;
+		mVelocity.z = sinf(degree) * 8.0f;
 		degree += 0.2f;
 
 		if (degree >= 6.5f)
@@ -92,7 +92,7 @@ void Jump::UpdateGameObject(float _deltaTime)
 	}
 
 	// 常に座標に速度を足す
-	mPosition += mVelocity * _deltaTime;
+	mPosition += mVelocity;
 
 	SetPosition(mPosition);
 }

@@ -11,6 +11,7 @@
 #include "HeartUI.h"
 #include "Sprite.h"
 #include "GoalLine.h"
+#include "CheckpointBoard.h"
 #include "MapCreate.h"
 
 bool	Stage01Scene::mSendContinueStage01Flag = false;
@@ -32,6 +33,19 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 	SetScene(_nowScene);
 
 	mGoalLine = new GoalLine(Vector3(800, 150, -9000), Vector3::Zero, Tag::Other, Scene::stage01);
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (i <= 1)
+		{
+  			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-79500.0f + i * 24000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+
+		}
+		else
+		{
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, -36800), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+		}
+	}
 
 	mSprite = new Sprite("Assets/sea.png");
 
@@ -82,8 +96,6 @@ SceneBase* Stage01Scene::update()
 
 		if (mNextSceneCount >= 80)
 		{
-			mPlayer->SetClearFlag(false);
-
 			/*return new GameClear(gameClear);*/
 			return new Stage02Scene(stage02);
 		}
@@ -95,7 +107,6 @@ SceneBase* Stage01Scene::update()
 
 		if (mNextSceneCount >= 80)
 		{
-			mPlayer->SetDeathFlag(false);
 			mContinueStage01Flag = true;
 			mSendContinueStage01Flag = mContinueStage01Flag;
 
