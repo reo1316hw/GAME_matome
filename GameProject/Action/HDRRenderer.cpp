@@ -286,6 +286,15 @@ void HDRRenderer::InitHDRBuffers()
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			// attach texture to framebuffer
+
+			/*
+			 * @fn フレームバッファ・オブジェクトにテクスチャ・イメージをアタッチする
+			 * 1.シンボリック定数はGL_FRAMEBUFFERでなければならない
+			 * 2.テクスチャからのイメージを添付するアタッチメントポイントを指定
+			 * 3.テクスチャーのターゲットを指定
+			 * 4.画像を添付するテクスチャオブジェクトを指定
+			 * 5.アタッチするテクスチャイメージのミップマップレベルを指定
+			 */
 			glFramebufferTexture2D(
 				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mHdrColorBuffers[i], 0
 			);
