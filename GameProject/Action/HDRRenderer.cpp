@@ -237,6 +237,7 @@ void HDRRenderer::InitHDRBuffers()
 	* 1.生成するフレームバッファ・オブジェクト名の数を指定
 	* 2.生成されたフレームバッファのオブジェクト名を格納する配列を指定
 	*/
+	// FBOに割り当てるための空のテクスチャを作成
 	glGenFramebuffers(1, &mHdrFBO);
 
 	/*
@@ -295,6 +296,7 @@ void HDRRenderer::InitHDRBuffers()
 			 * 4.画像を添付するテクスチャオブジェクトを指定
 			 * 5.アタッチするテクスチャイメージのミップマップレベルを指定
 			 */
+			 // FBOにカラーテクスチャとしてframeColorTextureをアタッチする
 			glFramebufferTexture2D(
 				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mHdrColorBuffers[i], 0
 			);
