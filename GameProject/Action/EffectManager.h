@@ -7,6 +7,8 @@
 @brief	インクルード
 */
 
+#include "ParticleEffectBase.h"
+
 class SandEffect;
 class DeathEffect;
 class ClearEffect;

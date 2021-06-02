@@ -6,9 +6,9 @@
 /*
 @brief	インクルード
 */
-#include <array>
-
 #include "pch.h"
+
+#include <array>
 
 /*
 @param	線分の開始地点のポジション

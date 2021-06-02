@@ -12,6 +12,9 @@
 @brief	インクルード
 */
 
+#include "PhysicsWorld.h"
+#include "ColliderComponent.h"
+
 class BoxCollider final : public ColliderComponent
 {
 public:

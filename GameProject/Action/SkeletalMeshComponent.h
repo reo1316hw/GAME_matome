@@ -11,6 +11,8 @@
 /*
 @brief	インクルード
 */
+#include "MeshComponent.h"
+#include "MatrixPalette.h"
 
 class SkeletalMeshComponent : public MeshComponent
 {

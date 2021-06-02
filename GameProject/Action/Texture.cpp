@@ -1,9 +1,9 @@
 ﻿/*
 @brief	インクルード
 */
-#include <SDL_image.h>
-
 #include "pch.h"
+
+#include <SDL_image.h>
 
 /*
 @fn	コンストラクタ

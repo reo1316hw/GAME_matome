@@ -12,6 +12,15 @@
 @brief	インクルード
 */
 
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <SDL.h>
+#include "Math.h"
+#include "ParticleComponent.h"
+#include "Player.h"
+
+
 #define RENDERER Renderer::GetInstance()
 
 //平行光源用の構造体
