@@ -11,7 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "Component.h"
 
 class GameObject;
 class Shader;

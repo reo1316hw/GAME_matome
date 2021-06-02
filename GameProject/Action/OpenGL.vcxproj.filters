@@ -183,9 +183,6 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GoalLine.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="ClearEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
@@ -214,6 +211,10 @@
       <Filter>Map\Board</Filter>
     </ClCompile>
     <ClCompile Include="VerticalMoveGroundExplanationBoard.cpp">
+      <Filter>Map\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="GoalLine.cpp">
       <Filter>Map\Board</Filter>
     </ClCompile>
   </ItemGroup>
@@ -402,9 +403,6 @@
     <ClInclude Include="TutorialScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GoalLine.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="ClearEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
@@ -433,6 +431,10 @@
       <Filter>Map\Board</Filter>
     </ClInclude>
     <ClInclude Include="VerticalMoveGroundExplanationBoard.h">
+      <Filter>Map\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="GoalLine.h">
       <Filter>Map\Board</Filter>
     </ClInclude>
   </ItemGroup>

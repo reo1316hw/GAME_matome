@@ -6,25 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "Renderer.h"
-#include "Texture.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "VertexArray.h"
-#include "SpriteComponent.h"
-#include "UIComponent.h"
-#include "MeshComponent.h"
-#include "InvisibleMeshComponent.h"
-#include "HeartUI.h"
-#include "Skeleton.h"
-#include "Animation.h"
-#include "SkeletalMeshComponent.h"
-#include "HDRRenderer.h"
-#include <algorithm>
-#include <glew.h>
-#include <fstream>
-#include <sstream>
-#include <document.h>
+#include "pch.h"
 
 //自分のインスタンスの初期化
 Renderer* Renderer::mRenderer = nullptr;

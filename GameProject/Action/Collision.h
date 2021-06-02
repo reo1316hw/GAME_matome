@@ -11,9 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "Math.h"
-#include <vector>
-#include <map>
 
 //線分
 struct LineSegment

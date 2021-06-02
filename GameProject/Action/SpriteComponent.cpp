@@ -6,12 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "SpriteComponent.h"
-#include "Texture.h"
-#include "Shader.h"
-#include "GameObject.h"
-#include "Game.h"
-#include "Renderer.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

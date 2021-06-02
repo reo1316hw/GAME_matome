@@ -1,18 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Stage02Scene.h"
-#include "GameClear.h"
-#include "GameOver.h"
-#include "ContinueScene.h"
-#include "Stage01Scene.h"
-#include "Renderer.h"
-#include "GameObjectManager.h"
-#include "HeartUI.h"
-#include "Sprite.h"
-#include "GoalLine.h"
-#include "CheckpointBoard.h"
-#include "MapCreate.h"
+#include "pch.h"
 
 bool	Stage02Scene::mSendContinueStage02Flag = false;
 

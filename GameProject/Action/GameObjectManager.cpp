@@ -1,12 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "GameObjectManager.h"
-#include "GameObject.h"
-#include "InputSystem.h"
-#include "Renderer.h"
-#include "MainCameraObject.h"
-#include "SceneBase.h"
+#include "pch.h"
 
 //自身のインスタンスの初期化
 GameObjectManager* GameObjectManager::mManager = nullptr;

@@ -11,9 +11,6 @@
 /*
 @brief	インクルード
 */
-#include <glew.h>
-#include <string>
-#include "Math.h"
 
 class Shader
 {

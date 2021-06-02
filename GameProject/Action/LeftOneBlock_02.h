@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
 
 class LeftOneBlock_02 : public GameObject
 {

@@ -6,8 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
-#include <string>
 
 class Texture;
 class SpriteComponent;

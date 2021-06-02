@@ -1,11 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Sprite.h"
-#include "SceneBase.h"
-#include "Renderer.h"
-#include "SpriteComponent.h"
-#include "Texture.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

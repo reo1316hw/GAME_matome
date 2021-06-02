@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
 
 class UpBlock : public GameObject
 {

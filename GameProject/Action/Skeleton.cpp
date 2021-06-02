@@ -6,12 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "Skeleton.h"
-#include <fstream>
-#include <sstream>
-#include <document.h>
-#include <SDL_log.h>
-#include "MatrixPalette.h"
+#include "pch.h"
 
 /*
 @fn スケルトンのファイルからのロード

@@ -1,9 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "HeartUI.h"
-#include "Renderer.h"
-#include "Player.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

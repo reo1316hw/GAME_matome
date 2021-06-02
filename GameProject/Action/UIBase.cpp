@@ -1,10 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "UIBase.h"
-#include "Renderer.h"
-#include "Texture.h"
-#include "SceneBase.h"
+#include "pch.h"
 
 /*
 @param	_pos UIの生成場所(スクリーン座標)

@@ -1,7 +1,9 @@
 /*
 @brief	インクルード
 */
-#include "RapidJsonHelper.h"
+#include "pch.h"
+
+#include "filereadstream.h"
 
 /*
 @fn		jsonファイルのオープン 

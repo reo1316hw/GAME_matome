@@ -11,8 +11,6 @@
 /*
 @brief	インクルード
 */
-#include <string>
-#include <vector>
 
 class Animation
 {

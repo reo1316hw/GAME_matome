@@ -6,9 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "SDL.h"
-#include "FPS.h"
-#include "stdio.h"
+#include "pch.h"
 
 /*
 @fn	コンストラクタ

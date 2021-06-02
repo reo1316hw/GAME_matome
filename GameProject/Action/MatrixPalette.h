@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "Math.h"
 
 //ボーンの最大数
 const size_t MAX_SKELETON_BONES = 196;

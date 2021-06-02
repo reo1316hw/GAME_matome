@@ -1,16 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "ContinueScene.h"
-#include "TutorialScene.h"
-#include "Stage01Scene.h"
-#include "Stage02Scene.h"
-#include "GameOver.h"
-#include "TitleScene.h"
-#include "Stage01Scene.h"
-#include "Renderer.h"
-#include "Sprite.h"
-#include "InputSystem.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

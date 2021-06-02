@@ -11,8 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "Component.h"
-#include "Collision.h"
 
 /*
 @brief	前方宣言

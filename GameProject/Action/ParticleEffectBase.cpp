@@ -6,10 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "ParticleEffectBase.h"
-#include "Renderer.h"
-#include "Texture.h"
-#include "SceneBase.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

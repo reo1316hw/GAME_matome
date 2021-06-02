@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
 
 class DownBlock : public GameObject
 {

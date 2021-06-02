@@ -1,18 +1,9 @@
 /*
 @brief	インクルード
 */
-#include "player.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
-#include <string>
-#include "Renderer.h"
-#include "MainCameraObject.h"
-#include "InputSystem.h"
-#include "BoxCollider.h"
-#include "SphereCollider.h"
-#include "EffectManager.h"
+#include "pch.h"
+
 #include "CheckpointEffectManager.h"
-#include "LateralMoveGround.h"
 
 Vector3 Player::mSendPos = Vector3::Zero;
 bool	Player::mSendClearFlag = false;

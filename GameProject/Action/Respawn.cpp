@@ -1,11 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Respawn.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
-#include "Renderer.h"
-#include "BoxCollider.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

@@ -6,9 +6,9 @@
 /*
 @brief	インクルード
 */
-#include "Collision.h"
-#include <algorithm>
 #include <array>
+
+#include "pch.h"
 
 /*
 @param	線分の開始地点のポジション

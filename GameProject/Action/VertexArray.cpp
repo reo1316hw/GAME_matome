@@ -1,8 +1,7 @@
 ﻿/*
 @brief	インクルード
 */
-#include "VertexArray.h"
-#include <glew.h>
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

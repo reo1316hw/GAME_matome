@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "ParticleEffectBase.h"
 
 class CheckpointEffect;
 class Player;

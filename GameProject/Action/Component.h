@@ -11,7 +11,6 @@
 /*
 @brief	インクルード
 */
-#include <cstdint>
 
 class GameObject;
 

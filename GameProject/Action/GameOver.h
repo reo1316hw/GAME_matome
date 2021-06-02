@@ -6,7 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "SceneBase.h"
 
 class GameOver : public SceneBase
 {

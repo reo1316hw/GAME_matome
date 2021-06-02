@@ -6,8 +6,6 @@
 /*
 @brief	インクルード
 */
-#include <string>
-#include <vector>
 
 class Texture
 {

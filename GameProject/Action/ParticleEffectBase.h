@@ -11,9 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
-#include "ParticleComponent.h"
-#include <string>
 
 /*
 @enum	パーティクルの状態

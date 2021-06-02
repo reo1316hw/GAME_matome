@@ -6,11 +6,6 @@
 /*
 @brief	インクルード
 */
-#include <vector>
-#include <functional>
-#include "Math.h"
-#include "Collision.h"
-#include "SceneBase.h"
 
 class Game;
 class Vector3;

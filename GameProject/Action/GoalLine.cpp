@@ -1,7 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "GoalLine.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

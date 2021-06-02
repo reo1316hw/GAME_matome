@@ -6,11 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "BoxCollider.h"
-#include "Math.h"
-#include "GameObject.h"
-#include "Collision.h"
-#include "Game.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

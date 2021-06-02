@@ -1,14 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Game.h"
-#include "Math.h"
-#include "GameObject.h"
-#include "Component.h"
-#include "InputSystem.h"
-#include "GameObjectManager.h"
-#include "PhysicsWorld.h"
-#include "MainCameraObject.h"
+#include "pch.h"
 
 //ゲームオブジェクトのID、カウント用の初期化
 int GameObject::mGameObjectId = 0;

@@ -6,11 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "Shader.h"
-#include "Texture.h"
-#include <SDL.h>
-#include <fstream>
-#include <sstream>
+#include "pch.h"
 
 /*
 @fn	コンストラクタ

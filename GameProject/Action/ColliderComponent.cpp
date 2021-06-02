@@ -6,9 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "ColliderComponent.h"
-#include "Game.h"
-#include "PhysicsWorld.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

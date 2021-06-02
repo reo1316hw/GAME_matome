@@ -6,13 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "document.h"
-#include "filereadstream.h"
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <algorithm>
-
 
 /*
 @fn		jsonファイルのオープン

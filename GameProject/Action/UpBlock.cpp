@@ -1,12 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "UpBlock.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
-#include "Renderer.h"
-#include "BoxCollider.h"
-#include "Player.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

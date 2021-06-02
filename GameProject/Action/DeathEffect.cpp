@@ -1,11 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "DeathEffect.h"
-#include "Renderer.h"
-#include "ParticleComponent.h"
-#include "SceneBase.h"
-#include "GameObject.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

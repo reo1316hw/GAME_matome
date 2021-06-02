@@ -1,11 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "GameOver.h"
-#include "TitleScene.h"
-#include "Renderer.h"
-#include "Sprite.h"
-#include "InputSystem.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

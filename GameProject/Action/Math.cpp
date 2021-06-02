@@ -9,7 +9,11 @@
 /*
 @brief	インクルード
 */
-#include "Math.h"
+#include <cmath>
+#include <memory.h>
+#include <limits>
+
+#include "pch.h"
 
 const Vector2 Vector2::Zero(0.0f, 0.0f);
 const Vector2 Vector2::UnitX(1.0f, 0.0f);

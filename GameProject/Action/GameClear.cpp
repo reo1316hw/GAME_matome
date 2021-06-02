@@ -1,12 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "GameClear.h"
-#include "TitleScene.h"
-#include "Stage01Scene.h"
-#include "Renderer.h"
-#include "Sprite.h"
-#include "InputSystem.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

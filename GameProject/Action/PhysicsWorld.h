@@ -11,9 +11,6 @@
 /*
 @brief	インクルード
 */
-#include <map>
-#include <functional>
-#include "Collision.h"
 
 #define PHYSICS PhysicsWorld::GetInstance()
 

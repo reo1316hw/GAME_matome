@@ -6,10 +6,6 @@
 /*
 @brief	インクルード
 */
-#include <SDL_scancode.h>
-#include <SDL_gamecontroller.h>
-#include <SDL_mouse.h>
-#include "Math.h"
 
 /*
 enum ButtonState

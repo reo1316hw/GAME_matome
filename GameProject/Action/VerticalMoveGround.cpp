@@ -1,12 +1,9 @@
 /*
 @brief	インクルード
 */
-#include "VerticalMoveGround.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
-#include "Renderer.h"
-#include "BoxCollider.h"
 #include <iostream>
+
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

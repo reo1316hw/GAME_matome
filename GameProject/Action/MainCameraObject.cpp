@@ -1,6 +1,4 @@
-#include "MainCameraObject.h"
-#include "Renderer.h"
-#include "ColliderComponent.h"
+#include "pch.h"
 
 /*
 @fn	コンストラクタ

@@ -6,8 +6,9 @@
 /*
 @brief	インクルード
 */
-#include "Component.h"
-#include "GameObject.h"
+#include <cstdint>
+
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

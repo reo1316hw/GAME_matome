@@ -1,9 +1,9 @@
 /*
 @brief	インクルード
 */
+#include "pch.h"
+
 #include "CheckpointEffectManager.h"
-#include "CheckpointEffect.h"
-#include "Player.h"
 
 /*
 @fn		コンストラクタ

@@ -1,8 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "CheckpointBoard.h"
-#include "BoxCollider.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

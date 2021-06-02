@@ -1,28 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "MapCreate.h"
-#include "Ground.h"
-#include "Glass.h"
-#include "Block.h"
-#include "VerticalMoveGround.h"
-#include "Jump.h"
-#include "LateralMoveGround.h"
-#include "Player.h"
-#include "UpBlock.h"
-#include "UpBlock_02.h"
-#include "VerticalBlock.h"
-#include "AerialBlock.h"
-#include "RightBlock.h"
-#include "LeftBlock.h"
-#include "RightOneBlock.h"
-#include "RightOneBlock_02.h"
-#include "LeftOneBlock.h"
-#include "LeftOneBlock_02.h"
-#include "DownBlock.h"
-#include "GoalBlock.h"
-#include "Respawn.h"
-#include "SceneBase.h"
+#include "pch.h"
 
 /*
 @fn	コンストラクタ

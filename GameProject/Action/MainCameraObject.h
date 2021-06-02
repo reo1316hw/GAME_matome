@@ -11,7 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
 
 class MainCameraObject :
 	public GameObject

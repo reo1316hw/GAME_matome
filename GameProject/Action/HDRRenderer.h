@@ -6,8 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "Game.h"
-#include "Math.h"
 
 class HDRRenderer
 {

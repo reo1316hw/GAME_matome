@@ -1,9 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "HDRRenderer.h"
-#include "Renderer.h"
-#include "Shader.h"
+#include "pch.h"
 
 HDRRenderer::HDRRenderer(int _fboWidth, int _fboHeight, int _bloomLevel)
 	: mGaussianBlurShader(nullptr)

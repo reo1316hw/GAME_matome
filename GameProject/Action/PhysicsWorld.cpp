@@ -6,13 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "PhysicsWorld.h"
-#include <algorithm>
-#include <SDL.h>
-#include "SphereCollider.h"
-#include "BoxCollider.h"
-#include "GameObject.h"
-#include "ColliderComponent.h"
+#include "pch.h"
 
 //自分のインスタンスの初期化
 PhysicsWorld* PhysicsWorld::mPhysics = nullptr;

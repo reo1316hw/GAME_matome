@@ -11,8 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "ColliderComponent.h"
-#include "PhysicsWorld.h"
 
 class SphereCollider final : public ColliderComponent
 {

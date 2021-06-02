@@ -1,17 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Mesh.h"
-#include "Renderer.h"
-#include "Texture.h"
-#include "VertexArray.h"
-#include <fstream>
-#include <sstream>
-#include <document.h>
-#include <SDL_log.h>
-#include "Math.h"
-#include "Collision.h"
-#include "RapidJsonHelper.h"
+#include "pch.h"
 
 /*
 @fn		テクスチャステージを読み込み

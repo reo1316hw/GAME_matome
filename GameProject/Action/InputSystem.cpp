@@ -1,8 +1,11 @@
-#include "InputSystem.h"
-#include <SDL.h>
 #include <cstring>
 #include <stdio.h>
 #include <limits.h>
+#include <SDL_scancode.h>
+#include <SDL_gamecontroller.h>
+#include <SDL_mouse.h>
+
+#include "pch.h"
 
 //コントローラーが接続されたかのフラグの初期化
 bool InputSystem::mControllerConnected = 0;

@@ -11,11 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "SDL.h"
-#include "SceneBase.h"
-#include <unordered_map>
-#include <vector>
-#include <string>
 
 class FPS;
 class GameObject;

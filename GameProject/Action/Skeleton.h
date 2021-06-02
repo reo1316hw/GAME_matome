@@ -11,9 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "BoneTransform.h"
-#include <string>
-#include <vector>
 
 class Skeleton
 {

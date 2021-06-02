@@ -6,12 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "UIComponent.h"
-#include "Texture.h"
-#include "Shader.h"
-#include "GameObject.h"
-#include "Game.h"
-#include "Renderer.h"
+#include "pch.h"
 
 //UIのID、カウント用の初期化
 int UIComponent::mUIid = 0;

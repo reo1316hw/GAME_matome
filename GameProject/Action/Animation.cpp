@@ -6,13 +6,7 @@
 /*
 @brief	インクルード
 */
-#include "Animation.h"
-#include "Skeleton.h"
-#include "Math.h"
-#include <fstream>
-#include <sstream>
-#include <document.h>
-#include <SDL_log.h>
+#include "pch.h"
 
 /*
 @fn アニメーション読み込み

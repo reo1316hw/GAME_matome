@@ -11,11 +11,6 @@
 /*
 @brief	インクルード
 */
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include "Math.h"
-#include "Collision.h"
 
 class Renderer;
 class VertexArray;

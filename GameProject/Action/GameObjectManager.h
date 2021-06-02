@@ -13,11 +13,6 @@
 /*
 @brief	インクルード
 */
-#include "SDL.h"
-#include <unordered_map>
-#include <vector>
-#include <string>
-#include "GameObject.h"
 
 class GameObject;
 struct InputState;

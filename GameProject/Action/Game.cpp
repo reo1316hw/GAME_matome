@@ -1,16 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Game.h"
-#include "SDL.h"
-#include <glew.h>
-#include <algorithm>
-#include "FPS.h"
-#include "Renderer.h"
-#include "InputSystem.h"
-#include "PhysicsWorld.h"
-#include "GameObjectManager.h"
-#include "Stage01Scene.h"
+#include "pch.h"
 
 int Game::mDebug = 0;
 

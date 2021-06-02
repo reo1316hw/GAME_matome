@@ -6,9 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
-#include "UIComponent.h"
-#include <string>
 
 class UIBase : public GameObject
 {

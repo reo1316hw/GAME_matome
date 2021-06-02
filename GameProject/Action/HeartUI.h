@@ -6,8 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "UIComponent.h"
-#include "UIBase.h"
 
 class Player;
 

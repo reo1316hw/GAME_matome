@@ -1,12 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "EffectManager.h"
-#include "SandEffect.h"
-#include "DeathEffect.h"
-#include "ClearEffect.h"
-#include "CheckpointEffect.h"
-#include "Player.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

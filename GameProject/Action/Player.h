@@ -6,8 +6,6 @@
 /*
 @brief	インクルード
 */
-#include "GameObject.h"
-#include "ParticleEffectBase.h"
 
 class EffectManager;
 class CheckpointEffectManager;

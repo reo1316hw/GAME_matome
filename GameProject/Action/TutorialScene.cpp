@@ -1,20 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "TutorialScene.h"
-#include "Stage01Scene.h"
-#include "Renderer.h"
-#include "GameObjectManager.h"
-#include "GameClear.h"
-#include "GameOver.h"
-#include "ContinueScene.h"
-#include "EffectManager.h"
-#include "Sprite.h"
-#include "VerticalMoveGroundExplanationBoard.h"
-#include "OperationExplanationBoard.h"
-#include "GoalLine.h"
-#include "MapCreate.h"
-#include "HeartUI.h"
+#include "pch.h"
 
 bool	TutorialScene::mSendContinueTutorialFlag = false;
 

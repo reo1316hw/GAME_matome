@@ -11,7 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "Math.h"
 
 class BoneTransform
 {

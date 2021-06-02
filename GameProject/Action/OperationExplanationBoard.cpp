@@ -1,7 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "OperationExplanationBoard.h"
+#include "pch.h"
 
 /*
 @fn		コンストラクタ

@@ -11,8 +11,6 @@
 /*
 @brief	インクルード
 */
-#include "Component.h"
-#include "Math.h"
 
 class ParticleComponent : public Component
 {
