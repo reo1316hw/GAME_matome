@@ -802,8 +802,10 @@ void MapCreate::CreateRightBlock()
 		{
 			const unsigned int name = mRightBlockMapData[(int)iz][(int)ix];
 			const Vector3 objectPos = Vector3(mOffset * ix , 70, -mOffset * iz);
+			const Vector3 objectPos2 = Vector3(mOffset * ix, 100, -mOffset * iz);
 			const Vector3 objectSize = Vector3(70, 70, 100);
 			const float addPosX = 600.0f;
+			const float addPosX2 = 200.0f;
 
 			if (mScene == SceneBase::stage02)
 			{
@@ -811,6 +813,10 @@ void MapCreate::CreateRightBlock()
 				{
 				case(11):
 					new RightBlock(objectPos, objectSize, addPosX, rightBlock, ColliderTag::rightBlockTag, SceneBase::stage02);
+					break;
+
+				case(418):
+					new RightBlock(objectPos2, objectSize, addPosX2, rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -830,8 +836,10 @@ void MapCreate::CreateLeftBlock()
 		{
 			const unsigned int name = mLeftBlockMapData[(int)iz][(int)ix];
 			const Vector3 objectPos = Vector3(mOffset * ix, 70, -mOffset * iz);
+			const Vector3 objectPos2 = Vector3(mOffset * ix, 100, -mOffset * iz);
 			const Vector3 objectSize = Vector3(70, 70, 100);
 			const float addPosX = 600.0f;
+			const float addPosX2 = 200.0f;
 
 			if (mScene == SceneBase::stage02)
 			{
@@ -839,6 +847,10 @@ void MapCreate::CreateLeftBlock()
 				{
 				case(13):
 					new LeftBlock(objectPos, objectSize, addPosX, leftBlock, ColliderTag::leftBlockTag, SceneBase::stage02);
+					break;
+
+				case(419):
+					new LeftBlock(objectPos2, objectSize, addPosX2, leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -849,7 +861,7 @@ void MapCreate::CreateLeftBlock()
 /*
 @fn	1マス右移動床を生成する
 */
-void MapCreate::CreateRightOneBlock()
+void MapCreate::CreateRightGround()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
 	{
@@ -887,37 +899,9 @@ void MapCreate::CreateRightOneBlock()
 }
 
 /*
-@fn	1マス右移動床を生成する
-*/
-void MapCreate::CreateRightOneBlock_02()
-{
-	for (float iz = 0; iz < mSizeZ; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mRightOneBlock02MapData[(int)iz][(int)ix];
-			const Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			const Vector3 objectSize = Vector3(70, 70, 100);
-			const float addPosX = 200.0f;
-
-			if (mScene == SceneBase::stage02)
-			{
-				switch (name)
-				{
-				case(18):
-					new RightBlock(objectPos, objectSize, addPosX, rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02);
-					break;
-				}
-			}
-
-		}
-	}
-}
-
-/*
 @fn	1マス左移動床を生成する
 */
-void MapCreate::CreateLeftOneBlock()
+void MapCreate::CreateLeftGround()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
 	{
@@ -948,36 +932,6 @@ void MapCreate::CreateLeftOneBlock()
 					break;
 				}
 				break;
-			}
-
-		}
-	}
-}
-
-/*
-@fn	1マス左移動床を生成する
-*/
-void MapCreate::CreateLeftOneBlock_02()
-{
-	for (float iz = 0; iz < mSizeZ; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mLeftOneBlock02MapData[(int)iz][(int)ix];
-			const Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			const Vector3 objectSize = Vector3(70, 70, 100);
-			const float addPosX = 200.0f;
-
-			if (mScene == SceneBase::stage02)
-			{
-				switch (name)
-				{
-				case(19):
-					new LeftBlock(objectPos, objectSize, addPosX, leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02);
-					break;
-				default:
-					break;
-				}
 			}
 
 		}
@@ -1068,13 +1022,13 @@ void MapCreate::CreateGoal()
 /*
 @fn	リスポーン地点を生成する
 */
-void MapCreate::CreateRespawn01()
+void MapCreate::CreateRespawn()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
 	{
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
-			const unsigned int name = mRespawn01MapData[(int)iz][(int)ix];
+			const unsigned int name = mRespawnMapData[(int)iz][(int)ix];
 			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
 			const Vector3 objectSize = Vector3(100, 10, 100);
 
@@ -1087,81 +1041,11 @@ void MapCreate::CreateRespawn01()
 				case(21):
 					new Respawn(objectPos, objectSize, respawn01, SceneBase::stage01);
 					break;
-				}
-				break;
 
-			case SceneBase::stage02:
-
-				switch (name)
-				{
-				case(21):
-					new Respawn(objectPos, objectSize, respawn01, SceneBase::stage02);
-					break;
-				}
-				break;
-			}
-		}
-	}
-}
-
-/*
-@fn	リスポーン地点を生成する
-*/
-void MapCreate::CreateRespawn02()
-{
-	for (float iz = 0; iz < mSizeZ; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mRespawn02MapData[(int)iz][(int)ix];
-			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
-			const Vector3 objectSize = Vector3(100, 10, 100);
-
-			switch (mScene)
-			{
-			case SceneBase::stage01:
-
-				switch (name)
-				{
 				case(22):
 					new Respawn(objectPos, objectSize, respawn02, SceneBase::stage01);
 					break;
-				}
-				break;
 
-			case SceneBase::stage02:
-
-				switch (name)
-				{
-				case(22):
-					new Respawn(objectPos, objectSize, respawn02, SceneBase::stage02);
-					break;
-				}
-				break;
-			}
-		}
-	}
-}
-
-/*
-@fn	リスポーン地点を生成する
-*/
-void MapCreate::CreateRespawn03()
-{
-	for (float iz = 0; iz < mSizeZ; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mRespawn03MapData[(int)iz][(int)ix];
-			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
-			const Vector3 objectSize = Vector3(100, 10, 100);
-
-			switch (mScene)
-			{
-			case SceneBase::stage01:
-
-				switch (name)
-				{
 				case(23):
 					new Respawn(objectPos, objectSize, respawn03, SceneBase::stage01);
 					break;
@@ -1172,6 +1056,14 @@ void MapCreate::CreateRespawn03()
 
 				switch (name)
 				{
+				case(21):
+					new Respawn(objectPos, objectSize, respawn01, SceneBase::stage02);
+					break;
+
+				case(22):
+					new Respawn(objectPos, objectSize, respawn02, SceneBase::stage02);
+					break;
+
 				case(23):
 					new Respawn(objectPos, objectSize, respawn03, SceneBase::stage02);
 					break;

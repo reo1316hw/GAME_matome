@@ -49,20 +49,16 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 		mMapCreate->CreateLateralMoveGround();
 		mMapCreate->CreatePlayer();
 		mMapCreate->CreateUpBlock();
-		mMapCreate->CreateUpBlock_02();
 		mMapCreate->CreateVerticalBlock();
 		mMapCreate->CreateAerialBlock();
 		mMapCreate->CreateRightBlock();
 		mMapCreate->CreateLeftBlock();
-		mMapCreate->CreateRightOneBlock();
-		mMapCreate->CreateRightOneBlock_02();
-		mMapCreate->CreateLeftOneBlock();
-		mMapCreate->CreateLeftOneBlock_02();
+		mMapCreate->CreateRightGround();
+		mMapCreate->CreateLeftGround();
+		mMapCreate->CreateLeftGround();
 		mMapCreate->CreateDownBlock();
 		mMapCreate->CreateGoal();
-		mMapCreate->CreateRespawn01();
-		mMapCreate->CreateRespawn02();
-		mMapCreate->CreateRespawn03();
+		mMapCreate->CreateRespawn();
 	}
 
 	for (int i = 0; i < 3; i++)

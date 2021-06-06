@@ -49,9 +49,7 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 		mMapCreate->CreateLateralMoveGround();
 		mMapCreate->CreatePlayer();
 		mMapCreate->CreateGoal();
-		mMapCreate->CreateRespawn01();
-		mMapCreate->CreateRespawn02();
-		mMapCreate->CreateRespawn03();
+		mMapCreate->CreateRespawn();
 	}
 
 	for (int i = 0; i < 3; i++)

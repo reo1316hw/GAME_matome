@@ -66,7 +66,6 @@ public:
 	@fn	上移動ブロックを生成する
 	*/
 	void CreateUpBlock();
-	void CreateUpBlock_02();
 
 	/*
 	@fn	縦長障害物を生成する
@@ -91,14 +90,12 @@ public:
 	/*
 	@fn	1マス右移動床を生成する
 	*/
-	void CreateRightOneBlock();
-	void CreateRightOneBlock_02();
+	void CreateRightGround();
 
 	/*
 	@fn	1マス左移動床を生成する
 	*/
-	void CreateLeftOneBlock();
-	void CreateLeftOneBlock_02();
+	void CreateLeftGround();
 
 	/*
 	@fn	落下ブロックを生成する
@@ -113,9 +110,7 @@ public:
 	/*
 	@fn	リスポーン地点を生成する
 	*/
-	void CreateRespawn01();
-	void CreateRespawn02();
-	void CreateRespawn03();
+	void CreateRespawn();
 
 private:
 

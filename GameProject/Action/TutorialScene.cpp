@@ -38,8 +38,8 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 		mMapCreate->CreateLateralMoveGround();
 		mMapCreate->CreatePlayer();
 		mMapCreate->CreateUpBlock();
-		mMapCreate->CreateRightOneBlock();
-		mMapCreate->CreateLeftOneBlock();
+		mMapCreate->CreateRightGround();
+		mMapCreate->CreateLeftGround();
 		mMapCreate->CreateGoal();
 	}
 
