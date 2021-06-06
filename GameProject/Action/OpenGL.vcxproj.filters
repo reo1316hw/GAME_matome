@@ -116,16 +116,10 @@
     <ClCompile Include="VerticalBlock.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="UpBlock_02.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="UpBlock.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="RightOneBlock_02.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="RightOneBlock.cpp">
+    <ClCompile Include="RightGround.cpp">
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="RightBlock.cpp">
@@ -134,10 +128,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="LeftOneBlock_02.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="LeftOneBlock.cpp">
+    <ClCompile Include="LeftGround.cpp">
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="LeftBlock.cpp">
@@ -339,25 +330,16 @@
     <ClInclude Include="VerticalBlock.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="UpBlock_02.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="UpBlock.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="RightOneBlock_02.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="RightOneBlock.h">
+    <ClInclude Include="RightGround.h">
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="LeftOneBlock_02.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="LeftOneBlock.h">
+    <ClInclude Include="LeftGround.h">
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="LeftBlock.h">

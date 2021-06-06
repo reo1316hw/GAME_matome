@@ -27,20 +27,15 @@ MapCreate::~MapCreate()
 	mLateralMoveGroundMapData.clear();
 	mPlayerMapData.clear();
 	mUpBlockMapData.clear();
-	mUpBlock02MapData.clear();
 	mVerticalBlockMapData.clear();
 	mAerialBlockMapData.clear();
 	mRightBlockMapData.clear();
 	mLeftBlockMapData.clear();
-	mRightOneBlockMapData.clear();
-	mRightOneBlock02MapData.clear();
-	mLeftOneBlockMapData.clear();
-	mLeftOneBlock02MapData.clear();
+	mRightGroundMapData.clear();
+	mLeftGroundMapData.clear();
 	mDownBlockMapData.clear();
 	mGoalBlockMapData.clear();
-	mRespawn01MapData.clear();
-	mRespawn02MapData.clear();
-	mRespawn03MapData.clear();
+	mRespawnMapData.clear();
 }
 
 /*
@@ -118,16 +113,16 @@ bool MapCreate::OpenFile()
 		}
 
 		//1マス右移動床の読み込み
-		if (!readTiledJson(mRightOneBlockMapData, "Assets/Config/tutorial.json", "RightOneBlock"))
+		if (!readTiledJson(mRightGroundMapData, "Assets/Config/tutorial.json", "RightGround"))
 		{
-			printf("don't have Layer/RightOneBlock\n");
+			printf("don't have Layer/RightGround\n");
 			return true;
 		}
 
 		//1マス左移動床の読み込み
-		if (!readTiledJson(mLeftOneBlockMapData, "Assets/Config/tutorial.json", "LeftOneBlock"))
+		if (!readTiledJson(mLeftGroundMapData, "Assets/Config/tutorial.json", "LeftGround"))
 		{
-			printf("don't have Layer/LeftOneBlock\n");
+			printf("don't have Layer/LeftGround\n");
 			return true;
 		}
 
@@ -207,24 +202,10 @@ bool MapCreate::OpenFile()
 			return true;
 		}
 
-		//リスポーン地点01の読み込み
-		if (!readTiledJson(mRespawn01MapData, "Assets/Config/RunMap.json", "Respawn01"))
+		//リスポーン地点の読み込み
+		if (!readTiledJson(mRespawnMapData, "Assets/Config/RunMap.json", "Respawn"))
 		{
-			printf("don't have Layer/Respawn01\n");
-			return true;
-		}
-
-		//リスポーン地点02の読み込み
-		if (!readTiledJson(mRespawn02MapData, "Assets/Config/RunMap.json", "Respawn02"))
-		{
-			printf("don't have Layer/Respawn02\n");
-			return true;
-		}
-
-		//リスポーン地点03の読み込み
-		if (!readTiledJson(mRespawn03MapData, "Assets/Config/RunMap.json", "Respawn03"))
-		{
-			printf("don't have Layer/Respawn03\n");
+			printf("don't have Layer/Respawn\n");
 			return true;
 		}
 	}
@@ -287,11 +268,6 @@ bool MapCreate::OpenFile()
 			printf("don't have Layer/UpBlock\n");
 			return true;
 		}
-		if (!readTiledJson(mUpBlock02MapData, "Assets/Config/RunMap02.json", "UpBlock_02"))
-		{
-			printf("don't have Layer/UpBlock_02\n");
-			return true;
-		}
 
 		//縦長障害物の読み込み
 		if (!readTiledJson(mVerticalBlockMapData, "Assets/Config/RunMap02.json", "VerticalBlock"))
@@ -322,26 +298,16 @@ bool MapCreate::OpenFile()
 		}
 
 		//1マス右移動床の読み込み
-		if (!readTiledJson(mRightOneBlockMapData, "Assets/Config/RunMap02.json", "RightOneBlock"))
+		if (!readTiledJson(mRightGroundMapData, "Assets/Config/RunMap02.json", "RightGround"))
 		{
-			printf("don't have Layer/RightOneBlock\n");
-			return true;
-		}
-		if (!readTiledJson(mRightOneBlock02MapData, "Assets/Config/RunMap02.json", "RightOneBlock_02"))
-		{
-			printf("don't have Layer/RightOneBlock_02\n");
+			printf("don't have Layer/RightGround\n");
 			return true;
 		}
 
 		//1マス左移動床の読み込み
-		if (!readTiledJson(mLeftOneBlockMapData, "Assets/Config/RunMap02.json", "LeftOneBlock"))
+		if (!readTiledJson(mLeftGroundMapData, "Assets/Config/RunMap02.json", "LeftGround"))
 		{
-			printf("don't have Layer/LeftOneBlock\n");
-			return true;
-		}
-		if (!readTiledJson(mLeftOneBlock02MapData, "Assets/Config/RunMap02.json", "LeftOneBlock_02"))
-		{
-			printf("don't have Layer/LeftOneBlock_02\n");
+			printf("don't have Layer/LeftGround\n");
 			return true;
 		}
 
@@ -366,24 +332,10 @@ bool MapCreate::OpenFile()
 			return true;
 		}
 
-		//リスポーン地点01の読み込み
-		if (!readTiledJson(mRespawn01MapData, "Assets/Config/RunMap02.json", "Respawn01"))
+		//リスポーン地点の読み込み
+		if (!readTiledJson(mRespawnMapData, "Assets/Config/RunMap02.json", "Respawn"))
 		{
-			printf("don't have Layer/Respawn01\n");
-			return true;
-		}
-
-		//リスポーン地点02の読み込み
-		if (!readTiledJson(mRespawn02MapData, "Assets/Config/RunMap02.json", "Respawn02"))
-		{
-			printf("don't have Layer/Respawn02\n");
-			return true;
-		}
-
-		//リスポーン地点03の読み込み
-		if (!readTiledJson(mRespawn03MapData, "Assets/Config/RunMap02.json", "Respawn03"))
-		{
-			printf("don't have Layer/Respawn03\n");
+			printf("don't have Layer/Respawn\n");
 			return true;
 		}
 	}
@@ -401,8 +353,8 @@ void MapCreate::CreateGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix , 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -450,8 +402,8 @@ void MapCreate::CreateGlass()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mGlassMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -499,8 +451,8 @@ void MapCreate::CreateBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 100, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 100, 100);
 
 			switch (mScene)
 			{
@@ -549,8 +501,8 @@ void MapCreate::CreateVerticalMoveGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mVerticalMoveGroundMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -598,9 +550,9 @@ void MapCreate::CreateJump()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mJumpMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
 			/*Vector3 tutorialObjectSize = Vector3(100, 10, 150);*/
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -649,8 +601,8 @@ void MapCreate::CreateLateralMoveGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mLateralMoveGroundMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -698,8 +650,8 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
-			Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
+			const Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
+			const Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
 
 			switch (mScene)
 			{
@@ -748,8 +700,9 @@ void MapCreate::CreateUpBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mUpBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, -100, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 100, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, -100, -mOffset * iz);
+			const Vector3 objectPos2 = Vector3(mOffset * ix, 100, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 100, 100);
 
 			switch (mScene)
 			{
@@ -761,6 +714,7 @@ void MapCreate::CreateUpBlock()
 					new UpBlock(objectPos, objectSize, upBlock, SceneBase::tutorial);
 					break;
 				}
+
 				break;
 
 			case SceneBase::stage02:
@@ -770,36 +724,14 @@ void MapCreate::CreateUpBlock()
 				case(8):
 					new UpBlock(objectPos, objectSize, upBlock, SceneBase::stage02);
 					break;
-				}
-				break;
-			}
-		}
-	}
-}
 
-/*
-@fn	上移動ブロックを生成する
-*/
-void MapCreate::CreateUpBlock_02()
-{
-	for (float iz = 0; iz < mSizeZ; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mUpBlock02MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 100, 100);
-
-			if (mScene == SceneBase::stage02)
-			{
-				switch (name)
-				{
 				case(17):
-					new UpBlock_02(objectPos, objectSize, upBlock_02, SceneBase::stage02);
+					new UpBlock(objectPos2, objectSize, upBlock_02, SceneBase::stage02);
 					break;
 				}
-			}
 
+				break;
+			}
 		}
 	}
 }
@@ -816,8 +748,8 @@ void MapCreate::CreateVerticalBlock()
 			for (float ix = 0; ix < mSizeX; ix++)
 			{
 				const unsigned int name = mVerticalBlockMapData[(int)iz][(int)ix];
-				Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy + 100, -mOffset * iz);
-				Vector3 objectSize = Vector3(70, 100, 100);
+				const Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy + 100, -mOffset * iz);
+				const Vector3 objectSize = Vector3(70, 100, 100);
 				if (mScene == SceneBase::stage02)
 				{
 					switch (name)
@@ -843,8 +775,8 @@ void MapCreate::CreateAerialBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mAerialBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 100, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 100, 100);
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
@@ -869,14 +801,16 @@ void MapCreate::CreateRightBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mRightBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix , 70, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 70, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix , 70, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 70, 100);
+			const float addPosX = 600.0f;
+
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
 				{
 				case(11):
-					new RightBlock(objectPos, objectSize, rightBlock, SceneBase::stage02);
+					new RightBlock(objectPos, objectSize, addPosX, rightBlock, ColliderTag::rightBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -895,14 +829,16 @@ void MapCreate::CreateLeftBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mLeftBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 70 , -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 70, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 70, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 70, 100);
+			const float addPosX = 600.0f;
+
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
 				{
 				case(13):
-					new LeftBlock(objectPos, objectSize, leftBlock, SceneBase::stage02);
+					new LeftBlock(objectPos, objectSize, addPosX, leftBlock, ColliderTag::leftBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -919,9 +855,9 @@ void MapCreate::CreateRightOneBlock()
 	{
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
-			const unsigned int name = mRightOneBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const unsigned int name = mRightGroundMapData[(int)iz][(int)ix];
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -930,7 +866,7 @@ void MapCreate::CreateRightOneBlock()
 				switch (name)
 				{
 				case(15):
-					new RightOneBlock(objectPos, objectSize, rightOneBlock, SceneBase::tutorial);
+					new RightGround(objectPos, objectSize, rightGround, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -940,7 +876,7 @@ void MapCreate::CreateRightOneBlock()
 				switch (name)
 				{
 				case(15):
-					new RightOneBlock(objectPos, objectSize, rightOneBlock, SceneBase::stage02);
+					new RightGround(objectPos, objectSize, rightGround, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -960,15 +896,16 @@ void MapCreate::CreateRightOneBlock_02()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mRightOneBlock02MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 70, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 70, 100);
+			const float addPosX = 200.0f;
 
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
 				{
 				case(18):
-					new RightOneBlock_02(objectPos, objectSize, rightOneBlock_02, SceneBase::stage02);
+					new RightBlock(objectPos, objectSize, addPosX, rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -986,9 +923,9 @@ void MapCreate::CreateLeftOneBlock()
 	{
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
-			const unsigned int name = mLeftOneBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const unsigned int name = mLeftGroundMapData[(int)iz][(int)ix];
+			const Vector3 objectPos = Vector3(mOffset * ix, 0, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -997,7 +934,7 @@ void MapCreate::CreateLeftOneBlock()
 				switch (name)
 				{
 				case(14):
-					new LeftOneBlock(objectPos, objectSize, leftOneBlock, SceneBase::tutorial);
+					new LeftGround(objectPos, objectSize, leftGround, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -1007,7 +944,7 @@ void MapCreate::CreateLeftOneBlock()
 				switch (name)
 				{
 				case(14):
-					new LeftOneBlock(objectPos, objectSize, leftOneBlock, SceneBase::stage02);
+					new LeftGround(objectPos, objectSize, leftGround, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -1027,14 +964,16 @@ void MapCreate::CreateLeftOneBlock_02()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mLeftOneBlock02MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
-			Vector3 objectSize = Vector3(70, 70, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 100, -mOffset * iz);
+			const Vector3 objectSize = Vector3(70, 70, 100);
+			const float addPosX = 200.0f;
+
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
 				{
 				case(19):
-					new LeftOneBlock_02(objectPos, objectSize, leftOneBlock_02, SceneBase::stage02);
+					new LeftBlock(objectPos, objectSize, addPosX, leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02);
 					break;
 				default:
 					break;
@@ -1055,8 +994,8 @@ void MapCreate::CreateDownBlock()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mDownBlockMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 1600, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 1600, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 			if (mScene == SceneBase::stage02)
 			{
 				switch (name)
@@ -1085,8 +1024,8 @@ void MapCreate::CreateGoal()
 			for (float ix = 0; ix < mSizeX; ix++)
 			{
 				const unsigned int name = mGoalBlockMapData[(int)iz][(int)ix];
-				Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
-				Vector3 objectSize = Vector3(100, 100, 100);
+				const Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
+				const Vector3 objectSize = Vector3(100, 100, 100);
 
 				switch (mScene)
 				{
@@ -1136,8 +1075,8 @@ void MapCreate::CreateRespawn01()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mRespawn01MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -1175,8 +1114,8 @@ void MapCreate::CreateRespawn02()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mRespawn02MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{
@@ -1214,8 +1153,8 @@ void MapCreate::CreateRespawn03()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mRespawn03MapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
-			Vector3 objectSize = Vector3(100, 10, 100);
+			const Vector3 objectPos = Vector3(mOffset * ix, 0.0f, -mOffset * iz);
+			const Vector3 objectSize = Vector3(100, 10, 100);
 
 			switch (mScene)
 			{

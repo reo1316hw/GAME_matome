@@ -7,7 +7,7 @@
 @brief	インクルード
 */
 
-class LeftOneBlock : public GameObject
+class LeftGround : public GameObject
 {
 public:
 
@@ -18,12 +18,12 @@ public:
 	@param	_objectTag 1マス左移動床のタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	LeftGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ
 	*/
-	~LeftOneBlock() {};
+	~LeftGround() {};
 
 	/*
 	@fn		1マス左移動床のアップデート

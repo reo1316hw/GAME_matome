@@ -10,7 +10,7 @@
 @param	_objectTag 1マス左移動床のタグ
 @param	_sceneTag シーンのタグ
 */
-LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -33,7 +33,7 @@ LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag&
 		// 当たり判定
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_07.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::leftOneBlockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::leftGroundTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -48,7 +48,7 @@ LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag&
 		// 当たり判定
 		mMesh = new Mesh;
 		mMesh = RENDERER->GetMesh("Assets/box_19.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::leftOneBlockTag, GetOnCollisionFunc());
+		mBoxcollider = new BoxCollider(this, ColliderTag::leftGroundTag, GetOnCollisionFunc());
 		mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 		break;
@@ -61,7 +61,7 @@ LeftOneBlock::LeftOneBlock(const Vector3& _pos, const Vector3& _size, const Tag&
 @fn		1マス左移動床のアップデート
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
-void LeftOneBlock::UpdateGameObject(float _deltaTime)
+void LeftGround::UpdateGameObject(float _deltaTime)
 {
 	Vector3 playerPos = Player::GetPos();
 

@@ -139,7 +139,6 @@ private:
 	std::vector<std::vector<int>> mGlassMapData;
 	//上移動ブロックマップデータ
 	std::vector<std::vector<int>> mUpBlockMapData;
-	std::vector<std::vector<int>> mUpBlock02MapData;
 	//縦長障害物マップデータ
 	std::vector<std::vector<int>> mVerticalBlockMapData;
 	//空中ブロックマップデータ
@@ -149,19 +148,15 @@ private:
 	//左移動ブロックマップデータ
 	std::vector<std::vector<int>> mLeftBlockMapData;
 	//1マス右移動床マップデータ
-	std::vector<std::vector<int>> mRightOneBlockMapData;
-	std::vector<std::vector<int>> mRightOneBlock02MapData;
+	std::vector<std::vector<int>> mRightGroundMapData;
 	//1マス左移動床マップデータ
-	std::vector<std::vector<int>> mLeftOneBlockMapData;
-	std::vector<std::vector<int>> mLeftOneBlock02MapData;
+	std::vector<std::vector<int>> mLeftGroundMapData;
 	//落下ブロックマップデータ
 	std::vector<std::vector<int>> mDownBlockMapData;
 	//ゴール柱マップデータ
 	std::vector<std::vector<int>> mGoalBlockMapData;
 	//リスポーン地点マップデータ
-	std::vector<std::vector<int>> mRespawn01MapData;
-	std::vector<std::vector<int>> mRespawn02MapData;
-	std::vector<std::vector<int>> mRespawn03MapData;
+	std::vector<std::vector<int>> mRespawnMapData;
 
 	//現在のシーン
 	int mScene;

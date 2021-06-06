@@ -516,8 +516,8 @@ void Player::OnCollision(const GameObject& _hitObject)
 		if (mTag == ground ||
 			mTag == glass ||
 			mTag == verticalMoveGround ||
-			mTag == rightOneBlock ||
-			mTag == leftOneBlock ||
+			mTag == rightGround ||
+			mTag == leftGround ||
 			mTag == lateralMoveGround ||
 			mTag == jump ||
 			mTag == downBlock)
@@ -530,8 +530,8 @@ void Player::OnCollision(const GameObject& _hitObject)
 			mTag == verticalBlock ||
 			mTag == rightBlock ||
 			mTag == leftBlock ||
-			mTag == rightOneBlock_02 ||
-			mTag == leftOneBlock_02 ||
+			mTag == rightOneMoveBlock ||
+			mTag == leftOneMoveBlock ||
 			mTag == aerialBlock ||
 			mTag == upBlock)
 		{

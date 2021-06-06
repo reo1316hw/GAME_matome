@@ -18,7 +18,7 @@ public:
 	@param	_objectTag 右移動ブロックのタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	RightBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ

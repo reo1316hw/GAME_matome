@@ -7,7 +7,7 @@
 @brief	インクルード
 */
 
-class RightOneBlock : public GameObject
+class RightGround : public GameObject
 {
 public:
 
@@ -18,12 +18,12 @@ public:
 	@param	_objectTag 1マス右移動床のタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	RightOneBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	RightGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ
 	*/
-	~RightOneBlock() {};
+	~RightGround() {};
 
 	/*
 	@fn		1マス右移動床のアップデート

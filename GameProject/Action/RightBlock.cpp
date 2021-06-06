@@ -10,7 +10,7 @@
 @param	_objectTag 右移動ブロックのタグ
 @param	_sceneTag シーンのタグ
 */
-RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mElapseTime(0.0f)
 	, mDifferencePos(0.0f)
@@ -24,7 +24,7 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	SetPosition(_pos);
 
 	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
-	mEndPos = Vector3(_pos.x + 600, _pos.y, _pos.z);
+	mEndPos = Vector3(_pos.x + _addPosX, _pos.y, _pos.z);
 	mInversionPos = Vector3(_pos.x + 60, _pos.y, _pos.z);
 
 	//生成したRightBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
@@ -35,7 +35,7 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	// 当たり判定
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
-	mBoxcollider = new BoxCollider(this, ColliderTag::rightBlockTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, _colliderTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
