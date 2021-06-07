@@ -83,9 +83,6 @@
     <ClCompile Include="Stage01Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="MapCreate.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -208,6 +205,9 @@
     <ClCompile Include="GoalLine.cpp">
       <Filter>Map\Board</Filter>
     </ClCompile>
+    <ClCompile Include="MapCreate.cpp">
+      <Filter>Map\MapCreate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -293,9 +293,6 @@
     </ClInclude>
     <ClInclude Include="Stage02Scene.h">
       <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MapCreate.h">
-      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="Stage01Scene.h">
       <Filter>Scene</Filter>
@@ -419,6 +416,9 @@
     <ClInclude Include="GoalLine.h">
       <Filter>Map\Board</Filter>
     </ClInclude>
+    <ClInclude Include="MapCreate.h">
+      <Filter>Map\MapCreate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -465,6 +465,9 @@
     </Filter>
     <Filter Include="Map\Board">
       <UniqueIdentifier>{70797c33-8c88-4e9b-926f-d9ef85e81e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\MapCreate">
+      <UniqueIdentifier>{fb03b50a-c2b0-499c-a55f-e6d0b6a9dc40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

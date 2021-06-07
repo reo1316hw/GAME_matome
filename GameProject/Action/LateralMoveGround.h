@@ -19,7 +19,7 @@ public:
 	@param	_sceneTag シーンのタグ
 	@param _distance 横移動床の移動する距離
 	*/
-	LateralMoveGround(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance);
+	LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance);
 
 	/*
 	@fn	デストラクタ

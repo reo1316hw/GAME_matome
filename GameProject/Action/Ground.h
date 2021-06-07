@@ -18,7 +18,7 @@ public:
 	@param	_objectTag 床のタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	Ground(const Vector3& _pos, const Vector3& _size,const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	Ground(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ

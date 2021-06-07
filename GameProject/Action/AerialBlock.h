@@ -18,7 +18,7 @@ public:
 	@param	_objectTag 空中ブロックのタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	AerialBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	AerialBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ

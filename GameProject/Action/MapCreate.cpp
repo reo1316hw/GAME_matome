@@ -363,7 +363,7 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::tutorial);
+					new Ground(objectPos, objectSize, "Assets/box.gpmesh", ground, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -373,7 +373,7 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::stage01);
+					new Ground(objectPos, objectSize, "Assets/box_08.gpmesh", ground, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -383,7 +383,7 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::stage02);
+					new Ground(objectPos, objectSize, "Assets/box_13.gpmesh", ground, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -412,7 +412,7 @@ void MapCreate::CreateGlass()
 				switch (name)
 				{
 				case(2):
-					new Glass(objectPos, objectSize, glass, SceneBase::tutorial);
+					new Glass(objectPos, objectSize, "Assets/box_02.gpmesh", glass, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -422,7 +422,7 @@ void MapCreate::CreateGlass()
 				switch (name)
 				{
 				case(2):
-					new Glass(objectPos, objectSize, glass,SceneBase::stage01);
+					new Glass(objectPos, objectSize, "Assets/box_09.gpmesh", glass,SceneBase::stage01);
 					break;
 				}
 				break;
@@ -432,7 +432,7 @@ void MapCreate::CreateGlass()
 				switch (name)
 				{
 				case(2):
-					new Glass(objectPos, objectSize, glass, SceneBase::stage02);
+					new Glass(objectPos, objectSize, "Assets/box_14.gpmesh", glass, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -461,7 +461,7 @@ void MapCreate::CreateBlock()
 				switch (name)
 				{
 				case(3):
-					new Block(objectPos, objectSize, block, SceneBase::tutorial);
+					new Block(objectPos, objectSize, "Assets/box_03.gpmesh", block, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -471,7 +471,7 @@ void MapCreate::CreateBlock()
 				switch (name)
 				{
 				case(3):
-					new Block(objectPos, objectSize, block, SceneBase::stage01);
+					new Block(objectPos, objectSize, "Assets/box_10.gpmesh", block, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -481,7 +481,7 @@ void MapCreate::CreateBlock()
 				switch (name)
 				{
 				case(3):
-					new Block(objectPos, objectSize, block, SceneBase::stage02);
+					new Block(objectPos, objectSize, "Assets/box_15.gpmesh", block, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -511,7 +511,7 @@ void MapCreate::CreateVerticalMoveGround()
 				switch (name)
 				{
 				case(4):
-					new VerticalMoveGround(objectPos, objectSize, verticalMoveGround, SceneBase::tutorial);
+					new VerticalMoveGround(objectPos, objectSize, "Assets/box_04.gpmesh", verticalMoveGround, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -521,7 +521,7 @@ void MapCreate::CreateVerticalMoveGround()
 				switch (name)
 				{
 				case(4):
-					new VerticalMoveGround(objectPos, objectSize, verticalMoveGround, SceneBase::stage01);
+					new VerticalMoveGround(objectPos, objectSize, "Assets/box_11.gpmesh", verticalMoveGround, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -531,7 +531,7 @@ void MapCreate::CreateVerticalMoveGround()
 				switch (name)
 				{
 				case(4):
-					new VerticalMoveGround(objectPos, objectSize, verticalMoveGround, SceneBase::stage02);
+					new VerticalMoveGround(objectPos, objectSize, "Assets/box_16.gpmesh", verticalMoveGround, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -561,7 +561,7 @@ void MapCreate::CreateJump()
 				switch (name)
 				{
 				case(5):
-					new Jump(objectPos, objectSize, jump, SceneBase::tutorial);
+					new Jump(objectPos, objectSize, "Assets/box_05.gpmesh", jump, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -571,7 +571,7 @@ void MapCreate::CreateJump()
 				switch (name)
 				{
 				case(5):
-					new Jump(objectPos, objectSize, jump, SceneBase::stage01);
+					new Jump(objectPos, objectSize, "Assets/box_12.gpmesh", jump, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -581,7 +581,7 @@ void MapCreate::CreateJump()
 				switch (name)
 				{
 				case(5):
-					new Jump(objectPos, objectSize, jump, SceneBase::stage02);
+					new Jump(objectPos, objectSize, "Assets/box_17.gpmesh", jump, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -611,7 +611,7 @@ void MapCreate::CreateLateralMoveGround()
 				switch (name)
 				{
 				case(6):
-					new LateralMoveGround(objectPos, objectSize, lateralMoveGround, SceneBase::tutorial,1000.0f);
+					new LateralMoveGround(objectPos, objectSize, "Assets/box.gpmesh", lateralMoveGround, SceneBase::tutorial,1000.0f);
 					break;
 				}
 				break;
@@ -621,7 +621,7 @@ void MapCreate::CreateLateralMoveGround()
 				switch (name)
 				{
 				case(6):
-					new LateralMoveGround(objectPos, objectSize, lateralMoveGround, SceneBase::stage01 ,1000.0f);
+					new LateralMoveGround(objectPos, objectSize, "Assets/box_08.gpmesh", lateralMoveGround, SceneBase::stage01 ,1000.0f);
 					break;
 				}
 				break;
@@ -631,7 +631,7 @@ void MapCreate::CreateLateralMoveGround()
 				switch (name)
 				{
 				case(6):
-					new LateralMoveGround(objectPos, objectSize, lateralMoveGround, SceneBase::stage02, 1000.0f);
+					new LateralMoveGround(objectPos, objectSize, "Assets/box_13.gpmesh" ,lateralMoveGround, SceneBase::stage02, 1000.0f);
 					break;
 				}
 				break;
@@ -660,7 +660,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, player, SceneBase::tutorial);
+					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -670,7 +670,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, player, SceneBase::stage01);
+					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -680,7 +680,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, player, SceneBase::stage02);
+					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -711,7 +711,7 @@ void MapCreate::CreateUpBlock()
 				switch (name)
 				{
 				case(8):
-					new UpBlock(objectPos, objectSize, upBlock, SceneBase::tutorial);
+					new UpBlock(objectPos, objectSize, "Assets/box_03.gpmesh" ,upBlock, SceneBase::tutorial);
 					break;
 				}
 
@@ -722,11 +722,11 @@ void MapCreate::CreateUpBlock()
 				switch (name)
 				{
 				case(8):
-					new UpBlock(objectPos, objectSize, upBlock, SceneBase::stage02);
+					new UpBlock(objectPos, objectSize, "Assets/box_15.gpmesh" ,upBlock, SceneBase::stage02);
 					break;
 
 				case(17):
-					new UpBlock(objectPos2, objectSize, upBlock_02, SceneBase::stage02);
+					new UpBlock(objectPos2, objectSize, "Assets/box_15.gpmesh", upBlock_02, SceneBase::stage02);
 					break;
 				}
 
@@ -755,7 +755,7 @@ void MapCreate::CreateVerticalBlock()
 					switch (name)
 					{
 					case(9):
-						new VerticalBlock(objectPos, objectSize, verticalBlock, SceneBase::stage02);
+						new VerticalBlock(objectPos, objectSize, "Assets/box_15.gpmesh", verticalBlock, SceneBase::stage02);
 						break;
 					}
 				}
@@ -782,7 +782,7 @@ void MapCreate::CreateAerialBlock()
 				switch (name)
 				{
 				case(10):
-					new AerialBlock(objectPos, objectSize, aerialBlock, SceneBase::stage02);
+					new AerialBlock(objectPos, objectSize, "Assets/box_15.gpmesh", aerialBlock, SceneBase::stage02);
 					break;
 				}
 			}
@@ -812,11 +812,11 @@ void MapCreate::CreateRightBlock()
 				switch (name)
 				{
 				case(11):
-					new RightBlock(objectPos, objectSize, addPosX, rightBlock, ColliderTag::rightBlockTag, SceneBase::stage02);
+					new RightBlock(objectPos, objectSize, addPosX, "Assets/box_15.gpmesh", rightBlock, ColliderTag::rightBlockTag, SceneBase::stage02);
 					break;
 
 				case(418):
-					new RightBlock(objectPos2, objectSize, addPosX2, rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02);
+					new RightBlock(objectPos2, objectSize, addPosX2, "Assets/box_15.gpmesh", rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -846,11 +846,11 @@ void MapCreate::CreateLeftBlock()
 				switch (name)
 				{
 				case(13):
-					new LeftBlock(objectPos, objectSize, addPosX, leftBlock, ColliderTag::leftBlockTag, SceneBase::stage02);
+					new LeftBlock(objectPos, objectSize, addPosX, "Assets/box_15.gpmesh", leftBlock, ColliderTag::leftBlockTag, SceneBase::stage02);
 					break;
 
 				case(419):
-					new LeftBlock(objectPos2, objectSize, addPosX2, leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02);
+					new LeftBlock(objectPos2, objectSize, addPosX2, "Assets/box_15.gpmesh", leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02);
 					break;
 				}
 			}
@@ -878,7 +878,7 @@ void MapCreate::CreateRightGround()
 				switch (name)
 				{
 				case(15):
-					new RightGround(objectPos, objectSize, rightGround, SceneBase::tutorial);
+					new RightGround(objectPos, objectSize, "Assets/box_06.gpmesh", rightGround, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -888,7 +888,7 @@ void MapCreate::CreateRightGround()
 				switch (name)
 				{
 				case(15):
-					new RightGround(objectPos, objectSize, rightGround, SceneBase::stage02);
+					new RightGround(objectPos, objectSize, "Assets/box_18.gpmesh", rightGround, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -918,7 +918,7 @@ void MapCreate::CreateLeftGround()
 				switch (name)
 				{
 				case(14):
-					new LeftGround(objectPos, objectSize, leftGround, SceneBase::tutorial);
+					new LeftGround(objectPos, objectSize, "Assets/box_07.gpmesh", leftGround, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -928,7 +928,7 @@ void MapCreate::CreateLeftGround()
 				switch (name)
 				{
 				case(14):
-					new LeftGround(objectPos, objectSize, leftGround, SceneBase::stage02);
+					new LeftGround(objectPos, objectSize, "Assets/box_19.gpmesh", leftGround, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -955,7 +955,7 @@ void MapCreate::CreateDownBlock()
 				switch (name)
 				{
 				case(16):
-					new DownBlock(objectPos, objectSize, downBlock, SceneBase::stage02);
+					new DownBlock(objectPos, objectSize, "Assets/box_13.gpmesh", downBlock, SceneBase::stage02);
 					break;
 				default:
 					break;
@@ -988,7 +988,7 @@ void MapCreate::CreateGoal()
 					switch (name)
 					{
 					case(20):
-						new GoalBlock(objectPos, objectSize, goalBlock, SceneBase::tutorial);
+						new GoalBlock(objectPos, objectSize, "Assets/box_03.gpmesh", goalBlock, SceneBase::tutorial);
 						break;
 					}
 					break;
@@ -998,7 +998,7 @@ void MapCreate::CreateGoal()
 					switch (name)
 					{
 					case(20):
-						new GoalBlock(objectPos, objectSize, goalBlock, SceneBase::stage01);
+						new GoalBlock(objectPos, objectSize, "Assets/box_10.gpmesh", goalBlock, SceneBase::stage01);
 						break;
 					}
 					break;
@@ -1008,7 +1008,7 @@ void MapCreate::CreateGoal()
 					switch (name)
 					{
 					case(20):
-						new GoalBlock(objectPos, objectSize, goalBlock, SceneBase::stage02);
+						new GoalBlock(objectPos, objectSize, "Assets/box_15.gpmesh", goalBlock, SceneBase::stage02);
 						break;
 					}
 					break;

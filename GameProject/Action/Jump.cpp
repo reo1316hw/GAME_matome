@@ -10,7 +10,7 @@
 @param	_objectTag ジャンプ床のタグ
 @param	_sceneTag シーンのタグ
 */
-Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag) :
+Jump::Jump(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag) :
 	GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -21,52 +21,16 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	degree = 0.0f;
 	mVelocity = Vector3::Zero;
 
-	switch (_sceneTag)
-	{
-	case SceneBase::Scene::tutorial:
+	//生成したJumpの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
+	mMeshComponent = new MeshComponent(this);
+	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
 
-		//生成したJumpの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
-		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_05.gpmesh"));
-
-		// 当たり判定
-		mMesh = new Mesh;
-		mMesh = RENDERER->GetMesh("Assets/box_05.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
-		mBoxcollider->SetObjectBox(mMesh->GetBox());
-
-		break;
-	case SceneBase::Scene::stage01:
-
-		//生成したJumpの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
-		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_12.gpmesh"));
-
-		// 当たり判定
-		mMesh = new Mesh;
-		mMesh = RENDERER->GetMesh("Assets/box_12.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
-		mBoxcollider->SetObjectBox(mMesh->GetBox());
-
-		break;
-
-	case SceneBase::Scene::stage02:
-
-		//生成したJumpの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
-		mMeshComponent = new MeshComponent(this);
-		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_17.gpmesh"));
-
-		// 当たり判定
-		mMesh = new Mesh;
-		mMesh = RENDERER->GetMesh("Assets/box_17.gpmesh");
-		mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
-		mBoxcollider->SetObjectBox(mMesh->GetBox());
-
-		break;
-	}
+	// 当たり判定
+	mMesh = new Mesh;
+	mMesh = RENDERER->GetMesh(_gpmeshName);
+	mBoxcollider = new BoxCollider(this, ColliderTag::jumpTag, GetOnCollisionFunc());
+	mBoxcollider->SetObjectBox(mMesh->GetBox());
 }
 
 void Jump::UpdateGameObject(float _deltaTime)

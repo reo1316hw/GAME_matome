@@ -18,7 +18,7 @@ public:
 	@param	_objectTag 左移動床のタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag);
+	LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ

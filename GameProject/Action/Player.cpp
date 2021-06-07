@@ -19,7 +19,7 @@ int     Player::mSendLife = 0;
 @param	_objectTag プレイヤーのタグ
 @param	_sceneTag シーンのタグ
 */
-Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mPlayerSphere(Vector3::Zero,0.0f)
 	, mVisibleFrameCount(0)
@@ -52,7 +52,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mMeshComponent = new MeshComponent(this);
 
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
 
 	mEffectManager = new EffectManager(this, _objectTag, _sceneTag);
 	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);

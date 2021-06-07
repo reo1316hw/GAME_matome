@@ -10,7 +10,7 @@
 @param	_objectTag 左移動床のタグ
 @param	_sceneTag シーンのタグ
 */
-LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag)
+LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mElapseTime(0.0f)
 	, mDifferencePos(0.0f)
@@ -31,11 +31,11 @@ LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const float _add
 	//生成したLeftBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
 
 	// 当たり判定
 	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
+	mMesh = RENDERER->GetMesh(_gpmeshName);
 	mBoxcollider = new BoxCollider(this, _colliderTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 

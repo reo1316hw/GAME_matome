@@ -9,7 +9,7 @@
 @param	_objectTag 空中ブロックのタグ
 @param	_sceneTag シーンのタグ
 */
-AerialBlock::AerialBlock(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+AerialBlock::AerialBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -20,11 +20,11 @@ AerialBlock::AerialBlock(const Vector3& _pos, const Vector3& _size, const Tag& _
 	//生成したAerialBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/box_15.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
 
 	//当たり判定
 	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh("Assets/box_15.gpmesh");
+	mMesh = RENDERER->GetMesh(_gpmeshName);
 	mBoxcollider = new BoxCollider(this, ColliderTag::aerialBlockTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 }
