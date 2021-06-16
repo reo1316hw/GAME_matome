@@ -44,7 +44,6 @@
 #include "HeartUI.h"
 
 #include "ParticleComponent.h"
-#include "EffectManager.h"
 #include "ParticleEffectBase.h"
 #include "CheckpointBoard.h"
 #include "GoalLine.h"

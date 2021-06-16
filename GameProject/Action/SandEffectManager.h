@@ -1,22 +1,75 @@
+/*
+@brief	プリプロセッサ
+*/
 #pragma once
-#include "GameObject.h"
+
+/*
+@brief	インクルード
+*/
+
 #include "ParticleEffectBase.h"
-class SandEffectManager :
-	public GameObject
+
+class SandEffect;
+class DeathEffect;
+class ClearEffect;
+class CheckpointEffect;
+class Player;
+
+class SandEffectManager : public GameObject
 {
 public:
-	SandEffectManager(GameObject* _owner, SceneBase::Scene _sceneTag , const Tag& _objectTag);
+
+	/*
+	@fn		コンストラクタ
+	@param	_owner ゲームオブジェクトクラスのポインタ
+	@param	_objectTag アタッチしたゲームオブジェクトのタグ
+	@param	_sceneTag シーンのタグ
+	*/
+	SandEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+
+	/*
+	@fn	デストラクタ
+	*/
 	~SandEffectManager() {};
 
+	/*
+	@fn		エフェクトマネージャーのアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
 	void UpdateGameObject(float _deltaTime)override;
 	
 private:
-	GameObject* owner;
-	ParticleState state;
-	Vector3 prePos;
-	SceneBase::Scene sceneTag;
-	Tag tag;
-	int frameCount;
-	int scene;
+
+	//ゲームオブジェクトクラスのポインタ
+	GameObject*		 mOwner;
+	//パーティクルの状態
+	ParticleState	 mState;
+	//エフェクトマネージャーの座標
+	Vector3			 mPos;
+	//シーンのタグ
+	SceneBase::Scene mSceneTag;
+	//アタッチしたゲームオブジェクトのタグ
+	Tag				 mTag;
+	//砂ぼこりエフェクト
+	SandEffect*		 mSandEffect;
+	//デスエフェクト
+	DeathEffect*	 mDeathEffect;
+	//クリアエフェクト
+	ClearEffect*	 mClearEffect;
+	//プレイヤーのポインタ
+	Player*			 mPlayer;
+
+	//任意のタイミングで砂ぼこりエフェクトを生成するためのカウント
+	int				 mCreateSandEffectCount;
+	//任意のタイミングでデスエフェクトを生成するためのカウント
+	int				 mCreateDeathEffectCount;
+
+	//角度
+	float			 mAngle;
+
+	//クリアエフェクトを生成するかのフラグ
+	bool			 mClearEffectFlag;
+	//デスエフェクトを生成するかのフラグ
+	bool			 mDeathEffectFlag;
 };
 

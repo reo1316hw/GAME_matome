@@ -186,7 +186,7 @@
     <ClCompile Include="CheckpointEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
+    <ClCompile Include="SandEffectManager.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="CheckpointEffectManager.cpp">
@@ -207,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="MapCreate.cpp">
       <Filter>Map\MapCreate</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearEffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathEffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,7 +394,7 @@
     <ClInclude Include="DeathEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="EffectManager.h">
+    <ClInclude Include="SandEffectManager.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEffectBase.h">
@@ -418,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="MapCreate.h">
       <Filter>Map\MapCreate</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearEffectManager.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathEffectManager.h">
+      <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
