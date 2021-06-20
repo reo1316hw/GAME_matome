@@ -3,8 +3,6 @@
 */
 #include "pch.h"
 
-#include "CheckpointEffectManager.h"
-
 /*
 @fn		コンストラクタ
 @param	_owner ゲームオブジェクトクラスのポインタ
@@ -18,6 +16,8 @@ CheckpointEffectManager::CheckpointEffectManager(GameObject* _owner, const Tag& 
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
+
+	a = true;
 }
 
 /*
@@ -45,6 +45,7 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 	//アクティブなら
 	case PARTICLE_ACTIVE:
 		
+
 		//親のポジションを取得
 		mPosition = mOwner->GetPosition();
 
@@ -91,6 +92,7 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 			mCheckpointEffect = new CheckpointEffect(mPosition, vel, mTag, mSceneTag);
 		}
 
+		mState = ParticleState::PARTICLE_DISABLE;
 		break;
 	}
 }

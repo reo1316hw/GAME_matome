@@ -4,6 +4,9 @@
 #include "pch.h"
 
 #include "CheckpointEffectManager.h"
+#include "SandEffectManager.h"
+#include "ClearEffectManager.h"
+#include "DeathEffectManager.h"
 
 Vector3 Player::mSendPos = Vector3::Zero;
 bool	Player::mSendClearFlag = false;
@@ -54,7 +57,11 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
 
-	mEffectManager = new EffectManager(this, _objectTag, _sceneTag);
+	//エフェクト
+	mSandEffectManager = new SandEffectManager(this, _objectTag, _sceneTag);
+	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
+	mClearEffectManager = new ClearEffectManager(this, _objectTag, _sceneTag);
+	mDeathEffectManager = new DeathEffectManager(this, _objectTag, _sceneTag);
 	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
 
 	//プレイヤー自身の当たり判定
@@ -419,6 +426,32 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		mCheckpointEffectCount++;
 	}
+
+	////チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
+	//if (mCheckpointEffectCount == 1)
+	//{
+	//	mCheckpointFlag = false;
+	//	mCheckpointEffectCount = 0;
+	//}
+
+	////チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
+	//if (mCheckpointFlag)
+	//{
+	//	mCheckpointEffectCount++;
+	//}
+
+	////チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
+	//if (mCheckpointEffectCount == 1)
+	//{
+	//	mCheckpointFlag = false;
+	//	mCheckpointEffectCount = 0;
+	//}
+
+	////チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
+	//if (mCheckpointFlag)
+	//{
+	//	mCheckpointEffectCount++;
+	//}
 
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;

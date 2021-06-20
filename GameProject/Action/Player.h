@@ -9,11 +9,12 @@
 #include "GameObject.h"
 #include "ParticleEffectBase.h"
 
-class EffectManager;
+class SandEffectManager;
+class ClearEffectManager;
+class DeathEffectManager;
 class CheckpointEffectManager;
 class SphereCollider;
 class LateralMoveGround;
-class EffectManager;
 
 /*
 @enum	プレイヤーのリスポーンステート
@@ -65,8 +66,12 @@ private:
 	SphereCollider*		mSelfSphereCollider;
 	//プレイヤーの球当たり判定の大きさ
 	Sphere				mPlayerSphere;
-	//プレイヤーのエフェクト
-	EffectManager*		mEffectManager;
+	//プレイヤーの砂ぼこりエフェクト
+	SandEffectManager*  mSandEffectManager;
+	//プレイヤーのクリアエフェクト
+	ClearEffectManager* mClearEffectManager;
+	//プレイヤーのデスエフェクト
+	DeathEffectManager* mDeathEffectManager;
 	//プレイヤーのチェックポイントエフェクト
 	CheckpointEffectManager* mCheckpointEffectManager;
 	//横移動床のポインタ

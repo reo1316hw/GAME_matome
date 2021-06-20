@@ -50,6 +50,10 @@
 #include "OperationExplanationBoard.h"
 #include "VerticalMoveGroundExplanationBoard.h"
 
+#include "CheckpointEffectManager.h"
+#include "SandEffectManager.h"
+#include "ClearEffectManager.h"
+#include "DeathEffectManager.h"
 #include "CheckpointEffect.h"
 #include "SandEffect.h"
 #include "ClearEffect.h"

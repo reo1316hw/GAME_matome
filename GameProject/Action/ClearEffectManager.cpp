@@ -3,8 +3,6 @@
 */
 #include "pch.h"
 
-#include "ClearEffectManager.h"
-
 /*
 @fn		コンストラクタ
 @param	_owner ゲームオブジェクトクラスのポインタ
@@ -18,6 +16,8 @@ ClearEffectManager::ClearEffectManager(GameObject* _owner, const Tag& _objectTag
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
+
+	OneCreateClearFlag = true;
 }
 
 /*
@@ -26,7 +26,7 @@ ClearEffectManager::ClearEffectManager(GameObject* _owner, const Tag& _objectTag
 */
 void ClearEffectManager::UpdateGameObject(float _deltaTime)
 {
-	if (mPlayer->GetClearFlag())
+	if (mPlayer->GetClearFlag() && OneCreateClearFlag)
 	{
 		mState = ParticleState::PARTICLE_ACTIVE;
 	}
@@ -40,6 +40,10 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_DISABLE:
 		break;
 	case PARTICLE_ACTIVE:
+
+		mPosition = mOwner->GetPosition();
+		mPosition.y -= 10.0f;
+		mPosition.z -= 20.0f;
 
 		float x = 0.0f;
 		float y = 0.0f;
@@ -141,7 +145,9 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 			mAngle += 10.0f;
 		}
 
-		SetState(State::Dead);
+		OneCreateClearFlag = false;
+
+		//SetState(State::Dead);
 		break;
 	}
 }

@@ -52,4 +52,7 @@ private:
 	const float SPEED = 10.0f;
 	//向き
 	const float DIRECTION = 1.0f;
+
+	//クリアエフェクトを一度だけ生成するためのフラグ
+	bool			 OneCreateClearFlag;
 };

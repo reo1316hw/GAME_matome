@@ -3,8 +3,6 @@
 */
 #include "pch.h"
 
-#include "SandEffectManager.h"
-
 /*
 @fn		コンストラクタ
 @param	_owner ゲームオブジェクトクラスのポインタ
@@ -20,10 +18,10 @@ SandEffectManager::SandEffectManager(GameObject* _owner, const Tag& _objectTag, 
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
 
-	mAngle = 0.0f;
+	/*mAngle = 0.0f;
 
 	mClearEffectFlag = false;
-	mDeathEffectFlag = false;
+	mDeathEffectFlag = false;*/
 }
 
 /*
@@ -41,7 +39,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 		mState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	if (mPlayer->GetClearFlag())
+	/*if (mPlayer->GetClearFlag())
 	{
 		mClearEffectFlag = true;
 	}
@@ -49,7 +47,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 	if (mPlayer->GetDeathFlag())
 	{
 		mDeathEffectFlag = true;
-	}
+	}*/
 
 	Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
 
@@ -72,7 +70,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 		}		
 
 		
-		if (mDeathEffectFlag)
+		/*if (mDeathEffectFlag)
 		{
 			mCreateDeathEffectCount++;
 
@@ -209,7 +207,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 
 			mClearEffectFlag = false;
 			SetState(State::Dead);
-		}
+		}*/
 
 		break;
 	}

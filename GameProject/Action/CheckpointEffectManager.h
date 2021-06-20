@@ -52,5 +52,7 @@ private:
 	const float SPEED = 10.0f;
 	//Œü‚«
 	const float DIRECTION = 1.0f;
+
+	bool a;
 };
 
