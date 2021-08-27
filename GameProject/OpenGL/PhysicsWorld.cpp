@@ -113,6 +113,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func = mCollisionFunction.at(itr);
 				func(*(_sphere->GetOwner()));
 				_sphere->Refresh();
+				return;
 			}
 		}
 	}
