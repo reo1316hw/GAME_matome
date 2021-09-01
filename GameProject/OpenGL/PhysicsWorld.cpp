@@ -74,6 +74,15 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
+	for (auto itr : mBoxes)
+	{
+		if (_sphere->GetOwner()->GetPosition().z + 100.0f >= itr->GetOwner()->GetPosition().z - 50.0f||
+			_sphere->GetOwner()->GetPosition().z - 100.0f <= itr->GetOwner()->GetPosition().z + 50.0f)
+		{
+			
+		}
+	}
+
 	//プレイヤーが何かと当たったら
 	if (_sphere->GetTag() == ColliderTag::playerTag)
 	{
