@@ -147,7 +147,6 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 
 		OneCreateClearFlag = false;
 
-		//SetState(State::Dead);
 		break;
 	}
 }

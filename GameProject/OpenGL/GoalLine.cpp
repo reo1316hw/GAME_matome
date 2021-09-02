@@ -19,28 +19,3 @@ GoalLine::GoalLine(const Vector3& _pos, const Vector3& _vel, const Tag& _objectT
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 }
-
-/*
-@fn		ゴールラインのアップデート
-@param	_deltaTime 最後のフレームを完了するのに要した時間
-*/
-void GoalLine::UpdateGameObject(float _deltaTime)
-{
-	/*ParticleEffectBase::LifeCountDown();
-
-	if (lifeCount >= 0)
-	{
-		position += velocity * 10.0f;
-
-		mScale += 5.0f;
-		mAlpha -= 0.05f;
-		particle->SetScale(mScale);
-		particle->SetAlpha(mAlpha);
-		SetPosition(position);
-	}
-
-	if (lifeCount <= 0)
-	{
-		state = State::Dead;
-	}*/
-}

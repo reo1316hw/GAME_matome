@@ -34,11 +34,7 @@ public:
 
 private:
 
-
-
 	static Vector3 mSendVel;
-
-
 
 	//反転フラグ
 	bool mReversFlag;
@@ -48,10 +44,5 @@ private:
 
 public://ゲッターセッター
 	
-
-
 	Vector3 GetVelocity() { return mSendVel; };
-
-
-
 };

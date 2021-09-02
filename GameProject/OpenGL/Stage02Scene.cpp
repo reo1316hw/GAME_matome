@@ -15,7 +15,6 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.m_direction = Vector3(0.0f, 1.0f, 0.0f);
-	//dir.diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
 	dir.m_diffuseColor = Vector3(0.5f, 0.6f, 0.8f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
@@ -77,7 +76,7 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 */
 Stage02Scene::~Stage02Scene()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(stage02);
+	GAME_OBJECT_MANAGER->RemoveSceneGameObject(stage02);
 	delete mSprite;
 	delete mMapCreate;
 }
@@ -85,7 +84,7 @@ Stage02Scene::~Stage02Scene()
 /*
 @fn	現在のシーン時に毎フレーム更新処理をする
 */
-SceneBase* Stage02Scene::update()
+SceneBase* Stage02Scene::update(const InputState& _state)
 {
 	if (mPlayer->GetClearFlag())
 	{

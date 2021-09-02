@@ -28,7 +28,7 @@ public:
     /*
     @fn	現在のシーン時に毎フレーム更新処理をする
     */
-    virtual SceneBase* update() = 0;
+    virtual SceneBase* update(const InputState& _state) = 0;
 
     /*
     @enum シーンの種類

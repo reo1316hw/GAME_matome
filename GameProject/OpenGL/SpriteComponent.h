@@ -84,7 +84,6 @@ public://ゲッターセッター
 	@param _texture 使用するテクスチャのポインタ
 	*/
 	virtual void SetTexture(Texture* _texture);
-	//virtual void SetTexture(Texture* _texture , Texture* _emissiveTexture);
 
 	/*
 	@fn		描画をするかどうかを設定

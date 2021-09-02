@@ -10,6 +10,7 @@
 class TutorialScene;
 class Stage01Scene;
 class Stage02Scene;
+//struct InputState;
 
 class ContinueScene : public SceneBase
 {
@@ -29,7 +30,7 @@ public:
 	/*
 	@fn	現在のシーン時に毎フレーム更新処理をする
 	*/
-	SceneBase* update() override;
+	SceneBase* update(const InputState& _state) override;
 
 private:
 

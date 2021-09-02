@@ -19,28 +19,3 @@ OperationExplanationBoard::OperationExplanationBoard(const Vector3& _pos, const 
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 }
-
-/*
-@fn		操作方法パネルのアップデート
-@param	_deltaTime 最後のフレームを完了するのに要した時間
-*/
-void OperationExplanationBoard::UpdateGameObject(float _deltaTime)
-{
-	/*ParticleEffectBase::LifeCountDown();
-
-	if (lifeCount >= 0)
-	{
-		position += velocity * 10.0f;
-
-		mScale += 5.0f;
-		mAlpha -= 0.05f;
-		particle->SetScale(mScale);
-		particle->SetAlpha(mAlpha);
-		SetPosition(position);
-	}
-
-	if (lifeCount <= 0)
-	{
-		state = State::Dead;
-	}*/
-}

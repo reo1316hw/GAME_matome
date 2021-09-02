@@ -47,26 +47,6 @@
 	 説明
 */
 
-///*
-//@fn		ランチャー(Launcher.exe)呼び出し関数 
-//@param	_path Launcher.exeへの相対パスへの文字列を入れる
-//*/
-//void runLauncher(const char* _path)
-//{
-//
-//	char fullPathexe[512];
-//#pragma warning (disable:4996)
-//	sprintf(fullPathexe, "%s%s", _path, "Launcher.exe");
-//
-//	// プロセス起動準備
-//	PROCESS_INFORMATION pi = { 0 };
-//	STARTUPINFO si = { 0 };
-//	si.cb = sizeof(STARTUPINFO);
-//
-//	CreateProcess(fullPathexe, (LPSTR)"", NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, _path, &si, &pi);
-//}
-
-
 /*
 @fn		main関数
 @param  argc コマンドライン引数の数
@@ -85,8 +65,6 @@ int main(int argc, char** argv)
 	}
 	//ゲームクラスの終了処理
 	game.Termination();
-
-	//runLauncher("../../");
 
 	return 0;
 }

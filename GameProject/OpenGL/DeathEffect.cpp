@@ -17,7 +17,6 @@ DeathEffect::DeathEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, Scen
 	mScale = 16.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	//particle->SetColor(Vector3(0.0f,0.72f,0.79f));
 	mParticle->SetColor(Color::White);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
 	mVelocity = _vel;
@@ -38,15 +37,6 @@ void DeathEffect::UpdateGameObject(float _deltaTime)
 		mScale += 1.0f;
 		mParticle->SetAlpha(mAlpha);
 		mParticle->SetScale(mScale);
-		/*if (lifeCount <= 15)
-		{
-			velocity = velocity * speed;
-			velocity.y *= -1.0f;
-		}
-		else
-		{
-			velocity = velocity * speed;
-		}*/
 
 		mVelocity = mVelocity * mSpeed;
 		mPosition = mPosition + mVelocity;

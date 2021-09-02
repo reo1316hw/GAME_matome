@@ -69,21 +69,6 @@ void SpriteComponent::Draw(Shader * _shader)
 }
 
 /*
-@fn テクスチャをセットし縦横の長さを計算する
-@param _texture 使用するテクスチャのポインタ
-*/
-//void SpriteComponent::SetTexture(Texture * _texture, Texture* _emissiveTexture)
-//{
-//	texture = _texture;
-//	textureWidth = texture->GetWidth();
-//	textureHeight = texture->GetHeight();
-//
-//	emissiveTexture = _emissiveTexture;
-//	emissiveTextureWidth = emissiveTexture->GetWidth();
-//	emissiveTextureHeight = emissiveTexture->GetHeight();
-//}
-
-/*
 @fn		テクスチャをセットし縦横の長さを計算する
 @param	_texture 使用するテクスチャのポインタ
 */

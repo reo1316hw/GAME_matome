@@ -25,7 +25,7 @@ public:
 	/*
 	@fn	現在のシーン時に毎フレーム更新処理をする
 	*/
-	SceneBase* update() override;
+	SceneBase* update(const InputState& _state) override;
 
 	static bool GetContinueStage01Flag() { return mSendContinueStage01Flag; };
 	static void SetContinueStage01Flag(bool _continue) { mSendContinueStage01Flag = _continue; };

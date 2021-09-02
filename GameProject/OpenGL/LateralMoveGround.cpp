@@ -3,12 +3,7 @@
 */
 #include "pch.h"
 
-
-
 Vector3 LateralMoveGround::mSendVel = Vector3::Zero;
-
-
-
 
 /*
 @fn		コンストラクタ

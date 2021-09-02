@@ -65,7 +65,7 @@ public:
 	@fn		シーンごとの全てのゲームオブジェクトの削除
 	@param	_scene 削除するシーンのタグ
 	*/
-	void RemoveGameObjects(SceneBase::Scene _scene);
+	void RemoveSceneGameObject(SceneBase::Scene _scene);
 
 	/*
 	@fn		使用したすべてのゲームオブジェクトを解放する
@@ -95,7 +95,7 @@ private:
 	/*
 	@fn	デストラクタ
 	*/
-	~GameObjectManager();
+	~GameObjectManager() {};
 
 	//自身のインスタンス
 	static GameObjectManager* mManager;

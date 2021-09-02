@@ -13,14 +13,10 @@ ContinueScene::ContinueScene(const Scene& _nowScene)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.m_direction = Vector3(1.0f, 0.7f, -0.7f);
-	//dir.diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	SetScene(_nowScene);
-
-	mInputSystem = new InputSystem();
-	mInputSystem->Initialize();
 
 	mSprite = new Sprite("Assets/continue.png");
 }
@@ -36,62 +32,61 @@ ContinueScene::~ContinueScene()
 /*
 @fn	現在のシーン時に毎フレーム更新処理をする
 */
-SceneBase* ContinueScene::update()
+SceneBase* ContinueScene::update(const InputState& _state)
 {
-	mInputSystem->PrepareForUpdate();
-	mInputSystem->Update();
-
-	const InputState& sceneState = mInputSystem->GetState();
-
 	if (mTutorial->GetContinueTutorialFlag())
 	{
-		/*if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_Q) == Pressed)
-		{
-			return new Tutorial(SceneBase::mTutorial);
-		}*/
-
-		if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
-			sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
+			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
 			mTutorial->SetContinueTutorialFlag(false);
 			return new TutorialScene(SceneBase::tutorial);
 		}
+
+		/*if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
+			_state.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		{
+			mTutorial->SetContinueTutorialFlag(false);
+			return new TutorialScene(SceneBase::tutorial);
+		}*/
 	}
 
 	if (mStage01->GetContinueStage01Flag())
 	{
-		/*if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_Q) == Pressed)
-		{
-			mTutorial->SetContinueTutorialFlag(false);
-			return new Tutorial(SceneBase::mTutorial);
-		}*/
-
-		if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
-			sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
+			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
 			mStage01->SetContinueStage01Flag(false);
 			return new Stage01Scene(SceneBase::stage01);
 		}
+
+		/*if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
+			_state.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		{
+			mStage01->SetContinueStage01Flag(false);
+			return new Stage01Scene(SceneBase::stage01);
+		}*/
 	}
 
 	if (mStage02->GetContinueStage02Flag())
 	{
-		/*if (sceneState.Keyboard.GetKeyState(SDL_SCANCODE_Q) == Pressed)
-		{
-			mTutorial->SetContinueTutorialFlag(false);
-			return new Tutorial(SceneBase::mTutorial);
-		}*/
-
-		if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
-			sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
+			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
 			mStage02->SetContinueStage02Flag(false);
 			return new Stage02Scene(SceneBase::stage02);
 		}
+
+		/*if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
+			_state.m_keyboard.GetKeyValue(SDL_SCANCODE_Q) == 1)
+		{
+			mStage02->SetContinueStage02Flag(false);
+			return new Stage02Scene(SceneBase::stage02);
+		}*/
 	}
 
-	if (sceneState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1 ||
-		sceneState.m_keyboard.GetKeyValue(SDL_SCANCODE_E) == 1)
+	if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Released ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_E) == Released)
 	{
 		return new GameOver(SceneBase::gameOver);
 	}

@@ -52,24 +52,8 @@ private:
 	Tag				 mTag;
 	//砂ぼこりエフェクト
 	SandEffect*		 mSandEffect;
-	//デスエフェクト
-	DeathEffect*	 mDeathEffect;
-	//クリアエフェクト
-	ClearEffect*	 mClearEffect;
-	//プレイヤーのポインタ
-	Player*			 mPlayer;
 
 	//任意のタイミングで砂ぼこりエフェクトを生成するためのカウント
 	int				 mCreateSandEffectCount;
-	//任意のタイミングでデスエフェクトを生成するためのカウント
-	int				 mCreateDeathEffectCount;
-
-	//角度
-	float			 mAngle;
-
-	//クリアエフェクトを生成するかのフラグ
-	bool			 mClearEffectFlag;
-	//デスエフェクトを生成するかのフラグ
-	bool			 mDeathEffectFlag;
 };
 

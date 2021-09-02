@@ -63,8 +63,9 @@ private:
 
 	/*
 	@fn	“ü—ÍŠÖ˜A‚Ìˆ—
+	@return “ü—Íó‘Ô
 	*/
-    void ProcessInput();
+    InputState ProcessInput();
 
 	/*
 	@fn	•`‰æŠÖ˜A‚Ìˆ—

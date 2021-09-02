@@ -69,16 +69,10 @@ void RightBlock::UpdateGameObject(float _deltaTime)
 
 		if (mReversFlag == true)
 		{
-			/*Vector3 movePos = Vector3(mPosition + Vector3(50, 0, 0));
-			mPosition = Vector3::Lerp(mPosition,movePos,0.1f);*/
-
 			mVelocity.x = -RIGHT_SPEED;
 		}
 		else if (mReversFlag == false)
 		{
-			/*Vector3 movePos2 = Vector3(mPosition + Vector3(-50, 0, 0));
-			mPosition = Vector3::Lerp(mPosition, movePos2, 0.1f);*/
-
 			mVelocity.x = RIGHT_SPEED;
 		}
 	}
@@ -90,7 +84,6 @@ void RightBlock::UpdateGameObject(float _deltaTime)
 		mElapseTime += _deltaTime;
 		mDifferencePos = mEndPos.x - mInitPos.x;
 		mVelocity.x = Quartic::EaseIn(mElapseTime, mStart , mDifferencePos, TOTAL_TIME) * 0.02f;
-		//mVelocity.x = RIGHT_SPEED;
 	}
 
 	if (mInitPos.x < mPosition.x)

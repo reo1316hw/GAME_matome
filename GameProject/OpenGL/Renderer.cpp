@@ -285,30 +285,6 @@ void Renderer::Draw()
 				mc->Draw(mMeshShader);
 			}
 		}
-
-		//DrawParticle();
-
-		//// UIの描画
-		//// アルファブレンディングを有効にする
-		//glEnable(GL_BLEND);
-		//// デプスバッファ法を無効にする
-		//glDisable(GL_DEPTH_TEST);
-		//// RGB成分とα成分のブレンディング方法を別々に設定
-		//glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-		//// RGB成分とアルファ成分に別々の混合係数を設定
-		//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-		//// UIシェーダーをアクティブにする/スプライト頂点配列を有効にする
-		//mUiShader->SetActive();
-		//mUiVerts->SetActive();
-		//// すべてのUIの描画
-		//for (auto ui : mUis)
-		//{
-		//	if (ui->GetVisible())
-		//	{
-		//		ui->Draw(mUiShader, ui->GetOwner()->GetPosition());
-		//	}
-		//}
 	}
 	mHDRRenderer->HdrRecordEnd();
 
@@ -320,25 +296,6 @@ void Renderer::Draw()
 
 	// HDRBufferにレンダリングしたときのDepth情報をスクリーンにコピー
 	mHDRRenderer->CopyDepthToScreen();
-
-	
-	//mBasicShader->SetActive();
-	//mBasicShader->SetMatrixUniform("uViewProj", mView * mProjection);
-
-	//// Draw any skinned mMeshes now
-	//// Draw any skinned mMeshes now
-	//mSkinnedShader->SetActive();
-	//// Update mView-mProjection matrix
-	//mSkinnedShader->SetMatrixUniform("uViewProj", mView * mProjection);
-	//// Update lighting uniforms
-	//SetLightUniforms(mSkinnedShader, mView);
-	//for (auto sk : mSkeletalMeshes)
-	//{
-	//	if (sk->GetVisible())
-	//	{
-	//		sk->Draw(mSkinnedShader);
-	//	}
-	//}
 
 	DrawParticle();
 
@@ -509,16 +466,6 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 */
 void Renderer::AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent)
 {
-	/*if (_invisibleMeshComponent->GetIsSkeltal())
-	{
-		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_invisibleMeshComponent);
-		mSkeletalMeshes.emplace_back(sk);
-	}
-	else
-	{
-		invisibleMeshComponent.emplace_back(_meshComponent);
-	}*/
-
 	mInvisibleMeshComponents.emplace_back(_invisibleMeshComponent);
 }
 
@@ -528,18 +475,6 @@ void Renderer::AddInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshC
 */
 void Renderer::RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMeshComponent)
 {
-	/*if (_meshComponent->GetIsSkeltal())
-	{
-		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
-		auto iter = std::find(mSkeletalMeshes.begin(), mSkeletalMeshes.end(), sk);
-		mSkeletalMeshes.erase(iter);
-	}
-	else
-	{
-		auto iter = std::find(mMeshComponents.begin(), mMeshComponents.end(), _meshComponent);
-		mMeshComponents.erase(iter);
-	}*/
-	
 	auto iter = std::find(mInvisibleMeshComponents.begin(), mInvisibleMeshComponents.end(), _invisibleMeshComponent);
 	mInvisibleMeshComponents.erase(iter);
 }

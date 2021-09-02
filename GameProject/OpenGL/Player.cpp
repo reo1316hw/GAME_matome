@@ -427,32 +427,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		mCheckpointEffectCount++;
 	}
 
-	////チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
-	//if (mCheckpointEffectCount == 1)
-	//{
-	//	mCheckpointFlag = false;
-	//	mCheckpointEffectCount = 0;
-	//}
-
-	////チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
-	//if (mCheckpointFlag)
-	//{
-	//	mCheckpointEffectCount++;
-	//}
-
-	////チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
-	//if (mCheckpointEffectCount == 1)
-	//{
-	//	mCheckpointFlag = false;
-	//	mCheckpointEffectCount = 0;
-	//}
-
-	////チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
-	//if (mCheckpointFlag)
-	//{
-	//	mCheckpointEffectCount++;
-	//}
-
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
 

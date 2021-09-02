@@ -57,6 +57,10 @@ void Jump::UpdateGameObject(float _deltaTime)
 	SetPosition(mPosition);
 }
 
+/*
+@fn		ジャンプ床がヒットした時の処理
+@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
 void Jump::OnCollision(const GameObject& _hitObject)
 {
 	mHitFlag = true;

@@ -25,12 +25,6 @@ public:
 	*/
 	~VerticalMoveGroundExplanationBoard() {};
 
-	/*
-	@fn		縦移動床の説明パネルのアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
-	void UpdateGameObject(float _deltaTime)override;
-
 private:
 
 };

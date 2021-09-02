@@ -61,13 +61,6 @@ void UIComponent::Draw(Shader* _shader, const Vector3& _offset)
 
 		Matrix4 world = scaleMatrix * transMat;
 
-		/*Matrix4 scaleMatrix = Matrix4::CreateScale(
-			static_cast<float>(textureWidth),
-			static_cast<float>(textureHeight),
-			1.0f);
-
-		Matrix4 world = scaleMatrix * owner->GetWorldTransform();*/
-
 		_shader->SetMatrixUniform("uWorldTransform", world);
 
 		glActiveTexture(GL_TEXTURE0);
