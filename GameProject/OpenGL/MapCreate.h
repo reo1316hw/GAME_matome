@@ -6,6 +6,7 @@
 /*
 @brief	インクルード
 */
+class Player;
 
 class MapCreate : public GameObject
 {
@@ -60,7 +61,7 @@ public:
 	/*
 	@fn	プレイヤーを生成する
 	*/
-	void CreatePlayer();
+	Player* CreatePlayer();
 
 	/*
 	@fn	上移動ブロックを生成する
@@ -152,6 +153,9 @@ private:
 	std::vector<std::vector<int>> mGoalBlockMapData;
 	//リスポーン地点マップデータ
 	std::vector<std::vector<int>> mRespawnMapData;
+
+	// プレイヤーのポインタ
+	Player* mPlayer;
 
 	//現在のシーン
 	int mScene;

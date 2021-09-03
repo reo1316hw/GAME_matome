@@ -80,6 +80,12 @@ public:
 	*/
 	void RemoveSphere(SphereCollider* _sphere);
 
+	/*
+	@fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
+	@param _player プレイヤーのポインタ
+	*/
+	void SortPhysicsData(Player* _player);
+
 private:
 
 	/*

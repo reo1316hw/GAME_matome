@@ -10,7 +10,6 @@
 class TutorialScene;
 class Stage01Scene;
 class Stage02Scene;
-//struct InputState;
 
 class ContinueScene : public SceneBase
 {

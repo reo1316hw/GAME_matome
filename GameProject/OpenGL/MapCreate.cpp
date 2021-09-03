@@ -643,7 +643,7 @@ void MapCreate::CreateLateralMoveGround()
 /*
 @fn	ƒvƒŒƒCƒ„[‚ğ¶¬‚·‚é
 */
-void MapCreate::CreatePlayer()
+Player* MapCreate::CreatePlayer()
 {
 	for (float iz = 0; iz < mSizeZ; iz++)
 	{
@@ -660,7 +660,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
+					mPlayer = new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -670,7 +670,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
+					mPlayer = new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
 					break;
 				}
 				break;
@@ -680,7 +680,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(7):
-					new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
+					mPlayer = new Player(objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
 					break;
 				}
 				break;
@@ -688,6 +688,7 @@ void MapCreate::CreatePlayer()
 		}
 	}
 
+	return mPlayer;
 }
 
 /*

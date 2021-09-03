@@ -35,7 +35,7 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 		mMapCreate->CreateVerticalMoveGround();
 		mMapCreate->CreateJump();
 		mMapCreate->CreateLateralMoveGround();
-		mMapCreate->CreatePlayer();
+		mPlayer = mMapCreate->CreatePlayer();
 		mMapCreate->CreateUpBlock();
 		mMapCreate->CreateRightGround();
 		mMapCreate->CreateLeftGround();
@@ -46,6 +46,8 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial);
 	}
+
+	PHYSICS->SortPhysicsData(mPlayer);
 
 	mSendContinueTutorialFlag = false;
 }

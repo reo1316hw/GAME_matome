@@ -32,6 +32,21 @@ void PhysicsWorld::DeleteInstance()
 	}
 }
 
+void PhysicsWorld::SortPhysicsData(Player* _player)
+{
+	int count = 0;
+	for (auto itr : mBoxes)
+	{
+		/*count++;
+
+		if (_player->GetPosition().z + 50.0f >= itr->GetOwner()->GetPosition().z - 50.0f &&
+			_player->GetPosition().z - 50.0f <= itr->GetOwner()->GetPosition().z + 50.0f)
+		{
+			printf("%d\n",count);
+		}*/
+	}
+}
+
 void PhysicsWorld::HitCheck()
 {
 	SphereAndSphere();
@@ -72,15 +87,6 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	if (_sphere->GetOwner()->GetState() != State::Active)
 	{
 		return;
-	}
-
-	for (auto itr : mBoxes)
-	{
-		if (_sphere->GetOwner()->GetPosition().z + 100.0f >= itr->GetOwner()->GetPosition().z - 50.0f||
-			_sphere->GetOwner()->GetPosition().z - 100.0f <= itr->GetOwner()->GetPosition().z + 50.0f)
-		{
-			
-		}
 	}
 
 	//プレイヤーが何かと当たったら
