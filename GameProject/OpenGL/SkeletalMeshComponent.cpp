@@ -40,14 +40,10 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 			_shader->SetFloatUniform("uSpecPower", 100);
 
 			_shader->SetVectorUniform("uColor", mColor);
-			//  テクスチャをセット 
-			Texture* t = mMesh->GetTexture(mTextureIndex);
-			if (t)
-			{
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, t->GetTextureID());
-				_shader->SetIntUniform("uMeshTexture", 0);
-			}
+
+			// テクスチャ情報をシェーダーに渡す
+			HandOverTexture(_shader);
+			
 			//メッシュの頂点配列をアクティブに
 			VertexArray* va = mMesh->GetVertexArray();
 			va->SetActive();
@@ -58,24 +54,39 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 }
 
 /*
+@fn		テクスチャ情報をシェーダーに渡す
+@param	_shader 使用するシェーダークラスのポインタ
+*/
+void SkeletalMeshComponent::HandOverTexture(Shader* _shader)
+{
+	//  テクスチャをセット 
+	Texture* t = mMesh->GetTexture(mTextureIndex);
+	if (t)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, t->GetTextureID());
+		_shader->SetIntUniform("uMeshTexture", 0);
+	}
+}
+
+/*
 @fn		フレーム毎の処理
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
 void SkeletalMeshComponent::Update(float _deltaTime)
 {
-		if (mAnimation && mSkeleton)
+	if (mAnimation && mSkeleton)
+	{
+		mAnimTime += _deltaTime * mAnimPlayRate;
+		//  アニメを巻き戻して再生
+		while (mAnimTime > mAnimation->GetDuration())
 		{
-			mAnimTime += _deltaTime * mAnimPlayRate;
-			//  アニメを巻き戻して再生
-			while (mAnimTime > mAnimation->GetDuration())
-			{
-				mAnimTime -= mAnimation->GetDuration();
-			}
-
-			// 行列パレットの再計算
-			ComputeMatrixPalette();
+			mAnimTime -= mAnimation->GetDuration();
 		}
-	
+
+		// 行列パレットの再計算
+		ComputeMatrixPalette();
+	}
 }
 
 /*

@@ -47,12 +47,12 @@ void PhysicsWorld::SortPhysicsData(Player* _player)
 	}
 }
 
-void PhysicsWorld::HitCheck()
-{
-	SphereAndSphere();
-    BoxAndBox();
-    SphereAndBox();
-}
+//void PhysicsWorld::HitCheck()
+//{
+//	SphereAndSphere();
+//    BoxAndBox();
+//    SphereAndBox();
+//}
 
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
@@ -92,27 +92,6 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	//プレイヤーが何かと当たったら
 	if (_sphere->GetTag() == ColliderTag::playerTag)
 	{
-		for (auto itr : mSpheres)
-		{
-			if (itr == _sphere)
-			{
-				continue;
-			}
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (itr->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
-			bool hit = Intersect(itr->GetWorldSphere(), _sphere->GetWorldSphere());
-			if (hit)
-			{
-				OnCollisionFunc func = mCollisionFunction.at(_sphere);
-				func(*(itr->GetOwner()));
-				func = mCollisionFunction.at(itr);
-				func(*(_sphere->GetOwner()));
-				_sphere->Refresh();
-			}
-		}
 		for (auto itr : mBoxes)
 		{
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -170,86 +149,86 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
     mCollisionFunction.erase(_sphere);
 }
 
-void PhysicsWorld::SphereAndSphere()
-{
-	for (size_t i = 0; i < mSpheres.size(); i++)
-	{
-		if (mSpheres[i]->GetOwner()->GetState() != Active)
-		{
-			continue;
-		}
-		for (size_t j = i + 1; j < mSpheres.size(); j++)
-		{
-			if (mSpheres[j]->GetOwner()->GetState() != Active)
-			{
-				continue;
-			}
-			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mSpheres[j]->GetWorldSphere());
-
-			if (hit)
-			{
-				SphereCollider* sphereA = mSpheres[i];
-				SphereCollider* sphereB = mSpheres[j];
-
-				//sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
-				//sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
-			}
-		}
-	}
-}
-
-void PhysicsWorld::BoxAndBox()
-{
-	for (size_t i = 0; i < mBoxes.size(); i++)
-	{
-		if (mBoxes[i]->GetOwner()->GetState() != Active)
-		{
-			continue;
-		}
-		for (size_t j = i + 1; j < mBoxes.size(); j++)
-		{
-			if (mBoxes[j]->GetOwner()->GetState() != Active)
-			{
-				continue;
-			}
-			bool hit = Intersect(mBoxes[i]->GetWorldBox(), mBoxes[j]->GetWorldBox());
-
-			if (hit)
-			{
-				BoxCollider* boxA = mBoxes[i];
-				BoxCollider* boxB = mBoxes[j];
-
-				//boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
-				//boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
-			}
-		}
-	}
-}
-
-void PhysicsWorld::SphereAndBox()
-{
-	for (size_t i = 0; i < mSpheres.size(); i++)
-	{
-		if (mSpheres[i]->GetOwner()->GetState() != Active)
-		{
-			continue;
-		}
-		for (size_t j = 0; j < mBoxes.size(); j++)
-		{
-			if (mBoxes[j]->GetOwner()->GetState() != Active)
-			{
-				continue;
-			}
-			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mBoxes[j]->GetWorldBox());
-
-			if (hit)
-			{
-				//spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
-				//boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
-			}
-		}
-	}
-}
+//void PhysicsWorld::SphereAndSphere()
+//{
+//	for (size_t i = 0; i < mSpheres.size(); i++)
+//	{
+//		if (mSpheres[i]->GetOwner()->GetState() != Active)
+//		{
+//			continue;
+//		}
+//		for (size_t j = i + 1; j < mSpheres.size(); j++)
+//		{
+//			if (mSpheres[j]->GetOwner()->GetState() != Active)
+//			{
+//				continue;
+//			}
+//			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mSpheres[j]->GetWorldSphere());
+//
+//			if (hit)
+//			{
+//				SphereCollider* sphereA = mSpheres[i];
+//				SphereCollider* sphereB = mSpheres[j];
+//
+//				sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
+//				sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
+//			}
+//		}
+//	}
+//}
+//
+//void PhysicsWorld::BoxAndBox()
+//{
+//	for (size_t i = 0; i < mBoxes.size(); i++)
+//	{
+//		if (mBoxes[i]->GetOwner()->GetState() != Active)
+//		{
+//			continue;
+//		}
+//		for (size_t j = i + 1; j < mBoxes.size(); j++)
+//		{
+//			if (mBoxes[j]->GetOwner()->GetState() != Active)
+//			{
+//				continue;
+//			}
+//			bool hit = Intersect(mBoxes[i]->GetWorldBox(), mBoxes[j]->GetWorldBox());
+//
+//			if (hit)
+//			{
+//				BoxCollider* boxA = mBoxes[i];
+//				BoxCollider* boxB = mBoxes[j];
+//
+//				boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
+//				boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
+//			}
+//		}
+//	}
+//}
+//
+//void PhysicsWorld::SphereAndBox()
+//{
+//	for (size_t i = 0; i < mSpheres.size(); i++)
+//	{
+//		if (mSpheres[i]->GetOwner()->GetState() != Active)
+//		{
+//			continue;
+//		}
+//		for (size_t j = 0; j < mBoxes.size(); j++)
+//		{
+//			if (mBoxes[j]->GetOwner()->GetState() != Active)
+//			{
+//				continue;
+//			}
+//			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mBoxes[j]->GetWorldBox());
+//
+//			if (hit)
+//			{
+//				spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
+//				boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
+//			}
+//		}
+//	}
+//}
 
 /*
 @fn 衝突したことが確定したとき、めり込みを戻す関数

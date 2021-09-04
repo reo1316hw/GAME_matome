@@ -51,18 +51,10 @@ void SpriteComponent::Draw(Shader * _shader)
 		Matrix4 world = scaleMatrix * mOwner->GetWorldTransform();
 
 		_shader->SetMatrixUniform("uWorldTransform",world);
-		
-	/*	_shader->SetFloatUniform("uLuminance", texture->GetLuminace());*/
-
-		//texture->SetActive();
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mTexture->GetTextureID());
 		_shader->SetIntUniform("uSpriteTexture", 0);
-
-	/*	glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, emissiveTexture->GetTextureID());
-		_shader->SetIntUniform("uEmissiveMap", 3);*/
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);	
 	}

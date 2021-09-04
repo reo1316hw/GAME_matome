@@ -35,6 +35,12 @@ public:
 	*/
 	void Draw(class Shader* _shader) override;
 
+	/*
+	@fn		テクスチャ情報をシェーダーに渡す
+	@param	_shader 使用するシェーダークラスのポインタ
+	*/
+	void HandOverTexture(class Shader* _shader);
+
    	/*
 	@fn		アニメーションの再生
 	@param	_anim アニメーションデータクラス
