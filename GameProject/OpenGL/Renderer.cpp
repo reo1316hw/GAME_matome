@@ -299,7 +299,6 @@ void Renderer::Draw()
 
 	DrawParticle();
 
-
 	// UIの描画
 	// アルファブレンディングを有効にする
 	glEnable(GL_BLEND);
