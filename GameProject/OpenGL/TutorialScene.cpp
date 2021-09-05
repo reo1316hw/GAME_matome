@@ -29,17 +29,17 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	mMapCreate = new MapCreate();
 	if (!mMapCreate->OpenFile())
 	{
-		mMapCreate->CreateGround();
-		mMapCreate->CreateGlass();
-		mMapCreate->CreateBlock();
-		mMapCreate->CreateVerticalMoveGround();
-		mMapCreate->CreateJump();
-		mMapCreate->CreateLateralMoveGround();
-		mPlayer = mMapCreate->CreatePlayer();
-		mMapCreate->CreateUpBlock();
-		mMapCreate->CreateRightGround();
-		mMapCreate->CreateLeftGround();
-		mMapCreate->CreateGoal();
+		mMapCreate->AccessGroundData();
+		mMapCreate->AccessGlassData();
+		mMapCreate->AccessBlockData();
+		mMapCreate->AccessVerticalMoveGroundData();
+		mMapCreate->AccessJumpData();
+		mMapCreate->AccessLateralMoveGroundData();
+		mPlayer = mMapCreate->AccessPlayerData();
+		mMapCreate->AccessUpBlockData();
+		mMapCreate->AccessRightGroundData();
+		mMapCreate->AccessLeftGroundData();
+		mMapCreate->AccessGoalData();
 	}
 
 	for (int i = 0; i < 3; i++)

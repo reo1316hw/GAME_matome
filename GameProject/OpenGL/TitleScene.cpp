@@ -40,7 +40,7 @@ SceneBase* TitleScene::update(const InputState& _state)
 		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
 	{
 		return new TutorialScene(tutorial);
-		/*return new Stage01Scene(stage01);*/
+		//return new Stage01Scene(stage01);
 		//return new Stage02Scene(stage02);
 	}
 

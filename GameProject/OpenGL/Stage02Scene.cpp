@@ -27,7 +27,6 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 		if (i <= 1)
 		{
 			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f,( -81500.0f + i * 21200.0f)), Vector3::Zero, "Assets/checkpoint_stage02.png", Tag::checkpoint, Scene::stage02);
-
 		}
 		else
 		{
@@ -40,24 +39,24 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 	mMapCreate = new MapCreate();
 	if (!mMapCreate->OpenFile())
 	{
-		mMapCreate->CreateGround();
-		mMapCreate->CreateGlass();
-		mMapCreate->CreateBlock();
-		mMapCreate->CreateVerticalMoveGround();
-		mMapCreate->CreateJump();
-		mMapCreate->CreateLateralMoveGround();
-		mMapCreate->CreatePlayer();
-		mMapCreate->CreateUpBlock();
-		mMapCreate->CreateVerticalBlock();
-		mMapCreate->CreateAerialBlock();
-		mMapCreate->CreateRightBlock();
-		mMapCreate->CreateLeftBlock();
-		mMapCreate->CreateRightGround();
-		mMapCreate->CreateLeftGround();
-		mMapCreate->CreateLeftGround();
-		mMapCreate->CreateDownBlock();
-		mMapCreate->CreateGoal();
-		mMapCreate->CreateRespawn();
+		mMapCreate->AccessGroundData();
+		mMapCreate->AccessGlassData();
+		mMapCreate->AccessBlockData();
+		mMapCreate->AccessVerticalMoveGroundData();
+		mMapCreate->AccessJumpData();
+		mMapCreate->AccessLateralMoveGroundData();
+		mMapCreate->AccessPlayerData();
+		mMapCreate->AccessUpBlockData();
+		mMapCreate->AccessVerticalBlockData();
+		mMapCreate->AccessAerialBlockData();
+		mMapCreate->AccessRightBlockData();
+		mMapCreate->AccessLeftBlockData();
+		mMapCreate->AccessRightGroundData();
+		mMapCreate->AccessLeftGroundData();
+		mMapCreate->AccessLeftGroundData();
+		mMapCreate->AccessDownBlockData();
+		mMapCreate->AccessGoalData();
+		mMapCreate->AccessRespawnData();
 	}
 
 	for (int i = 0; i < 3; i++)

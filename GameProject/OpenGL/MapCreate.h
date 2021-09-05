@@ -29,89 +29,176 @@ public:
 	bool OpenFile();
 
 	/*
+	@fn	床のデータにアクセスする
+	*/
+	void AccessGroundData();
+
+	/*
 	@fn	床を生成する
 	*/
-	void CreateGround();
+	void CreateGround(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	ガラス床のデータにアクセスする
+	*/
+	void AccessGlassData();
 
 	/*
 	@fn	ガラス床を生成する
 	*/
-	void CreateGlass();
+	void CreateGlass(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	障害物のデータにアクセスする
+	*/
+	void AccessBlockData();
 
 	/*
 	@fn	障害物を生成する
 	*/
-	void CreateBlock();
+	void CreateBlock(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	縦移動床のデータにアクセスする
+	*/
+	void AccessVerticalMoveGroundData();
 
 	/*
 	@fn	縦移動床を生成する
 	*/
-	void CreateVerticalMoveGround();
+	void CreateVerticalMoveGround(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	ジャンプ中のデータにアクセスする
+	*/
+	void AccessJumpData();
 
 	/*
 	@fn	ジャンプ中を生成する
 	*/
-	void CreateJump();
+	void CreateJump(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	横移動床のデータにアクセスする
+	*/
+	void AccessLateralMoveGroundData();
 
 	/*
 	@fn	横移動床を生成する
 	*/
-	void CreateLateralMoveGround();
+	void CreateLateralMoveGround(const unsigned int _name, const Vector3 _objectPos);
 
 	/*
-	@fn	プレイヤーを生成する
+	@fn	    プレイヤーのデータにアクセスする
+	@return プレイヤークラスのポインタ
 	*/
-	Player* CreatePlayer();
+	Player* AccessPlayerData();
+
+	/*
+	@fn	    プレイヤーを生成する
+	@return プレイヤークラスのポインタ
+	*/
+	Player* CreatePlayer(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	上移動ブロックのデータにアクセスする
+	*/
+	void AccessUpBlockData();
 
 	/*
 	@fn	上移動ブロックを生成する
 	*/
-	void CreateUpBlock();
+	void CreateUpBlock(const unsigned int _name, const Vector3 _objectPos, const Vector3 _objectPos2);
+
+	/*
+	@fn	縦長障害物のデータにアクセスする
+	*/
+	void AccessVerticalBlockData();
 
 	/*
 	@fn	縦長障害物を生成する
 	*/
-	void CreateVerticalBlock();
+	void CreateVerticalBlock(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	空中ブロックのデータにアクセスする
+	*/
+	void AccessAerialBlockData();
 
 	/*
 	@fn	空中ブロックを生成する
 	*/
-	void CreateAerialBlock();
+	void CreateAerialBlock(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	右移動ブロックのデータにアクセスする
+	*/
+	void AccessRightBlockData();
 
 	/*
 	@fn	右移動ブロックを生成する
 	*/
-	void CreateRightBlock();
+	void CreateRightBlock(const unsigned int _name, const Vector3 _objectPos, const Vector3 _objectPos2);
+
+	/*
+	@fn	左移動ブロックのデータにアクセスする
+	*/
+	void AccessLeftBlockData();
 
 	/*
 	@fn	左移動ブロックを生成する
 	*/
-	void CreateLeftBlock();
+	void CreateLeftBlock(const unsigned int _name, const Vector3 _objectPos, const Vector3 _objectPos2);
+
+	/*
+	@fn	1マス右移動床のデータにアクセスする
+	*/
+	void AccessRightGroundData();
 
 	/*
 	@fn	1マス右移動床を生成する
 	*/
-	void CreateRightGround();
+	void CreateRightGround(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	1マス左移動床のデータにアクセスする
+	*/
+	void AccessLeftGroundData();
 
 	/*
 	@fn	1マス左移動床を生成する
 	*/
-	void CreateLeftGround();
+	void CreateLeftGround(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	落下ブロックのデータにアクセスする
+	*/
+	void AccessDownBlockData();
 
 	/*
 	@fn	落下ブロックを生成する
 	*/
-	void CreateDownBlock();
+	void CreateDownBlock(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	ゴール柱のデータにアクセスする
+	*/
+	void AccessGoalData();
 
 	/*
 	@fn	ゴール柱を生成する
 	*/
-	void CreateGoal();
+	void CreateGoal(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn	リスポーン地点のデータにアクセスする
+	*/
+	void AccessRespawnData();
 
 	/*
 	@fn	リスポーン地点を生成する
 	*/
-	void CreateRespawn();
+	void CreateRespawn(const unsigned int _name, const Vector3 _objectPos);
 
 private:
 
@@ -153,9 +240,6 @@ private:
 	std::vector<std::vector<int>> mGoalBlockMapData;
 	//リスポーン地点マップデータ
 	std::vector<std::vector<int>> mRespawnMapData;
-
-	// プレイヤーのポインタ
-	Player* mPlayer;
 
 	//現在のシーン
 	int mScene;

@@ -32,13 +32,19 @@ void PhysicsWorld::DeleteInstance()
 	}
 }
 
+/*
+@fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
+@param _player プレイヤーのポインタ
+*/
 void PhysicsWorld::SortPhysicsData(Player* _player)
 {
-	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox) {
-		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z; // 左の方が小さかったら
+	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
+	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox) 
+	{
+		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z;
 	});
 
-	printf("aaa\n");
+
 }
 
 //void PhysicsWorld::HitCheck()

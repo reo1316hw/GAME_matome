@@ -27,7 +27,6 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 		if (i <= 1)
 		{
   			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-79500.0f + i * 24000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
-
 		}
 		else
 		{
@@ -40,15 +39,15 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 	mMapCreate = new MapCreate();
 	if (!mMapCreate->OpenFile())
 	{
-		mMapCreate->CreateGround();
-		mMapCreate->CreateGlass();
-		mMapCreate->CreateBlock();
-		mMapCreate->CreateVerticalMoveGround();
-		mMapCreate->CreateJump();
-		mMapCreate->CreateLateralMoveGround();
-		mMapCreate->CreatePlayer();
-		mMapCreate->CreateGoal();
-		mMapCreate->CreateRespawn();
+		mMapCreate->AccessGroundData();
+		mMapCreate->AccessGlassData();
+		mMapCreate->AccessBlockData();
+		mMapCreate->AccessVerticalMoveGroundData();
+		mMapCreate->AccessJumpData();
+		mMapCreate->AccessLateralMoveGroundData();
+		mMapCreate->AccessPlayerData();
+		mMapCreate->AccessGoalData();
+		mMapCreate->AccessRespawnData();
 	}
 
 	for (int i = 0; i < 3; i++)
