@@ -34,17 +34,11 @@ void PhysicsWorld::DeleteInstance()
 
 void PhysicsWorld::SortPhysicsData(Player* _player)
 {
-	int count = 0;
-	for (auto itr : mBoxes)
-	{
-		/*count++;
+	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox) {
+		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z; // 左の方が小さかったら
+	});
 
-		if (_player->GetPosition().z + 50.0f >= itr->GetOwner()->GetPosition().z - 50.0f &&
-			_player->GetPosition().z - 50.0f <= itr->GetOwner()->GetPosition().z + 50.0f)
-		{
-			printf("%d\n",count);
-		}*/
-	}
+	printf("aaa\n");
 }
 
 //void PhysicsWorld::HitCheck()
