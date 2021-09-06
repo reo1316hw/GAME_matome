@@ -111,13 +111,15 @@ private:
 	*/
 	void SphereAndBox();
 
-	//矩形の当たり判定を全て格納するための可変長コンテナ
+	// 矩形の当たり判定を全て格納するための可変長コンテナ
     std::vector<BoxCollider*> mBoxes;
-
-	//球の当たり判定を全て格納するための可変長コンテナ
+	// 球の当たり判定を全て格納するための可変長コンテナ
 	std::vector<SphereCollider*> mSpheres;
-	//プレイヤーの球当たり判定を全て格納するための可変長コンテナ
-	std::vector<SphereCollider*> mPlayerSpheres;
+
+	// 衝突する可能性のある範囲の最初の番号
+	int mRangeHitsBegin;
+	// 衝突する可能性のある範囲の最後の番号
+	int mRangeHitsEnd;
 
 	OnCollisionMap mCollisionFunction;
 

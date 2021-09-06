@@ -38,13 +38,36 @@ void PhysicsWorld::DeleteInstance()
 */
 void PhysicsWorld::SortPhysicsData(Player* _player)
 {
+	// 当たり判定用のデータ配列の長さをカウント
+	int countDataLength = 0;
+	// 衝突する可能性のある範囲の要素数をカウント
+	int countRangeHits = 0;
+
 	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
-	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox) 
+	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox)
 	{
 		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z;
 	});
 
+	for (auto itr : mBoxes)
+	{
+		countDataLength++;
 
+		if (_player->GetPosition().z + 50.0f >= itr->GetOwner()->GetPosition().z - 50.0f &&
+			_player->GetPosition().z - 50.0f <= itr->GetOwner()->GetPosition().z + 50.0f)
+		{
+			countRangeHits++;
+
+			if (countRangeHits == 1)
+			{
+				mRangeHitsBegin = countDataLength;
+			}
+
+			mRangeHitsEnd = countRangeHits;
+		}
+	}
+
+	printf("%d , %d\n", mRangeHitsBegin, mRangeHitsEnd);
 }
 
 //void PhysicsWorld::HitCheck()
@@ -92,6 +115,25 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	//プレイヤーが何かと当たったら
 	if (_sphere->GetTag() == ColliderTag::playerTag)
 	{
+		for (auto itr : mBoxes)
+		{
+			//コライダーの親オブジェクトがActiveじゃなければ終了する
+			if (itr->GetOwner()->GetState() != State::Active)
+			{
+				continue;
+			}
+			bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
+			if (hit)
+			{
+				OnCollisionFunc func = mCollisionFunction.at(_sphere);
+				func(*(itr->GetOwner()));
+				func = mCollisionFunction.at(itr);
+				func(*(_sphere->GetOwner()));
+				_sphere->Refresh();
+				return;
+			}
+		}
+
 		for (auto itr : mBoxes)
 		{
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
