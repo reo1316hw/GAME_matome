@@ -707,7 +707,7 @@ Player* MapCreate::AccessPlayerData()
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
 			const Vector3 objectPos = Vector3(mOffset * ix, 500, -mOffset * iz);
 
-			playerPtr = CreatePlayer(name, objectPos);
+			playerPtr = CreatePlayer(name, objectPos, playerPtr);
 		}
 	}
 
@@ -718,10 +718,8 @@ Player* MapCreate::AccessPlayerData()
 @fn	プレイヤーを生成する
 @return プレイヤークラスのポインタ
 */
-Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectPos)
+Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectPos, Player* _playerPtr)
 {
-	// プレイヤーのポインタ
-	Player* playerPtr = nullptr;
 	const Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
 
 	switch (mScene)
@@ -731,7 +729,7 @@ Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectP
 		switch (_name)
 		{
 		case(7):
-			playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
+			_playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
 			break;
 		}
 		break;
@@ -741,7 +739,7 @@ Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectP
 		switch (_name)
 		{
 		case(7):
-			playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
+			_playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
 			break;
 		}
 		break;
@@ -751,13 +749,13 @@ Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectP
 		switch (_name)
 		{
 		case(7):
-			playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
+			_playerPtr = new Player(_objectPos, objectSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
 			break;
 		}
 		break;
 	}
 
-	return playerPtr;
+	return _playerPtr;
 }
 
 /*

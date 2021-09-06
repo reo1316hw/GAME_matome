@@ -98,7 +98,7 @@ public:
 	@fn	    プレイヤーを生成する
 	@return プレイヤークラスのポインタ
 	*/
-	Player* CreatePlayer(const unsigned int _name, const Vector3 _objectPos);
+	Player* CreatePlayer(const unsigned int _name, const Vector3 _objectPos, Player* _playerPtr);
 
 	/*
 	@fn	上移動ブロックのデータにアクセスする

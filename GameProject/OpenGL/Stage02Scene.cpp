@@ -45,7 +45,7 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 		mMapCreate->AccessVerticalMoveGroundData();
 		mMapCreate->AccessJumpData();
 		mMapCreate->AccessLateralMoveGroundData();
-		mMapCreate->AccessPlayerData();
+		mPlayer = mMapCreate->AccessPlayerData();
 		mMapCreate->AccessUpBlockData();
 		mMapCreate->AccessVerticalBlockData();
 		mMapCreate->AccessAerialBlockData();
@@ -63,6 +63,8 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02);
 	}
+
+	PHYSICS->SortPhysicsData(mPlayer);
 
 	mClearFlag = false;
 
