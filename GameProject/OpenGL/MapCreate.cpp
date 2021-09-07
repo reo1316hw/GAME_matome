@@ -360,6 +360,97 @@ void MapCreate::AccessGroundData()
 	}
 }
 
+//void MapCreate::AccessMapData(const Tag& _tag)
+//{
+//	for (int iz = 0; iz < mSizeZ; iz++)
+//	{
+//		for (int ix = 0; ix < mSizeX; ix++)
+//		{
+//			CreateObject(_tag,iz, ix);
+//		}
+//	}
+//}
+
+//void MapCreate::CreateObject(const Tag& _groundTag, int _iz, int _ix)
+//{
+//	const unsigned int name = mGroundMapData[_iz][_ix];
+//	const Vector3 objectPos = Vector3(mOffset * _ix, 0, -mOffset * _iz);
+//	const Vector3 objectSize = Vector3(100, 10, 100);
+//
+//	switch (mScene)
+//	{
+//	case SceneBase::tutorial:
+//
+//		switch (name)
+//		{
+//		case(1):
+//			new Ground(objectPos, objectSize, "Assets/box.gpmesh", _groundTag, SceneBase::tutorial);
+//			break;
+//		}
+//		break;
+//
+//	case SceneBase::stage01:
+//
+//		switch (name)
+//		{
+//		case(1):
+//			new Ground(objectPos, objectSize, "Assets/box_08.gpmesh", _groundTag, SceneBase::stage01);
+//			break;
+//		}
+//		break;
+//
+//	case SceneBase::stage02:
+//
+//		switch (name)
+//		{
+//		case(1):
+//			new Ground(objectPos, objectSize, "Assets/box_13.gpmesh", _groundTag, SceneBase::stage02);
+//			break;
+//		}
+//		break;
+//	}
+//}
+
+//void MapCreate::CreateObject(const Tag& _glassTag, int _iz, int _ix)
+//{
+//	const unsigned int name = mGlassMapData[_iz][_ix];
+//	const Vector3 objectPos = Vector3(mOffset * _ix, 0, -mOffset * _iz);
+//	const Vector3 objectSize = Vector3(100, 10, 100);
+//
+//	switch (mScene)
+//	{
+//	case SceneBase::tutorial:
+//
+//		switch (name)
+//		{
+//		case(2):
+//			new Glass(objectPos, objectSize, "Assets/box_02.gpmesh", glass, SceneBase::tutorial);
+//			break;
+//		}
+//		break;
+//
+//	case SceneBase::stage01:
+//
+//		switch (name)
+//		{
+//		case(2):
+//			new Glass(objectPos, objectSize, "Assets/box_09.gpmesh", glass, SceneBase::stage01);
+//			break;
+//		}
+//		break;
+//
+//	case SceneBase::stage02:
+//
+//		switch (name)
+//		{
+//		case(2):
+//			new Glass(objectPos, objectSize, "Assets/box_14.gpmesh", glass, SceneBase::stage02);
+//			break;
+//		}
+//		break;
+//	}
+//}
+
 /*
 @fn	°‚ð¶¬‚·‚é
 */

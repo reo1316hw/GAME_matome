@@ -118,8 +118,8 @@ private:
 
 	// 衝突する可能性のある範囲の最初の番号
 	int mRangeHitsBegin;
-	// 衝突する可能性のある範囲の最後の番号
-	int mRangeHitsEnd;
+	// 次に衝突する可能性のある範囲
+	int mRangeHitsNext;
 
 	OnCollisionMap mCollisionFunction;
 

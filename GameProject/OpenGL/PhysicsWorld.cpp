@@ -142,21 +142,6 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				continue;
 			}
 
-			if (_sphere->GetOwner()->GetPosition().z + 50.0f >= mBoxes[i]->GetOwner()->GetPosition().z - 50.0f &&
-				_sphere->GetOwner()->GetPosition().z - 50.0f <= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
-			{
-				countRangeHitsNum++;
-			}
-			else if (_sphere->GetOwner()->GetPosition().z + 50.0f < mBoxes[i]->GetOwner()->GetPosition().z - 50.0f)
-			{
-				if (i % countRangeHitsNum == 0)
-				{
-					mRangeHitsBegin += countRangeHitsNum;
-				}
-
-				break;
-			}
-
 			bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
 			if (hit)
 			{
@@ -165,6 +150,21 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				func = mCollisionFunction.at(mBoxes[i]);
 				func(*(_sphere->GetOwner()));
 				_sphere->Refresh();
+			}
+
+			if (_sphere->GetOwner()->GetPosition().z + 36.0f >= mBoxes[i]->GetOwner()->GetPosition().z - 50.0f &&
+				_sphere->GetOwner()->GetPosition().z - 36.0f <= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
+			{
+				mRangeHitsNext = countRangeHitsNum++;
+			}
+			else
+			{
+				if (_sphere->GetOwner()->GetPosition().z + 36.0f >= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
+				{
+					mRangeHitsBegin += mRangeHitsNext + 1;
+				}
+
+				break;
 			}
 		}
 	}

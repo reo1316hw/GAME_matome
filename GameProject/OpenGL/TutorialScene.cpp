@@ -29,6 +29,9 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	mMapCreate = new MapCreate();
 	if (!mMapCreate->OpenFile())
 	{
+		/*mMapCreate->AccessMapData(Tag::ground);
+		mMapCreate->AccessMapData(Tag::glass);*/
+
 		mMapCreate->AccessGroundData();
 		mMapCreate->AccessGlassData();
 		mMapCreate->AccessBlockData();

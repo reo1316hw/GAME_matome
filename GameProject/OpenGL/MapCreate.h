@@ -29,6 +29,15 @@ public:
 	bool OpenFile();
 
 	/*
+    @fn マップデータにアクセスする
+    */
+	void AccessMapData(const Tag& _tag);
+
+	void CreateObject(const Tag& _groundTag, int _iz, int _ix);
+
+	//void CreateObject(const Tag& _glassTag, int _iz, int _ix);
+
+	/*
 	@fn	床のデータにアクセスする
 	*/
 	void AccessGroundData();
