@@ -36,32 +36,13 @@ void PhysicsWorld::DeleteInstance()
 @fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
 @param _player プレイヤーのポインタ
 */
-void PhysicsWorld::SortPhysicsData(Player* _player)
+void PhysicsWorld::SortPhysicsData()
 {
 	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
 	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox)
 	{
 		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z;
 	});
-
-	/*for (int i = 0; i < mBoxes.size(); i++)
-	{
-		if (_player->GetPosition().z + 50.0f >= mBoxes[i]->GetOwner()->GetPosition().z - 50.0f &&
-			_player->GetPosition().z - 50.0f <= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
-		{
-			if (countRangeHitsNum == 0)
-			{
-				mRangeHitsBegin = i;
-			}
-
-			mRangeHitsEnd = countRangeHitsNum;
-			countRangeHitsNum++;
-		}
-		else if(_player->GetPosition().z + 50.0f < mBoxes[i]->GetOwner()->GetPosition().z - 50.0f)
-		{
-			break;
-		}
-	}*/
 }
 
 //void PhysicsWorld::HitCheck()
@@ -100,9 +81,10 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
-	int count = 0;
 	// 衝突する可能性のある範囲の要素数をカウント
 	int countRangeHitsNum = 0;
+	// 球状の当たり判定がアタッチされているオブジェクトのz座標
+	float spherePosZ = _sphere->GetOwner()->GetPosition().z;
 
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
@@ -110,32 +92,21 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
+	if (mPlayer->GetClearFlag() || mPlayer->GetDeathFlag())
+	{
+	    mRangeHitsBegin = 0;
+	}
+
 	//プレイヤーが何かと当たったら
 	if (_sphere->GetTag() == ColliderTag::playerTag)
 	{
-		//for (auto itr : mBoxes)
-		//{
-		//	count++;
-		//	// コライダーの親オブジェクトがActiveじゃなければ終了する
-		//	if (itr->GetOwner()->GetState() != State::Active)
-		//	{
-		//		continue;
-		//	}
-		//	bool hit = Intersect(_sphere->GetWorldSphere(), itr->GetWorldBox());
-		//	if (hit)
-		//	{
-		//		OnCollisionFunc func = mCollisionFunction.at(_sphere);
-		//		func(*(itr->GetOwner()));
-		//		func = mCollisionFunction.at(itr);
-		//		func(*(_sphere->GetOwner()));
-		//		_sphere->Refresh();
-		//		return;
-		//	}
-		//	printf("%d\n", count);
-		//}
-
 		for (int i = mRangeHitsBegin; i < mBoxes.size(); i++)
 		{
+			// 矩形状の当たり判定の最大z座標
+			float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
+			// 矩形状の当たり判定の最小z座標
+			float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
+
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
 			if (mBoxes[i]->GetOwner()->GetState() != State::Active)
 			{
@@ -152,18 +123,17 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				_sphere->Refresh();
 			}
 
-			if (_sphere->GetOwner()->GetPosition().z + 36.0f >= mBoxes[i]->GetOwner()->GetPosition().z - 50.0f &&
-				_sphere->GetOwner()->GetPosition().z - 36.0f <= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
+			if (spherePosZ > boxZMin &&
+				spherePosZ < boxZMax)
 			{
 				mRangeHitsNext = countRangeHitsNum++;
 			}
 			else
 			{
-				if (_sphere->GetOwner()->GetPosition().z + 36.0f >= mBoxes[i]->GetOwner()->GetPosition().z + 50.0f)
+				if (spherePosZ >= boxZMax)
 				{
 					mRangeHitsBegin += mRangeHitsNext + 1;
 				}
-
 				break;
 			}
 		}

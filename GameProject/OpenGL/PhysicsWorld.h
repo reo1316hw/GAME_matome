@@ -19,6 +19,7 @@ class GameObject;
 class BoxCollider;
 class SphereCollider;
 class ColliderComponent;
+class Player;
 
 typedef std::function<void(GameObject&)> OnCollisionFunc;
 typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> OnCollisionMap;
@@ -82,9 +83,8 @@ public:
 
 	/*
 	@fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
-	@param _player プレイヤーのポインタ
 	*/
-	void SortPhysicsData(Player* _player);
+	void SortPhysicsData();
 
 private:
 
@@ -121,6 +121,8 @@ private:
 	// 次に衝突する可能性のある範囲
 	int mRangeHitsNext;
 
+	Player* mPlayer;
+
 	OnCollisionMap mCollisionFunction;
 
 public://ゲッターセッター
@@ -129,6 +131,11 @@ public://ゲッターセッター
 	@return PhysicsWorldクラスのインスタンス(PhysicsWorld型)
 	*/
 	static PhysicsWorld* GetInstance() { return mPhysics; }
+
+	/*
+	@param _playerPtr プレイヤーのポインター
+	*/
+	void SetPlayerPtr(Player* _playerPtr) { mPlayer = _playerPtr; }
 };
 
 /*

@@ -272,7 +272,7 @@ public://ゲッターセッター
 	/*
 	@return	オブジェクトのスケール(float型)
 	*/
-	float GetScale() const { return mScale.x; }
+	float GetScale() const { return mScale.z; }
 
 	/*
 	@return	オブジェクトのクォータニオン(Quaternion型)

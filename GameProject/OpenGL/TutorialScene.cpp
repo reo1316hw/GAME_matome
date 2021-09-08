@@ -50,7 +50,7 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial);
 	}
 
-	PHYSICS->SortPhysicsData(mPlayer);
+	PHYSICS->SortPhysicsData();
 
 	mSendContinueTutorialFlag = false;
 }
