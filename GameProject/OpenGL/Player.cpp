@@ -431,12 +431,12 @@ void Player::UpdateGameObject(float _deltaTime)
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
 
 
-	mSendPos					= mPosition;
-	mSendClearFlag				= mClearFlag;
-	mSendDeathFlag				= mDeathFlag;
-	mSendRespawnFlag			= mRespawnFlag;
-	mSendCheckpointFlag			= mCheckpointFlag;
-	mSendLife					= mLife;
+	mSendPos			= mPosition;
+	mSendClearFlag		= mClearFlag;
+	mSendDeathFlag		= mDeathFlag;
+	mSendRespawnFlag	= mRespawnFlag;
+	mSendCheckpointFlag	= mCheckpointFlag;
+	mSendLife			= mLife;
 
 	mRespawnFlag = false;
 	mGroundFlag = false;

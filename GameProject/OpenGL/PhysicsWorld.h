@@ -39,6 +39,11 @@ public:
 	static void DeleteInstance();
 
 	/*
+	@fn 初期化
+	*/
+	void Initialize();
+
+	/*
 	@fn	当たり判定
 	*/
     void HitCheck();
@@ -80,11 +85,6 @@ public:
 	@param	_sphere　削除するSphereColliderクラスのポインタ
 	*/
 	void RemoveSphere(SphereCollider* _sphere);
-
-	/*
-	@fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
-	*/
-	void SortPhysicsData();
 
 private:
 

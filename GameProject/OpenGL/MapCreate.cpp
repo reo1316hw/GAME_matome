@@ -812,7 +812,7 @@ Player* MapCreate::AccessPlayerData()
 Player* MapCreate::CreatePlayer(const unsigned int _name, const Vector3 _objectPos, Player* _playerPtr)
 {
 	const Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
-
+	
 	switch (mScene)
 	{
 	case SceneBase::tutorial:

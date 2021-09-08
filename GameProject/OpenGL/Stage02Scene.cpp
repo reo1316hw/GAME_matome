@@ -64,7 +64,7 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02);
 	}
 
-	PHYSICS->SortPhysicsData();
+	PHYSICS->Initialize();
 
 	mClearFlag = false;
 

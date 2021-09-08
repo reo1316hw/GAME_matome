@@ -20,7 +20,7 @@ CheckpointBoard::CheckpointBoard(const Vector3& _pos, const Vector3& _vel, const
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 
-	mCehckpointBoardAABB = {Vector3(-1500.0f,-1500.0f,0.0f),Vector3(1500.0f,1500.0f,1.0f)};
+	mCehckpointBoardAABB = {Vector3(-1500.0f,-1500.0f,-100.0f),Vector3(1500.0f,1500.0f,100.0f)};
 
 	mBoxcollider = new BoxCollider(this, ColliderTag::checkpoint, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mCehckpointBoardAABB);

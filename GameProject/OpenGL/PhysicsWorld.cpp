@@ -33,11 +33,12 @@ void PhysicsWorld::DeleteInstance()
 }
 
 /*
-@fn     当たり判定用のデータ配列を当たる可能性のあるブロックの範囲でソートする
-@param _player プレイヤーのポインタ
+@fn 初期化
 */
-void PhysicsWorld::SortPhysicsData()
+void PhysicsWorld::Initialize()
 {
+	mRangeHitsBegin = 0;
+
 	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
 	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox)
 	{
@@ -92,7 +93,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	if (mPlayer->GetClearFlag() || mPlayer->GetDeathFlag())
+	if (mPlayer->GetClearFlag() || mPlayer->GetDeathFlag() || mPlayer->GetRespawnFlag())
 	{
 	    mRangeHitsBegin = 0;
 	}

@@ -147,9 +147,9 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	// HDRレンダラー初期化
 	mHDRRenderer = new HDRRenderer(mScreenWidth, mScreenHeight, 4);
 
-	////// カリング
-	//glFrontFace(GL_CCW);
-	//glEnable(GL_FRONT_FACE);
+	//// カリング
+	glFrontFace(GL_CCW);
+	glEnable(GL_FRONT_FACE);
 
 	//スプライト用の頂点配列を作成
 	CreateSpriteVerts();
