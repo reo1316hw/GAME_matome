@@ -36,7 +36,7 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 
 	mSprite = new Sprite("Assets/stage04.png");
 
-	mMapCreate = new MapCreate();
+	/*mMapCreate = new MapCreate();
 	if (!mMapCreate->OpenFile())
 	{
 		mMapCreate->AccessGroundData();
@@ -57,14 +57,12 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 		mMapCreate->AccessDownBlockData();
 		mMapCreate->AccessGoalData();
 		mMapCreate->AccessRespawnData();
-	}
+	}*/
 
 	for (int i = 0; i < 3; i++)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02);
 	}
-
-	PHYSICS->Initialize();
 
 	mClearFlag = false;
 

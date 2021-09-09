@@ -70,7 +70,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	mSelfSphereCollider->SetObjectSphere(sphere);
 
 	mLateralMoveVelocity = Vector3::Zero;
-
+	mSendPos = mPosition;
 	mButtonFlag = false;
 }
 

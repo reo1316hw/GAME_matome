@@ -85,7 +85,10 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	// 衝突する可能性のある範囲の要素数をカウント
 	int countRangeHitsNum = 0;
 	// 球状の当たり判定がアタッチされているオブジェクトのz座標
-	float spherePosZ = _sphere->GetOwner()->GetPosition().z;
+	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
+
+	float sphereZMax = _sphere->GetWorldSphere().m_center.z + _sphere->GetWorldSphere().m_radius;
+	float sphereZMin = _sphere->GetWorldSphere().m_center.z - _sphere->GetWorldSphere().m_radius;
 
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
@@ -93,25 +96,32 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	if (mPlayer->GetClearFlag() || mPlayer->GetDeathFlag() || mPlayer->GetRespawnFlag())
-	{
-	    mRangeHitsBegin = 0;
-	}
-
 	//プレイヤーが何かと当たったら
 	if (_sphere->GetTag() == ColliderTag::playerTag)
 	{
 		for (int i = mRangeHitsBegin; i < mBoxes.size(); i++)
 		{
+
 			// 矩形状の当たり判定の最大z座標
 			float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
 			// 矩形状の当たり判定の最小z座標
 			float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
 
+			float boxZPos = mBoxes[i]->GetOwner()->GetPosition().z;
+
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
 			if (mBoxes[i]->GetOwner()->GetState() != State::Active)
 			{
 				continue;
+			}
+
+			if (mPlayer->GetRespawnFlag())
+			{
+				if (boxZPos > sphereZMin &&
+					boxZPos < sphereZMax)
+				{
+					mRangeHitsBegin = i;
+				}
 			}
 
 			bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
@@ -124,14 +134,14 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 				_sphere->Refresh();
 			}
 
-			if (spherePosZ > boxZMin &&
-				spherePosZ < boxZMax)
+			if (sphereZPos > boxZMin &&
+				sphereZPos < boxZMax)
 			{
 				mRangeHitsNext = countRangeHitsNum++;
 			}
 			else
 			{
-				if (spherePosZ >= boxZMax)
+				if (sphereZPos >= boxZMax)
 				{
 					mRangeHitsBegin += mRangeHitsNext + 1;
 				}

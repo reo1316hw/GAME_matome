@@ -110,6 +110,9 @@ void Game::GameLoop()
 			// 現在のシーンの解放
     		delete mNowScene;
 
+			// 当たり判定処理初期化
+			PHYSICS->Initialize();
+
 			// 現在実行中のシーンの切り替え
  			mNowScene = tmpScene;
 			continue;

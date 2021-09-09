@@ -36,26 +36,24 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 
 	mSprite = new Sprite("Assets/sea.png");
 
-	mMapCreate = new MapCreate();
-	if (!mMapCreate->OpenFile())
-	{
-		mMapCreate->AccessGroundData();
-		mMapCreate->AccessGlassData();
-		mMapCreate->AccessBlockData();
-		mMapCreate->AccessVerticalMoveGroundData();
-		mMapCreate->AccessJumpData();
-		mMapCreate->AccessLateralMoveGroundData();
-		mPlayer = mMapCreate->AccessPlayerData();
-		mMapCreate->AccessGoalData();
-		mMapCreate->AccessRespawnData();
-	}
+	//mMapCreate = new MapCreate();
+	//if (!mMapCreate->OpenFile())
+	//{
+	//	mMapCreate->AccessGroundData();
+	//	mMapCreate->AccessGlassData();
+	//	mMapCreate->AccessBlockData();
+	//	mMapCreate->AccessVerticalMoveGroundData();
+	//	mMapCreate->AccessJumpData();
+	//	mMapCreate->AccessLateralMoveGroundData();
+	//	mPlayer = mMapCreate->AccessPlayerData();
+	//	mMapCreate->AccessGoalData();
+	//	mMapCreate->AccessRespawnData();
+	//}
 
 	for (int i = 0; i < 3; i++)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage01);
 	}
-
-	PHYSICS->Initialize();
 
 	mContinueStage01Flag = false;
 	mNextSceneCount = 0;

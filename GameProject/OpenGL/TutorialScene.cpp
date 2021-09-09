@@ -27,30 +27,12 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	mSprite = new Sprite("Assets/forest.png");
 
 	mMapCreate = new MapCreate();
-	if (!mMapCreate->OpenFile())
-	{
-		/*mMapCreate->AccessMapData(Tag::ground);
-		mMapCreate->AccessMapData(Tag::glass);*/
-
-		mMapCreate->AccessGroundData();
-		mMapCreate->AccessGlassData();
-		mMapCreate->AccessBlockData();
-		mMapCreate->AccessVerticalMoveGroundData();
-		mMapCreate->AccessJumpData();
-		mMapCreate->AccessLateralMoveGroundData();
-		mPlayer = mMapCreate->AccessPlayerData();
-		mMapCreate->AccessUpBlockData();
-		mMapCreate->AccessRightGroundData();
-		mMapCreate->AccessLeftGroundData();
-		mMapCreate->AccessGoalData();
-	}
+	mMapCreate->OpenTutorialFile();
 
 	for (int i = 0; i < 3; i++)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial);
 	}
-
-	PHYSICS->Initialize();
 
 	mSendContinueTutorialFlag = false;
 }

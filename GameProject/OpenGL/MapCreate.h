@@ -23,29 +23,64 @@ public:
 	~MapCreate();
 
 	/*
-	@fn		jsonファイルをRapidJsonで読み込んでマップデータを各配列に格納する
-	@return	ファイルを開けたか(bool型)
+	@fn		チュートリアルのjsonファイルをRapidJsonで読み込んでマップデータを各配列に格納する
+	@return プレイヤーのポインタ
 	*/
-	bool OpenFile();
+	Player* OpenTutorialFile();
 
 	/*
-    @fn マップデータにアクセスする
+	@fn		ステージ1のjsonファイルをRapidJsonで読み込んでマップデータを各配列に格納する
+	@return プレイヤーのポインタ
+	*/
+	Player* OpenStage01File();
+
+	/*
+	@fn		ステージ2のjsonファイルをRapidJsonで読み込んでマップデータを各配列に格納する
+	@return プレイヤーのポインタ
+	*/
+	Player* OpenStage02File();
+
+	/*
+	@fn	   チュートリアルのマップデータにアクセスする
+	@param _mapData マップデータ
+	@param _sizeY 上に配置していくためのオブジェクトの個数
+	*/
+	void AccessTutorialMapData(std::vector<std::vector<int>> _mapData, int _sizeY);
+
+	/*
+    @fn	   ステージ1のマップデータにアクセスする
+    @param _mapData マップデータ
+    @param _sizeY 上に配置していくためのオブジェクトの個数
     */
-	void AccessMapData(const Tag& _tag);
-
-	void CreateObject(const Tag& _groundTag, int _iz, int _ix);
-
-	//void CreateObject(const Tag& _glassTag, int _iz, int _ix);
+	void AccessStage01MapData(std::vector<std::vector<int>> _mapData, int _sizeY);
 
 	/*
-	@fn	床のデータにアクセスする
-	*/
-	void AccessGroundData();
+    @fn	   ステージ2のマップデータにアクセスする
+    @param _mapData マップデータ
+    @param _sizeY 上に配置していくためのオブジェクトの個数
+    */
+	void AccessStage02MapData(std::vector<std::vector<int>> _mapData, int _sizeY);
 
 	/*
-	@fn	床を生成する
+	@fn    チュートリアルのオブジェクトを生成する
+	@param _name マップデータの要素
+	@param _objectPos オブジェクトの座標
 	*/
-	void CreateGround(const unsigned int _name, const Vector3 _objectPos);
+	void CreateTutorialObject(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn    ステージ1のオブジェクトを生成する
+	@param _name マップデータの要素
+	@param _objectPos オブジェクトの座標
+	*/
+	void CreateStage01Object(const unsigned int _name, const Vector3 _objectPos);
+
+	/*
+	@fn    ステージ2のオブジェクトを生成する
+	@param _name マップデータの要素
+	@param _objectPos オブジェクトの座標
+	*/
+	void CreateStage02Object(const unsigned int _name, const Vector3 _objectPos);
 
 	/*
 	@fn	ガラス床のデータにアクセスする
@@ -215,51 +250,28 @@ private:
 
 	int  findLayerIndex(rapidjson::GenericArray<false,rapidjson::Value>& _layer,std::string& _layerName);
 
-	//床マップデータ
-	std::vector<std::vector<int>> mGroundMapData;
-	//プレイヤーマップデータ
-	std::vector<std::vector<int>> mPlayerMapData;
-	//横移動床マップデータ
-	std::vector<std::vector<int>> mLateralMoveGroundMapData;
-	//縦移動床マップデータ
-	std::vector<std::vector<int>> mVerticalMoveGroundMapData;
-	//ジャンプ床マップデータ
-	std::vector<std::vector<int>> mJumpMapData;
-	//障害物マップデータ
-	std::vector<std::vector<int>> mBlockMapData;
-	//ガラス床マップデータ
-	std::vector<std::vector<int>> mGlassMapData;
-	//上移動ブロックマップデータ
-	std::vector<std::vector<int>> mUpBlockMapData;
-	//縦長障害物マップデータ
-	std::vector<std::vector<int>> mVerticalBlockMapData;
-	//空中ブロックマップデータ
-	std::vector<std::vector<int>> mAerialBlockMapData;
-	//右移動ブロックマップデータ
-	std::vector<std::vector<int>> mRightBlockMapData;
-	//左移動ブロックマップデータ
-	std::vector<std::vector<int>> mLeftBlockMapData;
-	//1マス右移動床マップデータ
-	std::vector<std::vector<int>> mRightGroundMapData;
-	//1マス左移動床マップデータ
-	std::vector<std::vector<int>> mLeftGroundMapData;
-	//落下ブロックマップデータ
-	std::vector<std::vector<int>> mDownBlockMapData;
-	//ゴール柱マップデータ
+	// 下層のマップデータ
+	std::vector<std::vector<int>> mLowerMapData;
+	// 上層のマップデータ
+	std::vector<std::vector<int>> mUpperMapData;
+	// ゴール柱のマップデータ
 	std::vector<std::vector<int>> mGoalBlockMapData;
-	//リスポーン地点マップデータ
-	std::vector<std::vector<int>> mRespawnMapData;
 
-	//現在のシーン
+	// プレイヤーのポインタ
+	Player* mPlayer;
+
+	//int mMapData[2] = { mLowerMapData ,mUpperMapData };
+	
+	// 現在のシーン
 	int mScene;
-	//幅のマップデータ
+	// 幅のマップデータ
 	int	mSizeX;
-	//高さのマップデータ
+	// 高さのマップデータ
 	int	mSizeY;
-	//奥行のマップデータ
+	// 奥行のマップデータ
 	int	mSizeZ;
 
-	//オブジェクトごとの距離
+	// オブジェクトごとの距離
 	float mOffset;
 };
 
