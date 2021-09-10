@@ -5,19 +5,20 @@
 
 /*
 @fn		コンストラクタ
-@param	_owner ゲームオブジェクトクラスのポインタ
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-ClearEffectManager::ClearEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
+ClearEffectManager::ClearEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:GameObject(_sceneTag, _objectTag)
 {
-	mOwner = _owner;
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
 
 	OneCreateClearFlag = true;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -41,7 +42,7 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case PARTICLE_ACTIVE:
 
-		mPosition = mOwner->GetPosition();
+		mPosition = mPlayer->GetPosition();
 		mPosition.y -= 10.0f;
 		mPosition.z -= 20.0f;
 

@@ -31,7 +31,7 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial, mPlayer);
 	}
 
 	mSendContinueTutorialFlag = false;

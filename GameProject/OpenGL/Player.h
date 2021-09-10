@@ -82,18 +82,6 @@ private:
 	//横移動床にあたった時の速度
 	Vector3				mLateralMoveVelocity;
 
-	static Vector3 mSendPos;
-
-	static bool mSendClearFlag;
-
-	static bool mSendDeathFlag;
-
-	static bool mSendRespawnFlag;
-
-	static bool mSendCheckpointFlag;
-
-	static int  mSendLife;
-
 	//死んだか
 	bool		mDeathFlag;
 	//ダメージを受けたか
@@ -154,12 +142,11 @@ private:
 
 public://ゲッターセッター
 
-	static Vector3 GetPos() { return mSendPos; };
-	static bool GetClearFlag() { return mSendClearFlag; };
-	static bool GetDeathFlag() { return mSendDeathFlag; };
-	static bool GetRespawnFlag() { return mSendRespawnFlag; };
-	static bool GetCheckpointFlag() { return mSendCheckpointFlag; };
-	static int GetLife() { return mSendLife; };
+	bool GetClearFlag() { return mClearFlag; };
+	bool GetDeathFlag() { return mDeathFlag; };
+    bool GetRespawnFlag() { return mRespawnFlag; };
+    bool GetCheckpointFlag() { return mCheckpointFlag; };
+    int GetLife() { return mLife; };
 
 };
 

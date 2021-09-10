@@ -8,8 +8,9 @@
 @param	_pos プレイヤーの体力UIの生成場所(スクリーン座標)
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag)
+HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:UIBase(_pos, "Assets/heart02.png", _sceneTag, _objectTag)
 {
 	mUI = new UIComponent(this);
@@ -17,6 +18,7 @@ HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _s
 
 	mPosition = Vector3(_pos.x, _pos.y, 0.0f);
 
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -25,7 +27,7 @@ HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _s
 */
 void HeartUI::UpdateGameObject(float _deltaTime)
 {
-	if (player->GetLife() == 2)
+	if (mPlayer->GetLife() == 2)
 	{
 		if (mUI->GetUIid() == 2 || mUI->GetUIid() == 5 || mUI->GetUIid() == 8)
 		{
@@ -34,7 +36,7 @@ void HeartUI::UpdateGameObject(float _deltaTime)
 		}
 	}
 
-	if (player->GetLife() == 1)
+	if (mPlayer->GetLife() == 1)
 	{
 		if (mUI->GetUIid() == 1 || mUI->GetUIid() == 4 || mUI->GetUIid() == 7)
 		{
@@ -43,7 +45,7 @@ void HeartUI::UpdateGameObject(float _deltaTime)
 		}
 	}
 
-	if (player->GetLife() == 0)
+	if (mPlayer->GetLife() == 0)
 	{
 		if (mUI->GetUIid() == 0 || mUI->GetUIid() == 3 || mUI->GetUIid() == 6)
 		{

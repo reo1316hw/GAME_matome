@@ -9,6 +9,7 @@
 
 #include "ParticleEffectBase.h"
 
+// 前ぽ宣言
 class DeathEffect;
 class Player;
 
@@ -18,11 +19,11 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_owner ゲームオブジェクトクラスのポインタ
 	@param	_objectTag アタッチしたゲームオブジェクトのタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	DeathEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+	DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ

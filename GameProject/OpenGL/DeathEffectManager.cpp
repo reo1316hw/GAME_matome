@@ -5,14 +5,13 @@
 
 /*
 @fn		コンストラクタ
-@param	_owner ゲームオブジェクトクラスのポインタ
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-DeathEffectManager::DeathEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
+DeathEffectManager::DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:GameObject(_sceneTag, _objectTag)
 {
-	mOwner = _owner;
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
@@ -20,6 +19,8 @@ DeathEffectManager::DeathEffectManager(GameObject* _owner, const Tag& _objectTag
 	mAngle = 0.0f;
 
 	OneCreateDeathFlag = true;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -48,7 +49,7 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case PARTICLE_ACTIVE:
 
-		mPosition = mOwner->GetPosition();
+		mPosition = mPlayer->GetPosition();
 		mPosition.y -= 10.0f;
 		mPosition.z -= 20.0f;
 

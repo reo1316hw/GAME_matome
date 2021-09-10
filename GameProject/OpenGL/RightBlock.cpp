@@ -9,8 +9,9 @@
 @param	_size 右移動ブロックのサイズ
 @param	_objectTag 右移動ブロックのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag)
+RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr)
 	: GameObject(_sceneTag, _objectTag)
 	, mElapseTime(0.0f)
 	, mDifferencePos(0.0f)
@@ -39,6 +40,8 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _a
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -47,7 +50,7 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _a
 */
 void RightBlock::UpdateGameObject(float _deltaTime)
 {
-	Vector3 playerPos = Player::GetPos();
+	Vector3 playerPos = mPlayer->GetPosition();
 	//////////////////////////////////////
 	//予知動作処理
 
@@ -96,7 +99,7 @@ void RightBlock::UpdateGameObject(float _deltaTime)
 		mVelocity.x = 0;
 	}
 
-	if (Player::GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
 		mElapseTime = 0.0f;
 		mVelocity.x = 0;
@@ -105,7 +108,7 @@ void RightBlock::UpdateGameObject(float _deltaTime)
 
 	if (mOriginalPosFlag)
 	{
-		if (Player::GetRespawnFlag())
+		if (mPlayer->GetRespawnFlag())
 		{
 			mElapseTime = 0.0f;
 			mVelocity.x = 0;

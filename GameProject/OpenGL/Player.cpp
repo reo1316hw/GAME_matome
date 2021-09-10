@@ -8,13 +8,6 @@
 #include "ClearEffectManager.h"
 #include "DeathEffectManager.h"
 
-Vector3 Player::mSendPos = Vector3::Zero;
-bool	Player::mSendClearFlag = false;
-bool	Player::mSendDeathFlag = false;
-bool    Player::mSendRespawnFlag = false;
-bool	Player::mSendCheckpointFlag = false;
-int     Player::mSendLife = 0;
-
 /*
 @fn		コンストラクタ
 @param	_pos プレイヤーの座標
@@ -59,10 +52,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 
 	//エフェクト
 	mSandEffectManager = new SandEffectManager(this, _objectTag, _sceneTag);
-	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
-	mClearEffectManager = new ClearEffectManager(this, _objectTag, _sceneTag);
-	mDeathEffectManager = new DeathEffectManager(this, _objectTag, _sceneTag);
-	mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
+	mCheckpointEffectManager = new CheckpointEffectManager(_objectTag, _sceneTag, this);
+	mClearEffectManager = new ClearEffectManager(_objectTag, _sceneTag, this);
+	mDeathEffectManager = new DeathEffectManager(_objectTag, _sceneTag , this);
+	//mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
 
 	//プレイヤー自身の当たり判定
 	mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -70,7 +63,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	mSelfSphereCollider->SetObjectSphere(sphere);
 
 	mLateralMoveVelocity = Vector3::Zero;
-	mSendPos = mPosition;
 	mButtonFlag = false;
 }
 
@@ -429,14 +421,6 @@ void Player::UpdateGameObject(float _deltaTime)
 
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
-
-
-	mSendPos			= mPosition;
-	mSendClearFlag		= mClearFlag;
-	mSendDeathFlag		= mDeathFlag;
-	mSendRespawnFlag	= mRespawnFlag;
-	mSendCheckpointFlag	= mCheckpointFlag;
-	mSendLife			= mLife;
 
 	mRespawnFlag = false;
 	mGroundFlag = false;

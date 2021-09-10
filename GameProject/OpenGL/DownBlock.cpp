@@ -4,13 +4,14 @@
 #include "pch.h"
 
 /*
-@fn		コンストラクタ
-@param	_pos 落下ブロックの座標
-@param	_size 落下ブロックのサイズ
-@param	_objectTag 落下ブロックのタグ
-@param	_sceneTag シーンのタグ
+@fn	   コンストラクタ
+@param _pos 落下ブロックの座標
+@param _size 落下ブロックのサイズ
+@param _objectTag 落下ブロックのタグ
+@param _sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -30,6 +31,8 @@ DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::strin
 	mMesh = RENDERER->GetMesh(_gpmeshName);
 	mBoxcollider = new BoxCollider(this, ColliderTag::downBlockTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -38,7 +41,7 @@ DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::strin
 */
 void DownBlock::UpdateGameObject(float _deltaTime)
 {
-	Vector3 playerPos = Player::GetPos();
+	Vector3 playerPos = mPlayer->GetPosition();
 
 	if (playerPos.z >= mPosition.z - 3000.0f)
 	{
@@ -50,7 +53,7 @@ void DownBlock::UpdateGameObject(float _deltaTime)
 		mVelocity.y = 0;
 	}
 
-	if (Player::GetRespawnFlag())
+	if (mPlayer->GetRespawnFlag())
 	{
 		mPosition.y = 1600;
 	}

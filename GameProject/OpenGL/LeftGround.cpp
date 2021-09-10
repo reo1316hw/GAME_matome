@@ -9,8 +9,9 @@
 @param	_size 1マス左移動床のサイズ
 @param	_objectTag 1マス左移動床のタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -33,6 +34,8 @@ LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const std::str
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -41,7 +44,7 @@ LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const std::str
 */
 void LeftGround::UpdateGameObject(float _deltaTime)
 {
-	Vector3 playerPos = Player::GetPos();
+	Vector3 playerPos = mPlayer->GetPosition();
 
 	if (playerPos.z >= mPosition.z - 600.0f)
 	{
@@ -58,7 +61,7 @@ void LeftGround::UpdateGameObject(float _deltaTime)
 		mVelocity.x = 0;
 	}
 
-	if (Player::GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
 		mVelocity.x = 0;
 		mOriginalPosFlag = false;
@@ -66,7 +69,7 @@ void LeftGround::UpdateGameObject(float _deltaTime)
 
 	if (mOriginalPosFlag)
 	{
-		if (Player::GetRespawnFlag())
+		if (mPlayer->GetRespawnFlag())
 		{
 			mVelocity.x = 0;
 			mPosition.x = mInitPos.x;

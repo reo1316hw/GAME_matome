@@ -7,6 +7,9 @@
 @brief	インクルード
 */
 
+// 前方宣言
+class Player;
+
 class VerticalMoveGround : public GameObject
 {
 public:
@@ -17,8 +20,9 @@ public:
 	@param	_size 縦移動床のサイズ
 	@param	_objectTag 縦移動床のタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	VerticalMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	VerticalMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -35,6 +39,9 @@ private:
 
 	//縦移動床の前に移動する速度
 	const float FORWARD_SPEED = 10.0f;
+
+	// プレイヤーのポインタ
+	Player* mPlayer;
 
 	/*
 	@fn		縦移動床がヒットした時の処理

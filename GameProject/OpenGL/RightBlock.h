@@ -7,6 +7,9 @@
 @brief	インクルード
 */
 
+// 前方宣言
+class Player;
+
 class RightBlock : public GameObject
 {
 public:
@@ -17,8 +20,9 @@ public:
 	@param	_size 右移動ブロックのサイズ
 	@param	_objectTag 右移動ブロックのタグ
 	@param	_sceneTag シーンのタグ
+    @param _playerPtr プレイヤーのポインタ
 	*/
-	RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag);
+	RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -32,6 +36,9 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+	// プレイヤーのポインタ
+	Player* mPlayer;
 
 	//反転する座標
 	Vector3 mInversionPos;

@@ -7,6 +7,9 @@
 @brief	インクルード
 */
 
+// 前方宣言
+class Player;
+
 class DownBlock : public GameObject
 {
 public:
@@ -17,8 +20,9 @@ public:
 	@param	_size 落下ブロックのサイズ
 	@param	_objectTag 落下ブロックのタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	DownBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	DownBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -33,6 +37,9 @@ public:
 
 private:
 
-	//落下ブロックの落ちる速度
+	// 落下ブロックの落ちる速度
 	const float DOWN_SPEED = 25.0f;
+
+	// プレイヤーのポインタ
+	Player* mPlayer;
 };

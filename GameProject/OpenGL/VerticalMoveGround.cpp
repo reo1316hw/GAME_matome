@@ -11,8 +11,9 @@
 @param	_size 縦移動床のサイズ
 @param	_objectTag 縦移動床のタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag) :
+VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr) :
 	GameObject(_sceneTag,_objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -34,6 +35,8 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -49,7 +52,7 @@ void VerticalMoveGround::UpdateGameObject(float _deltaTime)
 
 	if (mOriginalPosFlag)
 	{
-		if (Player::GetRespawnFlag())
+		if (mPlayer->GetRespawnFlag())
 		{
 			mPosition.z = mPosition.z - 200;
 			mOriginalPosFlag = false;

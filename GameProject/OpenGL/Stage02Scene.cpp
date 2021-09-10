@@ -36,32 +36,12 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 
 	mSprite = new Sprite("Assets/stage04.png");
 
-	/*mMapCreate = new MapCreate();
-	if (!mMapCreate->OpenFile())
-	{
-		mMapCreate->AccessGroundData();
-		mMapCreate->AccessGlassData();
-		mMapCreate->AccessBlockData();
-		mMapCreate->AccessVerticalMoveGroundData();
-		mMapCreate->AccessJumpData();
-		mMapCreate->AccessLateralMoveGroundData();
-		mPlayer = mMapCreate->AccessPlayerData();
-		mMapCreate->AccessUpBlockData();
-		mMapCreate->AccessVerticalBlockData();
-		mMapCreate->AccessAerialBlockData();
-		mMapCreate->AccessRightBlockData();
-		mMapCreate->AccessLeftBlockData();
-		mMapCreate->AccessRightGroundData();
-		mMapCreate->AccessLeftGroundData();
-		mMapCreate->AccessLeftGroundData();
-		mMapCreate->AccessDownBlockData();
-		mMapCreate->AccessGoalData();
-		mMapCreate->AccessRespawnData();
-	}*/
+	mMapCreate = new MapCreate();
+	mPlayer = mMapCreate->OpenStage02File();
 
 	for (int i = 0; i < 3; i++)
 	{
-		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02, mPlayer);
 	}
 
 	mClearFlag = false;

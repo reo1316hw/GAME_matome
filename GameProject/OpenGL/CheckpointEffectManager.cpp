@@ -5,19 +5,20 @@
 
 /*
 @fn		コンストラクタ
-@param	_owner ゲームオブジェクトクラスのポインタ
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-CheckpointEffectManager::CheckpointEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
+CheckpointEffectManager::CheckpointEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:GameObject(_sceneTag, _objectTag)
 {
-	mOwner = _owner;
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
 
 	a = true;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -47,7 +48,7 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 		
 
 		//親のポジションを取得
-		mPosition = mOwner->GetPosition();
+		mPosition = mPlayer->GetPosition();
 
 		//8方向にチェックポイントエフェクトを飛ばす
 		for (int i = 0; i < 8; i++)

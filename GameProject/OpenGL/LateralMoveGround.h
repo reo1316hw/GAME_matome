@@ -7,6 +7,9 @@
 @brief	インクルード
 */
 
+// 前方宣言
+class Player;
+
 class LateralMoveGround : public GameObject
 {
 public:
@@ -18,8 +21,9 @@ public:
 	@param	_objectTag 横移動床のタグ
 	@param	_sceneTag シーンのタグ
 	@param _distance 横移動床の移動する距離
+    @param _playerPtr プレイヤーのポインタ
 	*/
-	LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance);
+	LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -35,6 +39,9 @@ public:
 private:
 
 	static Vector3 mSendVel;
+
+	// プレイヤーのポインタ
+	Player* mPlayer;
 
 	//反転フラグ
 	bool mReversFlag;

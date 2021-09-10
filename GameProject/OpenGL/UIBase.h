@@ -37,5 +37,5 @@ protected:
 	//UIの描画クラス
 	UIComponent* mUI;
 	//プレイヤーのポインタ
-	Player* player;
+	Player* mPlayer;
 };

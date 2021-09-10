@@ -9,8 +9,9 @@
 @param	_size 上移動ブロックのサイズ
 @param	_objectTag 上移動ブロックのタグ
 @param	_sceneTag シーンのタグ
+@param _playerPtr プレイヤーのポインタ
 */
-UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -33,6 +34,8 @@ UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _g
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -41,7 +44,7 @@ UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _g
 */
 void UpBlock::UpdateGameObject(float _deltaTime)
 {
-	Vector3 playerPos = Player::GetPos();
+	Vector3 playerPos = mPlayer->GetPosition();
 
 	if (playerPos.z >= mPosition.z - 1000.0f)
 	{
@@ -58,7 +61,7 @@ void UpBlock::UpdateGameObject(float _deltaTime)
 		mVelocity.y = 0;
 	}
 
-	if (Player::GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
 		mVelocity.y = 0;
 		mOriginalPosFlag = false;
@@ -66,7 +69,7 @@ void UpBlock::UpdateGameObject(float _deltaTime)
 
 	if (mOriginalPosFlag)
 	{
-		if (Player::GetRespawnFlag())
+		if (mPlayer->GetRespawnFlag())
 		{
 			mVelocity.y = 0;
 			mPosition.y = mInitPos.y;

@@ -7,6 +7,9 @@
 @brief	インクルード
 */
 
+// 前方宣言
+class Player;
+
 class LeftBlock : public GameObject
 {
 public:
@@ -17,8 +20,9 @@ public:
 	@param	_size 左移動床のサイズ
 	@param	_objectTag 左移動床のタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag);
+	LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -33,6 +37,8 @@ public:
 
 private:
 
+	// プレイヤーのポインタ
+	Player* mPlayer;
 	//反転する座標
 	Vector3 mInversionPos;
 

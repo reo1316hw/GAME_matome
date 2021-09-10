@@ -12,8 +12,9 @@ Vector3 LateralMoveGround::mSendVel = Vector3::Zero;
 @param	_objectTag 横移動床のタグ
 @param	_sceneTag シーンのタグ
 @param _distance 横移動床の移動する距離
+@param _playerPtr プレイヤーのポインタ
 */
-LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance)
+LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance, Player* _playerPtr)
 	: GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -40,6 +41,8 @@ LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, 
 	// 反転フラグ
 	mReversFlag = false;
 	mOriginalPosFlag = false;
+
+	mPlayer = _playerPtr;
 }
 
 /*
@@ -53,7 +56,7 @@ void LateralMoveGround::UpdateGameObject(float _deltaTime)
 		mOriginalPosFlag = true;
 	}
 
-	if (Player::GetDeathFlag())
+	if (mPlayer->GetDeathFlag())
 	{
 		mVelocity.x = 0.0f;
 		mOriginalPosFlag = false;
@@ -61,7 +64,7 @@ void LateralMoveGround::UpdateGameObject(float _deltaTime)
 
 	if (mOriginalPosFlag)
 	{
-		if (Player::GetRespawnFlag())
+		if (mPlayer->GetRespawnFlag())
 		{
 			mVelocity.x = 0.0f;
 			mPosition.x = mInitPos.x;

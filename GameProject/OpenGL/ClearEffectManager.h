@@ -7,6 +7,7 @@
 @brief	インクルード
 */
 
+// 前方宣言
 class ClearEffect;
 class Player;
 
@@ -16,11 +17,11 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_owner ゲームオブジェクトクラスのポインタ
 	@param	_objectTag アタッチしたゲームオブジェクトのタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	ClearEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+	ClearEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ

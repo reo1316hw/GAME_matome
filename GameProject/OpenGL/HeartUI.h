@@ -7,8 +7,6 @@
 @brief	インクルード
 */
 
-class Player;
-
 class HeartUI :public UIBase
 {
 public:
@@ -18,8 +16,9 @@ public:
 	@param	_pos プレイヤーの体力UIの生成場所(スクリーン座標)
 	@param	_objectTag アタッチしたゲームオブジェクトのタグ
 	@param	_sceneTag シーンのタグ
+	@param _playerPtr プレイヤーのポインタ
 	*/
-	HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+	HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
