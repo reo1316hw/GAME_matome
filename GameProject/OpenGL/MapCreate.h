@@ -256,6 +256,10 @@ private:
 	std::vector<std::vector<int>> mUpperMapData;
 	// ゴール柱のマップデータ
 	std::vector<std::vector<int>> mGoalBlockMapData;
+	// 縦長障害物のマップデータ
+	std::vector<std::vector<int>> mVerticalBlockMapData;
+	// 上移動ブロックのマップデータ
+	std::vector<std::vector<int>> mUpBlockMapData;
 
 	// プレイヤーのポインタ
 	Player* mPlayer;

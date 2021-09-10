@@ -36,19 +36,8 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 
 	mSprite = new Sprite("Assets/sea.png");
 
-	//mMapCreate = new MapCreate();
-	//if (!mMapCreate->OpenFile())
-	//{
-	//	mMapCreate->AccessGroundData();
-	//	mMapCreate->AccessGlassData();
-	//	mMapCreate->AccessBlockData();
-	//	mMapCreate->AccessVerticalMoveGroundData();
-	//	mMapCreate->AccessJumpData();
-	//	mMapCreate->AccessLateralMoveGroundData();
-	//	mPlayer = mMapCreate->AccessPlayerData();
-	//	mMapCreate->AccessGoalData();
-	//	mMapCreate->AccessRespawnData();
-	//}
+	mMapCreate = new MapCreate();
+	mPlayer = mMapCreate->OpenStage01File();
 
 	for (int i = 0; i < 3; i++)
 	{

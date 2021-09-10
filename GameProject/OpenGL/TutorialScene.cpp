@@ -27,7 +27,7 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	mSprite = new Sprite("Assets/forest.png");
 
 	mMapCreate = new MapCreate();
-	mMapCreate->OpenTutorialFile();
+	mPlayer = mMapCreate->OpenTutorialFile();
 
 	for (int i = 0; i < 3; i++)
 	{

@@ -87,9 +87,6 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	// 球状の当たり判定がアタッチされているオブジェクトのz座標
 	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
 
-	float sphereZMax = _sphere->GetWorldSphere().m_center.z + _sphere->GetWorldSphere().m_radius;
-	float sphereZMin = _sphere->GetWorldSphere().m_center.z - _sphere->GetWorldSphere().m_radius;
-
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
 	{
@@ -107,21 +104,10 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			// 矩形状の当たり判定の最小z座標
 			float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
 
-			float boxZPos = mBoxes[i]->GetOwner()->GetPosition().z;
-
 			//コライダーの親オブジェクトがActiveじゃなければ終了する
 			if (mBoxes[i]->GetOwner()->GetState() != State::Active)
 			{
 				continue;
-			}
-
-			if (mPlayer->GetRespawnFlag())
-			{
-				if (boxZPos > sphereZMin &&
-					boxZPos < sphereZMax)
-				{
-					mRangeHitsBegin = i;
-				}
 			}
 
 			bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
