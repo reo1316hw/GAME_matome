@@ -102,6 +102,10 @@ private:
 	bool		mCollisionFlag;
 	//チェックポイント通過したか
 	bool		mCheckpointFlag;
+	// リスポーンしたか
+	bool mRespawnFlag;
+	// リスポーンフラグを保存しておく変数
+	bool mSaveRespawnFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
@@ -144,7 +148,7 @@ public://ゲッターセッター
 
 	bool GetClearFlag() { return mClearFlag; };
 	bool GetDeathFlag() { return mDeathFlag; };
-    bool GetRespawnFlag() { return mRespawnFlag; };
+    bool GetRespawnFlag() { return mSaveRespawnFlag; };
     bool GetCheckpointFlag() { return mCheckpointFlag; };
     int GetLife() { return mLife; };
 

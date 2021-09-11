@@ -29,7 +29,6 @@ GameObject::GameObject(SceneBase::Scene _sceneTag,const Tag& _objectTag, bool _r
 	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)
 	, mHitFlag(false)
-	, mRespawnFlag(false)
 {
 	mGameObjectId++;
 	//GameObjectManager‚Éƒ|ƒCƒ“ƒ^‚ð“n‚·

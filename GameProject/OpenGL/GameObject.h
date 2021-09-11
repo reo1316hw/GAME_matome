@@ -237,8 +237,6 @@ protected:
 	bool mRecomputeWorldTransform;
 	// 当たったかどうか
 	bool mHitFlag;
-	// リスポーンしたか
-	bool mRespawnFlag;
 	// 初期位置に戻すか
 	bool mOriginalPosFlag;
 	

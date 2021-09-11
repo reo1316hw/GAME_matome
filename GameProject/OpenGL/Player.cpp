@@ -32,6 +32,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	, mGroundFlag(false)
 	, mCollisionFlag(true)
 	, mCheckpointFlag(false)
+	, mRespawnFlag(false)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -55,7 +56,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	mCheckpointEffectManager = new CheckpointEffectManager(_objectTag, _sceneTag, this);
 	mClearEffectManager = new ClearEffectManager(_objectTag, _sceneTag, this);
 	mDeathEffectManager = new DeathEffectManager(_objectTag, _sceneTag , this);
-	//mCheckpointEffectManager = new CheckpointEffectManager(this, _objectTag, _sceneTag);
 
 	//プレイヤー自身の当たり判定
 	mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -422,6 +422,9 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 常に座標に速度を足す
  	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
 
+	// 他のクラスで使用するためにリスポーンフラグを保存しておく
+	mSaveRespawnFlag = mRespawnFlag;
+
 	mRespawnFlag = false;
 	mGroundFlag = false;
 
@@ -481,12 +484,6 @@ void Player::GameObjectInput(const InputState& _keyState)
 	{
 		mButtonFlag = false;
 	}
-
-	/*if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B) == 1  ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
-	{
-		mVelocity.y = JUMP_SPEED;
-	}*/
 }
 
 /*
