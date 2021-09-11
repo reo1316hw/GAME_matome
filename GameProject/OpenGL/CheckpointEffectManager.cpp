@@ -46,54 +46,63 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 	//アクティブなら
 	case PARTICLE_ACTIVE:
 		
-
 		//親のポジションを取得
 		mPosition = mPlayer->GetPosition();
 
 		//8方向にチェックポイントエフェクトを飛ばす
 		for (int i = 0; i < 8; i++)
 		{
-			//速度を初期化
-			Vector3 vel = Vector3::Zero;
-
-			//各方向の速度と向きを計算
-			switch (i % 8)
-			{
-			case 0:
-				vel.x = DIRECTION * SPEED;
-				break;
-			case 1:
-				vel.z = DIRECTION * SPEED;
-				break;
-			case 2:
-				vel.x = -DIRECTION * SPEED;
-				break;
-			case 3:
-				vel.z = -DIRECTION * SPEED;
-				break;
-			case 4:
-				vel.x = DIRECTION * SPEED;
-				vel.z = DIRECTION * SPEED;
-				break;
-			case 5:
-				vel.x = -DIRECTION * SPEED;
-				vel.z = -DIRECTION * SPEED;
-				break;
-			case 6:
-				vel.x = DIRECTION * SPEED;
-				vel.z = -DIRECTION * SPEED;
-				break;
-			case 7:
-				vel.x = -DIRECTION * SPEED;
-				vel.z = DIRECTION * SPEED;
-				break;
-			}
-
+			// チェックポイントエフェクトの向きを決める
+			DecideDir(i);
 			//チェックポイントエフェクトを生成
-			mCheckpointEffect = new CheckpointEffect(mPosition, vel, mTag, mSceneTag);
+			mCheckpointEffect = new CheckpointEffect(mPosition, mVelocity, mTag, mSceneTag);
 		}
 
 		mState = ParticleState::PARTICLE_DISABLE;
 		break;
 	}
+}
+
+/*
+@fn    向きを決める
+@param _quantity 個数
+*/
+void CheckpointEffectManager::DecideDir(const int _quantity)
+{
+	//速度を初期化
+	mVelocity = Vector3::Zero;
+
+	//各方向の速度と向きを計算
+	switch (_quantity % 8)
+	{
+	case 0:
+		mVelocity.x = DIRECTION * SPEED;
+		break;
+	case 1:
+		mVelocity.z = DIRECTION * SPEED;
+		break;
+	case 2:
+		mVelocity.x = -DIRECTION * SPEED;
+		break;
+	case 3:
+		mVelocity.z = -DIRECTION * SPEED;
+		break;
+	case 4:
+		mVelocity.x = DIRECTION * SPEED;
+		mVelocity.z = DIRECTION * SPEED;
+		break;
+	case 5:
+		mVelocity.x = -DIRECTION * SPEED;
+		mVelocity.z = -DIRECTION * SPEED;
+		break;
+	case 6:
+		mVelocity.x = DIRECTION * SPEED;
+		mVelocity.z = -DIRECTION * SPEED;
+		break;
+	case 7:
+		mVelocity.x = -DIRECTION * SPEED;
+		mVelocity.z = DIRECTION * SPEED;
+		break;
+	}
+
 }

@@ -58,14 +58,11 @@ public:
 
 private:
 
-	//現在のシーン
-	SceneBase* mNowScene;
-
 	/*
-	@fn	入力関連の処理
-	@return 入力状態
-	*/
-    InputState ProcessInput();
+    @fn	入力関連の処理
+    @return 入力状態
+    */
+	InputState ProcessInput();
 
 	/*
 	@fn	描画関連の処理
@@ -82,6 +79,8 @@ private:
 	*/
 	void UnloadData();
 
+	//現在のシーン
+	SceneBase* mNowScene;
 	//FPS計測クラス
 	FPS* mFps;
     //入力管理クラス

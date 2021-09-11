@@ -27,14 +27,9 @@ public:
 	*/
 	SceneBase* update(const InputState& _state) override;
 
-	static bool GetContinueStage02Flag() { return mSendContinueStage02Flag; };
-	static void SetContinueStage02Flag(bool _continue) { mSendContinueStage02Flag = _continue; };
-
 private:
 
-	static bool mSendContinueStage02Flag;
-
-	//コンティニューシーンに移行するかのフラグ
-	bool mContinueStage02Flag;
+	// コンティニューシーンに移行するかのフラグ
+	bool mTransitionFlag;
 };
 

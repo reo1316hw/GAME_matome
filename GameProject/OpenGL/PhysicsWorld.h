@@ -120,6 +120,8 @@ private:
 	int mRangeHitsBegin;
 	// 次に衝突する可能性のある範囲
 	int mRangeHitsNext;
+	// チェックポイントの要素番号
+	int mCheckPointNum;
 
 	Player* mPlayer;
 
@@ -131,11 +133,6 @@ public://ゲッターセッター
 	@return PhysicsWorldクラスのインスタンス(PhysicsWorld型)
 	*/
 	static PhysicsWorld* GetInstance() { return mPhysics; }
-
-	/*
-	@param _playerPtr プレイヤーのポインター
-	*/
-	void SetPlayerPtr(Player* _playerPtr) { mPlayer = _playerPtr; }
 };
 
 /*

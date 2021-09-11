@@ -12,6 +12,9 @@
 PhysicsWorld* PhysicsWorld::mPhysics = nullptr;
 
 PhysicsWorld::PhysicsWorld()
+	: mCheckPointNum(0)
+	, mRangeHitsBegin(0)
+	, mRangeHitsNext(0)
 {
 }
 
@@ -93,46 +96,46 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	//プレイヤーが何かと当たったら
-	if (_sphere->GetTag() == ColliderTag::playerTag)
+	int count = 0;
+
+	for (int i = mRangeHitsBegin; i < mBoxes.size(); i++)
 	{
-		for (int i = mRangeHitsBegin; i < mBoxes.size(); i++)
+
+		// 矩形状の当たり判定の最大z座標
+		float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
+		// 矩形状の当たり判定の最小z座標
+		float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
+
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (mBoxes[i]->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+
+		/*if (mBoxes[i]->GetTag() == ColliderTag::respawn01 || mBoxes[i]->GetTag() == ColliderTag::respawn02 || mBoxes[i]->GetTag() == ColliderTag::respawn03)
 		{
 
-			// 矩形状の当たり判定の最大z座標
-			float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
-			// 矩形状の当たり判定の最小z座標
-			float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
+		}*/
 
-			//コライダーの親オブジェクトがActiveじゃなければ終了する
-			if (mBoxes[i]->GetOwner()->GetState() != State::Active)
-			{
-				continue;
-			}
+		bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
+		if (hit)
+		{
+			OnCollisionFunc func = mCollisionFunction.at(_sphere);
+			func(*(mBoxes[i]->GetOwner()));
+			func = mCollisionFunction.at(mBoxes[i]);
+			func(*(_sphere->GetOwner()));
+			_sphere->Refresh();
+		}
 
-			bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
-			if (hit)
-			{
-				OnCollisionFunc func = mCollisionFunction.at(_sphere);
-				func(*(mBoxes[i]->GetOwner()));
-				func = mCollisionFunction.at(mBoxes[i]);
-				func(*(_sphere->GetOwner()));
-				_sphere->Refresh();
-			}
-
-			if (sphereZPos > boxZMin &&
-				sphereZPos < boxZMax)
-			{
-				mRangeHitsNext = countRangeHitsNum++;
-			}
-			else
-			{
-				if (sphereZPos >= boxZMax)
-				{
-					mRangeHitsBegin += mRangeHitsNext + 1;
-				}
-				break;
-			}
+		if (sphereZPos > boxZMin &&
+			sphereZPos < boxZMax)
+		{
+			mRangeHitsNext = countRangeHitsNum++;
+		}
+		else if (sphereZPos >= boxZMax)
+		{
+			mRangeHitsBegin += mRangeHitsNext + 1;
+			break;
 		}
 	}
 }

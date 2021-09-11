@@ -3,13 +3,12 @@
 */
 #include "pch.h"
 
-bool	TutorialScene::mSendContinueTutorialFlag = false;
-
 /*
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
 TutorialScene::TutorialScene(const Scene& _nowScene)
+	: mTransitionFlag(false)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -33,8 +32,6 @@ TutorialScene::TutorialScene(const Scene& _nowScene)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial, mPlayer);
 	}
-
-	mSendContinueTutorialFlag = false;
 }
 
 /*
@@ -68,10 +65,8 @@ SceneBase* TutorialScene::update(const InputState& _state)
 
 		if (mNextSceneCount >= 80)
 		{
-			mContinueTutorialFlag = true;
-			mSendContinueTutorialFlag = mContinueTutorialFlag;
-			
-			return new ContinueScene(Continue);
+			mTransitionFlag = true;
+			return new ContinueScene(Continue, tutorial, mTransitionFlag);
 		}
 	}
 

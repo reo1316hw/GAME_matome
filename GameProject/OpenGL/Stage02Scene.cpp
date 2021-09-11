@@ -3,13 +3,13 @@
 */
 #include "pch.h"
 
-bool	Stage02Scene::mSendContinueStage02Flag = false;
-
 /*
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
 Stage02Scene::Stage02Scene(const Scene& _nowScene)
+	: mTransitionFlag(false)
+
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -45,8 +45,6 @@ Stage02Scene::Stage02Scene(const Scene& _nowScene)
 	}
 
 	mClearFlag = false;
-
-	mContinueStage02Flag = false;
 	mNextSceneCount = 0;
 }
 
@@ -81,10 +79,8 @@ SceneBase* Stage02Scene::update(const InputState& _state)
 
 		if (mNextSceneCount >= 80)
 		{
-			mContinueStage02Flag = true;
-			mSendContinueStage02Flag = mContinueStage02Flag;
-
-			return new ContinueScene(Continue);
+			mTransitionFlag = true;
+			return new ContinueScene(Continue, stage02, mTransitionFlag);
 		}
 	}
 

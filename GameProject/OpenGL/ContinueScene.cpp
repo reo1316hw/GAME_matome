@@ -7,7 +7,10 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-ContinueScene::ContinueScene(const Scene& _nowScene)
+ContinueScene::ContinueScene(const Scene& _nowScene, const Scene& _preScene, const bool _transitionSceneFlag)
+	: mTutorialTransitionFlag(false)
+	, mStage01TransitionFlag(false)
+	, mStage02TransitionFlag(false)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -19,6 +22,22 @@ ContinueScene::ContinueScene(const Scene& _nowScene)
 	SetScene(_nowScene);
 
 	mSprite = new Sprite("Assets/continue.png");
+
+	switch (_preScene)
+	{
+	case tutorial:
+
+		mTutorialTransitionFlag = _transitionSceneFlag;
+		break;
+	case stage01:
+
+		mStage01TransitionFlag = _transitionSceneFlag;
+		break;
+	case stage02:
+
+		mStage02TransitionFlag = _transitionSceneFlag;
+		break;
+	}
 }
 
 /*
@@ -34,12 +53,12 @@ ContinueScene::~ContinueScene()
 */
 SceneBase* ContinueScene::update(const InputState& _state)
 {
-	if (mTutorial->GetContinueTutorialFlag())
+	if (mTutorialTransitionFlag)
 	{
 		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
 			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
-			mTutorial->SetContinueTutorialFlag(false);
+			mTutorialTransitionFlag = false;
 			return new TutorialScene(SceneBase::tutorial);
 		}
 
@@ -51,12 +70,12 @@ SceneBase* ContinueScene::update(const InputState& _state)
 		}*/
 	}
 
-	if (mStage01->GetContinueStage01Flag())
+	if (mStage01TransitionFlag)
 	{
 		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
 			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
-			mStage01->SetContinueStage01Flag(false);
+			mStage01TransitionFlag = false;
 			return new Stage01Scene(SceneBase::stage01);
 		}
 
@@ -68,12 +87,12 @@ SceneBase* ContinueScene::update(const InputState& _state)
 		}*/
 	}
 
-	if (mStage02->GetContinueStage02Flag())
+	if (mStage02TransitionFlag)
 	{
 		if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
 			_state.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
 		{
-			mStage02->SetContinueStage02Flag(false);
+			mStage02TransitionFlag = false;
 			return new Stage02Scene(SceneBase::stage02);
 		}
 

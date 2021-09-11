@@ -30,9 +30,6 @@ public:
 	*/
 	SceneBase* update(const InputState& _state) override;
 
-	static bool GetContinueTutorialFlag() { return mSendContinueTutorialFlag; };
-	static void SetContinueTutorialFlag(bool _continue) { mSendContinueTutorialFlag = _continue; };
-
 private:
 
 	//チュートリアルシーン中の縦移動床の説明パネル
@@ -40,9 +37,7 @@ private:
 	//チュートリアルシーン中の操作説明パネル
 	OperationExplanationBoard* mOperationExplanationBoard;
 
-	static bool mSendContinueTutorialFlag;
-
-	//コンティニューシーンに移行するかのフラグ
-	bool mContinueTutorialFlag;
+	// コンティニューシーンに移行するかのフラグ
+	bool mTransitionFlag;
 };
 

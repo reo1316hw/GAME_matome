@@ -36,6 +36,12 @@ public:
 
 private:
 
+	/*
+	@fn    向きを決める
+	@param _quantity 個数
+	*/
+	void DecideDir(const int _quantity);
+
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
 	//パーティクルの状態

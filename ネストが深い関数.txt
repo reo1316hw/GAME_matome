@@ -1,11 +1,9 @@
 ・PhysicsWorld::HitCheck(BoxCollider* _box)
 ・PhysicsWorld::HitCheck(SphereCollider * _sphere)
 
-・MapCreate::Create***()×17
-
 ・Player::UpdateGameObject(float _deltaTime)
 
-・***EffectManager::UpdateGameObject(float _deltaTime)×3
+・***EffectManager::UpdateGameObject(float _deltaTime)×2
 
 ・HDRRenderer::HiBrightBlurCreate()
 ・HDRRenderer::InitHDRBuffers()
