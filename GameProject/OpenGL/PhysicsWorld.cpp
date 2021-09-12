@@ -87,6 +87,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
 	// 衝突する可能性のある範囲の要素数をカウント
 	int countRangeHitsNum = 0;
+	int countRangeHitsNextNum = 0;
 	// 球状の当たり判定がアタッチされているオブジェクトのz座標
 	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
 
@@ -98,7 +99,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 
 	int count = 0;
 
-	for (int i = mRangeHitsBegin; i < mBoxes.size(); i++)
+	for (unsigned int i = mRangeHitsBegin; i < mRangeHitsBegin + 10; i++)
 	{
 
 		// 矩形状の当たり判定の最大z座標
@@ -111,6 +112,8 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		{
 			continue;
 		}
+
+		count++;
 
 		/*if (mBoxes[i]->GetTag() == ColliderTag::respawn01 || mBoxes[i]->GetTag() == ColliderTag::respawn02 || mBoxes[i]->GetTag() == ColliderTag::respawn03)
 		{
@@ -130,13 +133,25 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		if (sphereZPos > boxZMin &&
 			sphereZPos < boxZMax)
 		{
-			mRangeHitsNext = countRangeHitsNum++;
+			mRangeHitsNext = ++countRangeHitsNum;
 		}
-		else if (sphereZPos >= boxZMax)
+		else if (sphereZPos >= mBoxes[i + mRangeHitsNext]->GetWorldBox().m_min.z)
 		{
-			mRangeHitsBegin += mRangeHitsNext + 1;
+			mRangeHitsBegin += mRangeHitsNext;
 			break;
 		}
+		/*else if(sphereZPos >= mBoxes[i + 5]->GetWorldBox().m_min.z)
+		{
+			mRangeHitsBegin += mRangeHitsNext;
+		}*/
+
+		//printf("%d\n", count);
+
+		//else if (sphereZPos + 220 >= boxZMax)
+		//{/*
+		//	mRangeHitsBegin += 0;*/
+		//	break;
+		//}
 	}
 }
 

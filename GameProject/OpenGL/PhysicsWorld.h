@@ -123,6 +123,8 @@ private:
 	// チェックポイントの要素番号
 	int mCheckPointNum;
 
+	int a;
+
 	Player* mPlayer;
 
 	OnCollisionMap mCollisionFunction;
