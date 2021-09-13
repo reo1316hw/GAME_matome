@@ -11,13 +11,19 @@
 //自分のインスタンスの初期化
 PhysicsWorld* PhysicsWorld::mPhysics = nullptr;
 
+/*
+@fn	コンストラクタの隠蔽
+*/
 PhysicsWorld::PhysicsWorld()
-	: mCheckPointNum(0)
+	: mRespawnNum(0)
 	, mRangeHitsBegin(0)
-	, mRangeHitsNext(0)
+	, mRangeHitsCount(0)
 {
 }
 
+/*
+@fn	インスタンスを作成する
+*/
 void PhysicsWorld::CreateInstance()
 {
 	if (mPhysics == nullptr)
@@ -26,6 +32,9 @@ void PhysicsWorld::CreateInstance()
 	}
 }
 
+/*
+@fn	インスタンスを削除する
+*/
 void PhysicsWorld::DeleteInstance()
 {
 	if (mPhysics != nullptr)
@@ -43,19 +52,17 @@ void PhysicsWorld::Initialize()
 	mRangeHitsBegin = 0;
 
 	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
-	std::sort(mBoxes.begin(), mBoxes.end(),[](BoxCollider* _frontBox, BoxCollider* _behindBox)
-	{
-		return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z;
-	});
+	std::sort(mBoxes.begin(), mBoxes.end(), [](BoxCollider* _frontBox, BoxCollider* _behindBox)
+		{
+			return _frontBox->GetOwner()->GetPosition().z < _behindBox->GetOwner()->GetPosition().z;
+		});
 }
 
-//void PhysicsWorld::HitCheck()
-//{
-//	SphereAndSphere();
-//    BoxAndBox();
-//    SphereAndBox();
-//}
-
+/*
+@fn		矩形の当たり判定
+@brief	矩形の当たり判定がどのオブジェクトと当たったかタグで調べる
+@param _box BoxColliderクラスのポインタ
+*/
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
@@ -71,7 +78,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		{
 			continue;
 		}
-		bool hit = Intersect(itr->GetWorldSphere(),_box->GetWorldBox());
+		bool hit = Intersect(itr->GetWorldSphere(), _box->GetWorldBox());
 		if (hit)
 		{
 			OnCollisionFunc func = mCollisionFunction.at(_box);
@@ -83,13 +90,23 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 	}
 }
 
-void PhysicsWorld::HitCheck(SphereCollider * _sphere)
+/*
+@fn		球の当たり判定
+@brief	球の当たり判定がどのオブジェクトと当たったかタグで調べる
+@param _sphere SphereColliderクラスのポインタ
+*/
+void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 {
 	// 衝突する可能性のある範囲の要素数をカウント
 	int countRangeHitsNum = 0;
-	int countRangeHitsNextNum = 0;
 	// 球状の当たり判定がアタッチされているオブジェクトのz座標
 	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
+	// 球状の当たり判定がアタッチされているオブジェクトのz速度
+	float sphereZVel = _sphere->GetOwner()->GetVelocity().z;
+	// リスポーン地点
+	float respawnPos = _sphere->GetOwner()->GetRespawnPos().z;
+	// リスポーンしたか
+	float respawnFlag = _sphere->GetOwner()->GetRespawnFlag();
 
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
@@ -97,28 +114,25 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		return;
 	}
 
-	int count = 0;
-
-	for (unsigned int i = mRangeHitsBegin; i < mRangeHitsBegin + 10; i++)
+	for (int i = mRangeHitsBegin; i < mRangeHitsBegin + 20; i++)
 	{
+		if (i == mBoxes.size())
+		{
+			break;
+		}
 
 		// 矩形状の当たり判定の最大z座標
 		float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
 		// 矩形状の当たり判定の最小z座標
 		float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
+		// 矩形状の当たり判定がアタッチされているオブジェクトの初期座標から移動した距離の差
+		float boxZdif = abs(mBoxes[i]->GetOwner()->GetInitPosition().z - mBoxes[i]->GetOwner()->GetPosition().z);
 
-		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		// コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (mBoxes[i]->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
-
-		count++;
-
-		/*if (mBoxes[i]->GetTag() == ColliderTag::respawn01 || mBoxes[i]->GetTag() == ColliderTag::respawn02 || mBoxes[i]->GetTag() == ColliderTag::respawn03)
-		{
-
-		}*/
 
 		bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
 		if (hit)
@@ -130,39 +144,40 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 			_sphere->Refresh();
 		}
 
-		if (sphereZPos > boxZMin &&
-			sphereZPos < boxZMax)
+		if (sphereZPos >= boxZMin - boxZdif &&
+			sphereZPos <= boxZMax - boxZdif)
 		{
-			mRangeHitsNext = ++countRangeHitsNum;
+			mRangeHitsCount = ++countRangeHitsNum;
 		}
-		else if (sphereZPos >= mBoxes[i + mRangeHitsNext]->GetWorldBox().m_min.z)
+		else if (sphereZPos + sphereZVel >= boxZMin - boxZdif)
 		{
-			mRangeHitsBegin += mRangeHitsNext;
+			mRangeHitsBegin += mRangeHitsCount;
+
+			if (countRangeHitsNum == 0)
+			{
+				mRangeHitsCount = 0;
+			}
 			break;
 		}
-		/*else if(sphereZPos >= mBoxes[i + 5]->GetWorldBox().m_min.z)
-		{
-			mRangeHitsBegin += mRangeHitsNext;
-		}*/
-
-		//printf("%d\n", count);
-
-		//else if (sphereZPos + 220 >= boxZMax)
-		//{/*
-		//	mRangeHitsBegin += 0;*/
-		//	break;
-		//}
 	}
 }
 
-void PhysicsWorld::AddBox(BoxCollider * _box, OnCollisionFunc _func)
+/*
+@fn		矩形の当たり判定を追加
+@param	_box　追加するBoxColliderクラスのポインタ
+*/
+void PhysicsWorld::AddBox(BoxCollider* _box, OnCollisionFunc _func)
 {
 	mBoxes.emplace_back(_box);
 	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
 	mCollisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 }
 
-void PhysicsWorld::RemoveBox(BoxCollider * _box)
+/*
+@fn		矩形の当たり判定を削除
+@param	_box　削除するBoxColliderクラスのポインタ
+*/
+void PhysicsWorld::RemoveBox(BoxCollider* _box)
 {
 	auto iter = std::find(mBoxes.begin(), mBoxes.end(), _box);
 	if (iter != mBoxes.end())
@@ -170,17 +185,25 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		std::iter_swap(iter, mBoxes.end() - 1);
 		mBoxes.pop_back();
 	}
-    mCollisionFunction.erase(_box);
+	mCollisionFunction.erase(_box);
 }
 
-void PhysicsWorld::AddSphere(SphereCollider * _sphere, OnCollisionFunc _func)
+/*
+@fn		球の当たり判定を追加
+@param	_sphere　追加するSphereColliderクラスのポインタ
+*/
+void PhysicsWorld::AddSphere(SphereCollider* _sphere, OnCollisionFunc _func)
 {
 	mSpheres.emplace_back(_sphere);
-    //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-    mCollisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
+	//コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
+	mCollisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
 
-void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
+/*
+@fn		球の当たり判定を削除
+@param	_sphere　削除するSphereColliderクラスのポインタ
+*/
+void PhysicsWorld::RemoveSphere(SphereCollider* _sphere)
 {
 	auto iter = std::find(mSpheres.begin(), mSpheres.end(), _sphere);
 	if (iter != mSpheres.end())
@@ -188,89 +211,8 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		std::iter_swap(iter, mSpheres.end() - 1);
 		mSpheres.pop_back();
 	}
-    mCollisionFunction.erase(_sphere);
+	mCollisionFunction.erase(_sphere);
 }
-
-//void PhysicsWorld::SphereAndSphere()
-//{
-//	for (size_t i = 0; i < mSpheres.size(); i++)
-//	{
-//		if (mSpheres[i]->GetOwner()->GetState() != Active)
-//		{
-//			continue;
-//		}
-//		for (size_t j = i + 1; j < mSpheres.size(); j++)
-//		{
-//			if (mSpheres[j]->GetOwner()->GetState() != Active)
-//			{
-//				continue;
-//			}
-//			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mSpheres[j]->GetWorldSphere());
-//
-//			if (hit)
-//			{
-//				SphereCollider* sphereA = mSpheres[i];
-//				SphereCollider* sphereB = mSpheres[j];
-//
-//				sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
-//				sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
-//			}
-//		}
-//	}
-//}
-//
-//void PhysicsWorld::BoxAndBox()
-//{
-//	for (size_t i = 0; i < mBoxes.size(); i++)
-//	{
-//		if (mBoxes[i]->GetOwner()->GetState() != Active)
-//		{
-//			continue;
-//		}
-//		for (size_t j = i + 1; j < mBoxes.size(); j++)
-//		{
-//			if (mBoxes[j]->GetOwner()->GetState() != Active)
-//			{
-//				continue;
-//			}
-//			bool hit = Intersect(mBoxes[i]->GetWorldBox(), mBoxes[j]->GetWorldBox());
-//
-//			if (hit)
-//			{
-//				BoxCollider* boxA = mBoxes[i];
-//				BoxCollider* boxB = mBoxes[j];
-//
-//				boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
-//				boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
-//			}
-//		}
-//	}
-//}
-//
-//void PhysicsWorld::SphereAndBox()
-//{
-//	for (size_t i = 0; i < mSpheres.size(); i++)
-//	{
-//		if (mSpheres[i]->GetOwner()->GetState() != Active)
-//		{
-//			continue;
-//		}
-//		for (size_t j = 0; j < mBoxes.size(); j++)
-//		{
-//			if (mBoxes[j]->GetOwner()->GetState() != Active)
-//			{
-//				continue;
-//			}
-//			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mBoxes[j]->GetWorldBox());
-//
-//			if (hit)
-//			{
-//				spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
-//				boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
-//			}
-//		}
-//	}
-//}
 
 /*
 @fn 衝突したことが確定したとき、めり込みを戻す関数

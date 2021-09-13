@@ -66,7 +66,7 @@ Player* MapCreate::OpenTutorialFile()
 	AccessTutorialMapData(mPlayerMapData, 1);
 	AccessTutorialMapData(mLowerMapData, 1);
 	AccessTutorialMapData(mUpperMapData, 1);
-	AccessTutorialMapData(mGoalBlockMapData, 10);
+	AccessTutorialMapData(mGoalBlockMapData, 5);
 
 	/*readCount++;
 

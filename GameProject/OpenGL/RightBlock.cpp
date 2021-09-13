@@ -23,8 +23,8 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _a
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
-	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
 	mEndPos = Vector3(_pos.x + _addEndPosX, _pos.y, _pos.z);
 	mInversionPos = Vector3(_pos.x + 60, _pos.y, _pos.z);
 

@@ -17,6 +17,7 @@ Respawn::Respawn(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;

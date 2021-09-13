@@ -76,71 +76,65 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 
 		Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
 
-		//クリアエフェクトを生成
-		mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
+		////クリアエフェクトを生成
+		//mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 
 		for (int i = 0; i < 200; i++)
 		{
-			if (i % 12 == 0)
+			/*if (i % 13 == 0)
+			{
+				vel = Vector3(0.0f, 0.0f, 0.0f);
+			}*/
+			if (i % 13 == 1)
 			{
 				vel = Vector3(x = x + 0.1f, y = y + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 1)
+			if (i % 13 == 2)
 			{
 				vel = Vector3(x2 = x2 - 0.1f, y2 = y2 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 2)
+			if (i % 13 == 3)
 			{
 				vel = Vector3(x3 = x3 + 0.2f, y3 = y3 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 3)
+			if (i % 13 == 4)
 			{
 				vel = Vector3(x4 = x4 - 0.2f, y4 = y4 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 4)
+			if (i % 13 == 5)
 			{
 				vel = Vector3(x5 = x5 + 0.4f, y5 = y5 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 5)
+			if (i % 13 == 6)
 			{
 				vel = Vector3(x6 = x6 - 0.4f, y6 = y6 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 6)
+			if (i % 13 == 7)
 			{
 				vel = Vector3(x7 = x7 + 0.6f, y7 = y7 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 7)
+			if (i % 13 == 8)
 			{
 				vel = Vector3(x8 = x8 - 0.6f, y8 = y8 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 8)
+			if (i % 13 == 9)
 			{
 				vel = Vector3(x9 = x9 + 0.8f, y9 = y9 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 9)
+			if (i % 13 == 10)
 			{
 				vel = Vector3(x10 = x10 - 0.8f, y10 = y10 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 10)
+			if (i % 13 == 11)
 			{
 				vel = Vector3(x11 = x11 + 1.0f, y11 = y11 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
-			if (i % 12 == 11)
+			if (i % 13 == 12)
 			{
 				vel = Vector3(x12 = x12 - 1.0f, y12 = y12 + 1.0f, 0.0f);
-				mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 			}
+
+			mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 
 			vel.y = sinf(mAngle);
 			mAngle += 10.0f;

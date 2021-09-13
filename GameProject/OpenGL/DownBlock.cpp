@@ -18,6 +18,7 @@ DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::strin
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	mEndPos = Vector3(_pos.x, _pos.y - 1600, _pos.z);
 

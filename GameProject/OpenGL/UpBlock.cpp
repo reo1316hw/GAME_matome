@@ -18,8 +18,8 @@ UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _g
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
-	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
 	mEndPos = Vector3(_pos.x, _pos.y + 200, _pos.z);
 
 	//生成したUpBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される

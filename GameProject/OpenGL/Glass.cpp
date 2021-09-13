@@ -18,6 +18,7 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const std::string _gpmes
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	mDownCount = 0;
 

@@ -21,11 +21,11 @@ LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, 
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	// 初期の座標
+	mInitPos = _pos;
 
 	// 移動先の座標
 	mEndPos = Vector3(_pos.x - _distance, _pos.y, _pos.z) ;
-	// 初期の座標
-	mInitPos = _pos;
 
 	//生成したLateralMoveGroundの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);

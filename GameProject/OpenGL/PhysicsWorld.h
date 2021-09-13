@@ -44,11 +44,6 @@ public:
 	void Initialize();
 
 	/*
-	@fn	当たり判定
-	*/
-    void HitCheck();
-
-	/*
 	@fn		矩形の当たり判定
 	@brief	矩形の当たり判定がどのオブジェクトと当たったかタグで調べる
 	@param _box BoxColliderクラスのポインタ
@@ -96,21 +91,6 @@ private:
 	//自分のインスタンス
 	static PhysicsWorld* mPhysics;
 
-	/*
-	@fn	矩形と矩形の当たり判定
-	*/
-	void BoxAndBox();
-
-	/*
-	@fn	球と球の当たり判定
-	*/
-	void SphereAndSphere();
-
-	/*
-	@fn	球と矩形の当たり判定
-	*/
-	void SphereAndBox();
-
 	// 矩形の当たり判定を全て格納するための可変長コンテナ
     std::vector<BoxCollider*> mBoxes;
 	// 球の当たり判定を全て格納するための可変長コンテナ
@@ -118,13 +98,11 @@ private:
 
 	// 衝突する可能性のある範囲の最初の番号
 	int mRangeHitsBegin;
-	// 次に衝突する可能性のある範囲
-	int mRangeHitsNext;
-	// チェックポイントの要素番号
-	int mCheckPointNum;
-
-	int a;
-
+	// 衝突する可能性のある範囲にどれだけオブジェクトがあるか
+	int mRangeHitsCount;
+	// リスポーン通過時の要素番号
+	int mRespawnNum;
+	// プレイヤーのポインタ
 	Player* mPlayer;
 
 	OnCollisionMap mCollisionFunction;

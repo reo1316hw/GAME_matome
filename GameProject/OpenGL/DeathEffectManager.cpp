@@ -11,6 +11,7 @@
 */
 DeathEffectManager::DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:GameObject(_sceneTag, _objectTag)
+	, mRandVel(Vector3(0.0f, 0.0f, 0.0f))
 {
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;
@@ -38,8 +39,6 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 		mState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
-
 	switch (mState)
 	{
 	case PARTICLE_DISABLE:
@@ -55,30 +54,39 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 
 		for (int i = 0; i < 50; i++)
 		{
-			Vector3 randVel = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
-			randVel.Normalize();
+			DecideDir(i);
 
-			if (i % 2 == 0)
-			{
-				randVel.x *= -1.0f;
-				randVel.z *= -1.0f;
-			}
-
-			if (i % 5 == 0)
-			{
-				randVel.x *= -1.0f;
-			}
-
-			if (i % 3 == 0)
-			{
-				randVel.z *= -1.0f;
-			}
-
-			mDeathEffect = new DeathEffect(mPosition, randVel, mTag, mSceneTag);
+			mDeathEffect = new DeathEffect(mPosition, mRandVel, mTag, mSceneTag);
 		}
 
 		OneCreateDeathFlag = false;
 
 		break;
+	}
+}
+
+/*
+@fn    Œü‚«‚ðŒˆ‚ß‚é
+@param _quantity ŒÂ”
+*/
+void DeathEffectManager::DecideDir(const int _quantity)
+{
+	mRandVel = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
+	mRandVel.Normalize();
+
+	if (_quantity % 2 == 0)
+	{
+		mRandVel.x *= -1.0f;
+		mRandVel.z *= -1.0f;
+	}
+
+	if (_quantity % 5 == 0)
+	{
+		mRandVel.x *= -1.0f;
+	}
+
+	if (_quantity % 3 == 0)
+	{
+		mRandVel.z *= -1.0f;
 	}
 }

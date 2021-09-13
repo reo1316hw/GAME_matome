@@ -20,6 +20,7 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	mEndPos = Vector3(_pos.x, _pos.y, _pos.z + 200);
 

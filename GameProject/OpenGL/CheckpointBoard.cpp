@@ -14,6 +14,7 @@ CheckpointBoard::CheckpointBoard(const Vector3& _pos, const Vector3& _vel, const
 	:ParticleEffectBase(_pos, _vel, 0, _particleFileName, _sceneTag, _objectTag)
 	, mCehckpointBoardAABB(Vector3::Zero, Vector3::Zero)
 {
+	mInitPos = _pos;
 	mScale = 3000.0f;
 	mAlpha = 0.3f;
 	mParticle->SetScale(mScale);

@@ -16,6 +16,7 @@ AerialBlock::AerialBlock(const Vector3& _pos, const Vector3& _size, const std::s
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	//生成したAerialBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);

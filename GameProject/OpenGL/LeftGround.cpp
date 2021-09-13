@@ -18,8 +18,8 @@ LeftGround::LeftGround(const Vector3& _pos, const Vector3& _size, const std::str
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
-	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
 	mEndPos = Vector3(_pos.x - 200, _pos.y, _pos.z);
 
 	//生成したLeftOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される

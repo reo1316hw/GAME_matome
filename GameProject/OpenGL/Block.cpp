@@ -17,6 +17,7 @@ Block::Block(const Vector3& _pos, const Vector3& _size, const std::string _gpmes
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	//生成したBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);

@@ -120,11 +120,11 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		Texture* t = _renderer->GetTexture(texName);
 		if (t == nullptr)
 		{
-			// テクスチャをロードする
+			// テクスチャを取得する
 			t = _renderer->GetTexture(texName);
 			if (t == nullptr)
 			{
-				// テクスチャがロードできなかった場合、デフォルトのテクスチャを使用
+				// テクスチャが取得できなかった場合、デフォルトのテクスチャを使用
 				t = _renderer->GetTexture("Assets/Default.png");
 			}
 		}

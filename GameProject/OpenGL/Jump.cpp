@@ -17,6 +17,7 @@ Jump::Jump(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshN
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
 
 	degree = 0.0f;
 	mVelocity = Vector3::Zero;

@@ -225,6 +225,8 @@ protected:
 	Vector3 mEndPos;
 	//初期座標
 	Vector3	mInitPos;
+	//リスポーンする地点
+	Vector3 mRespawnPos;
 	//オブジェクトのクォータニオン
 	Quaternion  mRotation;
 	//オブジェクトのワールド行列
@@ -239,6 +241,8 @@ protected:
 	bool mHitFlag;
 	// 初期位置に戻すか
 	bool mOriginalPosFlag;
+	// リスポーンフラグを保存しておく変数
+	bool mSaveRespawnFlag;
 	
 	//シーンのタグ
 	SceneBase::Scene mSceneTag;
@@ -258,14 +262,29 @@ public://ゲッターセッター
 	const Vector3& GetPosition() const { return mPosition; }
 
 	/*
+	@return	オブジェクトの初期座標(Vector3型)
+	*/
+	const Vector3& GetInitPosition() const { return mInitPos; }
+
+	/*
 	@return	オブジェクトの速度(Vector3型)
 	*/
 	const Vector3& GetVelocity() const { return mVelocity; }
 
 	/*
+    @return	リスポーンする地点(Vector3型)
+    */
+	const Vector3 GetRespawnPos() const { return mRespawnPos; };
+
+	/*
 	@return	ワールド変換の処理を行う必要性があるかのフラグ(bool型)
 	*/
 	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
+
+	/*
+    @return	リスポーンしたかのフラグ(bool型)
+    */
+	bool GetRespawnFlag() { return mSaveRespawnFlag; };
 
 	/*
 	@return	オブジェクトのスケール(float型)

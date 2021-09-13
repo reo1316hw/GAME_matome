@@ -38,6 +38,13 @@ public:
 
 private:
 
+
+	/*
+	@fn    向きを決める
+	@param _quantity 個数
+	*/
+	void DecideDir(const int _quantity);
+
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
 	//パーティクルの状態
@@ -50,6 +57,8 @@ private:
 	DeathEffect* mDeathEffect;
 	//プレイヤーのポインタ
 	Player* mPlayer;
+	// ランダムの速度
+	Vector3 mRandVel;
 
 	//任意のタイミングでデスエフェクトを生成するためのカウント
 	int				 mCreateDeathEffectCount;

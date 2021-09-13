@@ -223,69 +223,69 @@ void Renderer::Draw()
 {
 
 	mHDRRenderer->HdrRecordBegin();
+	
+	//アルファブレンディングを有効にする
+	glEnable(GL_BLEND);
+	//デプスバッファ法を無効にする
+	glDisable(GL_DEPTH_TEST);
+
+	// RGB成分とα成分のブレンディング方法を別々に設定
+	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+	// RGB成分とアルファ成分に別々の混合係数を設定
+	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
+	mSpriteShader->SetActive();
+	mSpriteVerts->SetActive();
+	// すべてのスプライトの描画
+	for (auto sprite : mSprites)
 	{
-		//アルファブレンディングを有効にする
-		glEnable(GL_BLEND);
-		//デプスバッファ法を無効にする
-		glDisable(GL_DEPTH_TEST);
-
-		// RGB成分とα成分のブレンディング方法を別々に設定
-		glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-		// RGB成分とアルファ成分に別々の混合係数を設定
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-		// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
-		mSpriteShader->SetActive();
-		mSpriteVerts->SetActive();
-		// すべてのスプライトの描画
-		for (auto sprite : mSprites)
+		if (sprite->GetVisible())
 		{
-			if (sprite->GetVisible())
-			{
-				sprite->Draw(mSpriteShader);
-			}
-		}
-
-		// RGB成分とα成分のブレンディング方法を別々に設定
-		glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-		// RGB成分とアルファ成分に別々の混合係数を設定
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-		// インビジブルメッシュコンポーネントの描画
-		// 基本的なインビジブルメッシュシェーダーをアクティブにする
-		mInvisibleMeshShader->SetActive();
-		// ビュー射影行列を更新する
-		mInvisibleMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
-		// シェーダーに渡すライティング情報を更新する
-		SetLightUniforms(mInvisibleMeshShader, mView);
-		// すべてのメッシュの描画
-		for (auto imc : mInvisibleMeshComponents)
-		{
-			if (imc->GetVisible())
-			{
-				imc->Draw(mInvisibleMeshShader);
-			}
-		}
-
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-
-		// メッシュコンポーネントの描画
-		// 基本的なメッシュシェーダーをアクティブにする
-		mMeshShader->SetActive();
-		// ビュー射影行列を更新する
-		mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
-		// シェーダーに渡すライティング情報を更新する
-		SetLightUniforms(mMeshShader, mView);
-		// すべてのメッシュの描画
-		for (auto mc : mMeshComponents)
-		{
-			if (mc->GetVisible())
-			{
-				mc->Draw(mMeshShader);
-			}
+			sprite->Draw(mSpriteShader);
 		}
 	}
+
+	// RGB成分とα成分のブレンディング方法を別々に設定
+	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+	// RGB成分とアルファ成分に別々の混合係数を設定
+	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+	// インビジブルメッシュコンポーネントの描画
+	// 基本的なインビジブルメッシュシェーダーをアクティブにする
+	mInvisibleMeshShader->SetActive();
+	// ビュー射影行列を更新する
+	mInvisibleMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+	// シェーダーに渡すライティング情報を更新する
+	SetLightUniforms(mInvisibleMeshShader, mView);
+	// すべてのメッシュの描画
+	for (auto imc : mInvisibleMeshComponents)
+	{
+		if (imc->GetVisible())
+		{
+			imc->Draw(mInvisibleMeshShader);
+		}
+	}
+
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+	// メッシュコンポーネントの描画
+	// 基本的なメッシュシェーダーをアクティブにする
+	mMeshShader->SetActive();
+	// ビュー射影行列を更新する
+	mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+	// シェーダーに渡すライティング情報を更新する
+	SetLightUniforms(mMeshShader, mView);
+	// すべてのメッシュの描画
+	for (auto mc : mMeshComponents)
+	{
+		if (mc->GetVisible())
+		{
+			mc->Draw(mMeshShader);
+		}
+	}
+	
 	mHDRRenderer->HdrRecordEnd();
 
 	//////////////////////////////////////////////////////////////////

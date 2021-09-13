@@ -104,8 +104,6 @@ private:
 	bool		mCheckpointFlag;
 	// リスポーンしたか
 	bool mRespawnFlag;
-	// リスポーンフラグを保存しておく変数
-	bool mSaveRespawnFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
@@ -115,7 +113,6 @@ private:
 	int			mLife;
 	//チェックポイントエフェクトを生存時間
 	int			mCheckpointEffectCount;
-
 	//角度
 	float		mAngle;
 
@@ -148,7 +145,6 @@ public://ゲッターセッター
 
 	bool GetClearFlag() { return mClearFlag; };
 	bool GetDeathFlag() { return mDeathFlag; };
-    bool GetRespawnFlag() { return mSaveRespawnFlag; };
     bool GetCheckpointFlag() { return mCheckpointFlag; };
     int GetLife() { return mLife; };
 

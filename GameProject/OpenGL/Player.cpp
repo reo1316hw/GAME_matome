@@ -38,6 +38,8 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
+	mInitPos = _pos;
+	mRespawnPos = _pos;
 
 	// 速度の値
 	mMoveSpeed = PLAYER_CONSTANT_SPEED;
@@ -98,6 +100,18 @@ void Player::UpdateGameObject(float _deltaTime)
 		mDamageFlag  = false;
 	}
 
+	//初期座標リスポーン処理
+	if (mRespawnState == RespawnState::respawnNone)
+	{
+		if (mRespawnFlag)
+		{
+			if (mLife >= 1)
+			{
+				mPosition = mRespawnPos;
+			}
+		}
+	}
+
 	//チュートリアル
 	if (mScene == SceneBase::tutorial)
 	{
@@ -110,18 +124,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mVelocity.y = TUTORIAL_JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
-		}
-
-		//チュートリアル時のリスポーン処理
-		if (mRespawnState == RespawnState::respawnNone)
-		{
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mPosition = Vector3(800.0f, 500.0f, -99800.0f);
-				}
-			}
 		}
 
 		//チュートリアル時のゴールの座標
@@ -146,16 +148,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ01のリスポーン処理
 		switch (mRespawnState)
 		{
-		//ステージ01の初期リスポーン地点
-		case RespawnState::respawnNone:
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mPosition = Vector3(800.0f, 500.0f, -99800.0f);
-				}
-			}
-			break;
 		//ステージ01のリスポーン地点01
 		case RespawnState::respawnComplete01:
 
@@ -163,7 +155,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(800.0f, 500.0f, -81000.0f);
+					mRespawnPos = Vector3(800.0f, 500.0f, -81000.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 
@@ -175,7 +168,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(800.0f, 500.0f, -56500.0f);
+					mRespawnPos = Vector3(800.0f, 500.0f, -56500.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 
@@ -187,7 +181,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(1100.0f, 500.0f, -37500.0f);
+					mRespawnPos = Vector3(1100.0f, 500.0f, -37500.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 
@@ -216,16 +211,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ02のリスポーン処理
 		switch (mRespawnState)
 		{
-		//ステージ02の初期リスポーン地点
-		case RespawnState::respawnNone:
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mPosition = Vector3(800.0f, 500.0f, -99800.0f);
-				}
-			}
-			break;
 		//ステージ02のリスポーン地点01
 		case RespawnState::respawnComplete01:
 
@@ -233,7 +218,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(800.0f, 500.0f, -83000.0f);
+					mRespawnPos = Vector3(800.0f, 500.0f, -83000.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 
@@ -245,7 +231,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(800.0f, 500.0f, -61500.0f);
+					mRespawnPos = Vector3(800.0f, 500.0f, -83000.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 
@@ -257,7 +244,8 @@ void Player::UpdateGameObject(float _deltaTime)
 			{
 				if (mLife >= 1)
 				{
-					mPosition = Vector3(800.0f, 500.0f, -30000.0f);
+					mRespawnPos = Vector3(800.0f, 500.0f, -30000.0f);
+					mPosition = mRespawnPos;
 				}
 			}
 

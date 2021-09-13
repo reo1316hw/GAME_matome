@@ -24,8 +24,8 @@ LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const float _add
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
-	
-	mInitPos = Vector3(_pos.x, _pos.y, _pos.z);
+	mInitPos = _pos;
+
 	mEndPos = Vector3(_pos.x - _addPosX, _pos.y, _pos.z);
 	mInversionPos = Vector3(_pos.x + 60, _pos.y, _pos.z);
 
