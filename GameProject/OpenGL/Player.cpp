@@ -41,11 +41,12 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	mInitPos = _pos;
 	mRespawnPos = _pos;
 
+	mScene = _sceneTag;
+
 	// 速度の値
 	mMoveSpeed = PLAYER_CONSTANT_SPEED;
 	mGravity   = GRAVITY_ACCEL;
 	mLife	  = PLAYER_LIFE;
-	mRespawnState = RespawnState::respawnNone;
 
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -77,8 +78,6 @@ void Player::UpdateGameObject(float _deltaTime)
 	//プレイヤーの斜め後ろにカメラをセット
 	mMainCamera->SetViewMatrixLerpObject(Vector3(0, 500, -550), mPosition);
 
-	mScene = SceneBase::GetScene();
-
 	//ステージクリアしたらプレイヤーの更新を止める
 	if (mClearFlag)
 	{
@@ -100,15 +99,12 @@ void Player::UpdateGameObject(float _deltaTime)
 		mDamageFlag  = false;
 	}
 
-	//初期座標リスポーン処理
-	if (mRespawnState == RespawnState::respawnNone)
+	// リスポーン処理
+	if (mRespawnFlag)
 	{
-		if (mRespawnFlag)
+		if (mLife >= 1)
 		{
-			if (mLife >= 1)
-			{
-				mPosition = mRespawnPos;
-			}
+			mPosition = mRespawnPos;
 		}
 	}
 
@@ -145,50 +141,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mJumpFlag = false;
 		}
 
-		//ステージ01のリスポーン処理
-		switch (mRespawnState)
-		{
-		//ステージ01のリスポーン地点01
-		case RespawnState::respawnComplete01:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(800.0f, 500.0f, -81000.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
-		//ステージ01のリスポーン地点02
-		case RespawnState::respawnComplete02:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(800.0f, 500.0f, -56500.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
-		//ステージ01のリスポーン地点03
-		case RespawnState::respawnComplete03:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(1100.0f, 500.0f, -37500.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
-		}
-
 		//ステージ01のゴール座標
 		if (mPosition.z >= -8900)
 		{
@@ -206,50 +158,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mVelocity.y = JUMP_SPEED;
 			mScaleFlag = true;
 			mJumpFlag = false;
-		}
-
-		//ステージ02のリスポーン処理
-		switch (mRespawnState)
-		{
-		//ステージ02のリスポーン地点01
-		case RespawnState::respawnComplete01:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(800.0f, 500.0f, -83000.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
-		//ステージ02のリスポーン地点02
-		case RespawnState::respawnComplete02:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(800.0f, 500.0f, -83000.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
-		//ステージ02のリスポーン地点03
-		case RespawnState::respawnComplete03:
-
-			if (mRespawnFlag)
-			{
-				if (mLife >= 1)
-				{
-					mRespawnPos = Vector3(800.0f, 500.0f, -30000.0f);
-					mPosition = mRespawnPos;
-				}
-			}
-
-			break;
 		}
 
 		//ステージ02のゴールの座標
@@ -532,19 +440,12 @@ void Player::OnCollision(const GameObject& _hitObject)
 		}
 
 		//リスポーン判定
-		if (mTag == respawn01)
+		if (mTag == respawn)
 		{
-			mRespawnState = RespawnState::respawnComplete01;
-		}
-		if (mTag == respawn02)
-		{
-			mRespawnState = RespawnState::respawnComplete02;
-		}
-		if (mTag == respawn03)
-		{
-			mRespawnState = RespawnState::respawnComplete03;
+			mRespawnPos = _hitObject.GetPosition();
 		}
 
+		//チェックポイント通過判定
 		if (mTag == checkpoint)
 		{
 			mCheckpointFlag = true;

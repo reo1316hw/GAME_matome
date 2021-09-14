@@ -54,7 +54,7 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 
 		for (int i = 0; i < 50; i++)
 		{
-			DecideDir(i);
+			DecideVelocity(i);
 
 			mDeathEffect = new DeathEffect(mPosition, mRandVel, mTag, mSceneTag);
 		}
@@ -66,10 +66,10 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 }
 
 /*
-@fn    Œü‚«‚ðŒˆ‚ß‚é
+@fn    ‘¬“x‚ðŒˆ‚ß‚é
 @param _quantity ŒÂ”
 */
-void DeathEffectManager::DecideDir(const int _quantity)
+void DeathEffectManager::DecideVelocity(const int _quantity)
 {
 	mRandVel = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
 	mRandVel.Normalize();

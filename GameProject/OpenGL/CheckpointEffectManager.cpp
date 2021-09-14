@@ -16,8 +16,6 @@ CheckpointEffectManager::CheckpointEffectManager(const Tag& _objectTag, SceneBas
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
 
-	a = true;
-
 	mPlayer = _playerPtr;
 }
 
@@ -53,7 +51,7 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 		for (int i = 0; i < 8; i++)
 		{
 			// チェックポイントエフェクトの向きを決める
-			DecideDir(i);
+			DecideVelocity(i);
 			//チェックポイントエフェクトを生成
 			mCheckpointEffect = new CheckpointEffect(mPosition, mVelocity, mTag, mSceneTag);
 		}
@@ -64,10 +62,10 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 }
 
 /*
-@fn    向きを決める
+@fn    速度を決める
 @param _quantity 個数
 */
-void CheckpointEffectManager::DecideDir(const int _quantity)
+void CheckpointEffectManager::DecideVelocity(const int _quantity)
 {
 	//速度を初期化
 	mVelocity = Vector3::Zero;

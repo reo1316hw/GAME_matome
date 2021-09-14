@@ -40,10 +40,10 @@ private:
 
 
 	/*
-	@fn    向きを決める
+	@fn    速度を決める
 	@param _quantity 個数
 	*/
-	void DecideDir(const int _quantity);
+	void DecideVelocity(const int _quantity);
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;

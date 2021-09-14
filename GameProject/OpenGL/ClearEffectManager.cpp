@@ -43,105 +43,63 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 	case PARTICLE_ACTIVE:
 
 		mPosition = mPlayer->GetPosition();
-		mPosition.y -= 10.0f;
-		mPosition.z -= 20.0f;
-
-		float x = 0.0f;
-		float y = 0.0f;
-		float x2 = 0.0f;
-		float y2 = 0.0f;
-		float x3 = 0.0f;
-		float y3 = 0.0f;
-		float x4 = 0.0f;
-		float y4 = 0.0f;
-		float x5 = 0.0f;
-		float y5 = 0.0f;
-		float x6 = 0.0f;
-		float y6 = 0.0f;
-		float x7 = 0.0f;
-		float y7 = 0.0f;
-		float x8 = 0.0f;
-		float y8 = 0.0f;
-		float x9 = 0.0f;
-		float y9 = 0.0f;
-		float x10 = 0.0f;
-		float y10 = 0.0f;
-		float x11 = 0.0f;
-		float y11 = 0.0f;
-		float x12 = 0.0f;
-		float y12 = 0.0f;
-
-		//角度
-		float	mAngle = 0.0f;
-
-		Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
-
-		////クリアエフェクトを生成
-		//mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
 
 		for (int i = 0; i < 200; i++)
 		{
-			/*if (i % 13 == 0)
-			{
-				vel = Vector3(0.0f, 0.0f, 0.0f);
-			}*/
-			if (i % 13 == 1)
-			{
-				vel = Vector3(x = x + 0.1f, y = y + 1.0f, 0.0f);
-			}
-			if (i % 13 == 2)
-			{
-				vel = Vector3(x2 = x2 - 0.1f, y2 = y2 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 3)
-			{
-				vel = Vector3(x3 = x3 + 0.2f, y3 = y3 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 4)
-			{
-				vel = Vector3(x4 = x4 - 0.2f, y4 = y4 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 5)
-			{
-				vel = Vector3(x5 = x5 + 0.4f, y5 = y5 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 6)
-			{
-				vel = Vector3(x6 = x6 - 0.4f, y6 = y6 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 7)
-			{
-				vel = Vector3(x7 = x7 + 0.6f, y7 = y7 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 8)
-			{
-				vel = Vector3(x8 = x8 - 0.6f, y8 = y8 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 9)
-			{
-				vel = Vector3(x9 = x9 + 0.8f, y9 = y9 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 10)
-			{
-				vel = Vector3(x10 = x10 - 0.8f, y10 = y10 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 11)
-			{
-				vel = Vector3(x11 = x11 + 1.0f, y11 = y11 + 1.0f, 0.0f);
-			}
-			if (i % 13 == 12)
-			{
-				vel = Vector3(x12 = x12 - 1.0f, y12 = y12 + 1.0f, 0.0f);
-			}
+			DecideVelocity(i);
 
-			mClearEffect = new ClearEffect(mPosition, vel, mTag, mSceneTag);
-
-			vel.y = sinf(mAngle);
-			mAngle += 10.0f;
+			mClearEffect = new ClearEffect(mPosition, mVelocity, mTag, mSceneTag);
 		}
 
 		OneCreateClearFlag = false;
 
+		break;
+	}
+}
+
+/*
+@fn    速度を決める
+@param _quantity 個数
+*/
+void ClearEffectManager::DecideVelocity(const int _quantity)
+{
+	//向き
+	float direction = 0.0f;
+	//速度
+	float speed = 0.0f;
+
+	mVelocity = Vector3(0.0f, 0.0f, 0.0f);
+	speed = _quantity * 0.1f;
+
+	switch (_quantity % 5)
+	{
+	case 0:
+		direction = -0.6f;
+		mVelocity.x = direction * speed;
+		direction = 1.0f;
+		mVelocity.y = direction * speed;
+		break;
+	case 1:
+		direction = -0.3f;
+		mVelocity.x = direction * speed;
+		direction = 1.0f;
+		mVelocity.y = direction * speed;
+		break;
+	case 2:
+		direction = 1.0f;
+		mVelocity.y = direction * speed;
+		break;
+	case 3:
+		direction = 0.3f;
+		mVelocity.x = direction * speed;
+		direction = 1.0f;
+		mVelocity.y = direction * speed;
+		break;
+	case 4:
+		direction = 0.6f;
+		mVelocity.x = direction * speed;
+		direction = 1.0f;
+		mVelocity.y = direction * speed;
 		break;
 	}
 }

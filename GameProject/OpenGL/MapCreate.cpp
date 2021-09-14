@@ -392,14 +392,14 @@ void MapCreate::CreateStage01Object(const unsigned int _name, const Vector3 _obj
 			break;
 		}
 		case(21):
-			new Respawn(_objectPos, objectSize, respawn01, SceneBase::stage01);
+		{
+			const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
+			const Vector3 respawnPos = _objectPos + addPos;
+			const Vector3 respawnSize = Vector3(2000.0f, 2000.0f, 100.0f);
+
+			new Respawn(respawnPos, respawnSize, respawn, SceneBase::stage01);
 			break;
-		case(22):
-			new Respawn(_objectPos, objectSize, respawn02, SceneBase::stage01);
-			break;
-		case(23):
-			new Respawn(_objectPos, objectSize, respawn03, SceneBase::stage01);
-			break;
+		}
 	}
 }
 
@@ -521,14 +521,14 @@ void MapCreate::CreateStage02Object(const unsigned int _name, const Vector3 _obj
 			break;
 	    }
 		case(21):
-			new Respawn(_objectPos, objectSize, respawn01, SceneBase::stage02);
+		{
+			const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
+			const Vector3 respawnPos = _objectPos + addPos;
+			const Vector3 respawnSize = Vector3(2000.0f, 2000.0f, 100.0f);
+
+			new Respawn(respawnPos, respawnSize, respawn, SceneBase::stage02);
 			break;
-		case(22):
-			new Respawn(_objectPos, objectSize, respawn02, SceneBase::stage02);
-			break;
-		case(23):
-			new Respawn(_objectPos, objectSize, respawn03, SceneBase::stage02);
-			break;
+		}
 		case(418):
 		{
 			const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);

@@ -36,6 +36,12 @@ public:
 
 private:
 
+	/*
+	@fn    速度を決める
+	@param _quantity 個数
+	*/
+	void DecideVelocity(const int _quantity);
+
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
 	//パーティクルの状態
@@ -48,11 +54,6 @@ private:
 	ClearEffect* mClearEffect;
 	//プレイヤーのポインタ
 	Player* mPlayer;
-
-	//速度
-	const float SPEED = 10.0f;
-	//向き
-	const float DIRECTION = 1.0f;
 
 	//クリアエフェクトを一度だけ生成するためのフラグ
 	bool			 OneCreateClearFlag;

@@ -143,6 +143,19 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 			func(*(_sphere->GetOwner()));
 			_sphere->Refresh();
 		}
+		
+		if (respawnFlag)
+		{
+			mRangeHitsBegin = mRespawnNum;
+		}
+		else
+		{
+			if (sphereZPos >= respawnPos &&
+				sphereZPos <= respawnPos + 200.0f)
+			{
+				mRespawnNum = mRangeHitsBegin - mRangeHitsCount;
+			}
+		}
 
 		if (sphereZPos >= boxZMin - boxZdif &&
 			sphereZPos <= boxZMax - boxZdif)

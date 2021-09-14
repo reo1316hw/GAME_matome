@@ -47,11 +47,9 @@ enum class ColliderTag
 	downBlockTag = 19,
 	goalBlockTag = 20,
 	isGroundtag = 21,
-	respawn01 = 22,
-	respawn02 = 23,
-	respawn03 = 24,
-	checkpoint = 25,
-	SwithTag = 26
+	respawn = 22,
+	checkpoint = 23,
+	SwithTag = 24
 };
 
 class ColliderComponent : public Component

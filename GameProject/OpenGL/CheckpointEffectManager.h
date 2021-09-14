@@ -37,10 +37,10 @@ public:
 private:
 
 	/*
-	@fn    向きを決める
-	@param _quantity 個数
-	*/
-	void DecideDir(const int _quantity);
+    @fn    速度を決める
+    @param _quantity 個数
+    */
+	void DecideVelocity(const int _quantity);
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
@@ -59,7 +59,5 @@ private:
 	const float SPEED = 10.0f;
 	//向き
 	const float DIRECTION = 1.0f;
-
-	bool a;
 };
 

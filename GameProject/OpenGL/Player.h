@@ -16,18 +16,6 @@ class CheckpointEffectManager;
 class SphereCollider;
 class LateralMoveGround;
 
-/*
-@enum	プレイヤーのリスポーンステート
-@brief	どのリスポーン地点で復活するか
-*/
-enum class RespawnState
-{
-	respawnNone = 0,
-	respawnComplete01 = 1,
-	respawnComplete02 = 2,
-	respawnComplete03 = 3
-};
-
 class Player:public GameObject
 {
 public:
@@ -76,9 +64,6 @@ private:
 	CheckpointEffectManager* mCheckpointEffectManager;
 	//横移動床のポインタ
 	LateralMoveGround*	mLateral;
-	//リスポーンステートの値を格納する変数
-	RespawnState		mRespawnState;
-
 	//横移動床にあたった時の速度
 	Vector3				mLateralMoveVelocity;
 
@@ -103,7 +88,7 @@ private:
 	//チェックポイント通過したか
 	bool		mCheckpointFlag;
 	// リスポーンしたか
-	bool mRespawnFlag;
+	bool        mRespawnFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
