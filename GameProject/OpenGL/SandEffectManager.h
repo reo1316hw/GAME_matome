@@ -1,14 +1,16 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
-
 #include "ParticleEffectBase.h"
 
+/*
+@brief 前方宣言
+*/
 class SandEffect;
 class DeathEffect;
 class ClearEffect;

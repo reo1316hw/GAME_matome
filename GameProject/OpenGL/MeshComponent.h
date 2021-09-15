@@ -1,17 +1,16 @@
 /*
-@file	MeshComponent.h
-@brief	メッシュデータの管理と描画を行う
+@file  MeshComponent.h
+@brief メッシュデータの管理と描画を行う
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 class Shader;
 class Mesh;
@@ -19,6 +18,7 @@ class Mesh;
 class MeshComponent : public Component
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
@@ -37,7 +37,9 @@ public:
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
     virtual void Draw(Shader* _shader);
+
 protected:
+
 	/*
 	@fn		テクスチャをステージごとにセット
 	@brief	ディフューズマップ	stage00
@@ -47,6 +49,7 @@ protected:
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
 	virtual void SetTextureToShader(class Shader* _shader);
+
 	//メッシュデータクラスへのポインタ
     Mesh* mMesh;
 	//テクスチャサイズ
@@ -55,7 +58,9 @@ protected:
 	bool mVisible;
 	//スケルトンデータを用いるか
 	bool mSkeltonFlag;
+
 public: //ゲッターセッター
+
 	/*
 	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない(bool型)
@@ -90,4 +95,3 @@ public: //ゲッターセッター
 	*/
 	void SetVisible(bool _visible) { mVisible = _visible; }
 };
-

@@ -1,10 +1,10 @@
 /*
-@file	Skeleton.h
-@brief	骨格
+@file  Skeleton.h
+@brief 骨格
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 

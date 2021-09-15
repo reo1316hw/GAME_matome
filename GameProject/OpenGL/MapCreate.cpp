@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -302,7 +302,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _name, const Vector3 _ob
         	new VerticalMoveGround(_objectPos, objectSize, "Assets/box_04.gpmesh", verticalMoveGround, SceneBase::tutorial, mPlayer);
         	break;
         case(5):
-        	new Jump(_objectPos, objectSize, "Assets/box_05.gpmesh", jump, SceneBase::tutorial);
+        	new Jump(_objectPos, objectSize, "Assets/box_05.gpmesh", jump, SceneBase::tutorial, mPlayer);
         	break;
         case(6):
         	new LateralMoveGround(_objectPos, objectSize, "Assets/box.gpmesh", lateralMoveGround, SceneBase::tutorial, 1000.0f, mPlayer);
@@ -370,7 +370,7 @@ void MapCreate::CreateStage01Object(const unsigned int _name, const Vector3 _obj
 		    new VerticalMoveGround(_objectPos, objectSize, "Assets/box_11.gpmesh", verticalMoveGround, SceneBase::stage01, mPlayer);
 			break;
 	    case(5):
-			new Jump(_objectPos, objectSize, "Assets/box_12.gpmesh", jump, SceneBase::stage01);
+			new Jump(_objectPos, objectSize, "Assets/box_12.gpmesh", jump, SceneBase::stage01, mPlayer);
 			break;
 		case(6):
 			new LateralMoveGround(_objectPos, objectSize, "Assets/box_08.gpmesh", lateralMoveGround, SceneBase::stage01 ,1000.0f, mPlayer);
@@ -425,7 +425,7 @@ void MapCreate::CreateStage02Object(const unsigned int _name, const Vector3 _obj
 	    	new VerticalMoveGround(_objectPos, objectSize, "Assets/box_16.gpmesh", verticalMoveGround, SceneBase::stage02, mPlayer);
 	    	break;
 	    case(5):
-	    	new Jump(_objectPos, objectSize, "Assets/box_17.gpmesh", jump, SceneBase::stage02);
+	    	new Jump(_objectPos, objectSize, "Assets/box_17.gpmesh", jump, SceneBase::stage02, mPlayer);
 	    	break;
 	    case(6):
 	    	new LateralMoveGround(_objectPos, objectSize, "Assets/box_13.gpmesh", lateralMoveGround, SceneBase::stage02, 1000.0f, mPlayer);

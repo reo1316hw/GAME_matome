@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -39,9 +39,7 @@ SceneBase* TitleScene::update(const InputState& _state)
 	if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == Released ||
 		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
 	{
-		//return new TutorialScene(tutorial);
-		//return new Stage01Scene(stage01);
-		return new Stage02Scene(stage02);
+		return new TutorialScene(tutorial);
 	}
 
 	return this;

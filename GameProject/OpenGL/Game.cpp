@@ -1,5 +1,10 @@
 /*
-@brief	インクルード
+@file Game.h
+@brief ゲームの進行を行う
+*/
+
+/*
+@brief インクルード
 */
 #include "pch.h"
 
@@ -40,7 +45,7 @@ bool Game::Initialize()
 	//レンダラーの初期化
 	Renderer::CreateInstance();
 	//画面作成
-	if (!RENDERER->Initialize(1000, 800, false))
+	if (!RENDERER->Initialize(1920, 1080, false))
 	{
 		SDL_Log("Failed to initialize renderer");
 		Renderer::DeleteInstance();

@@ -1,17 +1,16 @@
 /*
-@file	Mesh.h
-@brief	メッシュデータ
+@file  Mesh.h
+@brief メッシュデータ
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class Renderer;
 class VertexArray;
 class Texture;

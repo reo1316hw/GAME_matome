@@ -1,5 +1,5 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #include "pch.h"
 

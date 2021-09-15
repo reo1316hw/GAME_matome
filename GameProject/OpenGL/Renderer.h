@@ -1,17 +1,16 @@
 /*
-@file Renderer.h
+@file  Renderer.h
 @brief 描画の進行を行うクラス
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
-
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -20,6 +19,21 @@
 #include "ParticleComponent.h"
 #include "Player.h"
 
+/*
+@brief 前方宣言
+*/
+class SpriteComponent;
+class Texture;
+class Mesh;
+class Game;
+class MeshComponent;
+class InvisibleMeshComponent;
+class Shader;
+class VertexArray;
+class ParticleComponent;
+class UIComponent;
+class HeartUI;
+class HDRRenderer;
 
 #define RENDERER Renderer::GetInstance()
 
@@ -45,19 +59,6 @@ enum class TextureStage
 	EmissiveMap,
 	ShadowMap,
 };
-
-class SpriteComponent;
-class Texture;
-class Mesh;
-class Game;
-class MeshComponent;
-class InvisibleMeshComponent;
-class Shader;
-class VertexArray;
-class ParticleComponent;
-class UIComponent;
-class HeartUI;
-class HDRRenderer;
 
 class Renderer
 {
@@ -319,7 +320,7 @@ public://ゲッターセッター
 	@param _fileName アニメーションへのアドレス
 	@return スケルトンアニメーションの取得(class Animation)
 	*/
-	const class Animation* GetAnimation(const char* _fileName);                     // スケルタルアニメーションの取得
+	const class Animation* GetAnimation(const char* _fileName);
 
 	/*
 	@param	_fileName 取得したいメッシュのファイル名

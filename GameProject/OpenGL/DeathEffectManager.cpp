@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -11,7 +11,7 @@
 */
 DeathEffectManager::DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
 	:GameObject(_sceneTag, _objectTag)
-	, mRandVel(Vector3(0.0f, 0.0f, 0.0f))
+	, mRandVel(Vector3::Zero)
 {
 	mState = ParticleState::PARTICLE_DISABLE;
 	mSceneTag = _sceneTag;

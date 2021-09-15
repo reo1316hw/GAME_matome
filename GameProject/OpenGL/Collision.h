@@ -1,16 +1,12 @@
 /*
-@file Collision.h
+@file  Collision.h
 @brief 正方形や線、三角形等のオブジェクト宣言
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 //線分
 struct LineSegment

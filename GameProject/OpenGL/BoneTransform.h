@@ -1,20 +1,17 @@
 /*
- @file BoneTransform.h
+ @file  BoneTransform.h
  @brief モデルのボーン変換
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class BoneTransform
 {
 public:
+
 	//回転
 	Quaternion mRotation;
 	//移動

@@ -1,22 +1,22 @@
 /*
-@file	Component.h
-@brief	全てのコンポーネントの管理を行う
+@file  Component.h
+@brief 全てのコンポーネントの管理を行う
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 
 class Component
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ

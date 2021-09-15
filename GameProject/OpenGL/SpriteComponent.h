@@ -1,17 +1,16 @@
 /*
-@file	SpriteComponent.h
-@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+@file  SpriteComponent.h
+@brief 画像データクラスを管理し、スクリーン上に描画するクラス
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 class Shader;
 class Texture;
@@ -19,6 +18,7 @@ class Texture;
 class SpriteComponent : public Component
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
@@ -58,6 +58,7 @@ protected:
 	bool mVisible;
 
 public://ゲッターセッター
+
 	/*
 	@return テクスチャの横幅(int型)
 	*/

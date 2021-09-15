@@ -1,10 +1,10 @@
 /*
-@file	FPS.h
-@brief	フレームにかかった時間を計測し上限を設けるクラス
+@file  FPS.h
+@brief フレームにかかった時間を計測し上限を設けるクラス
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 

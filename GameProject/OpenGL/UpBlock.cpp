@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -20,7 +20,7 @@ UpBlock::UpBlock(const Vector3& _pos, const Vector3& _size, const std::string _g
 	SetPosition(_pos);
 	mInitPos = _pos;
 
-	mEndPos = Vector3(_pos.x, _pos.y + 200, _pos.z);
+	mEndPos = Vector3(_pos.x, _pos.y + 200.0f, _pos.z);
 
 	//生成したUpBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -58,12 +58,12 @@ void UpBlock::UpdateGameObject(float _deltaTime)
 
 	if (mPosition.y >= mEndPos.y)
 	{
-		mVelocity.y = 0;
+		mVelocity.y = 0.0f;
 	}
 
 	if (mPlayer->GetDeathFlag())
 	{
-		mVelocity.y = 0;
+		mVelocity.y = 0.0f;
 		mOriginalPosFlag = false;
 	}
 
@@ -71,8 +71,8 @@ void UpBlock::UpdateGameObject(float _deltaTime)
 	{
 		if (mPlayer->GetRespawnFlag())
 		{
-			mVelocity.y = 0;
-			mPosition.y = mInitPos.y;
+			mVelocity.y = 0.0f;
+			mPosition = mInitPos;
 			mOriginalPosFlag = false;
 		}
 	}

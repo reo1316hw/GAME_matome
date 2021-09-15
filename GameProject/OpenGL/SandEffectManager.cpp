@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -34,7 +34,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 		mState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
+	Vector3 vel = Vector3::Zero;
 
 	switch (mState)
 	{
@@ -54,7 +54,6 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 
 		break;
 	}
-
 
 	mPos = mOwner->GetPosition();
 }

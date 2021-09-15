@@ -1,13 +1,11 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
-// 前方宣言
 class Player;
 
 class LateralMoveGround : public GameObject

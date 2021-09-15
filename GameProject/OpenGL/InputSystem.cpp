@@ -1,3 +1,6 @@
+/*
+@brief	インクルード
+*/
 #include <cstring>
 #include <stdio.h>
 #include <limits.h>

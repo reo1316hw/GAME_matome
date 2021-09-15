@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -46,8 +46,8 @@ void Glass::UpdateGameObject(float _deltaTime)
 	{
 		mHitFlag = false;
 		mDownCount = 0;
-		mVelocity.y = 0;
-		mPosition.y = 0;
+		mVelocity.y = 0.0f;
+		mPosition = mInitPos;
 	}
 
 	if (mHitFlag)

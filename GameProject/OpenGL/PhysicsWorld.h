@@ -1,19 +1,16 @@
 ﻿/*
-@file	PhysicsWorld.h
-@brief	当たり判定を行う
+@file  PhysicsWorld.h
+@brief 当たり判定を行う
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
-#define PHYSICS PhysicsWorld::GetInstance()
-
 class Game;
 class GameObject;
 class BoxCollider;
@@ -21,6 +18,7 @@ class SphereCollider;
 class ColliderComponent;
 class Player;
 
+#define PHYSICS PhysicsWorld::GetInstance()
 typedef std::function<void(GameObject&)> OnCollisionFunc;
 typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> OnCollisionMap;
 

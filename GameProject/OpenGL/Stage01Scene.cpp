@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -25,11 +25,11 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 	{
 		if (i <= 1)
 		{
-  			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-81000.0f + i * 26000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+  			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-81100.0f + i * 25000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
 		}
 		else
 		{
-			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, -39000.0f), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, -39700.0f), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
 		}
 	}
 

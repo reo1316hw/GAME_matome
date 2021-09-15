@@ -1,10 +1,10 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
 class Player;
 
@@ -103,16 +103,12 @@ private:
 
 	// プレイヤーのポインタ
 	Player* mPlayer;
-
-	//int mMapData[2] = { mLowerMapData ,mUpperMapData };
-	
 	// 幅のマップデータ
 	int	mSizeX;
 	// 高さのマップデータ
 	int	mSizeY;
 	// 奥行のマップデータ
 	int	mSizeZ;
-
 	// オブジェクトごとの距離
 	float mOffset;
 };

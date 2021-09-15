@@ -1,10 +1,10 @@
 /*
-@file	FPS.h
-@brief	フレームにかかった時間を計測し上限を設けるクラス
+@file  FPS.h
+@brief フレームにかかった時間を計測し上限を設けるクラス
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
@@ -26,7 +26,9 @@ public:
 	@fn	フレーム毎の処理
 	*/
 	void Update();
+
 private:
+
 	/*
 	@fn	FPSが設定値より大きくならないための制御
 	*/
@@ -46,7 +48,9 @@ private:
 	int mBeforetickCount;				
 	//現在のフレームのかかった時間
 	float mDeltaTime;					
+
 public://ゲッターセッター
+
 	/*
 	@return 現在のフレームにかかった時間(float型)
 	*/

@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -68,7 +68,7 @@ void ClearEffectManager::DecideVelocity(const int _quantity)
 	//速度
 	float speed = 0.0f;
 
-	mVelocity = Vector3(0.0f, 0.0f, 0.0f);
+	mVelocity = Vector3::Zero;
 	speed = _quantity * 0.1f;
 
 	switch (_quantity % 5)

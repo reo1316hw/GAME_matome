@@ -1,10 +1,10 @@
 /*
-@file Renderer.h
+@file  Renderer.h
 @brief 描画の進行を行うクラス
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 

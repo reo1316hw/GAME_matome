@@ -1,7 +1,8 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
+
 /*
 @fn		コンストラクタ
 @param	_pos 空中ブロックの座標

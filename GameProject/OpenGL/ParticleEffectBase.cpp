@@ -4,7 +4,7 @@
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 

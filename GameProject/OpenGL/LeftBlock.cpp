@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -27,7 +27,7 @@ LeftBlock::LeftBlock(const Vector3& _pos, const Vector3& _size, const float _add
 	mInitPos = _pos;
 
 	mEndPos = Vector3(_pos.x - _addPosX, _pos.y, _pos.z);
-	mInversionPos = Vector3(_pos.x + 60, _pos.y, _pos.z);
+	mInversionPos = Vector3(_pos.x + 60.0f, _pos.y, _pos.z);
 
 	//生成したLeftBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -99,13 +99,13 @@ void LeftBlock::UpdateGameObject(float _deltaTime)
 
 	if (mPosition.x <= mEndPos.x)
 	{
-		mVelocity.x = 0;
+		mVelocity.x = 0.0f;
 	}
 
 	if (mPlayer->GetDeathFlag())
 	{
 		mElapseTime = 0.0f;
-		mVelocity.x = 0;
+		mVelocity.x = 0.0f;
 		mOriginalPosFlag = false;
 	}
 
@@ -114,8 +114,9 @@ void LeftBlock::UpdateGameObject(float _deltaTime)
 		if (mPlayer->GetRespawnFlag())
 		{
 			mElapseTime = 0.0f;
-			mVelocity.x = 0;
+			mVelocity.x = 0.0f;
 			mPosition.x = mInitPos.x;
+			mShakeFlag = false;
 			mOriginalPosFlag = false;
 		}
 	}

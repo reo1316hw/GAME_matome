@@ -1,12 +1,11 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class Game;
 class Vector3;
 class Matrix4;

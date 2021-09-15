@@ -1,10 +1,10 @@
 /*
-@file	ParticleComponent.h
-@brief	画像を管理しそれを3D空間上に描画するクラス。
+@file  ParticleComponent.h
+@brief 画像を管理しそれを3D空間上に描画するクラス。
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -14,11 +14,11 @@ Matrix4 ParticleComponent::mStaticBillboardMat;
 Vector3 ParticleComponent::mStaticCameraWorldPos;
 
 /*
-@fn		コンストラクタ
-@param	_owner アタッチするゲームオブジェクトのポインタ
-@param	_offset 親オブジェクトクラスと画像を描画する位置の差
-@param	_scale 画像の描画サイズ
-@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
+@fn	   コンストラクタ
+@param _owner アタッチするゲームオブジェクトのポインタ
+@param _offset 親オブジェクトクラスと画像を描画する位置の差
+@param _scale 画像の描画サイズ
+@param _updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 */
 ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
@@ -96,16 +96,3 @@ bool ParticleComponent::operator>(const ParticleComponent& _rhs) const
 	lenRhs = (mStaticCameraWorldPos - _rhs.mOffset).LengthSq();
 	return lenThis > lenRhs;
 }
-
-
-//Matrix4 GetBillboardMatrix()
-//{
-//	Matrix4 ret;
-//	ret = RENDERER->GetViewMatrix();
-//	ret.mat[3][0] = ret.mat[3][1] = ret.mat[3][2] = 0.0f;
-//	ret.Transpose();
-//	ret.mat[1][1] *= -1;
-//	ret.mat[2][2] *= -1;
-//
-//	return Matrix4(ret);
-//}

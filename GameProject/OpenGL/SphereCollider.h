@@ -1,16 +1,12 @@
 ﻿/*
-@file	SphereCollider.h
-@brief	球の当たり判定を行うコンポーネント
+@file  SphereCollider.h
+@brief 球の当たり判定を行うコンポーネント
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class SphereCollider final : public ColliderComponent
 {

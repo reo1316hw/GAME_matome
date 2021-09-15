@@ -1,17 +1,16 @@
 ﻿/*
-@file	BoxCollider.h
-@brief	ボックスの当たり判定を行うコンポーネント
+@file  BoxCollider.h
+@brief ボックスの当たり判定を行うコンポーネント
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
-
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
 

@@ -1,15 +1,15 @@
 /*
-@file	SkeletalMeshComponent.h
-@brief	スケルトンデータの描画とアニメーション
+@file  SkeletalMeshComponent.h
+@brief スケルトンデータの描画とアニメーション
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "MeshComponent.h"
 #include "MatrixPalette.h"
@@ -17,6 +17,7 @@
 class SkeletalMeshComponent : public MeshComponent
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
@@ -48,7 +49,9 @@ public:
 	@return	アニメーションの残り時間(float型)
 	*/
 	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
+
 protected:
+
 	/*
 	@fn 行列パレットの計算
 	*/
@@ -66,7 +69,9 @@ protected:
 	float mAnimTime;
 	//スケルトンデータに乗算する色
 	Vector3 mColor;
+
 public://ゲッターセッター
+
 	/*
 	@param _skeleton スケルトンデータ
 	*/

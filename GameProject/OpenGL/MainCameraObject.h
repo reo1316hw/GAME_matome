@@ -1,16 +1,12 @@
 /*
-@file MainCameraObject.h
+@file  MainCameraObject.h
 @brief メインカメラ。GameObjectの静的オブジェクト カメラと衝突していないオブジェクトは更新を一時的に停止する
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class MainCameraObject :
 	public GameObject

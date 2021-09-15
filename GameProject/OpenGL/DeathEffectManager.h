@@ -1,15 +1,16 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
-
 #include "ParticleEffectBase.h"
 
-// 前ぽ宣言
+/*
+@brief 前方宣言
+*/
 class DeathEffect;
 class Player;
 

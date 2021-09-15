@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -67,7 +67,7 @@ void LateralMoveGround::UpdateGameObject(float _deltaTime)
 		if (mPlayer->GetRespawnFlag())
 		{
 			mVelocity.x = 0.0f;
-			mPosition.x = mInitPos.x;
+			mPosition = mInitPos;
 			mOriginalPosFlag = false;
 		}
 	}

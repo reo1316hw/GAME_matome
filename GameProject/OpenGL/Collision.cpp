@@ -1,18 +1,18 @@
 /*
-@file Collision.h
+@file  Collision.h
 @brief 正方形や線、三角形等のオブジェクト宣言
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
 #include <array>
 
 /*
-@param	線分の開始地点のポジション
-@param	線分の終了地点のポジション
+@param 線分の開始地点のポジション
+@param 線分の終了地点のポジション
 */
 LineSegment::LineSegment(const Vector3 & _start, const Vector3 & _end)
 	: m_start(_start)
@@ -21,8 +21,8 @@ LineSegment::LineSegment(const Vector3 & _start, const Vector3 & _end)
 }
 
 /*
-@brief	線分上の点を返す
-@param	入力値 t（L(t) = Start + (End - Start)t）
+@brief  線分上の点を返す
+@param  入力値 t（L(t) = Start + (End - Start)t）
 @return 線分上の点のポジション
 */
 Vector3 LineSegment::PointOnSegment(float _t) const

@@ -1,12 +1,11 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class VerticalMoveGroundExplanationBoard;
 class OperationExplanationBoard;
 
@@ -40,4 +39,3 @@ private:
 	// コンティニューシーンに移行するかのフラグ
 	bool mTransitionFlag;
 };
-

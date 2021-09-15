@@ -1,10 +1,10 @@
 /*
-@file Shader.h
+@file  Shader.h
 @brief シェーダーデータ
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 

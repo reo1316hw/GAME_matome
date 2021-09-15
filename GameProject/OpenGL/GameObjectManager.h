@@ -1,21 +1,20 @@
 /*
-@file	GameObjectManager.h
-@brief	ゲームオブジェクトの更新を行う
+@file  GameObjectManager.h
+@brief ゲームオブジェクトの更新を行う
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
-#define GAME_OBJECT_MANAGER GameObjectManager::GetInstance()
-
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 struct InputState;
+
+#define GAME_OBJECT_MANAGER GameObjectManager::GetInstance()
 
 class GameObjectManager
 {
@@ -66,24 +65,6 @@ public:
 	@param	_scene 削除するシーンのタグ
 	*/
 	void RemoveSceneGameObject(SceneBase::Scene _scene);
-
-	/*
-	@fn		使用したすべてのゲームオブジェクトを解放する
-	@detail シーン遷移の際に使用される。GameObject内の再利用フラグが建っているオブジェクトは解放しない
-	*/
-	void RemoveAllUsedGameObject();
-
-	/*
-	@fn		特定のゲームオブジェクトを探す
-	@param	_tag ゲームオブジェクトのタグ
-	*/
-	GameObject* FindGameObject(Tag _tag);
-
-	/*
-	@fn		特定のゲームオブジェクトを探す
-	@param	_tag ゲームオブジェクトのタグ
-	*/
-	std::vector<GameObject*> FindGameObjects(Tag _tag);
 
 private:
 

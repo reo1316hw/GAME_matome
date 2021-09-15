@@ -1,16 +1,12 @@
 /*
-@file Shader.h
+@file  Shader.h
 @brief シェーダーデータ
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class Shader
 {

@@ -1,20 +1,17 @@
 /*
-@file	Skeleton.h
-@brief	骨格
+@file  Skeleton.h
+@brief 骨格
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class Skeleton
 {
 public:
+
 	/*
 	@struct それぞれのボーンの骨格定義
 	*/
@@ -34,17 +31,23 @@ public:
 	@return 成功、失敗
 	*/
 	bool Load(const std::string& _filename);
+
 protected:
+
 	/*
 	@fn スケルトンがロードされたときに自動的に呼び出され各ボーンのグローバル逆バインドポーズを計算
 	*/    
 	void ComputeGlobalInvBindPose();
+
 private:
+
 	//ボーン配列
 	std::vector<Bone> mBones;
 	//それぞれのボーンの逆バインドポーズ行列
 	std::vector<Matrix4> mGlobalInvBindPoses;
+
 public: //ゲッターセッター
+
 	/*
 	@return ボーン数(unsigned int型)
 	*/

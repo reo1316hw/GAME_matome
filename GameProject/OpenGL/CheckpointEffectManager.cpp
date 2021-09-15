@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -102,5 +102,4 @@ void CheckpointEffectManager::DecideVelocity(const int _quantity)
 		mVelocity.z = DIRECTION * SPEED;
 		break;
 	}
-
 }

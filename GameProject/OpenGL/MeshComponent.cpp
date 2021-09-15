@@ -1,18 +1,18 @@
 /*
-@file	MeshComponent.h
-@brief	メッシュデータの管理と描画を行う
+@file  MeshComponent.h
+@brief メッシュデータの管理と描画を行う
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
 /*
-@fn		コンストラクタ
-@param	_owner アタッチするゲームオブジェクトのポインタ
+@fn	   コンストラクタ
+@param _owner アタッチするゲームオブジェクトのポインタ
 @param _skelton スケルトンデータを用いるか。
-@sa SkeletalMeshComponent.h
+@sa    SkeletalMeshComponent.h
 */
 MeshComponent::MeshComponent(GameObject* _owner, bool _skelton)
 	: Component(_owner)

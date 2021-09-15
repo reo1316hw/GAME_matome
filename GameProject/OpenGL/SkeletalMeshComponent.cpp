@@ -1,16 +1,16 @@
 /*
-@file	SkeletalMeshComponent.h
-@brief	スケルトンデータの描画とアニメーション
+@file  SkeletalMeshComponent.h
+@brief スケルトンデータの描画とアニメーション
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
 /*
-@fn		コンストラクタ
-@param	_owner アタッチするゲームオブジェクトのポインタ
+@fn	   コンストラクタ
+@param _owner アタッチするゲームオブジェクトのポインタ
 */
 SkeletalMeshComponent::SkeletalMeshComponent(GameObject* _owner)
 	: MeshComponent(_owner, true)

@@ -1,10 +1,10 @@
 ﻿/*
-@file	PhysicsWorld.h
-@brief	当たり判定を行う
+@file  PhysicsWorld.h
+@brief 当たり判定を行う
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -78,9 +78,12 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		{
 			continue;
 		}
+
+		// sphereと当たったか
 		bool hit = Intersect(itr->GetWorldSphere(), _box->GetWorldBox());
 		if (hit)
 		{
+			// sphereの当たった際のリアクション処理
 			OnCollisionFunc func = mCollisionFunction.at(_box);
 			func(*(itr->GetOwner()));
 			func = mCollisionFunction.at(itr);
@@ -103,19 +106,21 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
 	// 球状の当たり判定がアタッチされているオブジェクトのz速度
 	float sphereZVel = _sphere->GetOwner()->GetVelocity().z;
-	// リスポーン地点
-	float respawnPos = _sphere->GetOwner()->GetRespawnPos().z;
+	// リスポーンZ地点
+	float respawnZPos = _sphere->GetOwner()->GetRespawnPos().z;
 	// リスポーンしたか
 	float respawnFlag = _sphere->GetOwner()->GetRespawnFlag();
 
-	//コライダーの親オブジェクトがActiveじゃなければ終了する
+	//　コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
 	{
 		return;
 	}
 
+	// プレイヤーの最小z座標から前方20個の範囲だけで当たり判定処理を行う
 	for (int i = mRangeHitsBegin; i < mRangeHitsBegin + 20; i++)
 	{
+		// カウントが配列の範囲から超えたらループから抜ける
 		if (i == mBoxes.size())
 		{
 			break;
@@ -134,40 +139,50 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 			continue;
 		}
 
+		// boxと当たったか
 		bool hit = Intersect(_sphere->GetWorldSphere(), mBoxes[i]->GetWorldBox());
 		if (hit)
 		{
+			// boxの当たった際のリアクション処理
 			OnCollisionFunc func = mCollisionFunction.at(_sphere);
 			func(*(mBoxes[i]->GetOwner()));
 			func = mCollisionFunction.at(mBoxes[i]);
 			func(*(_sphere->GetOwner()));
 			_sphere->Refresh();
 		}
+
+		// 球状の当たり判定がアタッチされている次のフレームのオブジェクトのz座標
+		float nextSphereZPos = sphereZPos + sphereZVel;
+		// リスポーン地点の最大z座標
+		float respawnZMax = respawnZPos + 100.0f;
+		// リスポーン地点の最小z座標
+		float respawnZMin = respawnZPos - 100.0f;
 		
 		if (respawnFlag)
 		{
 			mRangeHitsBegin = mRespawnNum;
+			mRangeHitsCount = 0;
 		}
 		else
 		{
-			if (sphereZPos >= respawnPos &&
-				sphereZPos <= respawnPos + 200.0f)
+			if (nextSphereZPos >= respawnZMin &&
+				nextSphereZPos <= respawnZMax)
 			{
-				mRespawnNum = mRangeHitsBegin - mRangeHitsCount;
+				mRespawnNum = mRangeHitsBegin;
 			}
 		}
 
-		if (mRespawnNum <= 0)
-		{
-			mRespawnNum = 0;
-		}
+		// 矩形状の当たり判定の最大初期z座標
+		float boxInitZMax = boxZMax - boxZdif;
+		// 矩形状の当たり判定の最小初期z座標
+		float boxInitZMin = boxZMin - boxZdif;
 
-		if (sphereZPos >= boxZMin - boxZdif &&
-			sphereZPos <= boxZMax - boxZdif)
+		if (sphereZPos >= boxInitZMin &&
+			sphereZPos <= boxInitZMax)
 		{
 			mRangeHitsCount = ++countRangeHitsNum;
 		}
-		else if (sphereZPos + sphereZVel >= boxZMin - boxZdif)
+		else if (nextSphereZPos >= boxInitZMin)
 		{
 			mRangeHitsBegin += mRangeHitsCount;
 

@@ -1,15 +1,15 @@
 /*
-@file	Animation.h
-@brief	Skeletonを用いたアニメーションのデータクラス
+@file  Animation.h
+@brief Skeletonを用いたアニメーションのデータクラス
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
 /*
-@fn アニメーション読み込み
+@fn    アニメーション読み込み
 @param アニメーションへのパス
 */
 bool Animation::Load(const std::string& _fileName)

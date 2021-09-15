@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -93,6 +93,7 @@ void GameObject::UpdateComponents(float _deltaTime)
 		}
 	}
 }
+
 /*
 @brief	ゲームオブジェクトのアップデート
 @param	最後のフレームを完了するのに要した時間
@@ -100,6 +101,7 @@ void GameObject::UpdateComponents(float _deltaTime)
 void GameObject::UpdateGameObject(float _deltaTime)
 {
 }
+
 /*
 @fn ゲームオブジェクトが静止中に更新されるアップデート関数
 @brief pauzingUpdateがtrueのときだけ呼ばれる更新関数
@@ -165,6 +167,7 @@ void GameObject::RemoveComponent(Component * _component)
 		mComponents.erase(itr);
 	}
 }
+
 /*
 @fn 現在の仕様上行うことができない処理を外部から強引に行うための関数
 @exsample ゲームオブジェクト全体の更新が停止中に対象のゲームオブジェクトを更新する
@@ -178,7 +181,6 @@ void GameObject::ExceptionUpdate()
 
 	ComputeWorldTransform();
 }
-
 
 /*
 @brief	Transformのワールド変換

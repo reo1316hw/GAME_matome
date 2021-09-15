@@ -1,17 +1,16 @@
 /*
-@file	InvisibleMeshComponent.h
-@brief	アルファブレンドメッシュデータの管理と描画を行う
+@file  InvisibleMeshComponent.h
+@brief アルファブレンドメッシュデータの管理と描画を行う
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 class Mesh;
 
@@ -37,7 +36,9 @@ public:
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
 	virtual void Draw(class Shader* _shader);
+
 protected:
+
 	/*
 	@fn		テクスチャをステージごとにセット
 	@brief	ディフューズマップ	stage00
@@ -47,6 +48,7 @@ protected:
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
 	virtual void SetTextureToShader(class Shader* _shader);
+
 	//メッシュデータクラスへのポインタ
 	Mesh* mMesh;
 	//テクスチャサイズ
@@ -55,7 +57,9 @@ protected:
 	bool mVisible;
 	//スケルトンデータを用いるか
 	bool mSkeltonFlag;
+
 public: //ゲッターセッター
+
 	/*
 	@return 設定されたMeshクラスのポインタ
 	*/

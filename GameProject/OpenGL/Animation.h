@@ -1,26 +1,25 @@
 /*
-@fil	Animation.h
-@brief	Skeletonを用いたアニメーションのデータクラス
+@fil   Animation.h
+@brief Skeletonを用いたアニメーションのデータクラス
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class Animation
 {
 public:
+
 	/*
 	@fn アニメーション読み込み
 	@param _fileName アニメーションへのパス
 	*/
-	bool Load(const std::string& _fileName);                                          
+	bool Load(const std::string& _fileName);    
+
 private:
+
 	//アニメーションのためのボーン数
 	size_t mNumBones;
 	//アニメーションのフレーム数
@@ -29,6 +28,7 @@ private:
 	float mDuration;
 	//アニメーションのフレーム間の時刻
 	float mFrameDuration;
+
 	/*
 	トラック上の各フレームの変換情報。
 	外側のベクトルの各インデックスはボーン、
@@ -36,7 +36,9 @@ private:
 	mTracks[ボーン][フレーム数]
 	*/
 	std::vector<std::vector<class BoneTransform>> mTracks;
+
 public: //ゲッターセッター
+
 	/*
 	@return ボーン数(unsigned int型)
 	*/

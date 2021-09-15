@@ -1,11 +1,7 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 //ボーンの最大数
 const size_t MAX_SKELETON_BONES = 196;

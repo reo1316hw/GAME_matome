@@ -1,17 +1,16 @@
 /*
-@file	SpriteComponent.h
-@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+@file  SpriteComponent.h
+@brief 画像データクラスを管理し、スクリーン上に描画するクラス
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class GameObject;
 class Shader;
 class Texture;
@@ -20,6 +19,7 @@ class Vector3;
 class UIComponent : public Component
 {
 public:
+
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
@@ -37,6 +37,7 @@ public:
 	@param _shader 使用するシェーダークラスのポインタ
 	*/
 	virtual void Draw(Shader* _shader, const Vector3& _offset);
+
 protected:
 
 	//クラスのポインタ
@@ -55,6 +56,7 @@ protected:
 	int mMyUIid;
 
 public://ゲッターセッター
+
 	/*
 	@return テクスチャの横幅(int型)
 	*/

@@ -1,15 +1,12 @@
 /*
-@brief	プリプロセッサ
+@briefプリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
-// 前方宣言
 class Player;
-
 class InvisibleMeshComponent;
 
 class Glass : public GameObject

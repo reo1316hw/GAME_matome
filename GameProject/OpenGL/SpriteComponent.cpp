@@ -1,17 +1,17 @@
 /*
-@file	SpriteComponent.h
-@brief	画像データクラスを管理し、スクリーン上に描画するクラス
+@file  SpriteComponent.h
+@brief 画像データクラスを管理し、スクリーン上に描画するクラス
 */
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
 /*
-@fn		コンストラクタ
-@param	_owner アタッチするゲームオブジェクトのポインタ
-@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
+@fn	   コンストラクタ
+@param _owner アタッチするゲームオブジェクトのポインタ
+@param _drawOrder 描画の順番（数値が小さいほど早く描画される）
 */
 SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
     : Component(_owner)
@@ -26,7 +26,7 @@ SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
 }
 
 /*
-@fn		デストラクタ
+@fn	デストラクタ
 */
 SpriteComponent::~SpriteComponent()
 {

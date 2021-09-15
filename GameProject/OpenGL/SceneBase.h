@@ -1,8 +1,11 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
+/*
+@brief 前方宣言
+*/
 class Sprite;
 class InputSystem;
 class MapCreate;

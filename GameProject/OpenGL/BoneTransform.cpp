@@ -1,5 +1,10 @@
 /*
-@brief	インクルード
+ @file  BoneTransform.h
+ @brief モデルのボーン変換
+*/
+
+/*
+@brief インクルード
 */
 #include "pch.h"
 

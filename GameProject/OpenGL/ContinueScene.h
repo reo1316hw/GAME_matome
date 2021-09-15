@@ -1,12 +1,11 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief 前方宣言
 */
-
 class TutorialScene;
 class Stage01Scene;
 class Stage02Scene;

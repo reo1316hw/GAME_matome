@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include <iostream>
 
@@ -22,7 +22,7 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _pos, const Vector3& _size
 	SetPosition(_pos);
 	mInitPos = _pos;
 
-	mEndPos = Vector3(_pos.x, _pos.y, _pos.z + 200);
+	mEndPos = Vector3(_pos.x, _pos.y, _pos.z + 200.0f);
 
 	//生成したVerticalMoveGroundの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -48,14 +48,15 @@ void VerticalMoveGround::UpdateGameObject(float _deltaTime)
 {
 	if (mPosition.z >= mEndPos.z)
 	{
-		mVelocity.z = 0;
+		mVelocity.z = 0.0f;
 	}
 
 	if (mOriginalPosFlag)
 	{
 		if (mPlayer->GetRespawnFlag())
 		{
-			mPosition.z = mPosition.z - 200;
+			mVelocity.z = 0.0f;
+			mPosition = mInitPos;
 			mOriginalPosFlag = false;
 		}
 	}

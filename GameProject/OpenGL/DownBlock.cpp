@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -20,7 +20,7 @@ DownBlock::DownBlock(const Vector3& _pos, const Vector3& _size, const std::strin
 	SetPosition(_pos);
 	mInitPos = _pos;
 
-	mEndPos = Vector3(_pos.x, _pos.y - 1600, _pos.z);
+	mEndPos = Vector3(_pos.x, _pos.y - 1600.0f, _pos.z);
 
 	//生成したDownBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -51,12 +51,13 @@ void DownBlock::UpdateGameObject(float _deltaTime)
 
 	if (mPosition.y <= mEndPos.y)
 	{
-		mVelocity.y = 0;
+		mVelocity.y = 0.0f;
 	}
 
 	if (mPlayer->GetRespawnFlag())
 	{
-		mPosition.y = 1600;
+		mPosition = mInitPos;
+		mVelocity.y = 0.0f;
 	}
 
 	// 常に座標に速度を足す

@@ -4,12 +4,12 @@
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
 
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "SDL.h"
 #include "SceneBase.h"
@@ -17,6 +17,9 @@
 #include <vector>
 #include <string>
 
+/*
+@brief 前方宣言
+*/
 class FPS;
 class GameObject;
 class InputSystem;

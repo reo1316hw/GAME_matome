@@ -4,13 +4,9 @@
 */
 
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 /*
 @enum	パーティクルの状態

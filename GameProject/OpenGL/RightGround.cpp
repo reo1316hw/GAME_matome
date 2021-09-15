@@ -1,5 +1,5 @@
 /*
-@brief	インクルード
+@brief インクルード
 */
 #include "pch.h"
 
@@ -20,7 +20,7 @@ RightGround::RightGround(const Vector3& _pos, const Vector3& _size, const std::s
 	SetPosition(_pos);
 	mInitPos = _pos;
 
-	mEndPos = Vector3(_pos.x + 200, _pos.y, _pos.z);
+	mEndPos = Vector3(_pos.x + 200.0f, _pos.y, _pos.z);
 
 	//生成したRightOneBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -53,7 +53,7 @@ void RightGround::UpdateGameObject(float _deltaTime)
 
 	if (mPosition.x >= mEndPos.x)
 	{
-		mVelocity.x = 0;
+		mVelocity.x = 0.0f;
 	}
 
 	if (mInitPos.x < mPosition.x)
@@ -63,7 +63,7 @@ void RightGround::UpdateGameObject(float _deltaTime)
 
 	if (mPlayer->GetDeathFlag())
 	{
-		mVelocity.x = 0;
+		mVelocity.x = 0.0f;
 		mOriginalPosFlag = false;
 	}
 
@@ -72,7 +72,7 @@ void RightGround::UpdateGameObject(float _deltaTime)
 		if (mPlayer->GetRespawnFlag())
 		{
 			mVelocity.x = 0;
-			mPosition.x = mInitPos.x;
+			mPosition = mInitPos;
 			mOriginalPosFlag = false;
 		}
 	}

@@ -1,11 +1,7 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class SandEffect :public ParticleEffectBase
 {

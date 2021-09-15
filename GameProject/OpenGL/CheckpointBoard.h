@@ -1,11 +1,7 @@
 /*
-@brief	プリプロセッサ
+@brief プリプロセッサ
 */
 #pragma once
-
-/*
-@brief	インクルード
-*/
 
 class CheckpointBoard : public ParticleEffectBase
 {
@@ -32,5 +28,6 @@ public:
 	void UpdateGameObject(float _deltaTime)override {};
 
 private:
+
 	AABB mCehckpointBoardAABB;
 };
