@@ -86,7 +86,6 @@
 #include "LeftGround.h"
 #include "DownBlock.h"
 #include "GoalBlock.h"
-#include "Respawn.h"
 
 #include "SceneBase.h"
 #include "TitleScene.h"

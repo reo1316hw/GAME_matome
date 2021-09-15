@@ -25,11 +25,11 @@ Stage01Scene::Stage01Scene(const Scene& _nowScene)
 	{
 		if (i <= 1)
 		{
-  			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-79500.0f + i * 24000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+  			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, (-81000.0f + i * 26000.0f)), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
 		}
 		else
 		{
-			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, -36800), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 300.0f, -39000.0f), Vector3::Zero, "Assets/checkpoint_stage01.png", Tag::checkpoint, Scene::stage01);
 		}
 	}
 

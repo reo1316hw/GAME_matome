@@ -96,15 +96,19 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		mLife -= 1;
 		mRespawnFlag = true;
-		mDamageFlag  = false;
+		mDamageFlag = false;
 	}
 
-	// リスポーン処理
+	//全ステージ共通のリスポーン処理
 	if (mRespawnFlag)
 	{
+		mLateralMoveVelocity = Vector3::Zero;
+		mCollisionFlag = true;
+
 		if (mLife >= 1)
 		{
 			mPosition = mRespawnPos;
+			mStopFlag = true;
 		}
 	}
 
@@ -164,18 +168,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		if (mPosition.z >= -2100)
 		{
 			mClearFlag = true;
-		}
-	}
-
-	//全ステージ共通のリスポーン処理
-	if (mRespawnFlag)
-	{
-		mLateralMoveVelocity = Vector3::Zero;
-		mCollisionFlag = true;
-
-		if (mLife >= 1)
-		{
-			mStopFlag = true;
 		}
 	}
 
@@ -316,7 +308,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	// 常に座標に速度を足す
- 	mPosition += (mVelocity + mLateralMoveVelocity)/* * _deltaTime*/;
+ 	mPosition += mVelocity + mLateralMoveVelocity;
 
 	// 他のクラスで使用するためにリスポーンフラグを保存しておく
 	mSaveRespawnFlag = mRespawnFlag;
@@ -337,28 +329,6 @@ void Player::UpdateGameObject(float _deltaTime)
 */
 void Player::GameObjectInput(const InputState& _keyState)
 {
-
-	//// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	//if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-	//	_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	//{
-	//	mVelocity.z = mMoveSpeed;
-	//}
-	//// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	//{
-	//	mVelocity.z = -mMoveSpeed;
-	//}
-	//// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	//else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-	//		 _keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0||
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-	//		 _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	//{
-	//	mVelocity.z *= 0;
-	//}
-
 	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
 		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
@@ -390,23 +360,20 @@ void Player::OnCollision(const GameObject& _hitObject)
 {
 	if (mCollisionFlag)
 	{
-		//重力を消す
-		mVelocity.y = 0;
-
 		//ヒットしたオブジェクトのタグを取得
 		mTag = _hitObject.GetTag();
 
-		//接地判定
-		if (mTag == ground ||
-			mTag == glass ||
-			mTag == verticalMoveGround ||
-			mTag == rightGround ||
-			mTag == leftGround ||
-			mTag == lateralMoveGround ||
-			mTag == jump ||
-			mTag == downBlock)
+		//ジャンプ判定
+		if (mTag == jump)
 		{
-			mGroundFlag = true;
+			mJumpFlag = true;
+		}
+
+		//チェックポイント通過判定
+		if (mTag == checkpoint)
+		{
+			mCheckpointFlag = true;
+			mRespawnPos = _hitObject.GetPosition();
 		}
 
 		//ダメージ判定
@@ -422,33 +389,32 @@ void Player::OnCollision(const GameObject& _hitObject)
 			mDamageFlag = true;
 		}
 
-		//ジャンプ判定
-		if (mTag == jump)
+		//接地判定
+		if (mTag == ground ||
+			mTag == glass ||
+			mTag == verticalMoveGround ||
+			mTag == rightGround ||
+			mTag == leftGround ||
+			mTag == lateralMoveGround ||
+			mTag == jump ||
+			mTag == downBlock)
 		{
-			mJumpFlag = true;
+			//重力を消す
+			mVelocity.y = 0;
+			mGroundFlag = true;
 		}
 
 		//横移動床の判定
 		if (mTag == lateralMoveGround)
 		{
+			//重力を消す
+			mVelocity.y = 0;
 			//横移動床の速度を取得
 			mLateralMoveVelocity = mLateral->GetVelocity();
 		}
 		else
 		{
 			mLateralMoveVelocity = Vector3::Zero;
-		}
-
-		//リスポーン判定
-		if (mTag == respawn)
-		{
-			mRespawnPos = _hitObject.GetPosition();
-		}
-
-		//チェックポイント通過判定
-		if (mTag == checkpoint)
-		{
-			mCheckpointFlag = true;
 		}
 	}
 }

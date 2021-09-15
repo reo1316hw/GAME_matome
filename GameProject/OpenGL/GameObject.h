@@ -59,9 +59,8 @@ enum Tag
 	leftOneMoveBlock = 18,
 	downBlock = 19,
 	goalBlock = 20,
-	respawn = 21,
-	checkpoint = 22,
-	Swith = 23
+	checkpoint = 21,
+	Swith = 22
 };
 
 /*

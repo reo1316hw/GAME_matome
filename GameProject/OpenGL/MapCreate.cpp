@@ -391,15 +391,6 @@ void MapCreate::CreateStage01Object(const unsigned int _name, const Vector3 _obj
 			new GoalBlock(_objectPos, goalBlockSize, "Assets/box_10.gpmesh", goalBlock, SceneBase::stage01);
 			break;
 		}
-		case(21):
-		{
-			const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-			const Vector3 respawnPos = _objectPos + addPos;
-			const Vector3 respawnSize = Vector3(2000.0f, 2000.0f, 100.0f);
-
-			new Respawn(respawnPos, respawnSize, respawn, SceneBase::stage01);
-			break;
-		}
 	}
 }
 
@@ -520,15 +511,6 @@ void MapCreate::CreateStage02Object(const unsigned int _name, const Vector3 _obj
 			new GoalBlock(_objectPos, goalBlockSize, "Assets/box_15.gpmesh", goalBlock, SceneBase::stage02);
 			break;
 	    }
-		case(21):
-		{
-			const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-			const Vector3 respawnPos = _objectPos + addPos;
-			const Vector3 respawnSize = Vector3(2000.0f, 2000.0f, 100.0f);
-
-			new Respawn(respawnPos, respawnSize, respawn, SceneBase::stage02);
-			break;
-		}
 		case(418):
 		{
 			const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);

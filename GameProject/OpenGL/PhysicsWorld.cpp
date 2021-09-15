@@ -157,6 +157,11 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 			}
 		}
 
+		if (mRespawnNum <= 0)
+		{
+			mRespawnNum = 0;
+		}
+
 		if (sphereZPos >= boxZMin - boxZdif &&
 			sphereZPos <= boxZMax - boxZdif)
 		{

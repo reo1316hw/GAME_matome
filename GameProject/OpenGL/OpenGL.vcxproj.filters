@@ -158,9 +158,6 @@
     <ClCompile Include="HDRRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Respawn.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="invisibleMeshComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -374,9 +371,6 @@
     </ClInclude>
     <ClInclude Include="HDRRenderer.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Respawn.h">
-      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="invisibleMeshComponent.h">
       <Filter>Components</Filter>

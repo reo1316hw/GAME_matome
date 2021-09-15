@@ -247,16 +247,6 @@ void InputSystem::Update()
 	mState.m_mouse.mMousePos.x = static_cast<float>(x) - 1024.0f / 2;
 	mState.m_mouse.mMousePos.y = 768.0f / 2 - static_cast<float>(y);
 
-	//コントローラー
-	//・ボタン
-	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; i++)
-	{
-		mState.m_controller.mCurrButtons[i] =
-			SDL_GameControllerGetButton(mController,
-				SDL_GameControllerButton(i));
-	}
-
-
 	// コントローラが無い場合は early exitする
 	if (mController != NULL)
 	{

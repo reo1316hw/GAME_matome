@@ -166,7 +166,7 @@ InputState Game::ProcessInput()
 	mInputSystem->Update();
 	const InputState& state = mInputSystem->GetState();
 
-	if (state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK)  ||
+	if (state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_BACK) == Released ||
 		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
 	{
 		mRunningFlag = false;
