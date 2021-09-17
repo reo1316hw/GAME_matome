@@ -14,7 +14,7 @@
 */
 SkeletalMeshComponent::SkeletalMeshComponent(GameObject* _owner)
 	: MeshComponent(_owner, true)
-	, mSkeleton(nullptr)
+	, MSkeleton(nullptr)
 	, mColor(Vector3(0,0,0))
 {
 }
@@ -30,14 +30,17 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 	{
 		if (mMesh)
 		{
+			//スペキュラー強度
+			const float SpecPower = 100.0f;
+
 			//ワールド変換をセット
 			_shader->SetMatrixUniform("uWorldTransform",
 				mOwner->GetWorldTransform());
-			// 行列パレットをセット    
+			//行列パレットをセット    
 			_shader->SetMatrixUniforms("uMatrixPalette", &mPalette.mEntry[0],
 				MAX_SKELETON_BONES);
 			//スペキュラー強度をセット
-			_shader->SetFloatUniform("uSpecPower", 100);
+			_shader->SetFloatUniform("uSpecPower", SpecPower);
 
 			_shader->SetVectorUniform("uColor", mColor);
 
@@ -75,13 +78,13 @@ void SkeletalMeshComponent::HandOverTexture(Shader* _shader)
 */
 void SkeletalMeshComponent::Update(float _deltaTime)
 {
-	if (mAnimation && mSkeleton)
+	if (MAnimation && MSkeleton)
 	{
 		mAnimTime += _deltaTime * mAnimPlayRate;
 		//  アニメを巻き戻して再生
-		while (mAnimTime > mAnimation->GetDuration())
+		while (mAnimTime > MAnimation->GetDuration())
 		{
-			mAnimTime -= mAnimation->GetDuration();
+			mAnimTime -= MAnimation->GetDuration();
 		}
 
 		// 行列パレットの再計算
@@ -91,24 +94,24 @@ void SkeletalMeshComponent::Update(float _deltaTime)
 
 /*
 @fn		アニメーションの再生
-@param	_anim アニメーションデータクラス
+@param	_Anim アニメーションデータクラス
 @param	_playRate アニメーションの再生速度
 @return	アニメーションの残り時間
 */
-float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRate) 
+float SkeletalMeshComponent::PlayAnimation(const Animation* _Anim, float _playRate) 
 {
-	mAnimation = _anim;
+	MAnimation = _Anim;
 	mAnimTime = 0.0f;
 	mAnimPlayRate = _playRate;
 
-	if (!mAnimation)
+	if (!MAnimation)
 	{
 		return 0.0f;
 	}
 
 	ComputeMatrixPalette();
 
-	return mAnimation->GetDuration();
+	return MAnimation->GetDuration();
 }
 
 /*
@@ -117,15 +120,15 @@ float SkeletalMeshComponent::PlayAnimation(const Animation* _anim, float _playRa
 void SkeletalMeshComponent::ComputeMatrixPalette()                             
 {
 	// グローバル逆バインド行列配列の取得
-	const std::vector<Matrix4>& globalInvBindPoses = mSkeleton->GetGlobalInvBindPoses();
+	const std::vector<Matrix4>& GlobalInvBindPoses = MSkeleton->GetGlobalInvBindPoses();
 	// 現在のポーズ行列
 	std::vector<Matrix4> currentPoses;                                        
 	// アニメ時刻時点のグローバルポーズの取得
-	mAnimation->GetGlobalPoseAtTime(currentPoses, mSkeleton, mAnimTime);
+	MAnimation->GetGlobalPoseAtTime(currentPoses, MSkeleton, mAnimTime);
 	// それぞれのボーンの行列パレットのセット                                    
-	for (size_t i = 0; i < mSkeleton->GetNumBones(); i++)
+	for (size_t i = 0; i < MSkeleton->GetNumBones(); i++)
 	{
 		//行列パレット[i] = グローバル逆バインド行列[i]　×　現在のポーズ行列[i]  (iはボーンID)         
-		mPalette.mEntry[i] = globalInvBindPoses[i] * currentPoses[i];
+		mPalette.mEntry[i] = GlobalInvBindPoses[i] * currentPoses[i];
 	}
 }

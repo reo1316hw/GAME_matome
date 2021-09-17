@@ -15,9 +15,9 @@ public:
 
 	/*
 	@fn	   コンストラクタ
-	@param _fileName 画像ファイルの名前
+	@param _FileName 画像ファイルの名前
 	*/
-	Sprite(const std::string _fileName);
+	Sprite(const std::string _FileName);
 
 	/*
 	@fn	デストラクタ

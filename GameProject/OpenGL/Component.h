@@ -37,9 +37,9 @@ public:
 
 	/*
 	@fn		入力処理
-	@param	_state InputState構造体
+	@param	_State InputState構造体
 	*/
-	virtual void ProcessInput(const struct InputState& _state) {}
+	virtual void ProcessInput(const struct InputState& _State) {}
 
 	/*
 	@fn	Transformのワールド変換

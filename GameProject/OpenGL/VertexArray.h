@@ -20,24 +20,24 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_verts 頂点バッファの配列のポインタ
+	@param	_Verts 頂点バッファの配列のポインタ
 	@param	_numVerts 頂点数
-	@param	_indices インデックスバッファの配列のポインタ
+	@param	_Indices インデックスバッファの配列のポインタ
 	@param	_numIndices インデックスの数
 	*/
-	VertexArray(const float* _verts, unsigned int _numVerts,
-		const unsigned int* _indices, unsigned int _numIndices);
+	VertexArray(const float* _Verts, unsigned int _numVerts,
+		const unsigned int* _Indices, unsigned int _numIndices);
 
 	/*
 	@fn		頂点配列コンストラクタ
-	@param	_verts 頂点バッファの配列のポインタ
+	@param	_Verts 頂点バッファの配列のポインタ
 	@param	_numVerts 頂点数
 	@param	_layout 頂点レイアウト
 	@param	_indices インデックスバッファの配列のポインタ
 	@param	_numIndices インデックスの数
 	*/
-	VertexArray(const void* _verts, unsigned int _numVerts, Layout _layout,
-		const unsigned int* _indices, unsigned int _numIndices);
+	VertexArray(const void* _Verts, unsigned int _numVerts, Layout _layout,
+		const unsigned int* _Indices, unsigned int _numIndices);
 
 	/*
 	@fn	デストラクタ

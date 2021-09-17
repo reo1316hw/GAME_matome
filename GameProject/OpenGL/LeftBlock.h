@@ -14,13 +14,13 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 左移動床の座標
-	@param	_size 左移動床のサイズ
-	@param	_objectTag 左移動床のタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 左移動床の座標
+	@param	_Size 左移動床のサイズ
+	@param	_ObjectTag 左移動床のタグ
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	LeftBlock(const Vector3& _pos, const Vector3& _size, const float _addPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
+	LeftBlock(const Vector3& _Pos, const Vector3& _Size, const float _AddPosX, const std::string _GpmeshName, const Tag& _ObjectTag, const ColliderTag& _ColliderTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -51,10 +51,4 @@ private:
 	float mDifferencePos;
 	//開始の値
 	float mStart;
-
-	//全体の時間
-	const float TOTAL_TIME = 1.0f;
-
-	//左移動床の左に移動する速度
-	const float LEFT_SPEED = 20.0f;
 };

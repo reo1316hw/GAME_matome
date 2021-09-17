@@ -24,10 +24,10 @@ public:
 	/*
 	@fn		コンストラクタ
 	@param	_owner ゲームオブジェクトクラスのポインタ
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	SandEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+	SandEffectManager(GameObject* _owner, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag);
 
 	/*
 	@fn	デストラクタ

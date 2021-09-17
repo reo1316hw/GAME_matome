@@ -43,10 +43,10 @@ public:
 
 	/*
 	@fn		ゲームオブジェクトの入力処理
-	@param	_state 各入力機器の入力状態
+	@param	_State 各入力機器の入力状態
 	@brief	キーボード、マウス、コントローラー
 	*/
-	void ProcessInput(const InputState& _state);
+	void ProcessInput(const InputState& _State);
 
 	/*
 	@fn		ゲームオブジェクトの追加

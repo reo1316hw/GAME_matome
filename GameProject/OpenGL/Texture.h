@@ -19,10 +19,10 @@ public:
 
 	/*
 	@fn		テクスチャのロード
-	@param	_fileName テクスチャのファイル名
+	@param	_FileName テクスチャのファイル名
 	@return	true : 成功 , false : 失敗(bool型)
 	*/
-	bool Load(const std::string& _fileName);
+	bool Load(const std::string& _FileName);
 
 	/*
 	@fn	ロードしたテクスチャの解放

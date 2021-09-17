@@ -5,32 +5,32 @@
 
 /*
 @fn	   コンストラクタ
-@param _pos ガラス床の座標
-@param _size ガラス床のサイズ
-@param _objectTag ガラス床のタグ
-@param _sceneTag シーンのタグ
+@param _Pos ガラス床の座標
+@param _Size ガラス床のサイズ
+@param _ObjectTag ガラス床のタグ
+@param _SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-Glass::Glass(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag,const SceneBase::Scene _sceneTag, Player* _playerPtr) :
-	GameObject(_sceneTag,_objectTag)
+Glass::Glass(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag,const SceneBase::Scene _SceneTag, Player* _playerPtr) :
+	GameObject(_SceneTag,_ObjectTag)
 {
 	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
-	SetScale(_size);
-	SetPosition(_pos);
-	mInitPos = _pos;
+	mTag = _ObjectTag;
+	SetScale(_Size);
+	SetPosition(_Pos);
+	mInitPos = _Pos;
 
 	mDownCount = 0;
 
 	//生成したGlassの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mInvisibleMeshComponent = new InvisibleMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mInvisibleMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
+	mInvisibleMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
 	// 当たり判定
 	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh(_gpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::glassTag, GetOnCollisionFunc());
+	mMesh = RENDERER->GetMesh(_GpmeshName);
+	mBoxcollider = new BoxCollider(this, ColliderTag::eGlassTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mPlayer = _playerPtr;
@@ -42,6 +42,9 @@ Glass::Glass(const Vector3& _pos, const Vector3& _size, const std::string _gpmes
 */
 void Glass::UpdateGameObject(float _deltaTime)
 {
+	// 落とすためのカウントの上限値
+	const int LimitDownCount = 15;
+
 	if (mPlayer->GetRespawnFlag())
 	{
 		mHitFlag = false;
@@ -55,9 +58,13 @@ void Glass::UpdateGameObject(float _deltaTime)
 		mDownCount++;
 	}
 
-	if (mDownCount >= 15)
+	// 落とすためのカウントが上限値まで達したらガラス床が落ちる
+	if (mDownCount >= LimitDownCount)
 	{
-		mVelocity.y = -DOWN_SPEED;
+		// 落ちるスピード
+		const float DownSpeed = 100.0f;
+
+		mVelocity.y = -DownSpeed;
 	}
 
 	// 常に座標に速度を足す
@@ -68,9 +75,9 @@ void Glass::UpdateGameObject(float _deltaTime)
 
 /*
 @fn		ガラス床がヒットした時の処理
-@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
 */
-void Glass::OnCollision(const GameObject& _hitObject)
+void Glass::OnCollision(const GameObject& _HitObject)
 {
 	mHitFlag = true;
 }

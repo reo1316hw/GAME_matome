@@ -14,14 +14,14 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 横移動床の座標
-	@param	_size 横移動床のサイズ
-	@param	_objectTag 横移動床のタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 横移動床の座標
+	@param	_Size 横移動床のサイズ
+	@param	_ObjectTag 横移動床のタグ
+	@param	_SceneTag シーンのタグ
 	@param _distance 横移動床の移動する距離
     @param _playerPtr プレイヤーのポインタ
 	*/
-	LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance, Player* _playerPtr);
+	LateralMoveGround(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, const float _Distance, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -43,9 +43,6 @@ private:
 
 	//反転フラグ
 	bool mReversFlag;
-
-	//横移動するときの速度
-	const float MOVE_SPEED = 10.0f;
 
 public://ゲッターセッター
 	

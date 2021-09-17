@@ -29,13 +29,14 @@ MapCreate::~MapCreate()
 */
 Player* MapCreate::OpenTutorialFile()
 {
-	//int readCount = 0;
-
 	// プレイヤーのマップデータの読み込み
 	if (!readTiledJson(mPlayerMapData, "Assets/Config/tutorialFix.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
+
+	mSizeX = mPlayerMapData[0].size();
+	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
 	if (!readTiledJson(mLowerMapData, "Assets/Config/tutorialFix.json", "Lower"))
@@ -43,19 +44,11 @@ Player* MapCreate::OpenTutorialFile()
 		printf("don't have Layer/Lower\n");
 	}
 
-	mSizeX = mLowerMapData[0].size();
-	mSizeZ = mLowerMapData.size();
-	mSizeY = mLowerMapData[0].size();
-
-	//readCount++;
-
 	// 上層のマップデータの読み込み
 	if (!readTiledJson(mUpperMapData, "Assets/Config/tutorialFix.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
-
-	//readCount++;
 
 	// ゴールのマップデータの読み込み
 	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/tutorialFix.json", "Goal"))
@@ -63,17 +56,13 @@ Player* MapCreate::OpenTutorialFile()
 		printf("don't have Layer/Goal\n");
 	}
 
-	AccessTutorialMapData(mPlayerMapData, 1);
-	AccessTutorialMapData(mLowerMapData, 1);
-	AccessTutorialMapData(mUpperMapData, 1);
-	AccessTutorialMapData(mGoalBlockMapData, 5);
-
-	/*readCount++;
-
-	for (int i = 0; i < readCount; i++)
-	{
-		AccessMapData();
-	}*/
+	mSizeY = 1;
+	AccessTutorialMapData(mPlayerMapData, mSizeY);
+	AccessTutorialMapData(mLowerMapData, mSizeY);
+	AccessTutorialMapData(mUpperMapData, mSizeY);
+	
+	mSizeY = 5;
+	AccessTutorialMapData(mGoalBlockMapData, mSizeY);
 
 	return mPlayer;
 }
@@ -84,13 +73,14 @@ Player* MapCreate::OpenTutorialFile()
 */
 Player* MapCreate::OpenStage01File()
 {
-	//int readCount = 0;
-
 	// プレイヤーのマップデータの読み込み
 	if (!readTiledJson(mPlayerMapData, "Assets/Config/stage01Fix.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
+
+	mSizeX = mPlayerMapData[0].size();
+	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
 	if (!readTiledJson(mLowerMapData, "Assets/Config/stage01Fix.json", "Lower"))
@@ -98,19 +88,11 @@ Player* MapCreate::OpenStage01File()
 		printf("don't have Layer/Lower\n");
 	}
 
-	mSizeX = mLowerMapData[0].size();
-	mSizeZ = mLowerMapData.size();
-	mSizeY = mLowerMapData[0].size();
-
-	//readCount++;
-
 	// 上層のマップデータの読み込み
 	if (!readTiledJson(mUpperMapData, "Assets/Config/stage01Fix.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
-
-	//readCount++;
 
 	// ゴールのマップデータの読み込み
 	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/stage01Fix.json", "Goal"))
@@ -118,17 +100,13 @@ Player* MapCreate::OpenStage01File()
 		printf("don't have Layer/Goal\n");
 	}
 
-	AccessStage01MapData(mPlayerMapData, 1);
-	AccessStage01MapData(mLowerMapData, 1);
-	AccessStage01MapData(mUpperMapData, 1);
-	AccessStage01MapData(mGoalBlockMapData, 10);
+	mSizeY = 1;
+	AccessStage01MapData(mPlayerMapData, mSizeY);
+	AccessStage01MapData(mLowerMapData, mSizeY);
+	AccessStage01MapData(mUpperMapData, mSizeY);
 
-	/*readCount++;
-
-	for (int i = 0; i < readCount; i++)
-	{
-		AccessMapData();
-	}*/
+	mSizeY = 10;
+	AccessStage01MapData(mGoalBlockMapData, mSizeY);
 
 	return mPlayer;
 }
@@ -139,13 +117,14 @@ Player* MapCreate::OpenStage01File()
 */
 Player* MapCreate::OpenStage02File()
 {
-	//int readCount = 0;
-
 	// プレイヤーのマップデータの読み込み
 	if (!readTiledJson(mPlayerMapData, "Assets/Config/stage02Fix.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
+
+	mSizeX = mPlayerMapData[0].size();
+	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
 	if (!readTiledJson(mLowerMapData, "Assets/Config/stage02Fix.json", "Lower"))
@@ -153,19 +132,11 @@ Player* MapCreate::OpenStage02File()
 		printf("don't have Layer/Lower\n");
 	}
 
-	mSizeX = mLowerMapData[0].size();
-	mSizeZ = mLowerMapData.size();
-	mSizeY = mLowerMapData[0].size();
-
-	//readCount++;
-
 	// 上層のマップデータの読み込み
 	if (!readTiledJson(mUpperMapData, "Assets/Config/stage02Fix.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
-
-	//readCount++;
 
 	// ゴールのマップデータの読み込み
 	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/stage02Fix.json", "Goal"))
@@ -173,15 +144,11 @@ Player* MapCreate::OpenStage02File()
 		printf("don't have Layer/Goal\n");
 	}
 
-	//readCount++;
-
 	// ゴールのマップデータの読み込み
 	if (!readTiledJson(mVerticalBlockMapData, "Assets/Config/stage02Fix.json", "VerticalBlock"))
 	{
 		printf("don't have Layer/VerticalBlock\n");
 	}
-
-	//readCount++;
 
 	// ゴールのマップデータの読み込み
 	if (!readTiledJson(mUpBlockMapData, "Assets/Config/stage02Fix.json", "UpBlock"))
@@ -189,19 +156,17 @@ Player* MapCreate::OpenStage02File()
 		printf("don't have Layer/UpBlock\n");
 	}
 
-	AccessStage02MapData(mPlayerMapData, 1);
-	AccessStage02MapData(mLowerMapData, 1);
-	AccessStage02MapData(mUpperMapData, 1);
-	AccessStage02MapData(mUpBlockMapData, 1);
-	AccessStage02MapData(mVerticalBlockMapData, 2);
-	AccessStage02MapData(mGoalBlockMapData, 10);
+	mSizeY = 1;
+	AccessStage02MapData(mPlayerMapData, mSizeY);
+	AccessStage02MapData(mLowerMapData, mSizeY);
+	AccessStage02MapData(mUpperMapData, mSizeY);
+	AccessStage02MapData(mUpBlockMapData, mSizeY);
 
-	/*readCount++;
+	mSizeY = 2;
+	AccessStage02MapData(mVerticalBlockMapData, mSizeY);
 
-	for (int i = 0; i < readCount; i++)
-	{
-		AccessMapData();
-	}*/
+	mSizeY = 10;
+	AccessStage02MapData(mGoalBlockMapData, mSizeY);
 
 	return mPlayer;
 }
@@ -219,10 +184,10 @@ void MapCreate::AccessTutorialMapData(std::vector<std::vector<int>> _mapData, in
 		{
 			for (int iy = 0; iy < _sizeY; iy++)
 			{
-				const unsigned int name = _mapData[iz][ix];
-				const Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
+				const unsigned int Name = _mapData[iz][ix];
+				const Vector3 ObjectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
 
-				CreateTutorialObject(name, objectPos);
+				CreateTutorialObject(Name, ObjectPos);
 			}
 		}
 	}
@@ -241,10 +206,10 @@ void MapCreate::AccessStage01MapData(std::vector<std::vector<int>> _mapData, int
 		{
 			for (int iy = 0; iy < _sizeY; iy++)
 			{
-				const unsigned int name = _mapData[iz][ix];
-				const Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
+				const unsigned int Name = _mapData[iz][ix];
+				const Vector3 ObjectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
 
-				CreateStage01Object(name, objectPos);
+				CreateStage01Object(Name, ObjectPos);
 			}
 		}
 	}
@@ -263,10 +228,10 @@ void MapCreate::AccessStage02MapData(std::vector<std::vector<int>> _mapData, int
 		{
 			for (int iy = 0; iy < _sizeY; iy++)
 			{
-				const unsigned int name = _mapData[iz][ix];
-				const Vector3 objectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
+				const unsigned int Name = _mapData[iz][ix];
+				const Vector3 ObjectPos = Vector3(mOffset * ix, mOffset * iy, -mOffset * iz);
 
-				CreateStage02Object(name, objectPos);
+				CreateStage02Object(Name, ObjectPos);
 			}
 		}
 	}
@@ -274,67 +239,67 @@ void MapCreate::AccessStage02MapData(std::vector<std::vector<int>> _mapData, int
 
 /*
 @fn    チュートリアルのオブジェクトを生成する
-@param _name マップデータの要素
-@param _objectPos オブジェクトの座標
+@param _Name マップデータの要素
+@param _ObjectPos オブジェクトの座標
 */
-void MapCreate::CreateTutorialObject(const unsigned int _name, const Vector3 _objectPos)
+void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _ObjectPos)
 {
-	const Vector3 objectSize = Vector3(100.0f, 10.0f, 100.0f);
-	const Vector3 obstacleSize = Vector3(70.0f, 100.0f, 100.0f);
+	const Vector3 ObjectSize = Vector3(100.0f, 10.0f, 100.0f);
+	const Vector3 ObstacleSize = Vector3(70.0f, 100.0f, 100.0f);
 
-	switch (_name)
+	switch (_Name)
 	{
-        case(1):
-        	new Ground(_objectPos, objectSize, "Assets/box.gpmesh", ground, SceneBase::tutorial);
+	    case(eGround):
+        	new Ground(_ObjectPos, ObjectSize, "Assets/box.gpmesh", ground, SceneBase::tutorial);
         	break;
-        case(2):
-        	new Glass(_objectPos, objectSize, "Assets/box_02.gpmesh", glass, SceneBase::tutorial, mPlayer);
+        case(eGlass):
+        	new Glass(_ObjectPos, ObjectSize, "Assets/box_02.gpmesh", glass, SceneBase::tutorial, mPlayer);
         	break;
-        case(3):
+        case(eBlock):
         {
-        	const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-        	const Vector3 blockPos = _objectPos + addPos;
+        	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+        	const Vector3 BlockPos = _ObjectPos + AddPos;
         
-        	new Block(blockPos, obstacleSize, "Assets/box_03.gpmesh", block, SceneBase::tutorial);
+        	new Block(BlockPos, ObstacleSize, "Assets/box_03.gpmesh", block, SceneBase::tutorial);
         	break;
         }
-        case(4):
-        	new VerticalMoveGround(_objectPos, objectSize, "Assets/box_04.gpmesh", verticalMoveGround, SceneBase::tutorial, mPlayer);
+        case(eVerticalMoveGround):
+        	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_04.gpmesh", verticalMoveGround, SceneBase::tutorial, mPlayer);
         	break;
-        case(5):
-        	new Jump(_objectPos, objectSize, "Assets/box_05.gpmesh", jump, SceneBase::tutorial, mPlayer);
+        case(eJump):
+        	new Jump(_ObjectPos, ObjectSize, "Assets/box_05.gpmesh", jump, SceneBase::tutorial, mPlayer);
         	break;
-        case(6):
-        	new LateralMoveGround(_objectPos, objectSize, "Assets/box.gpmesh", lateralMoveGround, SceneBase::tutorial, 1000.0f, mPlayer);
+        case(eLateralMoveGround):
+        	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box.gpmesh", lateralMoveGround, SceneBase::tutorial, 1000.0f, mPlayer);
         	break;
-        case(7):
+        case(ePlayer):
         {
-        	const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-        	const Vector3 playerPos = _objectPos + addPos;
-        	const Vector3 playerSize = Vector3(1.2f, 1.2f, 1.2f);
+        	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
+        	const Vector3 PlayerPos = _ObjectPos + AddPos;
+        	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
         
-        	mPlayer = new Player(playerPos, playerSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
+        	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", player, SceneBase::tutorial);
         	break;
         }
-        case(8):
+        case(eLowUpBlock):
         {
-        	const Vector3 addPos = Vector3(0.0f, -100.0f, 0.0f);
-        	const Vector3 upBlockPos = _objectPos + addPos;
+        	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
+        	const Vector3 UpBlockPos = _ObjectPos + AddPos;
         
-        	new UpBlock(upBlockPos, obstacleSize, "Assets/box_03.gpmesh", upBlock, SceneBase::tutorial, mPlayer);
+        	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_03.gpmesh", upBlock, SceneBase::tutorial, mPlayer);
         	break;
         }
-        case(14):
-        	new LeftGround(_objectPos, objectSize, "Assets/box_07.gpmesh", leftGround, SceneBase::tutorial, mPlayer);
+        case(eLeftGround):
+        	new LeftGround(_ObjectPos, ObjectSize, "Assets/box_07.gpmesh", leftGround, SceneBase::tutorial, mPlayer);
         	break;
-        case(15):
-        	new RightGround(_objectPos, objectSize, "Assets/box_06.gpmesh", rightGround, SceneBase::tutorial, mPlayer);
+        case(eRightGround):
+        	new RightGround(_ObjectPos, ObjectSize, "Assets/box_06.gpmesh", rightGround, SceneBase::tutorial, mPlayer);
         	break;
-        case(20):
+        case(eGoalBlock):
         {
-        	const Vector3 goalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
+        	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
         
-        	new GoalBlock(_objectPos, goalBlockSize, "Assets/box_03.gpmesh", goalBlock, SceneBase::tutorial);
+        	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_03.gpmesh", goalBlock, SceneBase::tutorial);
         	break;
         }
 	}
@@ -342,53 +307,53 @@ void MapCreate::CreateTutorialObject(const unsigned int _name, const Vector3 _ob
 
 /*
 @fn    ステージ1のオブジェクトを生成する
-@param _name マップデータの要素
-@param _objectPos オブジェクトの座標
+@param _Name マップデータの要素
+@param _ObjectPos オブジェクトの座標
 */
-void MapCreate::CreateStage01Object(const unsigned int _name, const Vector3 _objectPos)
+void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _ObjectPos)
 {
-	const Vector3 objectSize = Vector3(100.0f, 10.0f, 100.0f);
-	const Vector3 obstacleSize = Vector3(70.0f, 100.0f, 100.0f);
+	const Vector3 ObjectSize = Vector3(100.0f, 10.0f, 100.0f);
+	const Vector3 ObstacleSize = Vector3(70.0f, 100.0f, 100.0f);
 
-	switch (_name)
+	switch (_Name)
 	{
-	    case(1):
-	    	new Ground(_objectPos, objectSize, "Assets/box_08.gpmesh", ground, SceneBase::stage01);
+	    case(eGround):
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", ground, SceneBase::stage01);
 	    	break;
-	    case(2):
-			new Glass(_objectPos, objectSize, "Assets/box_09.gpmesh", glass,SceneBase::stage01, mPlayer);
+	    case(eGlass):
+			new Glass(_ObjectPos, ObjectSize, "Assets/box_09.gpmesh", glass,SceneBase::stage01, mPlayer);
 			break;
-	    case(3):
+	    case(eBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-	    	const Vector3 blockPos = _objectPos + addPos;
+	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-			new Block(blockPos, obstacleSize, "Assets/box_10.gpmesh", block, SceneBase::stage01);
+			new Block(BlockPos, ObstacleSize, "Assets/box_10.gpmesh", block, SceneBase::stage01);
 			break;
 	    }
-	    case(4):
-		    new VerticalMoveGround(_objectPos, objectSize, "Assets/box_11.gpmesh", verticalMoveGround, SceneBase::stage01, mPlayer);
+	    case(eVerticalMoveGround):
+		    new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_11.gpmesh", verticalMoveGround, SceneBase::stage01, mPlayer);
 			break;
-	    case(5):
-			new Jump(_objectPos, objectSize, "Assets/box_12.gpmesh", jump, SceneBase::stage01, mPlayer);
+	    case(eJump):
+			new Jump(_ObjectPos, ObjectSize, "Assets/box_12.gpmesh", jump, SceneBase::stage01, mPlayer);
 			break;
-		case(6):
-			new LateralMoveGround(_objectPos, objectSize, "Assets/box_08.gpmesh", lateralMoveGround, SceneBase::stage01 ,1000.0f, mPlayer);
+		case(eLateralMoveGround):
+			new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", lateralMoveGround, SceneBase::stage01 ,1000.0f, mPlayer);
 			break;
-	    case(7):
+	    case(ePlayer):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-	    	const Vector3 playerPos = _objectPos + addPos;
-	    	const Vector3 playerSize = Vector3(1.2f, 1.2f, 1.2f);
+	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
+	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
+	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-		    mPlayer = new Player(playerPos, playerSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
+		    mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", player, SceneBase::stage01);
 			break;
 	    }
-	    case(20):
+	    case(eGoalBlock):
 		{
-			const Vector3 goalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
+			const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 
-			new GoalBlock(_objectPos, goalBlockSize, "Assets/box_10.gpmesh", goalBlock, SceneBase::stage01);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_10.gpmesh", goalBlock, SceneBase::stage01);
 			break;
 		}
 	}
@@ -396,147 +361,147 @@ void MapCreate::CreateStage01Object(const unsigned int _name, const Vector3 _obj
 
 /*
 @fn    ステージ2のオブジェクトを生成する
-@param _name マップデータの要素
-@param _objectPos オブジェクトの座標
+@param _Name マップデータの要素
+@param _ObjectPos オブジェクトの座標
 */
-void MapCreate::CreateStage02Object(const unsigned int _name, const Vector3 _objectPos)
+void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _ObjectPos)
 {
-	const Vector3 objectSize = Vector3(100.0f, 10.0f, 100.0f);
-	const Vector3 obstacleSize = Vector3(70.0f, 100.0f, 100.0f);
-	const Vector3 moveObstacleSize = Vector3(70.0f, 70.0f, 100.0f);
+	const Vector3 ObjectSize = Vector3(100.0f, 10.0f, 100.0f);
+	const Vector3 ObstacleSize = Vector3(70.0f, 100.0f, 100.0f);
+	const Vector3 MoveObstacleSize = Vector3(70.0f, 70.0f, 100.0f);
 
-	switch (_name)
+	switch (_Name)
 	{
-	    case(1):
-	    	new Ground(_objectPos, objectSize, "Assets/box_13.gpmesh", ground, SceneBase::stage02);
+	    case(eGround):
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", ground, SceneBase::stage02);
 	    	break;
-	    case(2):
-	    	new Glass(_objectPos, objectSize, "Assets/box_14.gpmesh", glass, SceneBase::stage02, mPlayer);
+	    case(eGlass):
+	    	new Glass(_ObjectPos, ObjectSize, "Assets/box_14.gpmesh", glass, SceneBase::stage02, mPlayer);
 	    	break;
-	    case(3):
+	    case(eBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-	    	const Vector3 blockPos = _objectPos + addPos;
+	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-	    	new Block(blockPos, obstacleSize, "Assets/box_15.gpmesh", block, SceneBase::stage02);
+	    	new Block(BlockPos, ObstacleSize, "Assets/box_15.gpmesh", block, SceneBase::stage02);
 	    	break;
 	    }
-	    case(4):
-	    	new VerticalMoveGround(_objectPos, objectSize, "Assets/box_16.gpmesh", verticalMoveGround, SceneBase::stage02, mPlayer);
+	    case(eVerticalMoveGround):
+	    	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_16.gpmesh", verticalMoveGround, SceneBase::stage02, mPlayer);
 	    	break;
-	    case(5):
-	    	new Jump(_objectPos, objectSize, "Assets/box_17.gpmesh", jump, SceneBase::stage02, mPlayer);
+	    case(eJump):
+	    	new Jump(_ObjectPos, ObjectSize, "Assets/box_17.gpmesh", jump, SceneBase::stage02, mPlayer);
 	    	break;
-	    case(6):
-	    	new LateralMoveGround(_objectPos, objectSize, "Assets/box_13.gpmesh", lateralMoveGround, SceneBase::stage02, 1000.0f, mPlayer);
+	    case(eLateralMoveGround):
+	    	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", lateralMoveGround, SceneBase::stage02, 1000.0f, mPlayer);
 	    	break;
-	    case(7):
+	    case(ePlayer):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-	    	const Vector3 playerPos = _objectPos + addPos;
-	    	const Vector3 playerSize = Vector3(1.2f, 1.2f, 1.2f);
+	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
+	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
+	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-	    	mPlayer = new Player(playerPos, playerSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
+	    	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", player, SceneBase::stage02);
 	    	break;
 	    }
-	    case(8):
+	    case(eLowUpBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, -100.0f, 0.0f);
-	    	const Vector3 upBlockPos = _objectPos + addPos;
+	    	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
+	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(upBlockPos, obstacleSize, "Assets/box_15.gpmesh", upBlock, SceneBase::stage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", upBlock, SceneBase::stage02, mPlayer);
 	    	break;
 	    }
-	    case(9):
+	    case(eVerticalBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-	    	const Vector3 verticalBlockPos = _objectPos + addPos;
+	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+	    	const Vector3 VerticalBlockPos = _ObjectPos + AddPos;
 	    
-	    	new VerticalBlock(verticalBlockPos, obstacleSize, "Assets/box_15.gpmesh", verticalBlock, SceneBase::stage02);
+	    	new VerticalBlock(VerticalBlockPos, ObstacleSize, "Assets/box_15.gpmesh", verticalBlock, SceneBase::stage02);
 	    	break;
 	    }
-	    case(10):
+	    case(eAerialBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 500.0f, 0.0f);
-	    	const Vector3 aerialBlockPos = _objectPos + addPos;
-			const Vector3 aerialBlockSize = Vector3(100.0f, 100.0f, 100.0f);
+	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
+	    	const Vector3 AerialBlockPos = _ObjectPos + AddPos;
+			const Vector3 AerialBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-	    	new AerialBlock(aerialBlockPos, aerialBlockSize, "Assets/box_15.gpmesh", aerialBlock, SceneBase::stage02);
+	    	new AerialBlock(AerialBlockPos, AerialBlockSize, "Assets/box_15.gpmesh", aerialBlock, SceneBase::stage02);
 	    	break;
 	    }
-		case(11):
+		case(eRightBlock):
 		{
-			const Vector3 addPos = Vector3(0.0f, 70.0f, 0.0f);
-			const Vector3 rightBlockPos = _objectPos + addPos;
-			const float addEndPosX = 600.0f;
+			const Vector3 AddPos = Vector3(0.0f, 70.0f, 0.0f);
+			const Vector3 RightBlockPos = _ObjectPos + AddPos;
+			const float AddEndPosX = 600.0f;
 
-			new RightBlock(rightBlockPos, moveObstacleSize, addEndPosX, "Assets/box_15.gpmesh", rightBlock, ColliderTag::rightBlockTag, SceneBase::stage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPosX, "Assets/box_15.gpmesh", rightBlock, ColliderTag::eRightBlockTag, SceneBase::stage02, mPlayer);
 			break;
 		}
-		case(13):
+		case(eLeftBlock):
 		{
-			const Vector3 addPos = Vector3(0.0f, 70.0f, 0.0f);
-			const Vector3 leftBlockPos = _objectPos + addPos;
-			const float addEndPos = 600.0f;
+			const Vector3 AddPos = Vector3(0.0f, 70.0f, 0.0f);
+			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
+			const float AddEndPos = 600.0f;
 
-			new LeftBlock(leftBlockPos, moveObstacleSize, addEndPos, "Assets/box_15.gpmesh", leftBlock, ColliderTag::leftBlockTag, SceneBase::stage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", leftBlock, ColliderTag::eLeftBlockTag, SceneBase::stage02, mPlayer);
 			break;
 		}
-		case(14):
-			new LeftGround(_objectPos, objectSize, "Assets/box_19.gpmesh", leftGround, SceneBase::stage02, mPlayer);
+		case(eLeftGround):
+			new LeftGround(_ObjectPos, ObjectSize, "Assets/box_19.gpmesh", leftGround, SceneBase::stage02, mPlayer);
 			break;
-		case(15):
-			new RightGround(_objectPos, objectSize, "Assets/box_18.gpmesh", rightGround, SceneBase::stage02, mPlayer);
+		case(eRightGround):
+			new RightGround(_ObjectPos, ObjectSize, "Assets/box_18.gpmesh", rightGround, SceneBase::stage02, mPlayer);
 			break;
-		case(16):
+		case(eDownBlock):
 		{
-			const Vector3 addPos = Vector3(0.0f, 1600.0f, 0.0f);
-			const Vector3 downBlockPos = _objectPos + addPos;
+			const Vector3 AddPos = Vector3(0.0f, 1600.0f, 0.0f);
+			const Vector3 DownBlockPos = _ObjectPos + AddPos;
 
-			new DownBlock(downBlockPos, objectSize, "Assets/box_13.gpmesh", downBlock, SceneBase::stage02, mPlayer);
+			new DownBlock(DownBlockPos, ObjectSize, "Assets/box_13.gpmesh", downBlock, SceneBase::stage02, mPlayer);
 			break;
 		}
-	    case(17):
+	    case(eHighUpBlock):
 	    {
-	    	const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-	    	const Vector3 upBlockPos = _objectPos + addPos;
+	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(upBlockPos, obstacleSize, "Assets/box_15.gpmesh", upBlock_02, SceneBase::stage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", upBlock_02, SceneBase::stage02, mPlayer);
 	    	break;
 	    }
-	    case(20):
+	    case(eGoalBlock):
 	    {
-	    	const Vector3 goalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
+	    	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-			new GoalBlock(_objectPos, goalBlockSize, "Assets/box_15.gpmesh", goalBlock, SceneBase::stage02);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_15.gpmesh", goalBlock, SceneBase::stage02);
 			break;
 	    }
-		case(418):
+		case(eOneRightBlock):
 		{
-			const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-			const Vector3 rightBlockPos = _objectPos + addPos;
-			const float addEndPos = 200.0f;
+			const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+			const Vector3 RightBlockPos = _ObjectPos + AddPos;
+			const float AddEndPos = 200.0f;
 
-			new RightBlock(rightBlockPos, moveObstacleSize, addEndPos, "Assets/box_15.gpmesh", rightOneMoveBlock, ColliderTag::rightOneMoveBlockTag, SceneBase::stage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", rightOneMoveBlock, ColliderTag::eRightOneMoveBlockTag, SceneBase::stage02, mPlayer);
 			break;
 		}
-		case(419):
+		case(eOneLeftBlock):
 		{
-			const Vector3 addPos = Vector3(0.0f, 100.0f, 0.0f);
-			const Vector3 leftBlockPos = _objectPos + addPos;
-			const float addEndPos = 200.0f;
+			const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
+			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
+			const float AddEndPos = 200.0f;
 
-			new LeftBlock(leftBlockPos, moveObstacleSize, addEndPos, "Assets/box_15.gpmesh", leftOneMoveBlock, ColliderTag::leftOneMoveBlockTag, SceneBase::stage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", leftOneMoveBlock, ColliderTag::eLeftOneMoveBlockTag, SceneBase::stage02, mPlayer);
 			break;
 		}
 	}
 }
 
-bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName)
+bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _FileName, const char* _LayerName)
 {
 	//RapidJsonドキュメントとして開けるか？
 	rapidjson::Document doc;
-	if (!openJsonFile(doc, _fileName))
+	if (!openJsonFile(doc, _FileName))
 	{
 		return false;
 	}
@@ -556,7 +521,7 @@ bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const cha
 	int layerSize = layer.Size();
 
 	//layer名から該当layerの添え字を調べる
-	std::string layerNameString(_layerName);
+	std::string layerNameString(_LayerName);
 	int layerIndex = findLayerIndex(layer, layerNameString);
 	if (layerIndex<0)
 	{
@@ -567,7 +532,7 @@ bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const cha
 	rapidjson::Value::ConstMemberIterator itr = layer[layerIndex].FindMember("data");
 	if (itr==layer[layerIndex].MemberEnd())
 	{
-		printf("レイヤー名:%sにマップデータがありません\n", _layerName);
+		printf("レイヤー名:%sにマップデータがありません\n", _LayerName);
 		return false;
 	}
 

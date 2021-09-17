@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos ジャンプ床の座標
-	@param	_size ジャンプ床のサイズ
-	@param	_objectTag ジャンプ床のタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos ジャンプ床の座標
+	@param	_Size ジャンプ床のサイズ
+	@param	_ObjectTag ジャンプ床のタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	Jump(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
+	Jump(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -29,9 +29,9 @@ public:
 
 	/*
 	@fn		ジャンプ床がヒットした時の処理
-	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+	@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _HitObject)override;
 
 private:
 

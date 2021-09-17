@@ -5,19 +5,19 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos クリアエフェクトの生成場所
-@param	_vel クリアエフェクトの速度
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos クリアエフェクトの生成場所
+@param	_Vel クリアエフェクトの速度
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-ClearEffect::ClearEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 30, "Assets/miniGlass.png", _sceneTag, _objectTag)
+ClearEffect::ClearEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	:ParticleEffectBase(_Pos, _Vel, 30, "Assets/miniGlass.png", _SceneTag, _ObjectTag)
 {
 	mAlpha = 0.5f;
 	mScale = 8.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetColor(Color::Yellow);
+	mParticle->SetColor(Color::sYELLOW);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
 	mSpeed = 1.0f;
 }

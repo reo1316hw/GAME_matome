@@ -27,14 +27,14 @@ Shader::~Shader()
 
 /*
 @fn		頂点シェーダーとフラグメントシェーダーのロード
-@param	_vertName 頂点シェーダーのファイル名
-@param	_fragName 頂点シェーダーのファイル名
+@param	_VertName 頂点シェーダーのファイル名
+@param	_FragName 頂点シェーダーのファイル名
 @return	true : 成功 , false : 失敗(bool型)
 */
-bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
+bool Shader::Load(const std::string & _VertName, const std::string & _FragName)
 {
-	if (!CompileShader(_vertName,GL_VERTEX_SHADER, mVertexShader) ||
-		!CompileShader(_fragName,GL_FRAGMENT_SHADER, mFragShader))
+	if (!CompileShader(_VertName,GL_VERTEX_SHADER, mVertexShader) ||
+		!CompileShader(_FragName,GL_FRAGMENT_SHADER, mFragShader))
 	{
 		return false;
 	}
@@ -72,97 +72,97 @@ void Shader::SetActive()
 
 /*
 @fn		行列のUniform変数を設定する
-@param	_name 設定するUniform変数名
-@param	_matrix 設定する行列
+@param	_Name 設定するUniform変数名
+@param	_Matrix 設定する行列
 */
-void Shader::SetMatrixUniform(const char * _name, const Matrix4 & _matrix)
+void Shader::SetMatrixUniform(const char * _Name, const Matrix4 & _Matrix)
 {
-	GLuint loc = glGetUniformLocation(mShaderProgram,_name);
+	GLuint loc = glGetUniformLocation(mShaderProgram, _Name);
 	// シェーダーに行列データを送る
-	glUniformMatrix4fv(loc, 1, GL_TRUE, _matrix.GetAsFloatPtr());
+	glUniformMatrix4fv(loc, 1, GL_TRUE, _Matrix.GetAsFloatPtr());
 }
 
 /*
 @fn		行列のUniform変数を設定する
-@param	_name 設定するUniform変数名
-@param	_matrices 設定する行列
+@param	_Name 設定するUniform変数名
+@param	_Matrices 設定する行列
 @param	_count 行列の数
 */
-void Shader::SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count)
+void Shader::SetMatrixUniforms(const char* _Name, Matrix4* _Matrices, unsigned _count)
 {
-	GLuint loc = glGetUniformLocation(mShaderProgram, _name);
+	GLuint loc = glGetUniformLocation(mShaderProgram, _Name);
 	// 行列配列データをシェーダー変数に送る
-	glUniformMatrix4fv(loc, _count, GL_TRUE, _matrices->GetAsFloatPtr());
+	glUniformMatrix4fv(loc, _count, GL_TRUE, _Matrices->GetAsFloatPtr());
 }
 
 /*
 @fn		Vector3のUniform変数を設定する
-@param	_name 設定するUniform変数名
-@param	_vector 設定するVector3
+@param	_Name 設定するUniform変数名
+@param	_Vector 設定するVector3
 */
-void Shader::SetVectorUniform(const char * _name, const Vector3 & _vector)
+void Shader::SetVectorUniform(const char * _Name, const Vector3 & _Vector)
 {
-    GLuint loc = glGetUniformLocation(mShaderProgram, _name);
+    GLuint loc = glGetUniformLocation(mShaderProgram, _Name);
     // シェーダーにVectorデータを送る
-    glUniform3fv(loc, 1, _vector.GetAsFloatPtr());
+    glUniform3fv(loc, 1, _Vector.GetAsFloatPtr());
 }
 
 /*
-@fn		Vector3のUniform変数を設定する
-@param	_name 設定するUniform変数名
-@param	_vector 設定するVector3
+@fn		floatのUniform変数を設定する
+@param	_Name 設定するUniform変数名
+@param	_Value 設定するfloat
 */
-void Shader::SetFloatUniform(const char * _name, const float & _value)
+void Shader::SetFloatUniform(const char * _Name, const float & _Value)
 {
-    GLuint loc = glGetUniformLocation(mShaderProgram, _name);
+    GLuint loc = glGetUniformLocation(mShaderProgram, _Name);
     // シェーダーにfloatデータを送る
-    glUniform1f(loc, _value);
+    glUniform1f(loc, _Value);
 }
 
 /*
 @fn		intのUniform変数を設定する
-@param	_name 設定するUniform変数名
-@param	_value 設定するint
+@param	_Name 設定するUniform変数名
+@param	_Value 設定するint
 */
-void Shader::SetIntUniform(const char* _name, const int _value)
+void Shader::SetIntUniform(const char* _Name, const int _Value)
 {
-	GLuint loc = glGetUniformLocation(mShaderProgram, _name);
+	GLuint loc = glGetUniformLocation(mShaderProgram, _Name);
 	// シェーダーにintデータを送る
-	glUniform1i(loc, _value);
+	glUniform1i(loc, _Value);
 }
 
 /*
 @fn		シェーダーをコンパイルする
-@param	_fileName コンパイルするシェーダーのファイル名
+@param	_FileName コンパイルするシェーダーのファイル名
 @param	_shaderType シェーダーの種類
 @param	_outShader シェーダーのID用の参照変数
 @return	true : 成功 , false : 失敗(bool型)
 */
-bool Shader::CompileShader(const std::string & _fileName, GLenum _shaderType, GLuint & _outShader)
+bool Shader::CompileShader(const std::string & _FileName, GLenum _shaderType, GLuint & _outShader)
 {
-	std::ifstream shaderFile(_fileName);
+	std::ifstream shaderFile(_FileName);
 	if (shaderFile.is_open())
 	{
 		std::stringstream sstream;
 		sstream << shaderFile.rdbuf();
 		std::ifstream().swap(shaderFile);
 		std::string contents = sstream.str();
-		const char* contentsChar = contents.c_str();
+		const char* ContentsChar = contents.c_str();
 
 		_outShader = glCreateShader(_shaderType);
 
-		glShaderSource(_outShader, 1, &(contentsChar), nullptr);
+		glShaderSource(_outShader, 1, &(ContentsChar), nullptr);
 		glCompileShader(_outShader);
 
 		if (!IsCompiled(_outShader))
 		{
-			SDL_Log("Failed to compile shader %s", _fileName.c_str());
+			SDL_Log("Failed to compile shader %s", _FileName.c_str());
 			return false;
 		}
 	}
 	else
 	{
-		SDL_Log("Shader file not found: %s", _fileName.c_str());
+		SDL_Log("Shader file not found: %s", _FileName.c_str());
 		return false;
 	}
 

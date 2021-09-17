@@ -5,13 +5,13 @@
 
 /*
 @fn		コンストラクタ
-@param	_verts 頂点バッファの配列のポインタ
+@param	_Verts 頂点バッファの配列のポインタ
 @param	_numVerts 頂点数
-@param	_indices インデックスバッファの配列のポインタ
+@param	_Indices インデックスバッファの配列のポインタ
 @param	_numIndices インデックスの数
 */
-VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
-	const unsigned int* _indices, unsigned int _numIndices)
+VertexArray::VertexArray(const float* _Verts, unsigned int _numVerts,
+	const unsigned int* _Indices, unsigned int _numIndices)
 	:mNumVerts(_numVerts)
 	,mNumIndices(_numIndices)
 {
@@ -22,12 +22,12 @@ VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
 	// 頂点バッファの作成
 	glGenBuffers(1, &mVertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, _numVerts * 8 * sizeof(float), _verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _numVerts * 8 * sizeof(float), _Verts, GL_STATIC_DRAW);
 
 	// インデクスバッファの作成
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _numIndices * sizeof(unsigned int), _indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _numIndices * sizeof(unsigned int), _Indices, GL_STATIC_DRAW);
 
 	//最初の頂点属性を有効に（位置座標）
 	glEnableVertexAttribArray(0);
@@ -61,13 +61,13 @@ VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
 
 /*
 @fn		頂点配列コンストラクタ
-@param	_verts 頂点バッファの配列のポインタ
+@param	_Verts 頂点バッファの配列のポインタ
 @param	_numVerts 頂点数
 @param	_layout 頂点レイアウト
-@param	_indices インデックスバッファの配列のポインタ
+@param	_Indices インデックスバッファの配列のポインタ
 @param	_numIndices インデックスの数
 */
-VertexArray::VertexArray(const void * _verts, unsigned int _numVerts, Layout _layout, const unsigned int * _indices, unsigned int _numIndices)
+VertexArray::VertexArray(const void * _Verts, unsigned int _numVerts, Layout _layout, const unsigned int * _Indices, unsigned int _numIndices)
 	: mNumVerts(_numVerts)
 	, mNumIndices(_numIndices)
 {
@@ -85,12 +85,12 @@ VertexArray::VertexArray(const void * _verts, unsigned int _numVerts, Layout _la
 	// 頂点バッファの作成
 	glGenBuffers(1, &mVertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, mNumVerts * vertexSize, _verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, mNumVerts * vertexSize, _Verts, GL_STATIC_DRAW);
 
 	// インデックスバッファの作成
 	glGenBuffers(1, &mIndexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), _indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), _Indices, GL_STATIC_DRAW);
 
 	// 頂点属性
 	if (_layout == PosNormTex)

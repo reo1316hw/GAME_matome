@@ -3,39 +3,39 @@
 */
 #include "pch.h"
 
-Vector3 LateralMoveGround::mSendVel = Vector3::Zero;
+Vector3 LateralMoveGround::mSendVel = Vector3::sZERO;
 
 /*
 @fn		コンストラクタ
-@param	_pos 横移動床の座標
-@param	_size 横移動床のサイズ
-@param	_objectTag 横移動床のタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos 横移動床の座標
+@param	_Size 横移動床のサイズ
+@param	_ObjectTag 横移動床のタグ
+@param	_SceneTag シーンのタグ
 @param _distance 横移動床の移動する距離
 @param _playerPtr プレイヤーのポインタ
 */
-LateralMoveGround::LateralMoveGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const float _distance, Player* _playerPtr)
-	: GameObject(_sceneTag, _objectTag)
+LateralMoveGround::LateralMoveGround(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, const float _Distance, Player* _playerPtr)
+	: GameObject(_SceneTag, _ObjectTag)
 {
 	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
-	SetScale(_size);
-	SetPosition(_pos);
+	mTag = _ObjectTag;
+	SetScale(_Size);
+	SetPosition(_Pos);
 	// 初期の座標
-	mInitPos = _pos;
+	mInitPos = _Pos;
 
 	// 移動先の座標
-	mEndPos = Vector3(_pos.x - _distance, _pos.y, _pos.z) ;
+	mEndPos = Vector3(_Pos.x - _Distance, _Pos.y, _Pos.z) ;
 
 	//生成したLateralMoveGroundの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
 	// 当たり判定
 	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh(_gpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::lateralMoveGroundTag, GetOnCollisionFunc());
+	mMesh = RENDERER->GetMesh(_GpmeshName);
+	mBoxcollider = new BoxCollider(this, ColliderTag::eLateralMoveGroundTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	// 反転フラグ
@@ -81,14 +81,17 @@ void LateralMoveGround::UpdateGameObject(float _deltaTime)
 		mReversFlag = false;
 	}
 
+	//横移動するときの速度
+	const float MoveSpeed = 10.0f;
+
 	if (mReversFlag == true )
 	{
-		mVelocity.x = MOVE_SPEED;
+		mVelocity.x = MoveSpeed;
 		
 	}
 	else if(mReversFlag == false)
 	{
-		mVelocity.x = -MOVE_SPEED;
+		mVelocity.x = -MoveSpeed;
 	}
 
 	mSendVel = mVelocity;

@@ -33,11 +33,11 @@ public:
 
 	/*
 	@fn		メッシュデータの読み込み
-	@param	_fileName ロードしたいメッシュのファイル名
+	@param	_FileName ロードしたいメッシュのファイル名
 	@param	_renderer Rendererクラスのポインタ
 	@return true : 成功 , false : 失敗(bool型)
 	*/
-    bool Load(const std::string& _fileName, Renderer* _renderer);
+    bool Load(const std::string& _FileName, Renderer* _renderer);
 
 	/*
 	@fn	ロードしたメッシュデータの解放

@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos ゴールラインの座標
-	@param	_vel ゴールラインの速度
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos ゴールラインの座標
+	@param	_Vel ゴールラインの速度
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	GoalLine(const Vector3& _pos, const Vector3& _vel, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	GoalLine(const Vector3& _Pos, const Vector3& _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag);
 
 	/*
 	@fn	デストラクタ

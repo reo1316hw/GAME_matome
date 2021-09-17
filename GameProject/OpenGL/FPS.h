@@ -35,9 +35,9 @@ private:
 	void Wait();
 
 	//フレームレートの最高値
-	const Uint32 mSetFps;				
+	const Uint32 MSetFps;				
 	//１フレームにかける時間
-	const Uint32 mOneFrameTickCount;		
+	const Uint32 MOneFrameTickCount;		
 	//フレームのカウンター
 	Uint32 mFpsCount;					
 	//FPSの計算を始めた時の時間

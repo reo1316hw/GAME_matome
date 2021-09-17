@@ -25,15 +25,15 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos エフェクトの生成場所
-	@param	_vel エフェクトの速度
-	@param	_lifeCount エフェクトの生存時間
-	@param	_particleFileName 画像へのアドレス
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
-	@param	_scale 画像の拡大サイズ
+	@param	_Pos エフェクトの生成場所
+	@param	_Vel エフェクトの速度
+	@param	_LifeCount エフェクトの生存時間
+	@param	_ParticleFileName 画像へのアドレス
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
+	@param	_Scale 画像の拡大サイズ
 	*/
-	ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag,const float& _scale = 10);
+	ParticleEffectBase(const Vector3& _Pos, const Vector3& _Vel, const int& _LifeCount, const std::string& _ParticleFileName, const SceneBase::Scene _SceneTag, const Tag& _ObjectTag,const float& _Scale = 10);
 
 	/*
 	@fn	デストラクタ
@@ -55,6 +55,8 @@ protected:
 
 	//パーティクルの描画クラス
 	ParticleComponent*	mParticle;
+	//パーティクルの状態
+	ParticleState		mParticleState;
 
 	//生存時間
 	int					mLifeCount;
@@ -65,9 +67,6 @@ protected:
 	float				mScale;
 	//加速度
 	float				mSpeed;
-
-	//パーティクルの状態
-	ParticleState		mParticleState;
 
 public:
 

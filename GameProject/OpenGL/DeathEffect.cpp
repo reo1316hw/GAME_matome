@@ -5,21 +5,21 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos デスエフェクトの生成場所
-@param	_vel クリアエフェクトの速度
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos デスエフェクトの生成場所
+@param	_Vel クリアエフェクトの速度
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-DeathEffect::DeathEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 40, "Assets/miniGlass.png", _sceneTag, _objectTag)
+DeathEffect::DeathEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/miniGlass.png", _SceneTag, _ObjectTag)
 {
 	mAlpha = 1.0f;
 	mScale = 16.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetColor(Color::White);
+	mParticle->SetColor(Color::sWHITE);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
-	mVelocity = _vel;
+	mVelocity = _Vel;
 	mSpeed = 1.15f;
 }
 

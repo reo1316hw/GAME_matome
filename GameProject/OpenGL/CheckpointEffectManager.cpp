@@ -5,16 +5,16 @@
 
 /*
 @fn		コンストラクタ
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-CheckpointEffectManager::CheckpointEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
-	:GameObject(_sceneTag, _objectTag)
+CheckpointEffectManager::CheckpointEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+	:GameObject(_SceneTag, _ObjectTag)
 {
 	mState = ParticleState::PARTICLE_DISABLE;
-	mSceneTag = _sceneTag;
-	mTag = _objectTag;
+	mSceneTag = _SceneTag;
+	mTag = _ObjectTag;
 
 	mPlayer = _playerPtr;
 }
@@ -63,43 +63,50 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 
 /*
 @fn    速度を決める
-@param _quantity 個数
+@param _Quantity 個数
 */
-void CheckpointEffectManager::DecideVelocity(const int _quantity)
+void CheckpointEffectManager::DecideVelocity(const int _Quantity)
 {
+	//方向の個数
+	const int DirectionNum = 8;
+	//速度
+	const float Speed = 10.0f;
+	//向き
+	const float Direction = 1.0f;
+
 	//速度を初期化
-	mVelocity = Vector3::Zero;
+	mVelocity = Vector3::sZERO;
 
 	//各方向の速度と向きを計算
-	switch (_quantity % 8)
+	switch (_Quantity % DirectionNum)
 	{
-	case 0:
-		mVelocity.x = DIRECTION * SPEED;
+	case eRightCheckpoint:
+		mVelocity.x = Direction * Speed;
 		break;
-	case 1:
-		mVelocity.z = DIRECTION * SPEED;
+	case eFrontCheckpoint:
+		mVelocity.z = Direction * Speed;
 		break;
-	case 2:
-		mVelocity.x = -DIRECTION * SPEED;
+	case eLeftCheckpoint:
+		mVelocity.x = -Direction * Speed;
 		break;
-	case 3:
-		mVelocity.z = -DIRECTION * SPEED;
+	case eBackCheckpoint:
+		mVelocity.z = -Direction * Speed;
 		break;
-	case 4:
-		mVelocity.x = DIRECTION * SPEED;
-		mVelocity.z = DIRECTION * SPEED;
+	case eRightFrontCheckpoint:
+		mVelocity.x = Direction * Speed;
+		mVelocity.z = Direction * Speed;
 		break;
-	case 5:
-		mVelocity.x = -DIRECTION * SPEED;
-		mVelocity.z = -DIRECTION * SPEED;
+	case eLeftBackCheckpoint:
+		mVelocity.x = -Direction * Speed;
+		mVelocity.z = -Direction * Speed;
 		break;
-	case 6:
-		mVelocity.x = DIRECTION * SPEED;
-		mVelocity.z = -DIRECTION * SPEED;
+	case eRightBackCheckpoint:
+		mVelocity.x = Direction * Speed;
+		mVelocity.z = -Direction * Speed;
 		break;
-	case 7:
-		mVelocity.x = -DIRECTION * SPEED;
-		mVelocity.z = DIRECTION * SPEED;
+	case eLeftFrontCheckpoint:
+		mVelocity.x = -Direction * Speed;
+		mVelocity.z = Direction * Speed;
 		break;
 	}
 }

@@ -15,21 +15,21 @@
 
 #include "pch.h"
 
-const Vector2 Vector2::Zero(0.0f, 0.0f);
-const Vector2 Vector2::UnitX(1.0f, 0.0f);
-const Vector2 Vector2::UnitY(0.0f, 1.0f);
-const Vector2 Vector2::NegUnitX(-1.0f, 0.0f);
-const Vector2 Vector2::NegUnitY(0.0f, -1.0f);
+const Vector2 Vector2::sZERO(0.0f, 0.0f);
+const Vector2 Vector2::sUNIT_X(1.0f, 0.0f);
+const Vector2 Vector2::sUNIT_Y(0.0f, 1.0f);
+const Vector2 Vector2::sNEG_UNIT_X(-1.0f, 0.0f);
+const Vector2 Vector2::sNEG_UNIT_Y(0.0f, -1.0f);
 
-const Vector3 Vector3::Zero(0.0f, 0.0f, 0.f);
-const Vector3 Vector3::UnitX(1.0f, 0.0f, 0.0f);
-const Vector3 Vector3::UnitY(0.0f, 1.0f, 0.0f);
-const Vector3 Vector3::UnitZ(0.0f, 0.0f, 1.0f);
-const Vector3 Vector3::NegUnitX(-1.0f, 0.0f, 0.0f);
-const Vector3 Vector3::NegUnitY(0.0f, -1.0f, 0.0f);
-const Vector3 Vector3::NegUnitZ(0.0f, 0.0f, -1.0f);
-const Vector3 Vector3::Infinity(Math::Infinity, Math::Infinity, Math::Infinity);
-const Vector3 Vector3::NegInfinity(Math::NegInfinity, Math::NegInfinity, Math::NegInfinity);
+const Vector3 Vector3::sZERO(0.0f, 0.0f, 0.f);
+const Vector3 Vector3::sUNIT_X(1.0f, 0.0f, 0.0f);
+const Vector3 Vector3::sUNIT_Y(0.0f, 1.0f, 0.0f);
+const Vector3 Vector3::sUNIT_Z(0.0f, 0.0f, 1.0f);
+const Vector3 Vector3::sNEG_UNIT_X(-1.0f, 0.0f, 0.0f);
+const Vector3 Vector3::sNEG_UNIT_Y(0.0f, -1.0f, 0.0f);
+const Vector3 Vector3::sNEG_UNIT_Z(0.0f, 0.0f, -1.0f);
+const Vector3 Vector3::sINFINITY(Math::Infinity, Math::Infinity, Math::Infinity);
+const Vector3 Vector3::sNEG_INFINITY(Math::NegInfinity, Math::NegInfinity, Math::NegInfinity);
 
 static float m3Ident[3][3] =
 {
@@ -37,7 +37,7 @@ static float m3Ident[3][3] =
 { 0.0f, 1.0f, 0.0f },
 { 0.0f, 0.0f, 1.0f }
 };
-const Matrix3 Matrix3::Identity(m3Ident);
+const Matrix3 Matrix3::sIDENTITY(m3Ident);
 
 static float m4Ident[4][4] =
 {
@@ -86,44 +86,44 @@ float Quartic::EaseOut(float _elapseTime, float _initpos, float _differencePos, 
 }
 //////////////////////////////////////
 
-const Matrix4 Matrix4::Identity(m4Ident);
+const Matrix4 Matrix4::sIDENTITY(m4Ident);
 
-const Quaternion Quaternion::Identity(0.0f, 0.0f, 0.0f, 1.0f);
+const Quaternion Quaternion::sIDENTITY(0.0f, 0.0f, 0.0f, 1.0f);
 
-Vector2 Vector2::Transform(const Vector2& _vec, const Matrix3& _mat, float _w /*= 1.0f*/)
+Vector2 Vector2::Transform(const Vector2& _Vec, const Matrix3& _Mat, float _w /*= 1.0f*/)
 {
     Vector2 retVal;
-    retVal.x = _vec.x * _mat.mat[0][0] + _vec.y * _mat.mat[1][0] + _w * _mat.mat[2][0];
-    retVal.y = _vec.x * _mat.mat[0][1] + _vec.y * _mat.mat[1][1] + _w * _mat.mat[2][1];
+    retVal.x = _Vec.x * _Mat.mat[0][0] + _Vec.y * _Mat.mat[1][0] + _w * _Mat.mat[2][0];
+    retVal.y = _Vec.x * _Mat.mat[0][1] + _Vec.y * _Mat.mat[1][1] + _w * _Mat.mat[2][1];
     //ignore w since we aren't returning a new value for it...
     return retVal;
 }
 
-Vector3 Vector3::Transform(const Vector3& _vec, const Matrix4& _mat, float _w /*= 1.0f*/)
+Vector3 Vector3::Transform(const Vector3& _Vec, const Matrix4& _Mat, float _w /*= 1.0f*/)
 {
     Vector3 retVal;
-    retVal.x = _vec.x * _mat.mat[0][0] + _vec.y * _mat.mat[1][0] +
-        _vec.z * _mat.mat[2][0] + _w * _mat.mat[3][0];
-    retVal.y = _vec.x * _mat.mat[0][1] + _vec.y * _mat.mat[1][1] +
-        _vec.z * _mat.mat[2][1] + _w * _mat.mat[3][1];
-    retVal.z = _vec.x * _mat.mat[0][2] + _vec.y * _mat.mat[1][2] +
-        _vec.z * _mat.mat[2][2] + _w * _mat.mat[3][2];
+    retVal.x = _Vec.x * _Mat.mat[0][0] + _Vec.y * _Mat.mat[1][0] +
+        _Vec.z * _Mat.mat[2][0] + _w * _Mat.mat[3][0];
+    retVal.y = _Vec.x * _Mat.mat[0][1] + _Vec.y * _Mat.mat[1][1] +
+        _Vec.z * _Mat.mat[2][1] + _w * _Mat.mat[3][1];
+    retVal.z = _Vec.x * _Mat.mat[0][2] + _Vec.y * _Mat.mat[1][2] +
+        _Vec.z * _Mat.mat[2][2] + _w * _Mat.mat[3][2];
     //ignore w since we aren't returning a new value for it...
     return retVal;
 }
 
 // This will transform the vector and renormalize the w component
-Vector3 Vector3::TransformWithPerspDiv(const Vector3& _vec, const Matrix4& _mat, float _w /*= 1.0f*/)
+Vector3 Vector3::TransformWithPerspDiv(const Vector3& _Vec, const Matrix4& _Mat, float _w /*= 1.0f*/)
 {
     Vector3 retVal;
-    retVal.x = _vec.x * _mat.mat[0][0] + _vec.y * _mat.mat[1][0] +
-        _vec.z * _mat.mat[2][0] + _w * _mat.mat[3][0];
-    retVal.y = _vec.x * _mat.mat[0][1] + _vec.y * _mat.mat[1][1] +
-        _vec.z * _mat.mat[2][1] + _w * _mat.mat[3][1];
-    retVal.z = _vec.x * _mat.mat[0][2] + _vec.y * _mat.mat[1][2] +
-        _vec.z * _mat.mat[2][2] + _w * _mat.mat[3][2];
-    float transformedW = _vec.x * _mat.mat[0][3] + _vec.y * _mat.mat[1][3] +
-        _vec.z * _mat.mat[2][3] + _w * _mat.mat[3][3];
+    retVal.x = _Vec.x * _Mat.mat[0][0] + _Vec.y * _Mat.mat[1][0] +
+        _Vec.z * _Mat.mat[2][0] + _w * _Mat.mat[3][0];
+    retVal.y = _Vec.x * _Mat.mat[0][1] + _Vec.y * _Mat.mat[1][1] +
+        _Vec.z * _Mat.mat[2][1] + _w * _Mat.mat[3][1];
+    retVal.z = _Vec.x * _Mat.mat[0][2] + _Vec.y * _Mat.mat[1][2] +
+        _Vec.z * _Mat.mat[2][2] + _w * _Mat.mat[3][2];
+    float transformedW = _Vec.x * _Mat.mat[0][3] + _Vec.y * _Mat.mat[1][3] +
+        _Vec.z * _Mat.mat[2][3] + _w * _Mat.mat[3][3];
     if (!Math::NearZero(Math::Abs(transformedW)))
     {
         transformedW = 1.0f / transformedW;
@@ -133,12 +133,12 @@ Vector3 Vector3::TransformWithPerspDiv(const Vector3& _vec, const Matrix4& _mat,
 }
 
 // Transform a Vector3 by a quaternion
-Vector3 Vector3::Transform(const Vector3& _v, const Quaternion& _q)
+Vector3 Vector3::Transform(const Vector3& _V, const Quaternion& _Q)
 {
     // v + 2.0*cross(q.xyz, cross(q.xyz,v) + q.w*v);
-    Vector3 qv(_q.x, _q.y, _q.z);
-    Vector3 retVal = _v;
-    retVal += 2.0f * Vector3::Cross(qv, Vector3::Cross(qv, _v) + _q.w * _v);
+    Vector3 qv(_Q.x, _Q.y, _Q.z);
+    Vector3 retVal = _V;
+    retVal += 2.0f * Vector3::Cross(qv, Vector3::Cross(qv, _V) + _Q.w * _V);
     return retVal;
 }
 
@@ -257,23 +257,23 @@ void Matrix4::Invert()
     }
 }
 
-Matrix4 Matrix4::CreateFromQuaternion(const class Quaternion& _q)
+Matrix4 Matrix4::CreateFromQuaternion(const class Quaternion& _Q)
 {
     float mat[4][4];
 
-    mat[0][0] = 1.0f - 2.0f * _q.y * _q.y - 2.0f * _q.z * _q.z;
-    mat[0][1] = 2.0f * _q.x * _q.y + 2.0f * _q.w * _q.z;
-    mat[0][2] = 2.0f * _q.x * _q.z - 2.0f * _q.w * _q.y;
+    mat[0][0] = 1.0f - 2.0f * _Q.y * _Q.y - 2.0f * _Q.z * _Q.z;
+    mat[0][1] = 2.0f * _Q.x * _Q.y + 2.0f * _Q.w * _Q.z;
+    mat[0][2] = 2.0f * _Q.x * _Q.z - 2.0f * _Q.w * _Q.y;
     mat[0][3] = 0.0f;
 
-    mat[1][0] = 2.0f * _q.x * _q.y - 2.0f * _q.w * _q.z;
-    mat[1][1] = 1.0f - 2.0f * _q.x * _q.x - 2.0f * _q.z * _q.z;
-    mat[1][2] = 2.0f * _q.y * _q.z + 2.0f * _q.w * _q.x;
+    mat[1][0] = 2.0f * _Q.x * _Q.y - 2.0f * _Q.w * _Q.z;
+    mat[1][1] = 1.0f - 2.0f * _Q.x * _Q.x - 2.0f * _Q.z * _Q.z;
+    mat[1][2] = 2.0f * _Q.y * _Q.z + 2.0f * _Q.w * _Q.x;
     mat[1][3] = 0.0f;
 
-    mat[2][0] = 2.0f * _q.x * _q.z + 2.0f * _q.w * _q.y;
-    mat[2][1] = 2.0f * _q.y * _q.z - 2.0f * _q.w * _q.x;
-    mat[2][2] = 1.0f - 2.0f * _q.x * _q.x - 2.0f * _q.y * _q.y;
+    mat[2][0] = 2.0f * _Q.x * _Q.z + 2.0f * _Q.w * _Q.y;
+    mat[2][1] = 2.0f * _Q.y * _Q.z - 2.0f * _Q.w * _Q.x;
+    mat[2][2] = 1.0f - 2.0f * _Q.x * _Q.x - 2.0f * _Q.y * _Q.y;
     mat[2][3] = 0.0f;
 
     mat[3][0] = 0.0f;

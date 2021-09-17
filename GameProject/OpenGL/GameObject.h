@@ -85,11 +85,11 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_sceneTag シーンのタグ
-	@param	_objectTag ゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
+	@param	_ObjectTag ゲームオブジェクトのタグ
 	@param	_reUseGameObject
 	*/
-	GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag , bool _reUseGameObject = false);
+	GameObject(SceneBase::Scene _SceneTag, const Tag& _ObjectTag , bool _reUseGameObject = false);
 
 	/*
 	@fn	デストラクタ
@@ -122,18 +122,18 @@ public:
 
 	/*
 	@fn		入力状態を受け取りGameObjectとComponentの入力更新関数を呼び出す
-	@param	_keyState 各入力機器の入力状態
+	@param	_KeyState 各入力機器の入力状態
 	@brief	キーボード、マウス、コントローラー
 	*/
-	void ProcessInput(const InputState& _keyState);
+	void ProcessInput(const InputState& _KeyState);
 
 	/*
 	@fn		入力を引数で受け取る更新関数
 	@brief	基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
-	@param	_keyState 各入力機器の入力状態
+	@param	_KeyState 各入力機器の入力状態
 	@brief	キーボード、マウス、コントローラー
 	*/
-	virtual void GameObjectInput(const InputState& _keyState);
+	virtual void GameObjectInput(const InputState& _KeyState);
 
 	/*
 	@fn		コンポーネントを追加する
@@ -160,17 +160,17 @@ public:
 
 	/*
 	@fn		矩形と矩形の押し戻し
-	@param	_myAABB	基準にするオブジェクトの矩形当たり判定
-	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
-	@param	_pairTag ヒットするオブジェクトのタグ
+	@param	_MyAABB	基準にするオブジェクトの矩形当たり判定
+	@param	_PairAABB ヒットするオブジェクトの矩形当たり判定
+	@param	_PairTag ヒットするオブジェクトのタグ
 	*/
-	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag);
+	virtual void FixCollision(const AABB& _MyAABB, const AABB& _PairAABB, const Tag& _PairTag);
 
 	/*
 	@fn		前方ベクトルの向きに回転する
 	@param	_forward 向かせたい前方方向ベクトル
 	*/
-	void RotateToNewForward(const Vector3& _forward);
+	void RotateToNewForward(const Vector3& _Forward);
 
 	/*
 	@fn 静的なmainCameraを生成する
@@ -184,7 +184,7 @@ protected:
 	@fn		ゲームオブジェクトがヒットした時の処理
 	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
 	*/
-	virtual void OnCollision(const GameObject& _hitObject) {}
+	virtual void OnCollision(const GameObject& _HitObject) {}
 
 	//メインカメラ　生成はGameObjectManager生成時に行われる
 	static class MainCameraObject* mMainCamera;
@@ -305,17 +305,17 @@ public://ゲッターセッター
 	/*
 	@return	オブジェクトの前方を表すベクトル(Vector3型)
 	*/
-	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitZ, mRotation); }
+	Vector3 GetForward() const { return Vector3::Transform(Vector3::sUNIT_Z, mRotation); }
 
 	/*
 	@return	オブジェクトの右を表すベクトル(Vector3型)
 	*/
-	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
+	Vector3 GetRight() const { return Vector3::Transform(Vector3::sUNIT_X, mRotation); }
 
 	/*
 	@return	オブジェクトの上を表すベクトル(Vector3型)
 	*/
-	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitY, mRotation); };
+	Vector3 GetUp() const { return Vector3::Transform(Vector3::sUNIT_Y, mRotation); };
 
 	/*
 	@return	オブジェクトのタグ(enum型 Tag)
@@ -348,9 +348,9 @@ public://ゲッターセッター
 	void SetScale(Vector3 _scale) { mScale.x = _scale.x; mScale.y = _scale.y; mScale.z = _scale.z; mRecomputeWorldTransform = true; }
 
 	/*
-	@param	_qotation オブジェクトのクォータニオン
+	@param	_Qotation オブジェクトのクォータニオン
 	*/
-	virtual void SetRotation(const Quaternion& _qotation) { mRotation = _qotation;  mRecomputeWorldTransform = true; }
+	virtual void SetRotation(const Quaternion& _Qotation) { mRotation = _Qotation;  mRecomputeWorldTransform = true; }
 
 	/*
 	@param	_state オブジェクトの状態
@@ -358,9 +358,9 @@ public://ゲッターセッター
 	virtual void SetState(State _state) { mState = _state; }
 
 	/*
-	@param	_pos オブジェクトのポジション
+	@param	_Pos オブジェクトのポジション
 	*/
-	virtual void SetPosition(const Vector3& _pos) { mPosition = _pos; mRecomputeWorldTransform = true; }
+	virtual void SetPosition(const Vector3& _Pos) { mPosition = _Pos; mRecomputeWorldTransform = true; }
 
 };
 

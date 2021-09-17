@@ -5,38 +5,41 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos 右移動ブロックの座標
-@param	_size 右移動ブロックのサイズ
-@param	_objectTag 右移動ブロックのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos 右移動ブロックの座標
+@param	_Size 右移動ブロックのサイズ
+@param	_ObjectTag 右移動ブロックのタグ
+@param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr)
-	: GameObject(_sceneTag, _objectTag)
+RightBlock::RightBlock(const Vector3& _Pos, const Vector3& _Size, const float _AddEndPosX, const std::string _GpmeshName, const Tag& _ObjectTag, const ColliderTag& _ColliderTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+	: GameObject(_SceneTag, _ObjectTag)
 	, mElapseTime(0.0f)
 	, mDifferencePos(0.0f)
 	, mStart(0.0f)
 	, mShakeFlag(false)
-	, mInversionPos(Vector3::Zero)
+	, mInversionPos(Vector3::sZERO)
 {
-	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
-	SetScale(_size);
-	SetPosition(_pos);
-	mInitPos = _pos;
+	// 反転する地点までの距離
+	const float Distance = 60.0f;
 
-	mEndPos = Vector3(_pos.x + _addEndPosX, _pos.y, _pos.z);
-	mInversionPos = Vector3(_pos.x + 60.0f, _pos.y, _pos.z);
+	//GameObjectメンバ変数の初期化
+	mTag = _ObjectTag;
+	SetScale(_Size);
+	SetPosition(_Pos);
+	mInitPos = _Pos;
+
+	mEndPos = Vector3(_Pos.x + _AddEndPosX, _Pos.y, _Pos.z);
+	mInversionPos = Vector3(_Pos.x + Distance, _Pos.y, _Pos.z);
 
 	//生成したRightBlockの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmMesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
 	// 当たり判定
 	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh(_gpmeshName);
-	mBoxcollider = new BoxCollider(this, _colliderTag, GetOnCollisionFunc());
+	mMesh = RENDERER->GetMesh(_GpmeshName);
+	mBoxcollider = new BoxCollider(this, _ColliderTag, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;
@@ -50,11 +53,16 @@ RightBlock::RightBlock(const Vector3& _pos, const Vector3& _size, const float _a
 */
 void RightBlock::UpdateGameObject(float _deltaTime)
 {
+	//プレイヤーの座標
 	Vector3 playerPos = mPlayer->GetPosition();
+	//距離
+	float distance = 2040.0f;
+	//予知動作を開始するためのz座標
+	float ShakeZPos = mPosition.z - distance;
+
 	//////////////////////////////////////
 	//予知動作処理
-
-	if (playerPos.z >= mPosition.z - 2040.0f)
+	if (playerPos.z >= ShakeZPos)
 	{
 		mShakeFlag = true;
 	}
@@ -70,23 +78,34 @@ void RightBlock::UpdateGameObject(float _deltaTime)
 			mReversFlag = false;
 		}
 
+		
+		//右移動ブロックの右に移動する速度
+		const float RightSpeed = 20.0f;
+
 		if (mReversFlag == true)
 		{
-			mVelocity.x = -RIGHT_SPEED;
+			mVelocity.x = -RightSpeed;
 		}
 		else if (mReversFlag == false)
 		{
-			mVelocity.x = RIGHT_SPEED;
+			mVelocity.x = RightSpeed;
 		}
 	}
 	/////////////////////////////////////////
 
-	if (playerPos.z >= mPosition.z - 1800.0f)
+	distance = 1800.0f;
+	//動き始めるためのz座標
+	const float MoveZPos = mPosition.z - distance;
+
+	if (playerPos.z >= MoveZPos)
 	{
+		//全体の時間
+		const float TotalTime = 1.0f;
+
 		mShakeFlag = false;
 		mElapseTime += _deltaTime;
 		mDifferencePos = mEndPos.x - mInitPos.x;
-		mVelocity.x = Quartic::EaseIn(mElapseTime, mStart , mDifferencePos, TOTAL_TIME) * 0.02f;
+		mVelocity.x = Quartic::EaseIn(mElapseTime, mStart , mDifferencePos, TotalTime) * 0.02f;
 	}
 
 	if (mInitPos.x < mPosition.x)

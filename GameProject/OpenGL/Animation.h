@@ -14,9 +14,9 @@ public:
 
 	/*
 	@fn アニメーション読み込み
-	@param _fileName アニメーションへのパス
+	@param _FileName アニメーションへのパス
 	*/
-	bool Load(const std::string& _fileName);    
+	bool Load(const std::string& _FileName);    
 
 private:
 
@@ -59,5 +59,5 @@ public: //ゲッターセッター
 	//指定された配列を、アニメーションの指定された時間に、
 	//各ボーンのグローバル（現在の）ポーズマトリックスで埋める。
 	//時間は > = 0.0fかつ <= 期間であると予想される
-	void GetGlobalPoseAtTime(std::vector<class Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
+	void GetGlobalPoseAtTime(std::vector<class Matrix4>& _outPoses, const class Skeleton* _InSkeleton, float _inTime) const;
 };

@@ -25,19 +25,19 @@ Texture::~Texture()
 
 /*
 @fn		テクスチャのロード
-@param	_fileName テクスチャのファイル名
+@param	_FileName テクスチャのファイル名
 @return	true : 成功 , false : 失敗(bool型)
 */
-bool Texture::Load(const std::string& _fileName)
+bool Texture::Load(const std::string& _FileName)
 {
 	int channels = 0;
 
 	// SDLサーフェスをテクスチャから作成
 	SDL_Texture* tex = nullptr;
-	SDL_Surface* surf = IMG_Load(_fileName.c_str());
+	SDL_Surface* surf = IMG_Load(_FileName.c_str());
 	if (!surf)
 	{
-		printf("テクスチャ読み込みに失敗 %s", _fileName.c_str());
+		printf("テクスチャ読み込みに失敗 %s", _FileName.c_str());
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool Texture::Load(const std::string& _fileName)
 	tex = SDL_CreateTextureFromSurface(RENDERER->GetSDLRenderer(), surf);
 	if (!tex)
 	{
-		printf("サーフェスからテクスチャの作成に失敗 : %s", _fileName.c_str());
+		printf("サーフェスからテクスチャの作成に失敗 : %s", _FileName.c_str());
 		return false;
 	}
 

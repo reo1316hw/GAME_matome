@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 砂ぼこりの座標
-	@param	_vel 砂ぼこりの速度
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 砂ぼこりの座標
+	@param	_Vel 砂ぼこりの速度
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	SandEffect(Vector3 _pos,Vector3 _vel, SceneBase::Scene _sceneTag,const Tag& _objectTag);
+	SandEffect(const Vector3 _Pos, const Vector3 _Vel, const SceneBase::Scene _SceneTag,const Tag& _ObjectTag);
 
 	/*
 	@fn	デストラクタ

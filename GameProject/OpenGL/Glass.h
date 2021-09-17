@@ -15,13 +15,13 @@ public:
 
 	/*
 	@fn	   コンストラクタ
-	@param _pos ガラス床の座標
-	@param _size ガラス床のサイズ
-	@param _objectTag ガラス床のタグ
-	@param _sceneTag シーンのタグ
+	@param _Pos ガラス床の座標
+	@param _Size ガラス床のサイズ
+	@param _ObjectTag ガラス床のタグ
+	@param _SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	Glass(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
+	Glass(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -45,12 +45,9 @@ private:
 	//落ちるまでのカウント
 	int mDownCount;
 
-	// 落ちるスピード
-	const float DOWN_SPEED = 100.0f;
-
 	/*
 	@fn		ガラス床がヒットした時の処理
-	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+	@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
 	*/
-	void OnCollision(const GameObject& _hitObject)override;
+	void OnCollision(const GameObject& _HitObject)override;
 };

@@ -44,11 +44,11 @@ public:
 
    	/*
 	@fn		アニメーションの再生
-	@param	_anim アニメーションデータクラス
+	@param	_Anim アニメーションデータクラス
 	@param	_playRate アニメーションの再生速度
 	@return	アニメーションの残り時間(float型)
 	*/
-	float PlayAnimation(const class Animation* _anim, float _playRate = 1.0f);
+	float PlayAnimation(const class Animation* _Anim, float _playRate = 1.0f);
 
 protected:
 
@@ -60,9 +60,9 @@ protected:
 	// 行列パレット
 	MatrixPalette mPalette;
 	// スケルトンデータ
-	const class Skeleton* mSkeleton;
+	const class Skeleton* MSkeleton;
 	// アニメーションデータ
-	const class Animation* mAnimation;
+	const class Animation* MAnimation;
 	// アニメーションの再生速度
 	float mAnimPlayRate;
 	// アニメーション時間
@@ -73,11 +73,11 @@ protected:
 public://ゲッターセッター
 
 	/*
-	@param _skeleton スケルトンデータ
+	@param _Skeleton スケルトンデータ
 	*/
-	void SetSkeleton(const class Skeleton* _skeleton) { mSkeleton = _skeleton; }
+	void SetSkeleton(const class Skeleton* _Skeleton) { MSkeleton = _Skeleton; }
 	/*
-	@param _color スケルトンデータに乗算する色
+	@param _Color スケルトンデータに乗算する色
 	*/
-	void SetColor(const Vector3& _color) { mColor = _color; }
+	void SetColor(const Vector3& _Color) { mColor = _Color; }
 };

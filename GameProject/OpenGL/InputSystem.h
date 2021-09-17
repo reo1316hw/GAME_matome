@@ -152,11 +152,11 @@ public://ゲッターセッター
 
 	/*
 	@fn		 スティックの入力を0~32767で返す
-	@param _iAxis どのスティックのどの値を取得するか
+	@param _IAxis どのスティックのどの値を取得するか
 		   (左スティックのXを取得...SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_LEFTX)
 	@return スティックの入力情報(float型)
 	*/
-	float GetAxisValue(const SDL_GameControllerAxis _iAxis) const;
+	float GetAxisValue(const SDL_GameControllerAxis _IAxis) const;
 
 	/*
 	@fn		スティックの入力を0~1で返す

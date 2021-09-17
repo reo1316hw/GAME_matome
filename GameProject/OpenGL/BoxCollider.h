@@ -65,7 +65,7 @@ public: //ゲッターセッター
 
 	/*
 	@fn		当たり判定に使うAABBの設定
-	@param	_box オブジェクトの大きさに合わせたAABBの構造体
+	@param	_Box オブジェクトの大きさに合わせたAABBの構造体
 	*/
-	void SetObjectBox(const AABB& _box) { mObjectBox = _box; }
+	void SetObjectBox(const AABB& _Box) { mObjectBox = _Box; }
 };

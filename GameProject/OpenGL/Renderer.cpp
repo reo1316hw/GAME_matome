@@ -31,11 +31,11 @@ Renderer::Renderer()
 	, mInvisibleMeshShader(nullptr)
 	, mBasicShader(nullptr)
 	, mParticleVertex(nullptr)
-	, mView(Matrix4::Identity)
-	, mProjection(Matrix4::Identity)
+	, mView(Matrix4::sIDENTITY)
+	, mProjection(Matrix4::sIDENTITY)
 	, mScreenWidth(0)
 	, mScreenHeight(0)
-	, mAmbientLight(Vector3::Zero)
+	, mAmbientLight(Vector3::sZERO)
 	, mSkinnedShader(nullptr)
 	, mUndefineTexID(0)
 	, mHDRRenderer(nullptr)
@@ -157,7 +157,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	CreateParticleVerts();
 
 	// UIの初期座標に加算される座標
-	mAddPosition = Vector2::Zero;
+	mAddPosition = Vector2::sZERO;
 
 	return true;
 }
@@ -479,12 +479,12 @@ void Renderer::RemoveInvisibleMeshComponent(InvisibleMeshComponent* _invisibleMe
 }
 
 /*
-@param _fileName モデルへのアドレス
+@param _FileName モデルへのアドレス
 @return スケルトンモデルの取得(class Skeleton)
 */
-const Skeleton * Renderer::GetSkeleton(const char* _fileName)
+const Skeleton * Renderer::GetSkeleton(const char* _FileName)
 {
-	std::string file(_fileName);
+	std::string file(_FileName);
 	auto iter = mSkeletons.find(file);
 	if (iter != mSkeletons.end())
 	{
@@ -507,12 +507,12 @@ const Skeleton * Renderer::GetSkeleton(const char* _fileName)
 }
 
 /*
-@param _fileName アニメーションへのアドレス
+@param _FileName アニメーションへのアドレス
 @return スケルトンアニメーションの取得(class Animation)
 */
-const Animation * Renderer::GetAnimation(const char* _fileName)
+const Animation * Renderer::GetAnimation(const char* _FileName)
 {
-	auto iter = mAnims.find(_fileName);
+	auto iter = mAnims.find(_FileName);
 	if (iter != mAnims.end())
 	{
 		return iter->second;
@@ -520,9 +520,9 @@ const Animation * Renderer::GetAnimation(const char* _fileName)
 	else
 	{
 		Animation* anim = new Animation();
-		if (anim->Load(_fileName))
+		if (anim->Load(_FileName))
 		{
-			mAnims.emplace(_fileName, anim);
+			mAnims.emplace(_FileName, anim);
 		}
 		else
 		{
@@ -534,14 +534,14 @@ const Animation * Renderer::GetAnimation(const char* _fileName)
 }
 
 /*
-@param	_fileName　取得したいテクスチャのファイル名
+@param	_FileName　取得したいテクスチャのファイル名
 @return Textureクラスのポインタ(class Texture)
 */
-Texture* Renderer::GetTexture(const std::string& _fileName)
+Texture* Renderer::GetTexture(const std::string& _FileName)
 {
 	Texture* texture = nullptr;
 	//すでに作成されてないか調べる
-	auto itr = mTextures.find(_fileName);
+	auto itr = mTextures.find(_FileName);
 	if (itr != mTextures.end())
 	{
 		texture = itr->second;
@@ -550,9 +550,9 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 	else
 	{
 		texture = new Texture();
-		if (texture->Load(_fileName))
+		if (texture->Load(_FileName))
 		{
-			mTextures.emplace(_fileName, texture);
+			mTextures.emplace(_FileName, texture);
 		}
 		else
 		{
@@ -565,14 +565,14 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 }
 
 /*
-@param	_fileName 取得したいメッシュのファイル名
+@param	_FileName 取得したいメッシュのファイル名
 @return Meshクラスのポインタ(class Mesh)
 */
-Mesh* Renderer::GetMesh(const std::string& _fileName)
+Mesh* Renderer::GetMesh(const std::string& _FileName)
 {
 	Mesh* m = nullptr;
 	//すでに作成されてないか調べる
-	auto iter = mMeshes.find(_fileName);
+	auto iter = mMeshes.find(_FileName);
 	if (iter != mMeshes.end())
 	{
 		m = iter->second;
@@ -581,9 +581,9 @@ Mesh* Renderer::GetMesh(const std::string& _fileName)
 	else
 	{
 		m = new Mesh();
-		if (m->Load(_fileName, this))
+		if (m->Load(_FileName, this))
 		{
-			mMeshes.emplace(_fileName, m);
+			mMeshes.emplace(_FileName, m);
 		}
 		else
 		{
@@ -661,7 +661,7 @@ bool Renderer::LoadShaders()
 	// メッシュ
 	mMeshShader->SetActive();
 	// ビュー行列の設定
-	mView = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
+	mView = Matrix4::CreateLookAt(Vector3::sZERO, Vector3::sUNIT_X, Vector3::sUNIT_Y);
 	mProjection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
 		mScreenWidth, mScreenHeight, 25.0f, 10000.0f);
 	mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
@@ -669,7 +669,7 @@ bool Renderer::LoadShaders()
 	// インビジブルメッシュ
 	mInvisibleMeshShader->SetActive();
 	// ビュー行列の設定
-	mView = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
+	mView = Matrix4::CreateLookAt(Vector3::sZERO, Vector3::sUNIT_X, Vector3::sUNIT_Z);
 	mProjection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
 		mScreenWidth, mScreenHeight, 25.0f, 10000.0f);
 	mInvisibleMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
@@ -793,12 +793,12 @@ void Renderer::DrawParticle()
 /*
 @fn	Particleの描画
 @param	_framebuffer フレームバッファ
-@param	_view ビュー行列
-@param	_proj プロジェクション行列
+@param	_View ビュー行列
+@param	_Proj プロジェクション行列
 @param	_viewPortScale 表示領域スケール
 @param	_lit 光源情報をシェーダーの変数にセットするかのフラグ
 */
-void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, const Matrix4 & _proj, float _viewPortScale, bool _lit)
+void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _View, const Matrix4 & _Proj, float _viewPortScale, bool _lit)
 {
 	// Set the current frame buffer
 	glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);
@@ -821,11 +821,11 @@ void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, con
 	// Set the mesh shader active
 	mMeshShader->SetActive();
 	// Update view-mProjection matrix
-	mMeshShader->SetMatrixUniform("uViewProj", _view * _proj);
+	mMeshShader->SetMatrixUniform("uViewProj", _View * _Proj);
 	// Update lighting uniforms
 	if (_lit)
 	{
-		SetLightUniforms(mMeshShader, _view);
+		SetLightUniforms(mMeshShader, _View);
 	}
 	for (auto mc : mMeshComponents)
 	{
@@ -840,12 +840,12 @@ void Renderer::Draw3DScene(unsigned int _framebuffer, const Matrix4 & _view, con
 /*
 @fn		光源情報をシェーダーの変数にセットする
 @param  _shader セットするShaderクラスのポインタ
-@param	_view ビュー行列
+@param	_View ビュー行列
 */
-void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
+void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _View)
 {
 	// ビュー行列を逆行列にする
-	Matrix4 invView = _view;
+	Matrix4 invView = _View;
 	invView.Invert();
 	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
 	// 環境光の設定

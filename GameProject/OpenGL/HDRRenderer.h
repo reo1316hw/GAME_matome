@@ -62,7 +62,7 @@ private:
 	*/
 	void  InitScreenQuadVAO();
 
-	float GaussianDistribution(const Vector2& _pos, float _rho);
+	float GaussianDistribution(const Vector2& _Pos, float _rho);
 
 	/*
 	@fn	ガウスぼかし計算
@@ -98,8 +98,6 @@ private:
 	// ブラー結果のテクスチャID
 	std::vector<unsigned int> mBlurBufferTexs;
 
-	//ガウスぼかしのサンプリング点
-	const int                 mSampleCount = 15;
 	//サンプリング点の座標(u,v) & w:重み
 	Vector3                   mOffset[15];
 };

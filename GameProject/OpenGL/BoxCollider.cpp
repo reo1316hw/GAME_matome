@@ -18,8 +18,8 @@
 */
 BoxCollider::BoxCollider(GameObject* _owner, ColliderTag _tag,OnCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner,_tag, _updateOrder, _collisionOrder)
-	, mObjectBox(Vector3::Zero,Vector3::Zero)
-	, mWorldBox(Vector3::Zero,Vector3::Zero)
+	, mObjectBox(Vector3::sZERO,Vector3::sZERO)
+	, mWorldBox(Vector3::sZERO,Vector3::sZERO)
 	, mShouldRotate(true)
 {
 	PHYSICS->AddBox(this,_func);

@@ -36,7 +36,7 @@ public:
 	@fn		描画処理
 	@param _shader 使用するシェーダークラスのポインタ
 	*/
-	virtual void Draw(Shader* _shader, const Vector3& _offset);
+	virtual void Draw(Shader* _shader, const Vector3& _Offset);
 
 protected:
 

@@ -16,9 +16,9 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
+	@param	_NowScene 現在のシーン
 	*/
-	ContinueScene(const Scene& _nowScene, const Scene& _preScene, const bool _transitionSceneFlag);
+	ContinueScene(const Scene& _NowScene, const Scene& _PreScene, const bool _TransitionSceneFlag);
 
 	/*
 	@fn	デストラクタ
@@ -28,7 +28,7 @@ public:
 	/*
 	@fn	現在のシーン時に毎フレーム更新処理をする
 	*/
-	SceneBase* update(const InputState& _state) override;
+	SceneBase* UpdateScene(const InputState& _State) override;
 
 private:
 

@@ -10,12 +10,12 @@
 
 /*
 @fn		テクスチャステージを読み込み
-@param	_doc rapidJsonオブジェクト
+@param	_Doc rapidJsonオブジェクト
 @param	_texStage テクスチャステージ
 @param	_stgString メンバ名
 @return	テクスチャのID(int型)
 */
-int LoadStageTextures(const rapidjson::Document& _doc, TextureStage _texStage, const char* _stgString);
+int LoadStageTextures(const rapidjson::Document& _Doc, TextureStage _texStage, const char* _StgString);
 
 namespace
 {
@@ -35,7 +35,7 @@ Mesh::Mesh()
 	, mSpecPower(100.0f)
 	, mLuminance(1.0f)
 	, mAlpha(1.0f)
-	, mBox(Vector3::Infinity, Vector3::NegInfinity)
+	, mBox(Vector3::sINFINITY, Vector3::sNEG_INFINITY)
 {
 	mStageDefTexture.emplace(TextureStage::DiffuseMap, 0);
 	mStageDefTexture.emplace(TextureStage::NormalMap, 0);
@@ -45,16 +45,16 @@ Mesh::Mesh()
 
 /*
 @fn		メッシュデータの読み込み
-@param	_fileName ロードしたいメッシュのファイル名
+@param	_FileName ロードしたいメッシュのファイル名
 @param	_renderer Rendererクラスのポインタ
 @return true : 成功 , false : 失敗(bool型)
 */
-bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
+bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 {
-	std::ifstream file(_fileName);
+	std::ifstream file(_FileName);
 	if (!file.is_open())
 	{
-		SDL_Log("File not found: Mesh %s", _fileName.c_str());
+		SDL_Log("File not found: Mesh %s", _FileName.c_str());
 		return false;
 	}
 
@@ -67,7 +67,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 
 	if (!doc.IsObject())
 	{
-		SDL_Log("Mesh %s is not valid json", _fileName.c_str());
+		SDL_Log("Mesh %s is not valid json", _FileName.c_str());
 		return false;
 	}
 
@@ -76,7 +76,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	// バージョンのチェック
 	if (ver != 1)
 	{
-		SDL_Log("Mesh %s not version 1", _fileName.c_str());
+		SDL_Log("Mesh %s not version 1", _FileName.c_str());
 		return false;
 	}
 
@@ -98,10 +98,10 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	}
 
 	// テクスチャのロード
-	const rapidjson::Value& readTextures = doc["textures"];
-	if (!readTextures.IsArray() || readTextures.Size() < 1)
+	const rapidjson::Value& ReadTextures = doc["textures"];
+	if (!ReadTextures.IsArray() || ReadTextures.Size() < 1)
 	{
-		SDL_Log("Mesh %s has no textures, there should be at least one", _fileName.c_str());
+		SDL_Log("Mesh %s has no textures, there should be at least one", _FileName.c_str());
 		return false;
 	}
 	mSpecPower = static_cast<float>(doc["specularPower"].GetDouble());
@@ -118,10 +118,10 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		mAlpha = ForceGetFloat(doc["alpha"]);
 	}
 
-	for (rapidjson::SizeType i = 0; i < readTextures.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < ReadTextures.Size(); i++)
 	{
 		// すでにロードされたテクスチャじゃないか調べる
-		std::string texName = readTextures[i].GetString();
+		std::string texName = ReadTextures[i].GetString();
 		Texture* t = _renderer->GetTexture(texName);
 		if (t == nullptr)
 		{
@@ -135,7 +135,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		}
 		mTextures.emplace_back(t);
 
-		if (readTextures.Size() == 1)
+		if (ReadTextures.Size() == 1)
 		{
 			mStageDefTexture[TextureStage::DiffuseMap] = t->GetTextureID();
 		}
@@ -151,29 +151,29 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	mStageDefTexture[TextureStage::EmissiveMap] = LoadStageTextures(doc, TextureStage::EmissiveMap, "emissivemap");
 
 	// 頂点配列データをロード
-	const rapidjson::Value& vertsJson = doc["vertices"];
-	if (!vertsJson.IsArray() || vertsJson.Size() < 1)
+	const rapidjson::Value& VertsJson = doc["vertices"];
+	if (!VertsJson.IsArray() || VertsJson.Size() < 1)
 	{
-		SDL_Log("Mesh %s has no vertices", _fileName.c_str());
+		SDL_Log("Mesh %s has no vertices", _FileName.c_str());
 		return false;
 	}
 
 	std::vector<Vertex> vertices;
-	vertices.reserve(vertsJson.Size() * vertSize);
+	vertices.reserve(VertsJson.Size() * vertSize);
 	mRadius = 0.0f;
-	for (rapidjson::SizeType i = 0; i < vertsJson.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < VertsJson.Size(); i++)
 	{
 		// 今のところは８つの要素とする
-		const rapidjson::Value& vert = vertsJson[i];
-		if (!vert.IsArray())
+		const rapidjson::Value& Vert = VertsJson[i];
+		if (!Vert.IsArray())
 		{
-			SDL_Log("Unexpected vertex format for %s", _fileName.c_str());
+			SDL_Log("Unexpected vertex format for %s", _FileName.c_str());
 			return false;
 		}
 		///////////////////////////////////////////////////////////////////////////////
-		Vector3 pos(static_cast<float>(vert[0].GetDouble()),
-			static_cast<float>(vert[1].GetDouble()),
-			static_cast<float>(vert[2].GetDouble()));
+		Vector3 pos(static_cast<float>(Vert[0].GetDouble()),
+			static_cast<float>(Vert[1].GetDouble()),
+			static_cast<float>(Vert[2].GetDouble()));
 		//verts.push_back(pos);
 		mRadius = Math::Max(mRadius, pos.LengthSq());
 
@@ -188,9 +188,9 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		{
 			Vertex v;
 			// Add the floats　float値を追加
-			for (rapidjson::SizeType j = 0; j < vert.Size(); j++)
+			for (rapidjson::SizeType j = 0; j < Vert.Size(); j++)
 			{
-				v.f = static_cast<float>(vert[j].GetDouble());
+				v.f = static_cast<float>(Vert[j].GetDouble());
 				vertices.emplace_back(v);
 			}
 		}
@@ -200,24 +200,24 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 			// Add pos/normal　頂点と法線を追加　6個分
 			for (rapidjson::SizeType j = 0; j < 6; j++)
 			{
-				v.f = static_cast<float>(vert[j].GetDouble());
+				v.f = static_cast<float>(Vert[j].GetDouble());
 				vertices.emplace_back(v);
 			}
 
 			// Add skin information　スキン情報追加（ボーン番号:unsigned charの1バイト分）
 			for (rapidjson::SizeType j = 6; j < 14; j += 4)  //ループとしては2回転する　1回転目はボーン番号、2回転目はボーンウェイトをintとして取ってくる（使用時に浮動小数化するっぽい）
 			{
-				v.b[0] = vert[j].GetUint();
-				v.b[1] = vert[j + 1].GetUint();
-				v.b[2] = vert[j + 2].GetUint();
-				v.b[3] = vert[j + 3].GetUint();
+				v.b[0] = Vert[j].GetUint();
+				v.b[1] = Vert[j + 1].GetUint();
+				v.b[2] = Vert[j + 2].GetUint();
+				v.b[3] = Vert[j + 3].GetUint();
 				vertices.emplace_back(v);
 			}
 
 			// Add tex coords　テクスチャ座標
-			for (rapidjson::SizeType j = 14; j < vert.Size(); j++)
+			for (rapidjson::SizeType j = 14; j < Vert.Size(); j++)
 			{
-				v.f = static_cast<float>(vert[j].GetDouble());
+				v.f = static_cast<float>(Vert[j].GetDouble());
 				vertices.emplace_back(v);
 			}
 		}
@@ -227,27 +227,27 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	mRadius = Math::Sqrt(mRadius);
 
 	// 要素配列データのロード
-	const rapidjson::Value& indJson = doc["indices"];
-	if (!indJson.IsArray() || indJson.Size() < 1)
+	const rapidjson::Value& IndJson = doc["indices"];
+	if (!IndJson.IsArray() || IndJson.Size() < 1)
 	{
-		SDL_Log("Mesh %s has no indices", _fileName.c_str());
+		SDL_Log("Mesh %s has no indices", _FileName.c_str());
 		return false;
 	}
 
 	std::vector<unsigned int> indices;
-	indices.reserve(indJson.Size() * 3);
-	for (rapidjson::SizeType i = 0; i < indJson.Size(); i++)
+	indices.reserve(IndJson.Size() * 3);
+	for (rapidjson::SizeType i = 0; i < IndJson.Size(); i++)
 	{
-		const rapidjson::Value& ind = indJson[i];
-		if (!ind.IsArray() || ind.Size() != 3)
+		const rapidjson::Value& Ind = IndJson[i];
+		if (!Ind.IsArray() || Ind.Size() != 3)
 		{
-			SDL_Log("Invalid indices for %s", _fileName.c_str());
+			SDL_Log("Invalid indices for %s", _FileName.c_str());
 			return false;
 		}
 
-		indices.emplace_back(ind[0].GetUint());
-		indices.emplace_back(ind[1].GetUint());
-		indices.emplace_back(ind[2].GetUint());
+		indices.emplace_back(Ind[0].GetUint());
+		indices.emplace_back(Ind[1].GetUint());
+		indices.emplace_back(Ind[2].GetUint());
 	}
 
 	// ここでVertexArrayクラスの作成
@@ -292,19 +292,19 @@ int Mesh::GetTextureID(TextureStage _stage)
 
 /*
 @fn		テクスチャステージを読み込み
-@param	_doc rapidJsonオブジェクト
+@param	_Doc rapidJsonオブジェクト
 @param	_texStage テクスチャステージ
-@param	_stgString メンバ名
+@param	_StgString メンバ名
 @return	テクスチャのID(int型)
 */
-int LoadStageTextures(const rapidjson::Document& _doc, TextureStage _texStage, const char* _stgString)
+int LoadStageTextures(const rapidjson::Document& _Doc, TextureStage _texStage, const char* _StgString)
 {
 	std::string noneTexture("none");
 	std::string texName;
 	Texture* t;
-	if (IsExistMember(_doc, _stgString))
+	if (IsExistMember(_Doc, _StgString))
 	{
-		texName = _doc[_stgString].GetString();
+		texName = _Doc[_StgString].GetString();
 		if (texName != noneTexture)
 		{
 			t = RENDERER->GetTexture(texName);

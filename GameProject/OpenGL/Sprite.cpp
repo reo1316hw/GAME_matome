@@ -5,13 +5,13 @@
 
 /*
 @fn	   コンストラクタ
-@param _fileName 画像ファイルの名前
+@param _FileName 画像ファイルの名前
 */
-Sprite::Sprite(const std::string _fileName)
+Sprite::Sprite(const std::string _FileName)
 	:GameObject(SceneBase::Scene::other, Tag::Other)
 {
 	mSpriteComponent = new SpriteComponent(this);
 
-	mSpriteTexture = RENDERER->GetTexture(_fileName);
+	mSpriteTexture = RENDERER->GetTexture(_FileName);
 	mSpriteComponent->SetTexture(mSpriteTexture);
 }

@@ -41,10 +41,10 @@ private:
 public://ゲッターセッター
 
 	/*
-	@param _offset 見たい座標との差
+	@param _Offset 見たい座標との差
 	@param _parentPos 見る座標
 	*/
-	void SetViewMatrixLerpObject(const Vector3& _offset, const Vector3& _parentPos);
+	void SetViewMatrixLerpObject(const Vector3& _Offset, const Vector3& _ParentPos);
 
 };
 

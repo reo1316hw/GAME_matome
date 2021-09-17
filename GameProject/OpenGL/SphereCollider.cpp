@@ -18,8 +18,8 @@
 */
 SphereCollider::SphereCollider(GameObject* _owner, ColliderTag _tag, OnCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner,_tag, _updateOrder, _collisionOrder)
-	, mObjectSphere( Vector3::Zero,0.0f )
-	, mWorldSphere( Vector3::Zero,0.0f )
+	, mObjectSphere( Vector3::sZERO,0.0f )
+	, mWorldSphere( Vector3::sZERO,0.0f )
 {
 	PHYSICS->AddSphere(this, _func);
 }

@@ -11,18 +11,18 @@
 #include <array>
 
 /*
-@param 線分の開始地点のポジション
-@param 線分の終了地点のポジション
+@param _Start 線分の開始地点のポジション
+@param _End 線分の終了地点のポジション
 */
-LineSegment::LineSegment(const Vector3 & _start, const Vector3 & _end)
-	: m_start(_start)
-	, m_end(_end)
+LineSegment::LineSegment(const Vector3 & _Start, const Vector3 & _End)
+	: m_start(_Start)
+	, m_end(_End)
 {
 }
 
 /*
 @brief  線分上の点を返す
-@param  入力値 t（L(t) = Start + (End - Start)t）
+@param  _t 入力値 t（L(t) = Start + (End - Start)t）
 @return 線分上の点のポジション
 */
 Vector3 LineSegment::PointOnSegment(float _t) const
@@ -32,15 +32,15 @@ Vector3 LineSegment::PointOnSegment(float _t) const
 
 /*
 @brief	点と線分の間の最短距離を返す
-@param	任意の点のポジション
+@param	_Point 任意の点のポジション
 @return 最短距離
 */
-float LineSegment::MinDistanceSquared(const Vector3 & _point) const
+float LineSegment::MinDistanceSquared(const Vector3 & _Point) const
 {
 	Vector3 ab = m_end - m_start;
 	Vector3 ba = -1.0f * ab;
-	Vector3 ac = _point - m_start;
-	Vector3 bc = _point - m_end;
+	Vector3 ac = _Point - m_start;
+	Vector3 bc = _Point - m_end;
 
 	if (Vector3::Dot(ab, ac) < 0.0f)
 	{
@@ -60,15 +60,15 @@ float LineSegment::MinDistanceSquared(const Vector3 & _point) const
 
 /*
 @brief	線分と線分の間の最短距離を返す
-@param	判定する線分の構造体１
-@param	判定する線分の構造体２
+@param	_Line1 判定する線分の構造体１
+@param	_Line2 判定する線分の構造体２
 @return 最短距離
 */
-float LineSegment::MinDistanceSquared(const LineSegment & _line1, const LineSegment & _line2)
+float LineSegment::MinDistanceSquared(const LineSegment & _Line1, const LineSegment & _Line2)
 {
-	Vector3 u = _line1.m_end - _line1.m_start;
-	Vector3 v = _line2.m_end - _line2.m_start;
-	Vector3 w = _line1.m_start - _line2.m_start;
+	Vector3 u = _Line1.m_end - _Line1.m_start;
+	Vector3 v = _Line2.m_end - _Line2.m_start;
+	Vector3 w = _Line1.m_start - _Line2.m_start;
 	float   a = Vector3::Dot(u, u);
 	float   b = Vector3::Dot(u, v);
 	float   c = Vector3::Dot(v, v);
@@ -138,93 +138,93 @@ float LineSegment::MinDistanceSquared(const LineSegment & _line1, const LineSegm
 }
 
 /*
-@param	平面の法線ベクトル
-@param	平面と原点の符号つき最短距離
+@param	_Normal 平面の法線ベクトル
+@param	_distance 平面と原点の符号つき最短距離
 */
-Plane::Plane(const Vector3 & _normal, float _distance)
-	: m_normal(_normal)
+Plane::Plane(const Vector3 & _Normal, float _distance)
+	: m_normal(_Normal)
 	, m_distance(_distance)
 {
 }
 
 /*
-@param	平面上の点1
-@param	平面上の点2
-@param	平面上の点3
+@param	_Vec1 平面上の点1
+@param	_Vec2 平面上の点2
+@param	_Vec3 平面上の点3
 */
-Plane::Plane(const Vector3 & _vec1, const Vector3 & _vec2, const Vector3 & _vec3)
+Plane::Plane(const Vector3 & _Vec1, const Vector3 & _Vec2, const Vector3 & _Vec3)
 {
-	Vector3 ab = _vec2 - _vec1;
-	Vector3 ac = _vec3 - _vec1;
+	Vector3 ab = _Vec2 - _Vec1;
+	Vector3 ac = _Vec3 - _Vec1;
 
 	m_normal = Vector3::Cross(ab, ac);
 	m_normal.Normalize();
 
-	m_distance = -Vector3::Dot(_vec1, m_normal);
+	m_distance = -Vector3::Dot(_Vec1, m_normal);
 
 }
 
 /*
 @brief	点と平面の最短距離を返す
-@param	任意の点のポジション
+@param	_Point 任意の点のポジション
 @return 符号つき最短距離
 */
-float Plane::SignedDistance(const Vector3& _point)
+float Plane::SignedDistance(const Vector3& _Point)
 {
-	return Vector3::Dot(_point, m_normal) - m_distance;
+	return Vector3::Dot(_Point, m_normal) - m_distance;
 }
 
 /*
-@param	球体の中心座標
-@param	球体の半径
+@param	_Center 球体の中心座標
+@param	_Radius 球体の半径
 */
-Sphere::Sphere(const Vector3 & _center, const float _radius)
-	: m_center(_center)
-	, m_radius(_radius)
+Sphere::Sphere(const Vector3 & _Center, const float _Radius)
+	: m_center(_Center)
+	, m_radius(_Radius)
 {
 }
 
 /*
 @brief	球体に点が含まれているかどうか
-@param	任意の点
+@param	_Point 任意の点
 @return true : 当たっている , false : 当たっていない
 */
-bool Sphere::Contains(const Vector3 & _point) const
+bool Sphere::Contains(const Vector3 & _Point) const
 {
-	float distansSquared = (m_center - _point).LengthSq();
+	float distansSquared = (m_center - _Point).LengthSq();
 	return distansSquared <= (m_radius * m_radius);
 }
 
 /*
-@param	最小のx,y,zの値のポジション
-@param	最大のx,y,zの値のポジション
+@param	_Min 最小のx,y,zの値のポジション
+@param	_Max 最大のx,y,zの値のポジション
 */
-AABB::AABB(const Vector3 & _min, const Vector3 & _max)
-	: m_min(_min),
-	  m_max(_max)
+AABB::AABB(const Vector3 & _Min, const Vector3 & _Max)
+	: m_min(_Min),
+	  m_max(_Max)
 {
 }
 
 /*
 @brief	最小値と最大値を各成分ごとに更新する
-@param	任意の点のポジション
+@param	_Point 任意の点のポジション
 */
-void AABB::UpdateMinMax(const Vector3 & _point)
+void AABB::UpdateMinMax(const Vector3 & _Point)
 {
-	m_min.x = Math::Min(m_min.x, _point.x);
-	m_min.y = Math::Min(m_min.y, _point.y);
-	m_min.z = Math::Min(m_min.z, _point.z);
+	m_min.x = Math::Min(m_min.x, _Point.x);
+	m_min.y = Math::Min(m_min.y, _Point.y);
+	m_min.z = Math::Min(m_min.z, _Point.z);
 
-	m_max.x = Math::Max(m_max.x, _point.x);
-	m_max.y = Math::Max(m_max.y, _point.y);
-	m_max.z = Math::Max(m_max.z, _point.z);
+	m_max.x = Math::Max(m_max.x, _Point.x);
+	m_max.y = Math::Max(m_max.y, _Point.y);
+	m_max.z = Math::Max(m_max.z, _Point.z);
 }
 
 /*
 @brief	当たり判定ボックスの回転
-@param	回転軸と回転表す値（Quaternion）
+@param	_Quaternion 回転軸と回転表す値（Quaternion）
 */
-void AABB::Rotate(const Quaternion & _quaternion)
+void AABB::Rotate(const Quaternion & _Quaternion)
 {
 	std::array<Vector3, 8> points;
 
@@ -240,67 +240,67 @@ void AABB::Rotate(const Quaternion & _quaternion)
 
 	points[7] = Vector3(m_max);
 
-	Vector3 p = Vector3::Transform(points[0], _quaternion);
+	Vector3 p = Vector3::Transform(points[0], _Quaternion);
 
 	m_min = p;
 	m_max = p;
 
 	for (std::size_t i = 1; i < points.size(); i++)
 	{
-		p = Vector3::Transform(points[i], _quaternion);
+		p = Vector3::Transform(points[i], _Quaternion);
 		UpdateMinMax(p);
 	}
 }
 
 /*
 @brief	ボックスに点が含まれているかどうか
-@param	任意の点
+@param	_Point 任意の点
 @return true : 当たっている , false : 当たっていない
 */
-bool AABB::Contains(const Vector3 & _point) const
+bool AABB::Contains(const Vector3 & _Point) const
 {
 	bool outside =
-        _point.x < m_min.x ||
-        _point.y < m_min.y ||
-        _point.z < m_min.x ||
-        _point.x > m_max.x ||
-        _point.y > m_max.y ||
-        _point.z > m_max.z;
+        _Point.x < m_min.x ||
+        _Point.y < m_min.y ||
+        _Point.z < m_min.x ||
+        _Point.x > m_max.x ||
+        _Point.y > m_max.y ||
+        _Point.z > m_max.z;
 	//どれも真でなければボックスの中に点がある
 	return !outside;
 }
 
 /*
 @brief	点とボックスの最短距離を返す
-@param	任意の点
+@param	_Point 任意の点
 @return 最短距離
 */
-float AABB::MinDistanceSquared(const Vector3 & _point) const
+float AABB::MinDistanceSquared(const Vector3 & _Point) const
 {
-	float dx = Math::Max(m_min.x - _point.x, 0.0f);
-	dx = Math::Max(dx, _point.x - m_max.x);
-	float dy = Math::Max(m_min.y - _point.y, 0.0f);
-	dy = Math::Max(dy, _point.y - m_max.y);
-	float dz = Math::Max(m_min.z - _point.z, 0.0f);
-	dz = Math::Max(dz, _point.z - m_max.z);
+	float dx = Math::Max(m_min.x - _Point.x, 0.0f);
+	dx = Math::Max(dx, _Point.x - m_max.x);
+	float dy = Math::Max(m_min.y - _Point.y, 0.0f);
+	dy = Math::Max(dy, _Point.y - m_max.y);
+	float dz = Math::Max(m_min.z - _Point.z, 0.0f);
+	dz = Math::Max(dz, _Point.z - m_max.z);
 
 	return dx * dx + dy * dy + dz * dz;
 }
 
 /*
 @param	始点となる点の座標
-@param	終点となる点の座標
-@param	カプセルの半径
+@param	_Start 終点となる点の座標
+@param	_End カプセルの半径
 */
-Capsule::Capsule(const Vector3 & _start, const Vector3 & _end, float _radius)
-	: m_segment(_start, _end)
+Capsule::Capsule(const Vector3 & _Start, const Vector3 & _End, float _radius)
+	: m_segment(_Start, _End)
 	, m_radius(_radius)
 {
 }
 
 /*
 @brief	カプセルの始点と終点の線分上の点を返す
-@param	入力値 t（L(t) = Start + (End - Start)t）
+@param	_t 入力値 t（L(t) = Start + (End - Start)t）
 @return 線分上の点のポジション
 */
 Vector3 Capsule::PointOnSegment(float _t) const
@@ -310,38 +310,38 @@ Vector3 Capsule::PointOnSegment(float _t) const
 
 /*
 @brief	カプセルに点が含まれているかどうか
-@param	任意の点
+@param	_Point 任意の点
 @return true : 当たっている , false : 当たっていない
 */
-bool Capsule::Contains(const Vector3 & _point) const
+bool Capsule::Contains(const Vector3 & _Point) const
 {
-	float distanceSquared = m_segment.MinDistanceSquared(_point);
+	float distanceSquared = m_segment.MinDistanceSquared(_Point);
 	return distanceSquared <= (m_radius * m_radius);
 }
 
 /*
 @brief	２次元のポリゴンに点が含まれているかどうか
-@param	任意の点
+@param	_Point 任意の点
 @return true : 当たっている , false : 当たっていない
 */
-bool ConvexPolygon::Contains(const Vector2 & _point) const
+bool ConvexPolygon::Contains(const Vector2 & _Point) const
 {
 	float sum = 0.0f;
 	Vector2 a, b;
 	for (std::size_t i = 0; i < m_vertices.size() - 1; i++)
 	{
-		a = m_vertices[i] - _point;
+		a = m_vertices[i] - _Point;
 		a.Normalize();
 
-		b = m_vertices[i + 1] - _point;
+		b = m_vertices[i + 1] - _Point;
 		b.Normalize();
 
 		sum += Math::Acos(Vector2::Dot(a, b));
 	}
 
-	a = m_vertices.back() - _point;
+	a = m_vertices.back() - _Point;
 	a.Normalize();
-	b = m_vertices.front() - _point;
+	b = m_vertices.front() - _Point;
 	b.Normalize();
 	sum += Math::Acos(Vector2::Dot(a, b));
 
@@ -350,21 +350,21 @@ bool ConvexPolygon::Contains(const Vector2 & _point) const
 
 /*
 @brief	球と球の当たり判定
-@param	球の構造体１
-@param	球の構造体２
+@param	_Sphere1 球の構造体１
+@param	_Sphere2 球の構造体２
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const Sphere & _sphere1, const Sphere & _sphere2)
+bool Intersect(const Sphere & _Sphere1, const Sphere & _Sphere2)
 {
-	float distanceSquared = (_sphere1.m_center - _sphere2.m_center).LengthSq();
-	float sum_radius = _sphere1.m_radius + _sphere2.m_radius;
+	float distanceSquared = (_Sphere1.m_center - _Sphere2.m_center).LengthSq();
+	float sum_radius = _Sphere1.m_radius + _Sphere2.m_radius;
 	return distanceSquared <= (sum_radius * sum_radius);
 }
 
 /*
 @brief	ボックスとボックスの当たり判定
-@param	ボックスの構造体１
-@param	ボックスの構造体２
+@param	_AABB1 ボックスの構造体１
+@param	_AABB2 ボックスの構造体２
 @return true : 当たっている , false : 当たっていない
 */
 bool Intersect(const AABB & _AABB1, const AABB & _AABB2)
@@ -382,51 +382,51 @@ bool Intersect(const AABB & _AABB1, const AABB & _AABB2)
 
 /*
 @brief	カプセルとカプセルの当たり判定
-@param	カプセルの構造体１
-@param	カプセルの構造体２
+@param	_Capsule1 カプセルの構造体１
+@param	_Capsule2 カプセルの構造体２
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const Capsule & _capsule1, const Capsule & _capsule2)
+bool Intersect(const Capsule & _Capsule1, const Capsule & _Capsule2)
 {
-	float distanceSquared = LineSegment::MinDistanceSquared(_capsule1.m_segment,
-        _capsule2.m_segment);
-	float sum_radius = _capsule1.m_radius + _capsule2.m_radius;
+	float distanceSquared = LineSegment::MinDistanceSquared(_Capsule1.m_segment,
+		_Capsule2.m_segment);
+	float sum_radius = _Capsule1.m_radius + _Capsule2.m_radius;
 	return distanceSquared <= (sum_radius * sum_radius);
 }
 
 /*
 @brief	球とボックスの当たり判定
-@param	球の構造体
-@param	ボックスの構造体
+@param	_Sphere 球の構造体
+@param	_AABB ボックスの構造体
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const Sphere & _sphere, const AABB & _AABB)
+bool Intersect(const Sphere & _Sphere, const AABB & _AABB)
 {
-	bool hit = _AABB.Contains(_sphere.m_center);
+	bool hit = _AABB.Contains(_Sphere.m_center);
 	if (hit)
 	{
-		printf("%f,%f\n",_sphere.m_center,_sphere.m_radius);
+		printf("%f,%f\n", _Sphere.m_center, _Sphere.m_radius);
 		printf("%f,%f\n", _AABB.m_min, _AABB.m_max);
 		return true;
 	}
-	float distanceSquared = _AABB.MinDistanceSquared(_sphere.m_center);
-	return distanceSquared <= (_sphere.m_radius * _sphere.m_radius);
+	float distanceSquared = _AABB.MinDistanceSquared(_Sphere.m_center);
+	return distanceSquared <= (_Sphere.m_radius * _Sphere.m_radius);
 }
 
 /*
 @brief	線分と球の当たり判定
-@param	線分の構造体
-@param	球の構造体
-@param	線分の始点から接触している点までの値tを格納する
+@param	_Line 線分の構造体
+@param	_Sphere 球の構造体
+@param	_outT 線分の始点から接触している点までの値tを格納する
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const LineSegment & _line, const Sphere & _sphere, float & _outT)
+bool Intersect(const LineSegment & _Line, const Sphere & _Sphere, float & _outT)
 {
-	Vector3 X = _line.m_start - _sphere.m_center;
-    Vector3 Y = _line.m_end - _line.m_start;
+	Vector3 X = _Line.m_start - _Sphere.m_center;
+    Vector3 Y = _Line.m_end - _Line.m_start;
 	float a = Vector3::Dot(Y, Y);
 	float b = 2.0f * Vector3::Dot(X, Y);
-	float c = Vector3::Dot(X, X) - _sphere.m_radius * _sphere.m_radius;
+	float c = Vector3::Dot(X, X) - _Sphere.m_radius * _Sphere.m_radius;
 
 	float discriminant = b * b - 4.0f * a * c;
 	if (discriminant < 0.0f)
@@ -459,18 +459,18 @@ bool Intersect(const LineSegment & _line, const Sphere & _sphere, float & _outT)
 
 /*
 @brief	線分と平面の当たり判定
-@param	線分の構造体
-@param	平面の構造体
-@param	線分の始点から接触している点までの値tを格納する
+@param	_Line 線分の構造体
+@param	_Plane 平面の構造体
+@param	_outT 線分の始点から接触している点までの値tを格納する
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const LineSegment & _line, const Plane & _plane, float & _outT)
+bool Intersect(const LineSegment & _Line, const Plane & _Plane, float & _outT)
 {
-	float denom = Vector3::Dot(_line.m_end - _line.m_start,
-		_plane.m_normal);
+	float denom = Vector3::Dot(_Line.m_end - _Line.m_start,
+		_Plane.m_normal);
 	if (Math::NearZero(denom))
 	{
-		if (Math::NearZero(Vector3::Dot(_line.m_start, _plane.m_normal) - _plane.m_distance))
+		if (Math::NearZero(Vector3::Dot(_Line.m_start, _Plane.m_normal) - _Plane.m_distance))
 		{
 			return true;
 		}
@@ -481,7 +481,7 @@ bool Intersect(const LineSegment & _line, const Plane & _plane, float & _outT)
 	}
 	else
 	{
-		float numer = -Vector3::Dot(_line.m_start, _plane.m_normal) - _plane.m_distance;
+		float numer = -Vector3::Dot(_Line.m_start, _Plane.m_normal) - _Plane.m_distance;
 		_outT = numer / denom;
 		if (_outT >= 0.0f && _outT <= 1.0f)
 		{
@@ -496,14 +496,14 @@ bool Intersect(const LineSegment & _line, const Plane & _plane, float & _outT)
 
 /*
 @brief	各軸での面と線分の当たり判定
-@param	線分の始点
-@param	線分の終点
-@param	平面上の点の値
-@param	平面の法線ベクトル
-@param	当たった物を格納する可変長コンテナ
+@param	_start 線分の始点
+@param	_end 線分の終点
+@param	_negd 平面上の点の値
+@param	_Norm 平面の法線ベクトル
+@param	_out 当たった物を格納する可変長コンテナ
 @return true : 当たっている , false : 当たっていない
 */
-bool TestSidePlane(float _start, float _end, float _negd, const Vector3& _norm,
+bool TestSidePlane(float _start, float _end, float _negd, const Vector3& _Norm,
 	std::vector<std::pair<float, Vector3>>& _out)
 {
 	float denom = _end - _start;
@@ -518,7 +518,7 @@ bool TestSidePlane(float _start, float _end, float _negd, const Vector3& _norm,
 		// Test that t is within bounds
 		if (t >= 0.0f && t <= 1.0f)
 		{
-			_out.emplace_back(t, _norm);
+			_out.emplace_back(t, _Norm);
 			return true;
 		}
 		else
@@ -530,32 +530,32 @@ bool TestSidePlane(float _start, float _end, float _negd, const Vector3& _norm,
 
 /*
 @brief	線分とボックスの当たり判定
-@param	線分の構造体
-@param	ボックスの構造体
-@param	線分の始点から接触している点までの値tを格納する
-@param	線分の始点から接触した面の法線ベクトルを格納する
+@param	_Line 線分の構造体
+@param	_AABB ボックスの構造体
+@param	_outT 線分の始点から接触している点までの値tを格納する
+@param	_outNorm 線分の始点から接触した面の法線ベクトルを格納する
 @return true : 当たっている , false : 当たっていない
 */
-bool Intersect(const LineSegment & _line, const AABB & _AABB, float & _outT, Vector3 & _outNorm)
+bool Intersect(const LineSegment & _Line, const AABB & _AABB, float & _outT, Vector3 & _outNorm)
 {
 	std::vector<std::pair<float, Vector3>> values;
 
-	TestSidePlane(_line.m_start.x, _line.m_end.x, _AABB.m_min.x, Vector3::NegUnitX, values);
-	TestSidePlane(_line.m_start.x, _line.m_end.x, _AABB.m_max.x, Vector3::UnitX, values);
-	TestSidePlane(_line.m_start.y, _line.m_end.y, _AABB.m_min.y, Vector3::NegUnitY, values);
-	TestSidePlane(_line.m_start.y, _line.m_end.y, _AABB.m_max.y, Vector3::UnitY, values);
-	TestSidePlane(_line.m_start.z, _line.m_end.z, _AABB.m_min.z, Vector3::NegUnitZ, values);
-	TestSidePlane(_line.m_start.z, _line.m_end.z, _AABB.m_max.z, Vector3::UnitZ, values);
+	TestSidePlane(_Line.m_start.x,_Line.m_end.x, _AABB.m_min.x, Vector3::sNEG_UNIT_X, values);
+	TestSidePlane(_Line.m_start.x,_Line.m_end.x, _AABB.m_max.x, Vector3::sUNIT_X, values);
+	TestSidePlane(_Line.m_start.y,_Line.m_end.y, _AABB.m_min.y, Vector3::sNEG_UNIT_Y, values);
+	TestSidePlane(_Line.m_start.y,_Line.m_end.y, _AABB.m_max.y, Vector3::sUNIT_Y, values);
+	TestSidePlane(_Line.m_start.z,_Line.m_end.z, _AABB.m_min.z, Vector3::sNEG_UNIT_Z, values);
+	TestSidePlane(_Line.m_start.z,_Line.m_end.z, _AABB.m_max.z, Vector3::sUNIT_Z, values);
 
 	std::sort(values.begin(), values.end(), [](
-		const std::pair<float, Vector3>& a,
-		const std::pair<float, Vector3>& b) {
-			return a.first < b.first;
+		const std::pair<float, Vector3>& A,
+		const std::pair<float, Vector3>& B) {
+			return A.first < B.first;
 		});
 	Vector3 point;
 	for (auto& t : values)
 	{
-		point = _line.PointOnSegment(t.first);
+		point = _Line.PointOnSegment(t.first);
 		if (_AABB.Contains(point))
 		{
             _outT = t.first;
@@ -568,20 +568,20 @@ bool Intersect(const LineSegment & _line, const AABB & _AABB, float & _outT, Vec
 
 /*
 @fn	球スイープの当たり判定
-@param	１フレーム前の球１の構造体
-@param	現在のフレームの球１の構造体
-@param	１フレーム前の球２の構造体
-@param	現在のフレームの球２の構造体
-@param	線分の始点から接触している点までの値tを格納する
+@param	_Sphere1 １フレーム前の球１の構造体
+@param	_Sphere2 現在のフレームの球１の構造体
+@param	_Sphere3 １フレーム前の球２の構造体
+@param	_Sphere4 現在のフレームの球２の構造体
+@param	_outT 線分の始点から接触している点までの値tを格納する
 @return true : 当たっている , false : 当たっていない
 */
-bool SweptSphere(const Sphere & _sphere1, const Sphere & _sphere2, const Sphere & _sphere3, const Sphere & _sphere4, float & _outT)
+bool SweptSphere(const Sphere & _Sphere1, const Sphere & _Sphere2, const Sphere & _Sphere3, const Sphere & _Sphere4, float & _outT)
 {
-	Vector3 X = _sphere1.m_center - _sphere3.m_center;
-	Vector3 Y = _sphere2.m_center - _sphere1.m_center - (_sphere4.m_center - _sphere3.m_center);
+	Vector3 X = _Sphere1.m_center - _Sphere3.m_center;
+	Vector3 Y = _Sphere2.m_center - _Sphere1.m_center - (_Sphere4.m_center - _Sphere3.m_center);
 	float a = Vector3::Dot(Y, Y);
 	float b = 2.0f * Vector3::Dot(X, Y);
-	float sum_radius = _sphere1.m_radius + _sphere3.m_radius;
+	float sum_radius = _Sphere1.m_radius + _Sphere3.m_radius;
 	float c = Vector3::Dot(X, X) - sum_radius * sum_radius;
 
 	float discriminant = b * b - 4.0f * a * c;

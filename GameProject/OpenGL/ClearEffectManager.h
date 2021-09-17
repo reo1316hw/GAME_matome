@@ -9,17 +9,29 @@
 class ClearEffect;
 class Player;
 
+/*
+@brief クリアエフェクトの方向
+*/
+enum DirectionClearEffect
+{
+	eLeftUpClear = 0,
+	eLeftUpUpClear = 1,
+	eUpClear = 2,
+	eRightUpUpClear = 3,
+	eRightUpClear = 4
+};
+
 class ClearEffectManager : public GameObject
 {
 public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	ClearEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
+	ClearEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -36,9 +48,9 @@ private:
 
 	/*
 	@fn    速度を決める
-	@param _quantity 個数
+	@param _Quantity 個数
 	*/
-	void DecideVelocity(const int _quantity);
+	void DecideVelocity(const int _Quantity);
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;

@@ -31,7 +31,8 @@ void GameObjectManager::DeleteInstance()
 }
 
 /*
-@brief  ゲームオブジェクトのアップデート処理
+@fn		ゲームオブジェクトのアップデート処理
+@param	_deltaTime 最後のフレームを完了するのに要した時間
 */
 void GameObjectManager::UpdateGameObject(float _deltaTime)
 {
@@ -83,34 +84,37 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	}
 	mPendingGameObjects.clear();
 }
+
 /*
-@brief  ゲームオブジェクトの入力処理
+@fn		ゲームオブジェクトの入力処理
+@param	_State 各入力機器の入力状態
+@brief	キーボード、マウス、コントローラー
 */
-void GameObjectManager::ProcessInput(const InputState& _state)
+void GameObjectManager::ProcessInput(const InputState& _State)
 {
 	mUpdatingGameObject = true;
 
 	for (auto tutorialObject : mTutorialObjects)
 	{
-		tutorialObject->ProcessInput(_state);
+		tutorialObject->ProcessInput(_State);
 	}
 
 	for (auto stage01Object : mStage01Objects)
 	{
-		stage01Object->ProcessInput(_state);
+		stage01Object->ProcessInput(_State);
 	}
 
 	for (auto stage02Object : mStage02Objects)
 	{
-		stage02Object->ProcessInput(_state);
+		stage02Object->ProcessInput(_State);
 	}
 
 	mUpdatingGameObject = false;
 }
 
 /*
-@brief  ゲームオブジェクトの追加
-@param	追加するGameObjectクラスのポインタ
+@fn		ゲームオブジェクトの追加
+@param	_object 追加するGameObjectクラスのポインタ
 */
 void GameObjectManager::AddGameObject(GameObject* _object)
 {
@@ -143,8 +147,8 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 }
 
 /*
-@brief  ゲームオブジェクトの削除
-@param	削除するGameObjectクラスのポインタ
+@fn		ゲームオブジェクトの削除
+@param	_object 削除するGameObjectクラスのポインタ
 */
 void GameObjectManager::RemoveGameObject(GameObject * _object)
 {

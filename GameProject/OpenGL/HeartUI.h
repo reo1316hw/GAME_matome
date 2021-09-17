@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos プレイヤーの体力UIの生成場所(スクリーン座標)
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos プレイヤーの体力UIの生成場所(スクリーン座標)
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
+	HeartUI(const Vector2& _Pos, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ

@@ -5,21 +5,21 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos クリアエフェクトの生成場所
-@param	_vel クリアエフェクトの速度
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos クリアエフェクトの生成場所
+@param	_Vel クリアエフェクトの速度
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-CheckpointEffect::CheckpointEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:ParticleEffectBase(_pos, _vel, 60, "Assets/star.png", _sceneTag, _objectTag)
+CheckpointEffect::CheckpointEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	:ParticleEffectBase(_Pos, _Vel, 60, "Assets/star.png", _SceneTag, _ObjectTag)
 {
-	mAlpha = ALPHA_INITIAL_VALUE;
-	mScale = SCALE_INITIAL_VALUE;
-	mVelocity.y = VELOCITY_INITIAL_VALUE;
-	mSpeed = ACCELERATION_INITIAL_VALUE;
+	mAlpha = 1.0f;
+	mScale = 0.0f;
+	mVelocity.y = 30.0f;
+	mSpeed = 1.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetColor(Color::Yellow);
+	mParticle->SetColor(Color::sYELLOW);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
 }
 
@@ -35,14 +35,21 @@ void CheckpointEffect::UpdateGameObject(float _deltaTime)
 	//ライフカウントが0より大きかったら速度、透明度、スケールの値を更新
 	if (mLifeCount > 0)
 	{
+		//速度の減速値
+		const float VelocityMinusValue = 1.5f;
+		//スケールの加速値
+		const float ScalePlusValue = 4.0f;
+		//スケールの最大値
+		const float ScaleMaxValue = 64.0f;
+
 		mVelocity = mVelocity * mSpeed;
 		mPosition = mPosition + mVelocity;
 
-		mVelocity.y -= VELOCITY_MINUS_VALUE;
+		mVelocity.y -= VelocityMinusValue;
 		
-		if (mScale <= SCALE_MAX_VALUE)
+		if (mScale <= ScaleMaxValue)
 		{
-			mScale += SCALE_PLUS_VALUE;
+			mScale += ScalePlusValue;
 		}
 
 		mParticle->SetScale(mScale);

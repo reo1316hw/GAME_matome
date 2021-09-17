@@ -61,7 +61,7 @@ bool Game::Initialize()
     //ゲームオブジェクト管理クラスの初期化
     GameObjectManager::CreateInstance();
 
-	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200,0, 0),Vector3::UnitY);
+	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200,0, 0),Vector3::sUNIT_Y);
 	RENDERER->SetViewMatrix(v);
 
 	return true;
@@ -102,12 +102,12 @@ void Game::GameLoop()
 	while (mRunningFlag)
 	{
 		//入力関連の処理
-		const InputState& state = ProcessInput();
+		const InputState& State = ProcessInput();
 
 		SceneBase* tmpScene;
 
 		// 実行中のシーンを更新処理
-		tmpScene = mNowScene->update(state);
+		tmpScene = mNowScene->UpdateScene(State);
 
 		// シーンの切り替えが発生した？
 		if (tmpScene != mNowScene)

@@ -57,8 +57,8 @@ public: //ゲッターセッター
 
 	/*
 	@fn		当たり判定に使うSphereの設定
-	@param	_sphere オブジェクトの大きさに合わせたSphereの構造体
+	@param	_Sphere オブジェクトの大きさに合わせたSphereの構造体
 	*/
-	void SetObjectSphere(const Sphere& _sphere) { mObjectSphere = _sphere; }
+	void SetObjectSphere(const Sphere& _Sphere) { mObjectSphere = _Sphere; }
 };
 

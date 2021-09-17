@@ -14,17 +14,27 @@
 class DeathEffect;
 class Player;
 
+/*
+@brief デスエフェクトの方向
+*/
+enum DirectionDeathEffect
+{
+	eLeftDeath = 0,
+	eBackDeath = 1,
+	eLeftBackDeath = 2
+};
+
 class DeathEffectManager : public GameObject
 {
 public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr);
+	DeathEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -42,9 +52,9 @@ private:
 
 	/*
 	@fn    速度を決める
-	@param _quantity 個数
+	@param _Quantity 個数
 	*/
-	void DecideVelocity(const int _quantity);
+	void DecideVelocity(const int _Quantity);
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;

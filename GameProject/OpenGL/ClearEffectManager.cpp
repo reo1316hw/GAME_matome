@@ -5,16 +5,16 @@
 
 /*
 @fn		コンストラクタ
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-ClearEffectManager::ClearEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
-	:GameObject(_sceneTag, _objectTag)
+ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+	:GameObject(_SceneTag, _ObjectTag)
 {
 	mState = ParticleState::PARTICLE_DISABLE;
-	mSceneTag = _sceneTag;
-	mTag = _objectTag;
+	mSceneTag = _SceneTag;
+	mTag = _ObjectTag;
 
 	OneCreateClearFlag = true;
 
@@ -42,9 +42,11 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case PARTICLE_ACTIVE:
 
+		//クリアエフェクトの個数
+		const int ClearEffectNum = 200;
 		mPosition = mPlayer->GetPosition();
 
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < ClearEffectNum; i++)
 		{
 			DecideVelocity(i);
 
@@ -59,43 +61,46 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 
 /*
 @fn    速度を決める
-@param _quantity 個数
+@param _Quantity 個数
 */
-void ClearEffectManager::DecideVelocity(const int _quantity)
+void ClearEffectManager::DecideVelocity(const int _Quantity)
 {
+	//方向の個数
+	const int DirectionNum = 5;
 	//向き
 	float direction = 0.0f;
 	//速度
 	float speed = 0.0f;
 
-	mVelocity = Vector3::Zero;
-	speed = _quantity * 0.1f;
+	//速度を初期化
+	mVelocity = Vector3::sZERO;
+	speed = _Quantity * 0.1f;
 
-	switch (_quantity % 5)
+	switch (_Quantity % DirectionNum)
 	{
-	case 0:
+	case eLeftUpClear:
 		direction = -0.6f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case 1:
+	case eLeftUpUpClear:
 		direction = -0.3f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case 2:
+	case eUpClear:
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case 3:
+	case eRightUpUpClear:
 		direction = 0.3f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case 4:
+	case eRightUpClear:
 		direction = 0.6f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;

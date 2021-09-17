@@ -5,17 +5,17 @@
 
 /*
 @fn		コンストラクタ
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-DeathEffectManager::DeathEffectManager(const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
-	:GameObject(_sceneTag, _objectTag)
-	, mRandVel(Vector3::Zero)
+DeathEffectManager::DeathEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+	:GameObject(_SceneTag, _ObjectTag)
+	, mRandVel(Vector3::sZERO)
 {
 	mState = ParticleState::PARTICLE_DISABLE;
-	mSceneTag = _sceneTag;
-	mTag = _objectTag;
+	mSceneTag = _SceneTag;
+	mTag = _ObjectTag;
 
 	mAngle = 0.0f;
 
@@ -48,11 +48,12 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case PARTICLE_ACTIVE:
 
-		mPosition = mPlayer->GetPosition();
-		mPosition.y -= 10.0f;
-		mPosition.z -= 20.0f;
+		//デスエフェクトの個数
+		const int DeathEffectNum = 50;
 
-		for (int i = 0; i < 50; i++)
+		mPosition = mPlayer->GetPosition();
+
+		for (int i = 0; i < DeathEffectNum; i++)
 		{
 			DecideVelocity(i);
 
@@ -67,26 +68,29 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 
 /*
 @fn    速度を決める
-@param _quantity 個数
+@param _Quantity 個数
 */
-void DeathEffectManager::DecideVelocity(const int _quantity)
+void DeathEffectManager::DecideVelocity(const int _Quantity)
 {
+	//方向の個数
+	const int DirectionNum = 3;
+	//向き
+	const float Direction = 1.0f;
+
 	mRandVel = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
 	mRandVel.Normalize();
 
-	if (_quantity % 2 == 0)
+	switch (_Quantity % DirectionNum)
 	{
-		mRandVel.x *= -1.0f;
-		mRandVel.z *= -1.0f;
-	}
-
-	if (_quantity % 5 == 0)
-	{
-		mRandVel.x *= -1.0f;
-	}
-
-	if (_quantity % 3 == 0)
-	{
-		mRandVel.z *= -1.0f;
+	case eLeftDeath:
+		mRandVel.x *= -Direction;
+		break;
+	case eBackDeath:
+		mRandVel.z *= -Direction;
+		break;
+	case eLeftBackDeath:
+		mRandVel.x *= -Direction;
+		mRandVel.z *= -Direction;
+		break;
 	}
 }

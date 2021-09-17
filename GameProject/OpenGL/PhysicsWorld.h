@@ -115,8 +115,8 @@ public://ゲッターセッター
 
 /*
 @fn 衝突したことが確定したとき、めり込みを戻す関数
-@param _movableBox 移動物体
-@param _fixedBox 移動しない物体
+@param _MovableBox 移動物体
+@param _FixedBox 移動しない物体
 @param _calcFixVec 移動物体の補正差分ベクトル
 */
-void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
+void CalcCollisionFixVec(const AABB& _MovableBox, const AABB& _FixedBox, Vector3& _calcFixVec);

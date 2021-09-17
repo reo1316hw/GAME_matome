@@ -5,18 +5,18 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos プレイヤーの体力UIの生成場所(スクリーン座標)
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos プレイヤーの体力UIの生成場所(スクリーン座標)
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-HeartUI::HeartUI(const Vector2& _pos, const Tag& _objectTag, SceneBase::Scene _sceneTag, Player* _playerPtr)
-	:UIBase(_pos, "Assets/heart02.png", _sceneTag, _objectTag)
+HeartUI::HeartUI(const Vector2& _Pos, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+	:UIBase(_Pos, "Assets/heart02.png", _SceneTag, _ObjectTag)
 {
 	mUI = new UIComponent(this);
 	mUI->SetTexture(RENDERER->GetTexture("Assets/heart.png"));
 
-	mPosition = Vector3(_pos.x, _pos.y, 0.0f);
+	mPosition = Vector3(_Pos.x, _Pos.y, 0.0f);
 
 	mPlayer = _playerPtr;
 }

@@ -10,14 +10,14 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos プレイヤーの座標
-@param	_size プレイヤーのサイズ
-@param	_objectTag プレイヤーのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos プレイヤーの座標
+@param	_Size プレイヤーのサイズ
+@param	_ObjectTag プレイヤーのタグ
+@param	_SceneTag シーンのタグ
 */
-Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
-	: GameObject(_sceneTag, _objectTag)
-	, mPlayerSphere(Vector3::Zero,0.0f)
+Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	: GameObject(_SceneTag, _ObjectTag)
+	, mPlayerSphere(Vector3::sZERO,0.0f)
 	, mVisibleFrameCount(0)
 	, mLife(0)
 	, mCheckpointEffectCount(0)
@@ -35,37 +35,37 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 	, mRespawnFlag(false)
 {
 	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
-	SetScale(_size);
-	SetPosition(_pos);
-	mInitPos = _pos;
-	mRespawnPos = _pos;
+	mTag = _ObjectTag;
+	SetScale(_Size);
+	SetPosition(_Pos);
+	mInitPos = _Pos;
+	mRespawnPos = _Pos;
 
-	mScene = _sceneTag;
+	mScene = _SceneTag;
 
 	// 速度の値
-	mMoveSpeed = PLAYER_CONSTANT_SPEED;
-	mGravity   = GRAVITY_ACCEL;
-	mLife	  = PLAYER_LIFE;
+	mMoveSpeed = 20.0f;
+	mGravity   = 2.0f;
+	mLife	   = 3;
 
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh(_gpmeshName));
+	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
 	//エフェクト
-	mSandEffectManager = new SandEffectManager(this, _objectTag, _sceneTag);
-	mCheckpointEffectManager = new CheckpointEffectManager(_objectTag, _sceneTag, this);
-	mClearEffectManager = new ClearEffectManager(_objectTag, _sceneTag, this);
-	mDeathEffectManager = new DeathEffectManager(_objectTag, _sceneTag , this);
+	mSandEffectManager = new SandEffectManager(this, _ObjectTag, _SceneTag);
+	mCheckpointEffectManager = new CheckpointEffectManager(_ObjectTag, _SceneTag, this);
+	mClearEffectManager = new ClearEffectManager(_ObjectTag, _SceneTag, this);
+	mDeathEffectManager = new DeathEffectManager(_ObjectTag, _SceneTag , this);
 
 	//プレイヤー自身の当たり判定
-	mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	Sphere sphere = { Vector3::Zero,30.0f };
+	mSelfSphereCollider = new SphereCollider(this, ColliderTag::ePlayerTag, GetOnCollisionFunc());
+	Sphere sphere = {Vector3::sZERO, 30.0f};
 	mSelfSphereCollider->SetObjectSphere(sphere);
 
-	mLateralMoveVelocity = Vector3::Zero;
+	mLateralMoveVelocity = Vector3::sZERO;
 	mButtonFlag = false;
 }
 
@@ -75,8 +75,15 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const std::string _gpm
 */
 void Player::UpdateGameObject(float _deltaTime)
 {
+	//カメラの座標
+	const Vector3 CameraPos = Vector3(0, 500, -550);
+	//ダメージを受けるy座標
+	const float DamageYPos = -700.0f;
+	//ゴールz座標
+	float goalZPos = 0.0f;
+
 	//プレイヤーの斜め後ろにカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(Vector3(0, 500, -550), mPosition);
+	mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
 
 	//ステージクリアしたらプレイヤーの更新を止める
 	if (mClearFlag)
@@ -85,9 +92,9 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//プレイヤーがある一定の座標まで落ちたらダメージを受ける
-	if (mPosition.y <= -700.0f)
+	if (mPosition.y <= DamageYPos)
 	{
-		mPosition.y = -699.0f;
+		mPosition.y = DamageYPos + 1.0f;
 		mDamageFlag = true;
 	}
 
@@ -102,7 +109,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	//全ステージ共通のリスポーン処理
 	if (mRespawnFlag)
 	{
-		mLateralMoveVelocity = Vector3::Zero;
+		mLateralMoveVelocity = Vector3::sZERO;
 		mCollisionFlag = true;
 
 		if (mLife >= 1)
@@ -116,18 +123,20 @@ void Player::UpdateGameObject(float _deltaTime)
 	if (mScene == SceneBase::tutorial)
 	{
 		//チュートリアル時の前方移動速度
-		mMoveSpeed = TUTORIAL_MOVE_SPEED;
+		mMoveSpeed = 13.0f;
 		//チュートリアル時のジャンプ力
 		if (mJumpFlag)
 		{
-			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = TUTORIAL_JUMP_SPEED;
+			mLateralMoveVelocity = Vector3::sZERO;
+			mVelocity.y = 48.0f;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
 
+		goalZPos = -75700.0f;
+
 		//チュートリアル時のゴールの座標
-		if (mPosition.z >= -75700)
+		if (mPosition.z >= goalZPos)
 		{
 			mClearFlag = true;
 		}
@@ -139,14 +148,16 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ01のジャンプ力
 		if (mJumpFlag)
 		{
-			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED;
+			mLateralMoveVelocity = Vector3::sZERO;
+			mVelocity.y = 40.0f;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
 
+		goalZPos = -8900.0f;
+
 		//ステージ01のゴール座標
-		if (mPosition.z >= -8900)
+		if (mPosition.z >= goalZPos)
 		{
 			mClearFlag = true;
 		}
@@ -158,14 +169,16 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ02のジャンプ力
 		if (mJumpFlag)
 		{
-			mLateralMoveVelocity = Vector3::Zero;
-			mVelocity.y = JUMP_SPEED;
+			mLateralMoveVelocity = Vector3::sZERO;
+			mVelocity.y = 40.0f;
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
 
+		goalZPos = -2100.0f;
+
 		//ステージ02のゴールの座標
-		if (mPosition.z >= -2100)
+		if (mPosition.z >= goalZPos)
 		{
 			mClearFlag = true;
 		}
@@ -174,21 +187,27 @@ void Player::UpdateGameObject(float _deltaTime)
 	//リスポーン後の待機時間中処理
 	if (mStopFlag)
 	{
+		//表示するタイミング
+		const int VisibleTiming = 10;
+
 		mAngle = 0.0f;
-
 		mVisibleFrameCount++;
-		if (mVisibleFrameCount % 10 == 0)
+
+		switch (mVisibleFrameCount % VisibleTiming)
 		{
+		case eInvisible:
 			mMeshComponent->SetVisible(false);
-		}
-
-		if (mVisibleFrameCount % 10 == 5)
-		{
+			break;
+		case eVisible:
 			mMeshComponent->SetVisible(true);
+			break;
 		}
 
-		mVelocity = Vector3::Zero;
-		if (mVisibleFrameCount >= 40)
+		//表示させるフレーム
+		const int VisibleFlame = 40;
+
+		mVelocity = Vector3::sZERO;
+		if (mVisibleFrameCount >= VisibleFlame)
 		{
 			mVisibleFrameCount = 0;
 			mVelocity.z = mMoveSpeed;
@@ -206,14 +225,19 @@ void Player::UpdateGameObject(float _deltaTime)
 		SetState(State::Dead);
 	}
 
+	//スケールを変える座標
+	const float ChangeScaleYPos = 120.0f;
+
 	///////////////////////////////////////////////////////
 	//スケール縮小処理
 	if (mScaleFlag)
 	{
-		mScale.y = 1.2f + (mPosition.y - 120.0f) * 0.0015f;
-		mScale.z = 1.2f + (mPosition.y - 120.0f) * 0.0015f;
+
+		mScale.y = 1.2f + (mPosition.y - ChangeScaleYPos) * 0.0015f;
+		mScale.z = 1.2f + (mPosition.y - ChangeScaleYPos) * 0.0015f;
 	}
-	if (mPosition.y <= 120.0f && mVelocity.y <= 0.0f)
+
+	if (mPosition.y <= ChangeScaleYPos && mVelocity.y <= 0.0f)
 	{
 		mScaleFlag = false;
 		mScale.x = 1.2f;
@@ -222,8 +246,11 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 	///////////////////////////////////////////////////////
 
+	//回転するy座標
+	const float RotateYPos = 200.0f;
+
 	//ジャンプしたときに回転を遅くする処理
-	if (mPosition.y >= 200)
+	if (mPosition.y >= RotateYPos)
 	{
 		if (mStopFlag == false)
 		{
@@ -238,19 +265,22 @@ void Player::UpdateGameObject(float _deltaTime)
 	//回転処理
 	float radian = Math::ToRadians(mAngle);
 	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitX, radian);
+	Quaternion inc(Vector3::sUNIT_X, radian);
 	Quaternion target = Quaternion::Concatenate(rot, inc);
 	SetRotation(target);
 	
+	//最大速度
+	const float PlayerMaxSpeed = 25.0f;
+
 	//右移動の最大速度
-	if (mVelocity.x >= PLAYER_MAX_SPEED)
+	if (mVelocity.x >= PlayerMaxSpeed)
 	{
-		mVelocity.x = PLAYER_MAX_SPEED;
+		mVelocity.x = PlayerMaxSpeed;
 	}
 	//左移動の最大速度
-	if (mVelocity.x <= -PLAYER_MAX_SPEED)
+	if (mVelocity.x <= -PlayerMaxSpeed)
 	{
-		mVelocity.x = -PLAYER_MAX_SPEED;
+		mVelocity.x = -PlayerMaxSpeed;
 	}
 
 	// 常に前に進む
@@ -262,20 +292,23 @@ void Player::UpdateGameObject(float _deltaTime)
 	//ボタンを押していないときの減速処理
 	if (mButtonFlag == false)
 	{
+		//減速度
+		const float PlayerSpeedDown = 4.0f;
+
 		//速度が0より大きかった場合に右に減速
 		if (mVelocity.x > 0.0f)
 		{
-			mVelocity.x += -PLAYER_SPEED_DOWN;
+			mVelocity.x += -PlayerSpeedDown;
 		}
 		//速度が0より小さかった場合に左に減速
 		else if (mVelocity.x < 0.0f)
 		{
-			mVelocity.x += PLAYER_SPEED_DOWN;
+			mVelocity.x += PlayerSpeedDown;
 		}
 		
 		//速度が減速度の値と一緒になったら速度を0に固定する
-		if (mVelocity.x <= PLAYER_SPEED_DOWN && mVelocity.x > 0.0f ||
-			mVelocity.x >= -PLAYER_SPEED_DOWN && mVelocity.x < 0.0f)
+		if (mVelocity.x <= PlayerSpeedDown && mVelocity.x > 0.0f ||
+			mVelocity.x >= -PlayerSpeedDown && mVelocity.x < 0.0f)
 		{
 			mVelocity.x = 0.0f;
 		}
@@ -288,8 +321,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.y -= mGravity;
 	}
 
+	//当たり判定を無効にするy座標
+	const float OffCollisionYPos = 30.0f;
+
 	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
-	if (mPosition.y < 30.0f)
+	if (mPosition.y < OffCollisionYPos)
 	{
 		mCollisionFlag = false;
 	}
@@ -324,29 +360,32 @@ void Player::UpdateGameObject(float _deltaTime)
 /*
 @fn		入力を引数で受け取る更新関数
 @brief	基本的にここで入力情報を変数に保存しUpdateGameObjectで更新を行う
-@param	_keyState 各入力機器の入力状態
+@param	_KeyState 各入力機器の入力状態
 @brief	キーボード、マウス、コントローラー
 */
-void Player::GameObjectInput(const InputState& _keyState)
+void Player::GameObjectInput(const InputState& _KeyState)
 {
+	//加速度
+	const float PlayerSpeedUp = 10.0f;
+
 	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
-	if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
+	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
 	{
-		mVelocity.x += -PLAYER_SPEED_UP;
+		mVelocity.x += -PlayerSpeedUp;
 	}
 	// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
 	{
-		mVelocity.x += PLAYER_SPEED_UP;
+		mVelocity.x += PlayerSpeedUp;
 	}
 
 	// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
-	else if (_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
-		_keyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
+		_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
 	{
 		mButtonFlag = false;
 	}
@@ -354,14 +393,14 @@ void Player::GameObjectInput(const InputState& _keyState)
 
 /*
 @fn		プレイヤーがヒットした時の処理
-@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
 */
-void Player::OnCollision(const GameObject& _hitObject)
+void Player::OnCollision(const GameObject& _HitObject)
 {
 	if (mCollisionFlag)
 	{
 		//ヒットしたオブジェクトのタグを取得
-		mTag = _hitObject.GetTag();
+		mTag = _HitObject.GetTag();
 
 		//ジャンプ判定
 		if (mTag == jump)
@@ -373,7 +412,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 		if (mTag == checkpoint)
 		{
 			mCheckpointFlag = true;
-			mRespawnPos = _hitObject.GetPosition();
+			mRespawnPos = _HitObject.GetPosition();
 		}
 
 		//ダメージ判定
@@ -414,7 +453,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 		}
 		else
 		{
-			mLateralMoveVelocity = Vector3::Zero;
+			mLateralMoveVelocity = Vector3::sZERO;
 		}
 	}
 }

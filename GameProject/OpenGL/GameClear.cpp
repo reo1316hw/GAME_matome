@@ -5,18 +5,20 @@
 
 /*
 @fn		コンストラクタ
-@param	_nowScene 現在のシーン
+@param	_NowScene 現在のシーン
 */
-GameClear::GameClear(const Scene& _nowScene)
+GameClear::GameClear(const Scene& _NowScene)
 {
-	// ライトを設定(設定しないと何も映らない)
-	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
+	//環境光
+	const Vector3 AmbientLight = Vector3(0.4f, 0.4f, 0.4f);
+	//ライトを設定(設定しないと何も映らない)
+	RENDERER->SetAmbientLight(AmbientLight);
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.m_direction = Vector3(1.0f, 0.7f, -0.7f);
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	SetScene(_nowScene);
+	SetScene(_NowScene);
 
 	mInputSystem = new InputSystem();
 	mInputSystem->Initialize();
@@ -37,10 +39,13 @@ GameClear::~GameClear()
 /*
 @fn	現在のシーン時に毎フレーム更新処理をする
 */
-SceneBase* GameClear::update(const InputState& _state)
+SceneBase* GameClear::UpdateScene(const InputState& _State)
 {
+	//次のシーンに遷移するタイミング
+	const int NextSceneTiming = 160;
+
 	mNextSceneCount++;
-	if (mNextSceneCount >= 160)
+	if (mNextSceneCount >= NextSceneTiming)
 	{
 		return new TitleScene(title);
 	}

@@ -24,11 +24,11 @@ public:
 
 	/*
 	@fn		頂点シェーダーとフラグメントシェーダーのロード
-	@param	_vertName 頂点シェーダーのファイル名
-	@param	_fragName 頂点シェーダーのファイル名
+	@param	_VertName 頂点シェーダーのファイル名
+	@param	_FragName 頂点シェーダーのファイル名
 	@return	true : 成功 , false : 失敗(bool型)
 	*/
-	bool Load(const std::string& _vertName,const std::string& _fragName);
+	bool Load(const std::string& _VertName,const std::string& _FragName);
 
 	/*
 	@fn	ロードしたシェーダーの解放
@@ -42,50 +42,50 @@ public:
 
 	/*
 	@fn		行列のUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_matrix 設定する行列
+	@param	_Name 設定するUniform変数名
+	@param	_Matrix 設定する行列
 	*/
-	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
+	void SetMatrixUniform(const char* _Name , const Matrix4& _Matrix);
 
 	/*
 	@fn		行列のUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_matrices 設定する行列
+	@param	_Name 設定するUniform変数名
+	@param	_Matrices 設定する行列
 	@param	_count 行列の数
 	*/
-	void SetMatrixUniforms(const char* _name, Matrix4* _matrices, unsigned _count);
+	void SetMatrixUniforms(const char* _Name, Matrix4* _Matrices, unsigned _count);
 
     /*
     @fn		Vector3のUniform変数を設定する
-    @param	_name 設定するUniform変数名
-    @param	_vector 設定するVector3
+    @param	_Name 設定するUniform変数名
+    @param	_Vector 設定するVector3
     */
-    void SetVectorUniform(const char* _name, const Vector3& _vector);
+    void SetVectorUniform(const char* _Name, const Vector3& _Vector);
 
     /*
     @fn		floatのUniform変数を設定する
-    @param	_name 設定するUniform変数名
-    @param	_value 設定するfloat
+    @param	_Name 設定するUniform変数名
+    @param	_Value 設定するfloat
     */
-    void SetFloatUniform(const char* _name, const float& _value);
+    void SetFloatUniform(const char* _Name, const float& _Value);
 
 	/*
 	@fn		intのUniform変数を設定する
-	@param	_name 設定するUniform変数名
-	@param	_value 設定するint
+	@param	_Name 設定するUniform変数名
+	@param	_Value 設定するint
 	*/
-	void SetIntUniform(const char* _name, const int _value);
+	void SetIntUniform(const char* _Name, const int _Value);
 
 private:
 
 	/*
 	@fn		シェーダーをコンパイルする
-	@param	_fileName コンパイルするシェーダーのファイル名
+	@param	_FileName コンパイルするシェーダーのファイル名
 	@param	_shaderType シェーダーの種類
 	@param	_outShader シェーダーのID用の参照変数
 	@return	true : 成功 , false : 失敗(bool型)
 	*/
-	bool CompileShader(const std::string& _fileName,GLenum _shaderType,GLuint& _outShader);
+	bool CompileShader(const std::string& _FileName,GLenum _shaderType,GLuint& _outShader);
 
 	/*
 	@fn		シェーダーがコンパイル出来ているか確認

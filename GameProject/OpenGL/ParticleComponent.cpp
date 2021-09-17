@@ -16,13 +16,13 @@ Vector3 ParticleComponent::mStaticCameraWorldPos;
 /*
 @fn	   コンストラクタ
 @param _owner アタッチするゲームオブジェクトのポインタ
-@param _offset 親オブジェクトクラスと画像を描画する位置の差
+@param _Offset 親オブジェクトクラスと画像を描画する位置の差
 @param _scale 画像の描画サイズ
 @param _updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 */
-ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset, float _scale, int _updateOrder)
+ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _Offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
-	, mOffset(_offset)
+	, mOffset(_Offset)
 	, mScale(_scale)
 	, mAlpha(1.0f)
 	, mBlendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
@@ -80,19 +80,19 @@ void ParticleComponent::Draw(Shader* _shader)
 }
 
 // カメラ距離でのソート用
-bool ParticleComponent::operator<(const ParticleComponent& _rhs) const
+bool ParticleComponent::operator<(const ParticleComponent& _Rhs) const
 {
 	float lenThis, lenRhs;
 	lenThis = (mStaticCameraWorldPos - mOffset).LengthSq();
-	lenRhs = (mStaticCameraWorldPos - _rhs.mOffset).LengthSq();
+	lenRhs = (mStaticCameraWorldPos - _Rhs.mOffset).LengthSq();
 	return lenThis < lenRhs;
 }
 
 // カメラ距離でのソート用
-bool ParticleComponent::operator>(const ParticleComponent& _rhs) const
+bool ParticleComponent::operator>(const ParticleComponent& _Rhs) const
 {
 	float lenThis, lenRhs;
 	lenThis = (mStaticCameraWorldPos - mOffset).LengthSq();
-	lenRhs = (mStaticCameraWorldPos - _rhs.mOffset).LengthSq();
+	lenRhs = (mStaticCameraWorldPos - _Rhs.mOffset).LengthSq();
 	return lenThis > lenRhs;
 }

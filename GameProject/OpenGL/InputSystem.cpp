@@ -139,13 +139,13 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) co
 
 /*
 @fn		スティックの入力を0~32767で返す
-@param	_iAxis どのスティックのどの値を取得するか
+@param	_IAxis どのスティックのどの値を取得するか
 	    (左スティックのXを取得...SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_LEFTX)
 @return スティックの入力情報(float型)
 */
-float ControllerState::GetAxisValue(const SDL_GameControllerAxis _iAxis) const
+float ControllerState::GetAxisValue(const SDL_GameControllerAxis _IAxis) const
 {
-	return mAxisValues[_iAxis];
+	return mAxisValues[_IAxis];
 }
 
 /*
@@ -221,7 +221,7 @@ void InputSystem::PrepareForUpdate()
 	//マウス
 	mState.m_mouse.mPrevButtons = mState.m_mouse.mCurrButtons;
 	mState.m_mouse.mRelativeFlag = false;
-	mState.m_mouse.mScrollWheel = Vector2::Zero;
+	mState.m_mouse.mScrollWheel = Vector2::sZERO;
 
 	//コントローラー
 	memcpy(mState.m_controller.mPrevButtons,
@@ -272,14 +272,14 @@ void InputSystem::Update()
 		}
 
 		// LPAD入力をベクトル化する
-		const float maxInput = 32767.0f;
+		const float MaxInput = 32767.0f;
 		mState.m_controller.mLAxis.x = (float)mState.m_controller.mAxisValues[SDL_CONTROLLER_AXIS_LEFTX];
 		mState.m_controller.mLAxis.y= (float)mState.m_controller.mAxisValues[SDL_CONTROLLER_AXIS_LEFTY];
 		
 		//printf("%f\n", (float)state.Controller.axisValues[SDL_CONTROLLER_AXIS_LEFTX]);
 		//スティックの入力に最低値を設ける(定数以下はカット)
-		mState.m_controller.mLAxis.x= (fabs(mState.m_controller.mLAxis.x) < (float)7849) ? 0.0f : mState.m_controller.mLAxis.x / maxInput;
-		mState.m_controller.mLAxis.y= (fabs(mState.m_controller.mLAxis.y) < (float)8689) ? 0.0f : mState.m_controller.mLAxis.y / maxInput;
+		mState.m_controller.mLAxis.x= (fabs(mState.m_controller.mLAxis.x) < (float)7849) ? 0.0f : mState.m_controller.mLAxis.x / MaxInput;
+		mState.m_controller.mLAxis.y= (fabs(mState.m_controller.mLAxis.y) < (float)8689) ? 0.0f : mState.m_controller.mLAxis.y / MaxInput;
 
 	}
 }
@@ -322,20 +322,20 @@ void InputSystem::SetRelativeMouseMode(bool _value)
 float InputSystem::Filter1D(int _input)
 {
 	//デッドゾーン（この値より小さいなら0.0にする）
-	const int deadZone = 250;
+	const int DeadZone = 250;
 	//最大値（この値より大きくても1.0にする）
-	const int maxValue = 30000;
+	const int MaxValue = 30000;
 
 	float retVal = 0.0f;
 
 	//入力値の絶対値を取る
 	int absValue = _input > 0 ? _input : -_input;
 	//入力値がデッドゾーンより小さいなら
-	if (absValue > deadZone)
+	if (absValue > DeadZone)
 	{
 		//デッドゾーンと最大値の間で1.0以下になるよう計算する
-		retVal = static_cast<float>(absValue - deadZone) /
-			(maxValue - deadZone);
+		retVal = static_cast<float>(absValue - DeadZone) /
+			(MaxValue - DeadZone);
 		//符号を元の値と同じにする
 		retVal = _input > 0 ? retVal : -1.0f * retVal;
 		//-1.0~1.0の間に収める
@@ -354,9 +354,9 @@ float InputSystem::Filter1D(int _input)
 Vector2 InputSystem::Filter2D(int _inputX, int _inputY)
 {
 	//デッドゾーン（この値より小さいなら0.0にする）
-	const float deadZone = 8000.0f;
+	const float DeadZone = 8000.0f;
 	//最大値（この値より大きくても1.0にする）
-	const float maxValue = 30000.0f;
+	const float MaxValue = 30000.0f;
 
 	//2次元ベクトルにする
 	Vector2 dir;
@@ -366,14 +366,14 @@ Vector2 InputSystem::Filter2D(int _inputX, int _inputY)
 	float length = dir.Length();
 
 	//入力値のベクトルの長さがデッドゾーンより小さいなら
-	if (length < deadZone)
+	if (length < DeadZone)
 	{
-		dir = Vector2::Zero;
+		dir = Vector2::sZERO;
 	}
 	else
 	{
 		//デッドゾーンと最大値の間で1.0以下になるよう計算する
-		float f = (length - deadZone) / (maxValue - deadZone);
+		float f = (length - DeadZone) / (MaxValue - DeadZone);
 		//0.0と1.0の間に収める
 		f = Math::Clamp(f, 0.0f, 1.0f);
 		//ベクトルを正規化して、分数の値にスケーリングする

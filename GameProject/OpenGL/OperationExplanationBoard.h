@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 操作方法パネルの座標
-	@param	_vel 操作方法パネルの速度
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 操作方法パネルの座標
+	@param	_Vel 操作方法パネルの速度
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	OperationExplanationBoard(const Vector3& _pos, const Vector3& _vel, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	OperationExplanationBoard(const Vector3& _Pos, const Vector3& _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag);
 
 	/*
 	@fn	デストラクタ

@@ -27,10 +27,10 @@ public:
 
 	/*
 	@fn スケルトンのファイルからのロード
-	@param _filename ファイルの名前
+	@param _FileName ファイルの名前
 	@return 成功、失敗
 	*/
-	bool Load(const std::string& _filename);
+	bool Load(const std::string& _Filename);
 
 protected:
 

@@ -12,8 +12,8 @@
 @fn	コンストラクタ
 */
 FPS::FPS()
-	: mSetFps(60)
-	, mOneFrameTickCount(1000 / mSetFps)
+	: MSetFps(60)
+	, MOneFrameTickCount(1000 / MSetFps)
 	, mFpsCount(0)
 	, mFrameStartTickTime(0)
 	, mFps(0)
@@ -48,10 +48,10 @@ void FPS::Update()
 		mFrameStartTickTime = SDL_GetTicks();
 	}
 	//設定したフレーム数が経過したら
-	if (mFpsCount == mSetFps)
+	if (mFpsCount == MSetFps)
 	{
 		int nowTickTime = SDL_GetTicks();
-		mFps = 1000 / ((nowTickTime - mFrameStartTickTime) / mSetFps);
+		mFps = 1000 / ((nowTickTime - mFrameStartTickTime) / MSetFps);
 		mFpsCount = 0;
 	}
 	else
@@ -65,5 +65,5 @@ void FPS::Update()
 */
 void FPS::Wait()
 {
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mBeforetickCount + mOneFrameTickCount));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mBeforetickCount + MOneFrameTickCount));
 }

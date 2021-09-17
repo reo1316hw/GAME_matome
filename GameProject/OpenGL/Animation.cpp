@@ -12,13 +12,13 @@
 @fn    アニメーション読み込み
 @param アニメーションへのパス
 */
-bool Animation::Load(const std::string& _fileName)
+bool Animation::Load(const std::string& _FileName)
 {
 	// filenameからテキストファイルとして読み込み、rapidJSONに解析させる
-	std::ifstream file(_fileName);
+	std::ifstream file(_FileName);
 	if (!file.is_open())
 	{
-		SDL_Log("File not found: Animation %s", _fileName.c_str());
+		SDL_Log("File not found: Animation %s", _FileName.c_str());
 		return false;
 	}
 
@@ -32,7 +32,7 @@ bool Animation::Load(const std::string& _fileName)
 	// JSONオブジェクトか？
 	if (!doc.IsObject())
 	{
-		SDL_Log("Animation %s is not valid json", _fileName.c_str());
+		SDL_Log("Animation %s is not valid json", _FileName.c_str());
 		return false;
 	}
 
@@ -41,99 +41,99 @@ bool Animation::Load(const std::string& _fileName)
 	// Check the metadata　メタデータのチェック。バージョンは１か？
 	if (ver != 1)
 	{
-		SDL_Log("Animation %s unknown format", _fileName.c_str());
+		SDL_Log("Animation %s unknown format", _FileName.c_str());
 		return false;
 	}
 
 	// "sequece"情報読み込めるか？
-	const rapidjson::Value& sequence = doc["sequence"];
-	if (!sequence.IsObject())
+	const rapidjson::Value& Sequence = doc["sequence"];
+	if (!Sequence.IsObject())
 	{
-		SDL_Log("Animation %s doesn't have a sequence.", _fileName.c_str());
+		SDL_Log("Animation %s doesn't have a sequence.", _FileName.c_str());
 		return false;
 	}
 
 	// "frames" "length" "bonecount"はあるか？
-	const rapidjson::Value& frames = sequence["frames"];
-	const rapidjson::Value& length = sequence["length"];
-	const rapidjson::Value& bonecount = sequence["bonecount"];
+	const rapidjson::Value& Fames = Sequence["frames"];
+	const rapidjson::Value& Length = Sequence["length"];
+	const rapidjson::Value& Bonecount = Sequence["bonecount"];
 
-	if (!frames.IsUint() || !length.IsDouble() || !bonecount.IsUint())
+	if (!Fames.IsUint() || !Length.IsDouble() || !Bonecount.IsUint())
 	{
-		SDL_Log("Sequence %s has invalid frames, length, or bone count.", _fileName.c_str());
+		SDL_Log("Sequence %s has invalid frames, length, or bone count.", _FileName.c_str());
 		return false;
 	}
 
 	// フレーム数、アニメーション時間、ボーン数、フレームあたりの時間を取得
-	mNumFrames = frames.GetUint();
-	mDuration = static_cast<float>(length.GetDouble());
-	mNumBones = bonecount.GetUint();
+	mNumFrames = Fames.GetUint();
+	mDuration = static_cast<float>(Length.GetDouble());
+	mNumBones = Bonecount.GetUint();
 	mFrameDuration = mDuration / (mNumFrames - 1);
 
 	// トラック配列を確保
 	mTracks.resize(mNumBones);
 
 	// トラック配列が取得できるか？
-	const rapidjson::Value& tracks = sequence["tracks"];
+	const rapidjson::Value& Tracks = Sequence["tracks"];
 
-	if (!tracks.IsArray())
+	if (!Tracks.IsArray())
 	{
-		SDL_Log("Sequence %s missing a tracks array.", _fileName.c_str());
+		SDL_Log("Sequence %s missing a tracks array.", _FileName.c_str());
 		return false;
 	}
 
 	// トラック数分ループ
-	for (rapidjson::SizeType i = 0; i < tracks.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < Tracks.Size(); i++)
 	{
 		// tracs[i]はオブジェクトか？
-		if (!tracks[i].IsObject())
+		if (!Tracks[i].IsObject())
 		{
-			SDL_Log("Animation %s: Track element %d is invalid.", _fileName.c_str(), i);
+			SDL_Log("Animation %s: Track element %d is invalid.", _FileName.c_str(), i);
 			return false;
 		}
 
 		// tracks[i]の中の "bone"をuintで読み込み。ボーン番号を取得
-		size_t boneIndex = tracks[i]["bone"].GetUint();
+		size_t boneIndex = Tracks[i]["bone"].GetUint();
 		
 		// tracks[i]の中の "transforms"が取得できるか？
-		const rapidjson::Value& transforms = tracks[i]["transforms"];
-		if (!transforms.IsArray())
+		const rapidjson::Value& Transforms = Tracks[i]["transforms"];
+		if (!Transforms.IsArray())
 		{
-			SDL_Log("Animation %s: Track element %d is missing transforms.", _fileName.c_str(), i);
+			SDL_Log("Animation %s: Track element %d is missing transforms.", _FileName.c_str(), i);
 			return false;
 		}
 
 		BoneTransform temp;
 		// transformのサイズとアニメーションフレーム数が不具合ないか？
-		if (transforms.Size() < mNumFrames)
+		if (Transforms.Size() < mNumFrames)
 		{
-			SDL_Log("Animation %s: Track element %d has fewer frames than expected.", _fileName.c_str(), i);
+			SDL_Log("Animation %s: Track element %d has fewer frames than expected.", _FileName.c_str(), i);
 			return false;
 		}
 
 		// transformsのサイズ分ループ。ボーン番号boneIndexの変換情報として取り込む
-		for (rapidjson::SizeType j = 0; j < transforms.Size(); j++)
+		for (rapidjson::SizeType j = 0; j < Transforms.Size(); j++)
 		{
 			// ローテーション(quaternion)とtrans(平行移動成分)を読み込む
-			const rapidjson::Value& rot = transforms[j]["rot"];
-			const rapidjson::Value& trans = transforms[j]["trans"];
+			const rapidjson::Value& Rot = Transforms[j]["rot"];
+			const rapidjson::Value& Trans = Transforms[j]["trans"];
 
-			if (!rot.IsArray() || !trans.IsArray())
+			if (!Rot.IsArray() || !Trans.IsArray())
 			{
-				SDL_Log("Skeleton %s: Bone %d is invalid.", _fileName.c_str(), i);
+				SDL_Log("Skeleton %s: Bone %d is invalid.", _FileName.c_str(), i);
 				return false;
 			}
 
 			// temp.mRotationに　quaternionとしてコピー、
-			temp.mRotation.x = static_cast<float>(rot[0].GetDouble());
-			temp.mRotation.y = static_cast<float>(rot[1].GetDouble());
-			temp.mRotation.z = static_cast<float>(rot[2].GetDouble());
-			temp.mRotation.w = static_cast<float>(rot[3].GetDouble());
+			temp.mRotation.x = static_cast<float>(Rot[0].GetDouble());
+			temp.mRotation.y = static_cast<float>(Rot[1].GetDouble());
+			temp.mRotation.z = static_cast<float>(Rot[2].GetDouble());
+			temp.mRotation.w = static_cast<float>(Rot[3].GetDouble());
 
 			// temp.mTranslationに平行移動成分としてコピー
-			temp.mTranslation.x = static_cast<float>(trans[0].GetDouble());
-			temp.mTranslation.y = static_cast<float>(trans[1].GetDouble());
-			temp.mTranslation.z = static_cast<float>(trans[2].GetDouble());
+			temp.mTranslation.x = static_cast<float>(Trans[0].GetDouble());
+			temp.mTranslation.y = static_cast<float>(Trans[1].GetDouble());
+			temp.mTranslation.z = static_cast<float>(Trans[2].GetDouble());
 
 			// ボーン番号boneIndexの姿勢データとして、mTracks配列に入れる。
 			mTracks[boneIndex].emplace_back(temp);
@@ -144,7 +144,7 @@ bool Animation::Load(const std::string& _fileName)
 }
 
 // inTime時刻時点のグローバルポーズ配列の取得
-void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, float _inTime) const
+void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skeleton* _InSkeleton, float _inTime) const
 {
 	if (_outPoses.size() != mNumBones)
 	{
@@ -173,10 +173,10 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 	}
 	else
 	{
-		_outPoses[0] = Matrix4::Identity;
+		_outPoses[0] = Matrix4::sIDENTITY;
 	}
 
-	const std::vector<Skeleton::Bone>& bones = _inSkeleton->GetBones();
+	const std::vector<Skeleton::Bone>& Bones = _InSkeleton->GetBones();
 	// Now setup the poses for the rest
 	// 残りのポーズを設定します
 	for (size_t bone = 1; bone < mNumBones; bone++)
@@ -192,6 +192,6 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 		}
 
 		// 出力ポーズ行列[bone] = ローカルポーズ行列 * 出力ポーズ行列[親bone]
-		_outPoses[bone] = localMat * _outPoses[bones[bone].mParent];
+		_outPoses[bone] = localMat * _outPoses[Bones[bone].mParent];
 	}
 }

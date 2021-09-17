@@ -6,17 +6,17 @@
 /*
 @fn		コンストラクタ
 @param	_owner ゲームオブジェクトクラスのポインタ
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-SandEffectManager::SandEffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
-	:GameObject(_sceneTag, _objectTag)
+SandEffectManager::SandEffectManager(GameObject* _owner, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	:GameObject(_SceneTag, _ObjectTag)
 {
 	mOwner = _owner;
 	mState = ParticleState::PARTICLE_DISABLE;
-	mPos = Vector3::Zero;
-	mSceneTag = _sceneTag;
-	mTag = _objectTag;
+	mPos = Vector3::sZERO;
+	mSceneTag = _SceneTag;
+	mTag = _ObjectTag;
 }
 
 /*
@@ -34,7 +34,7 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 		mState = ParticleState::PARTICLE_DISABLE;
 	}
 
-	Vector3 vel = Vector3::Zero;
+	Vector3 vel = Vector3::sZERO;
 
 	switch (mState)
 	{
@@ -42,11 +42,17 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case PARTICLE_ACTIVE:
 
+		//ポジションをずらすための定数
+		const Vector3 ShittPos = Vector3(0.0f, 10.0f, 20.0f);
+		//生成するタイミング
+		const int CreateTiming = 6;
+
 		mCreateSandEffectCount++;
 		mPosition = mOwner->GetPosition();
-		mPosition.y -= 10.0f;
-		mPosition.z -= 20.0f;
-		if (mCreateSandEffectCount % 6 == 0)
+		mPosition -= ShittPos;
+
+		//6フレームごとに生成する
+		if (mCreateSandEffectCount % CreateTiming == 0)
 		{
 			vel = Vector3(0.0f, 0.0f, -1.0);
 			mSandEffect = new SandEffect(mPosition, vel, mSceneTag, mTag);

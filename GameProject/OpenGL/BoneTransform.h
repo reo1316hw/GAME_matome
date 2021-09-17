@@ -25,9 +25,9 @@ public:
 	
 	/*
 	@fn		ボーン補間
-	@param	_nowFrameBone	現在のフレームのポーズ
-	@param	_nextFrameBone	次のフレームのポーズ
+	@param	_NowFramePone	現在のフレームのポーズ
+	@param	_NextFramePose	次のフレームのポーズ
 	@param	_interpolation	補間値
 	*/
-	static BoneTransform Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, float _interpolation);
+	static BoneTransform Interpolate(const BoneTransform& _NowFramePone, const BoneTransform& _NextFramePose, float _interpolation);
 };

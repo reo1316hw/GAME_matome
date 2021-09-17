@@ -5,19 +5,20 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos 砂ぼこりの座標
-@param	_vel 砂ぼこりの速度
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos 砂ぼこりの座標
+@param	_Vel 砂ぼこりの速度
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-SandEffect::SandEffect(Vector3 _pos, Vector3 _vel, SceneBase::Scene _sceneTag,const Tag& _objectTag)
-	:ParticleEffectBase(_pos,_vel,30,"Assets/PhotonB.png", _sceneTag, _objectTag)
+SandEffect::SandEffect(const Vector3 _Pos, const Vector3 _Vel, const SceneBase::Scene _SceneTag,const Tag& _ObjectTag)
+	:ParticleEffectBase(_Pos,_Vel,30,"Assets/PhotonB.png", _SceneTag, _ObjectTag)
 {
+	const Vector3 Color = Vector3(0.95f, 0.95f, 0.95f);
 	mAlpha = 0.5f;
 	mScale = 32.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetColor(Vector3(0.95f, 0.95f, 0.95f));
+	mParticle->SetColor(Color);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
 	mSpeed = 1.0f;
 }

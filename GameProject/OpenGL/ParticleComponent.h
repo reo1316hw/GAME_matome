@@ -23,11 +23,11 @@ public:
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
-	@param	_offset 親オブジェクトクラスと画像を描画する位置の差
+	@param	_Offset 親オブジェクトクラスと画像を描画する位置の差
 	@param	_scale 画像の描画サイズ
 	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
-	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
+	ParticleComponent(GameObject* _owner, const Vector3& _Offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
 
 	/*
 	@fn	デストラクタ
@@ -47,8 +47,8 @@ public:
 	void Draw(class Shader* _shader);
 
 	// カメラ距離でのソート用
-	bool operator < (const ParticleComponent& _rhs) const;
-	bool operator > (const ParticleComponent& _rhs) const;
+	bool operator < (const ParticleComponent& _Rhs) const;
+	bool operator > (const ParticleComponent& _Rhs) const;
 
 private:
 
@@ -104,9 +104,9 @@ public: //ゲッターセッター
 	void SetTextureID(int _texId) { mTextureID = _texId; }
 	
 	/*
-	@param _color 画像に乗算する色
+	@param _Color 画像に乗算する色
 	*/
-	void SetColor(const Vector3& _color) { mColor = _color; }
+	void SetColor(const Vector3& _Color) { mColor = _Color; }
 
 	/*
 	@param _alfa 透明度0~1
@@ -119,9 +119,9 @@ public: //ゲッターセッター
 	void SetScale(float _scale) { mScale = _scale; }
 
 	/*
-	@param _mat ビルボード行列
+	@param _Mat ビルボード行列
 	*/
-	void SetBillboardMat(const Matrix4& _mat) {	mStaticBillboardMat = _mat; }
+	void SetBillboardMat(const Matrix4& _Mat) {	mStaticBillboardMat = _Mat; }
 
 	/*
 	@param _brendType カメラのワールド座標

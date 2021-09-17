@@ -10,16 +10,16 @@
 
 /*
 @fn スケルトンのファイルからのロード
-@param _filename
+@param _FileName
 @return 成功、失敗
 */
-bool Skeleton::Load(const std::string& _fileName)
+bool Skeleton::Load(const std::string& _FileName)
 {
 	// ファイル名からテキストファイルをオープンして、RapidJSONに解析させる
-	std::ifstream file(_fileName);
+	std::ifstream file(_FileName);
 	if (!file.is_open())
 	{
-		SDL_Log("File not found: Skeleton %s", _fileName.c_str());
+		SDL_Log("File not found: Skeleton %s", _FileName.c_str());
 		return false;
 	}
 
@@ -33,7 +33,7 @@ bool Skeleton::Load(const std::string& _fileName)
 	// JSONオブジェクトか
 	if (!doc.IsObject())
 	{
-		SDL_Log("Skeleton %s is not valid json", _fileName.c_str());
+		SDL_Log("Skeleton %s is not valid json", _FileName.c_str());
 		return false;
 	}
 
@@ -42,41 +42,41 @@ bool Skeleton::Load(const std::string& _fileName)
 	// Check the metadata　メタデータのチェック（バージョンチェック）
 	if (ver != 1)
 	{
-		SDL_Log("Skeleton %s unknown format", _fileName.c_str());
+		SDL_Log("Skeleton %s unknown format", _FileName.c_str());
 		return false;
 	}
 
 	// bonecount ボーン数の取得
-	const rapidjson::Value& bonecount = doc["bonecount"];
-	if (!bonecount.IsUint())
+	const rapidjson::Value& Bonecount = doc["bonecount"];
+	if (!Bonecount.IsUint())
 	{
-		SDL_Log("Skeleton %s doesn't have a bone count.", _fileName.c_str());
+		SDL_Log("Skeleton %s doesn't have a bone count.", _FileName.c_str());
 		return false;
 	}
 
-	size_t count = bonecount.GetUint();
+	size_t count = Bonecount.GetUint();
 
 	// ボーン数がMAX_SKELETON_BONESを超えていた場合 (196本が最大)
 	if (count > MAX_SKELETON_BONES)
 	{
-		SDL_Log("Skeleton %s exceeds maximum bone count.", _fileName.c_str());
+		SDL_Log("Skeleton %s exceeds maximum bone count.", _FileName.c_str());
 		return false;
 	}
 
 	mBones.reserve(count);
 
 	// ボーン配列の取得
-	const rapidjson::Value& bones = doc["bones"];
-	if (!bones.IsArray())
+	const rapidjson::Value& Bones = doc["bones"];
+	if (!Bones.IsArray())
 	{
-		SDL_Log("Skeleton %s doesn't have a bone array?", _fileName.c_str());
+		SDL_Log("Skeleton %s doesn't have a bone array?", _FileName.c_str());
 		return false;
 	}
 
 	// ボーン配列のサイズとボーン数が異なる場合はエラーを返す
-	if (bones.Size() != count)
+	if (Bones.Size() != count)
 	{
-		SDL_Log("Skeleton %s has a mismatch between the bone count and number of bones", _fileName.c_str());
+		SDL_Log("Skeleton %s has a mismatch between the bone count and number of bones", _FileName.c_str());
 		return false;
 	}
 
@@ -86,49 +86,49 @@ bool Skeleton::Load(const std::string& _fileName)
 	for (rapidjson::SizeType i = 0; i < count; i++)
 	{
 		// ボーンが読めるか？
-		if (!bones[i].IsObject())
+		if (!Bones[i].IsObject())
 		{
-			SDL_Log("Skeleton %s: Bone %d is invalid.", _fileName.c_str(), i);
+			SDL_Log("Skeleton %s: Bone %d is invalid.", _FileName.c_str(), i);
 			return false;
 		}
 
 		// "name" ボーン名
-		const rapidjson::Value& name = bones[i]["name"];
-		temp.mName = name.GetString();
+		const rapidjson::Value& Name = Bones[i]["name"];
+		temp.mName = Name.GetString();
 
 		// "parent" 親ボーンID
-		const rapidjson::Value& parent = bones[i]["parent"];
-		temp.mParent = parent.GetInt();
+		const rapidjson::Value& Parent = Bones[i]["parent"];
+		temp.mParent = Parent.GetInt();
 
 		// "bindpose" バインドポーズ
-		const rapidjson::Value& bindpose = bones[i]["bindpose"];
-		if (!bindpose.IsObject())
+		const rapidjson::Value& Bindpose = Bones[i]["bindpose"];
+		if (!Bindpose.IsObject())
 		{
-			SDL_Log("Skeleton %s: Bone %d is invalid.", _fileName.c_str(), i);
+			SDL_Log("Skeleton %s: Bone %d is invalid.", _FileName.c_str(), i);
 			return false;
 		}
 
 		// バインドポーズの回転、位置
-		const rapidjson::Value& rot = bindpose["rot"];
-		const rapidjson::Value& trans = bindpose["trans"];
+		const rapidjson::Value& Rot = Bindpose["rot"];
+		const rapidjson::Value& Trans = Bindpose["trans"];
 
 		// 回転と位置が配列じゃなかったらエラー返す
-		if (!rot.IsArray() || !trans.IsArray())
+		if (!Rot.IsArray() || !Trans.IsArray())
 		{
-			SDL_Log("Skeleton %s: Bone %d is invalid.", _fileName.c_str(), i);
+			SDL_Log("Skeleton %s: Bone %d is invalid.", _FileName.c_str(), i);
 			return false;
 		}
 
 		// バインドポーズの回転成分
-		temp.mLocalBindPose.mRotation.x = static_cast<float>(rot[0].GetDouble());
-		temp.mLocalBindPose.mRotation.y = static_cast<float>(rot[1].GetDouble());
-		temp.mLocalBindPose.mRotation.z = static_cast<float>(rot[2].GetDouble());
-		temp.mLocalBindPose.mRotation.w = static_cast<float>(rot[3].GetDouble());
+		temp.mLocalBindPose.mRotation.x = static_cast<float>(Rot[0].GetDouble());
+		temp.mLocalBindPose.mRotation.y = static_cast<float>(Rot[1].GetDouble());
+		temp.mLocalBindPose.mRotation.z = static_cast<float>(Rot[2].GetDouble());
+		temp.mLocalBindPose.mRotation.w = static_cast<float>(Rot[3].GetDouble());
 
 		// バインドポーズの移動成分
-		temp.mLocalBindPose.mTranslation.x = static_cast<float>(trans[0].GetDouble());
-		temp.mLocalBindPose.mTranslation.y = static_cast<float>(trans[1].GetDouble());
-		temp.mLocalBindPose.mTranslation.z = static_cast<float>(trans[2].GetDouble());
+		temp.mLocalBindPose.mTranslation.x = static_cast<float>(Trans[0].GetDouble());
+		temp.mLocalBindPose.mTranslation.y = static_cast<float>(Trans[1].GetDouble());
+		temp.mLocalBindPose.mTranslation.z = static_cast<float>(Trans[2].GetDouble());
 
 		// ボーン配列に格納する
 		mBones.emplace_back(temp);

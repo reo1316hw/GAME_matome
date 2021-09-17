@@ -5,18 +5,18 @@
 
 /*
 @fn		コンストラクタ
-@param	_pos 縦移動床の説明パネルの座標
-@param	_vel 縦移動床の説明パネルの速度
-@param	_objectTag アタッチしたゲームオブジェクトのタグ
-@param	_sceneTag シーンのタグ
+@param	_Pos 縦移動床の説明パネルの座標
+@param	_Vel 縦移動床の説明パネルの速度
+@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+@param	_SceneTag シーンのタグ
 */
-VerticalMoveGroundExplanationBoard::VerticalMoveGroundExplanationBoard(const Vector3& _pos, const Vector3& _velocity, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
-	: ParticleEffectBase(_pos, _velocity, 0, "Assets/tutorial01.png", _sceneTag, _objectTag)
+VerticalMoveGroundExplanationBoard::VerticalMoveGroundExplanationBoard(const Vector3& _Pos, const Vector3& _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+	: ParticleEffectBase(_Pos, _Vel, 0, "Assets/tutorial01.png", _SceneTag, _ObjectTag)
 {
-	mInitPos = _pos;
+	mInitPos = _Pos;
 	mScale = 400.0f;
 	mAlpha = 1.0f;
 	mParticle->SetScale(mScale);
 	mParticle->SetAlpha(mAlpha);
-	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
+	mParticle->SetColor(Color::sWHITE);
 }

@@ -139,13 +139,16 @@ void HDRRenderer::HiBrightBlurCreate()
 				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
 
+				//ガウスぼかしのサンプリング点
+				const int SampleCount = 15;
+
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, renderSource);
 				mGaussianBlurShader->SetActive();
 				mGaussianBlurShader->SetIntUniform("blursource", 0);
-				mGaussianBlurShader->SetIntUniform("param.SampleCount", mSampleCount);
+				mGaussianBlurShader->SetIntUniform("param.SampleCount", SampleCount);
 
-				for (int i = 0; i < mSampleCount; i++)
+				for (int i = 0; i < SampleCount; i++)
 				{
 					std::string s = "param.Offset[" + std::to_string(i) + "]";
 					mGaussianBlurShader->SetVectorUniform(s.c_str(), mOffset[i]);
@@ -192,9 +195,9 @@ void HDRRenderer::HdrTonemapAndBrightBlurCombine()
 		mHdrToneAndBlurBlendShader->SetIntUniform("bloom4", 4);
 		mHdrToneAndBlurBlendShader->SetIntUniform("bloom5", 5);
 
-		const float exposure = 0.8f;
+		const float Exposure = 0.8f;
 
-		mHdrToneAndBlurBlendShader->SetFloatUniform("exposure", exposure);
+		mHdrToneAndBlurBlendShader->SetFloatUniform("exposure", Exposure);
 
 		glBindVertexArray(mQuadScreenVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -383,9 +386,9 @@ void HDRRenderer::InitScreenQuadVAO()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 }
 
-float HDRRenderer::GaussianDistribution(const Vector2& _pos, float _rho)
+float HDRRenderer::GaussianDistribution(const Vector2& _Pos, float _rho)
 {
-	return exp(-(_pos.x * _pos.x + _pos.y * _pos.y) / (2.0f * _rho * _rho));
+	return exp(-(_Pos.x * _Pos.x + _Pos.y * _Pos.y) / (2.0f * _rho * _rho));
 }
 
 void HDRRenderer::CalcGaussBlurParam(int _w, int _h, Vector2 _dir, float _deviation)

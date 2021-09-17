@@ -14,13 +14,13 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 右移動ブロックの座標
-	@param	_size 右移動ブロックのサイズ
-	@param	_objectTag 右移動ブロックのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 右移動ブロックの座標
+	@param	_Size 右移動ブロックのサイズ
+	@param	_ObjectTag 右移動ブロックのタグ
+	@param	_SceneTag シーンのタグ
     @param _playerPtr プレイヤーのポインタ
 	*/
-	RightBlock(const Vector3& _pos, const Vector3& _size, const float _addEndPosX, const std::string _gpmeshName, const Tag& _objectTag, const ColliderTag& _colliderTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
+	RightBlock(const Vector3& _Pos, const Vector3& _Size, const float _AddEndPosX, const std::string _GpmeshName, const Tag& _ObjectTag, const ColliderTag& _ColliderTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -52,9 +52,4 @@ private:
 	float mDifferencePos;
 	//開始の値
 	float mStart;
-
-	//全体の時間
-	const float TOTAL_TIME = 1.0f;
-	//右移動ブロックの右に移動する速度
-	const float RIGHT_SPEED = 20.0f;
 };

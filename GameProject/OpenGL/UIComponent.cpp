@@ -44,7 +44,7 @@ UIComponent::~UIComponent()
 @fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
-void UIComponent::Draw(Shader* _shader, const Vector3& _offset)
+void UIComponent::Draw(Shader* _shader, const Vector3& _Offset)
 {
 	//画像情報が空でないか、親オブジェクトが未更新状態でないか
 	if (mTexture && mOwner->GetState() != State::Dead)
@@ -56,8 +56,8 @@ void UIComponent::Draw(Shader* _shader, const Vector3& _offset)
 
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
-			Vector3(_offset.x - (mTextureWidth * 8.5f),
-				(mTextureHeight * 5.0f) - _offset.y, 0.0f));
+			Vector3(_Offset.x - (mTextureWidth * 8.5f),
+				(mTextureHeight * 5.0f) - _Offset.y, 0.0f));
 
 		Matrix4 world = scaleMatrix * transMat;
 

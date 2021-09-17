@@ -14,13 +14,13 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos 1マス右移動床の座標
-	@param	_size 1マス右移動床のサイズ
-	@param	_objectTag 1マス右移動床のタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos 1マス右移動床の座標
+	@param	_Size 1マス右移動床のサイズ
+	@param	_ObjectTag 1マス右移動床のタグ
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	RightGround(const Vector3& _pos, const Vector3& _size, const std::string _gpmeshName, const Tag& _objectTag, const SceneBase::Scene _sceneTag, Player* _playerPtr);
+	RightGround(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -37,7 +37,4 @@ private:
 
 	// プレイヤーのポインタ
 	Player* mPlayer;
-
-	//1マス右移動床の右に移動する速度
-	const float RIGHT_SPEED = 10.0f;
 };

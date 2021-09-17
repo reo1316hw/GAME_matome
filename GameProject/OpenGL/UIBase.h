@@ -9,13 +9,13 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos UIの生成場所(スクリーン座標)
-	@param	_uiFileName 画像へのアドレス
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
-	@param	_scale 画像の拡大サイズ
+	@param	_Pos UIの生成場所(スクリーン座標)
+	@param	_UiFileName 画像へのアドレス
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
+	@param	_Scale 画像の拡大サイズ
 	*/
-	UIBase(const Vector2& _pos,const std::string& _uiFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, const float& _scale = 10);
+	UIBase(const Vector2& _Pos,const std::string& _UiFileName, const SceneBase::Scene _SceneTag, const Tag& _ObjectTag, const float& _Scale = 10);
 
 	/*
 	@fn	デストラクタ

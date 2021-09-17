@@ -8,13 +8,13 @@
 /*
 @fn		jsonファイルのオープン 
 @param	_inputDocument rapidJsonオブジェクト
-@param	_inFileName オープンしたいJsonファイルパス
+@param	_InFileName オープンしたいJsonファイルパス
 return	ファイルを開くことができたか(bool型)
 */
-bool openJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName)
+bool openJsonFile(rapidjson::Document& _inputDocument, const char* _InFileName)
 {
 	// jsonファイル開けるか？
-	std::ifstream file(_inFileName);
+	std::ifstream file(_InFileName);
 	if (!file.is_open())
 	{
 		return false;
@@ -43,16 +43,16 @@ bool openJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName)
 
 /*
 @fn		Doc内にそのメンバーは存在するか？
-@param	_inDocument rapidJsonオブジェクト
-@param	_memberName メンバ名
+@param	_InDocument rapidJsonオブジェクト
+@param	_MemberName メンバ名
 @return	Documentにメンバ名が含まれていたかどうか(bool型)
 */
-bool IsExistMember(const rapidjson::Document& _inDocument, const char* _memberName)
+bool IsExistMember(const rapidjson::Document& _InDocument, const char* _MemberName)
 {
 	rapidjson::Value::ConstMemberIterator iter;
-	iter = _inDocument.FindMember(_memberName);
+	iter = _InDocument.FindMember(_MemberName);
 
-	if (iter == _inDocument.MemberEnd())
+	if (iter == _InDocument.MemberEnd())
 	{
 		return false;
 	}
@@ -61,22 +61,22 @@ bool IsExistMember(const rapidjson::Document& _inDocument, const char* _memberNa
 
 /*
 @fn		そのメンバーが存在し、かつ値が一致するか？
-@param	_inDocument ドキュメント
-@param	_menberName メンバー名
-@param	_matchValue 調べたいメンバー名にマッチする値
+@param	_InDocument ドキュメント
+@param	_MemberName メンバー名
+@param	_MatchValue 調べたいメンバー名にマッチする値
 @return	memberNameに対応する値がmatchValueだったときのみtrueを返す(bool型)
 */
-bool IsExistMemberAndValue(const rapidjson::Document& _inDocument, const char* _menberName, const char* _matchValue)
+bool IsExistMemberAndValue(const rapidjson::Document& _InDocument, const char* _MenberName, const char* _MatchValue)
 {
-	if (!IsExistMember(_inDocument, _menberName))
+	if (!IsExistMember(_InDocument, _MenberName))
 	{
 		return false;
 	}
 
 	std::string findValueString;
-	findValueString = std::string(_matchValue);
+	findValueString = std::string(_MatchValue);
 
-	if (findValueString != _inDocument[_menberName].GetString())
+	if (findValueString != _InDocument[_MenberName].GetString())
 	{
 		return false;
 	}
@@ -84,31 +84,31 @@ bool IsExistMemberAndValue(const rapidjson::Document& _inDocument, const char* _
 }
 
 /*
-@param _inDocument
-@param _menberName 
+@param _InDocument
+@param _MenberName 
 @return Document内にメンバ名が含まれるか(bool型)
 */
-bool IsExistArrayName(const rapidjson::Document& _inDocument, const char* _menberName)
+bool IsExistArrayName(const rapidjson::Document& _InDocument, const char* _MenberName)
 {
 	rapidjson::Value::ConstMemberIterator iter;
-	iter = _inDocument.FindMember(_menberName);
-	if (iter == _inDocument.MemberEnd())
+	iter = _InDocument.FindMember(_MenberName);
+	if (iter == _InDocument.MemberEnd())
 	{
 		return false;
 	}
-	return _inDocument[_menberName].IsArray();
+	return _InDocument[_MenberName].IsArray();
 }
 
 /*
 @fn		Value値を強制的にfloat値として取得
 @brief	JSON値を内容がintでも強制的にfloat値として取得
-@param	_val Value値
+@param	_Val Value値
 @return	JSON値(float型)
 */
-float ForceGetFloat(const rapidjson::Value& _val)
+float ForceGetFloat(const rapidjson::Value& _Val)
 {
 	std::string tmp;
-	tmp = _val.GetString();
+	tmp = _Val.GetString();
 
 	return static_cast<float>(atof(tmp.c_str()));
 }

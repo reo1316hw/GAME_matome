@@ -176,9 +176,9 @@ private:
 	/*
 	@fn		光源情報をシェーダーの変数にセットする
 	@param  _shader セットするShaderクラスのポインタ
-	@param	_view ビュー行列
+	@param	_View ビュー行列
 	*/
-	void SetLightUniforms(Shader* _shader, const Matrix4& _view);
+	void SetLightUniforms(Shader* _shader, const Matrix4& _View);
 
 
 	/*
@@ -205,12 +205,12 @@ private:
 	/*
 	@fn	Particleの描画
 	@param	_framebuffer フレームバッファ
-	@param	_view ビュー行列
-	@param	_proj 射影行列
+	@param	_View ビュー行列
+	@param	_Proj 射影行列
 	@param	_viewPortScale 表示領域スケール
 	@param	_lit 光源情報をシェーダーの変数にセットするかのフラグ
 	*/
-	void Draw3DScene(unsigned int _framebuffer, const Matrix4& _view, const Matrix4& _proj,
+	void Draw3DScene(unsigned int _framebuffer, const Matrix4& _View, const Matrix4& _Proj,
 		float _viewPortScale = 1.0f, bool _lit = true);
 
 	/*
@@ -305,28 +305,28 @@ public://ゲッターセッター
 	static Renderer* GetInstance() { return mRenderer; }
 
 	/*
-	@param	_fileName　取得したいテクスチャのファイル名
+	@param	_FileName　取得したいテクスチャのファイル名
 	@return Textureクラスのポインタ(class Texture)
 	*/
-	Texture* GetTexture(const std::string& _fileName);
+	Texture* GetTexture(const std::string& _FileName);
 
 	/*
-	@param _fileName モデルへのアドレス
+	@param _FileName モデルへのアドレス
 	@return スケルトンモデルの取得(class Skeleton)
 	*/
-	const class Skeleton* GetSkeleton(const char* _fileName);
+	const class Skeleton* GetSkeleton(const char* _FileName);
 
 	/*
-	@param _fileName アニメーションへのアドレス
+	@param _FileName アニメーションへのアドレス
 	@return スケルトンアニメーションの取得(class Animation)
 	*/
-	const class Animation* GetAnimation(const char* _fileName);
+	const class Animation* GetAnimation(const char* _FileName);
 
 	/*
-	@param	_fileName 取得したいメッシュのファイル名
+	@param	_FileName 取得したいメッシュのファイル名
 	@return Meshクラスのポインタ(class Mesh)
 	*/
-	Mesh* GetMesh(const std::string& _fileName);
+	Mesh* GetMesh(const std::string& _FileName);
 
 	/*
 	@return	平行光源の構造体(struct DirectionalLight）
@@ -364,14 +364,14 @@ public://ゲッターセッター
 	unsigned int GetUndefineTexID() { return mUndefineTexID; }
 
 	/*
-	@param	_view ビュー行列
+	@param	_View ビュー行列
 	*/
-	void SetViewMatrix(const Matrix4& _view) { mView = _view; }
+	void SetViewMatrix(const Matrix4& _View) { mView = _View; }
 
 	/*
-	@param	_ambient（環境光を表す）
+	@param	_Ambient（環境光を表す）
 	*/
-	void SetAmbientLight(const Vector3& _ambient) { mAmbientLight = _ambient; }
+	void SetAmbientLight(const Vector3& _Ambient) { mAmbientLight = _Ambient; }
 
 	/*
 	@fn	パーティクル用頂点を設定

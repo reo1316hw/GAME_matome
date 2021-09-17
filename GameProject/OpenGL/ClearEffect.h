@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos クリアエフェクトの生成場所
-	@param	_vel クリアエフェクトの速度
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos クリアエフェクトの生成場所
+	@param	_Vel クリアエフェクトの速度
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	ClearEffect(Vector3 _pos, Vector3 _vel, const Tag& _objectTag ,SceneBase::Scene _sceneTag);
+	ClearEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag , const SceneBase::Scene _SceneTag);
 
 	/*
 	@fn	デストラクタ

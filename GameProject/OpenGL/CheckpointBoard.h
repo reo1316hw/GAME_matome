@@ -9,12 +9,12 @@ public:
 
 	/*
 	@fn		コンストラクタ
-	@param	_pos チェックポイントボードの座標
-	@param	_vel チェックポイントボード操作方法パネルの速度
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
+	@param	_Pos チェックポイントボードの座標
+	@param	_Vel チェックポイントボード操作方法パネルの速度
+	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
+	@param	_SceneTag シーンのタグ
 	*/
-	CheckpointBoard(const Vector3& _pos, const Vector3& _vel, const std::string& _particleFileName ,const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	CheckpointBoard(const Vector3& _Pos, const Vector3& _Vel, const std::string& _ParticleFileName ,const Tag& _ObjectTag, const SceneBase::Scene _SceneTag);
 
 	/*
 	@fn	デストラクタ
