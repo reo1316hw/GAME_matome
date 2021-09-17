@@ -31,7 +31,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mScaleFlag(false)
 	, mGroundFlag(false)
 	, mCollisionFlag(true)
-	, mCheckpointFlag(false)
+	, mEnableCheckpointFlag(false)
 	, mRespawnFlag(false)
 {
 	//GameObjectメンバ変数の初期化
@@ -284,13 +284,13 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	// 常に前に進む
-	if (mStopFlag == false)
+	if (!mStopFlag)
 	{
 		mVelocity.z = mMoveSpeed;
 	}
 
 	//ボタンを押していないときの減速処理
-	if (mButtonFlag == false)
+	if (!mButtonFlag)
 	{
 		//減速度
 		const float PlayerSpeedDown = 4.0f;
@@ -316,7 +316,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//接地していないかつリスポーン時の待機時間じゃない時に重力処理を行う
-	if (mGroundFlag == false && mStopFlag == false)
+	if (!mGroundFlag && !mStopFlag)
 	{
 		mVelocity.y -= mGravity;
 	}
@@ -330,18 +330,8 @@ void Player::UpdateGameObject(float _deltaTime)
 		mCollisionFlag = false;
 	}
 
-	//チェックポイントエフェクト生成器の生存時間が1になったらチェックポイントエフェクトを発生させないようにする
-	if (mCheckpointEffectCount == 1)
-	{
-		mCheckpointFlag = false;
-		mCheckpointEffectCount = 0;
-	}
-
-	//チェックポイントを通過したらチェックポイントエフェクト生成器の生存時間をカウントする
-	if (mCheckpointFlag)
-	{
-		mCheckpointEffectCount++;
-	}
+	//チェックポイントを制御
+	CheckpointEffectControl();
 
 	// 常に座標に速度を足す
  	mPosition += mVelocity + mLateralMoveVelocity;
@@ -354,7 +344,38 @@ void Player::UpdateGameObject(float _deltaTime)
 
 	// 座標をセット
 	SetPosition(mPosition);
+}
 
+/*
+@fn	チェックポイントを制御
+*/
+void Player::CheckpointEffectControl()
+{
+	//チェックポイントボードに当たったらエフェクトを発生するためのカウントを始める
+	if (mHitCheckpointFlag)
+	{
+		//リセットするタイミング
+		const int ResetNum = 60;
+
+		mCheckpointEffectCount++;
+
+		//エフェクトのフラグやカウントを数フレーム後にリセットする
+		if (mCheckpointEffectCount >= ResetNum)
+		{
+			mHitCheckpointFlag = false;
+			mCheckpointEffectCount = 0;
+		}
+
+		//カウントを始めて最初の1フレーム時に1回だけエフェクトを発生させる
+		if (mCheckpointEffectCount == 1)
+		{
+			mEnableCheckpointFlag = true;
+		}
+		else
+		{
+			mEnableCheckpointFlag = false;
+		}
+	}
 }
 
 /*
@@ -402,19 +423,6 @@ void Player::OnCollision(const GameObject& _HitObject)
 		//ヒットしたオブジェクトのタグを取得
 		mTag = _HitObject.GetTag();
 
-		//ジャンプ判定
-		if (mTag == jump)
-		{
-			mJumpFlag = true;
-		}
-
-		//チェックポイント通過判定
-		if (mTag == checkpoint)
-		{
-			mCheckpointFlag = true;
-			mRespawnPos = _HitObject.GetPosition();
-		}
-
 		//ダメージ判定
 		if (mTag == block ||
 			mTag == verticalBlock ||
@@ -443,6 +451,12 @@ void Player::OnCollision(const GameObject& _HitObject)
 			mGroundFlag = true;
 		}
 
+		//ジャンプ判定
+		if (mTag == jump)
+		{
+			mJumpFlag = true;
+		}
+
 		//横移動床の判定
 		if (mTag == lateralMoveGround)
 		{
@@ -454,6 +468,13 @@ void Player::OnCollision(const GameObject& _HitObject)
 		else
 		{
 			mLateralMoveVelocity = Vector3::sZERO;
+		}
+
+		//チェックポイント通過判定
+		if (mTag == checkpoint)
+		{
+			mHitCheckpointFlag = true;
+			mRespawnPos = _HitObject.GetPosition();
 		}
 	}
 }

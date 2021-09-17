@@ -26,7 +26,7 @@ CheckpointEffectManager::CheckpointEffectManager(const Tag& _ObjectTag, const Sc
 void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 {
 	//チェックポイントを通過したらチェックポイントエフェクトをアクティブにする
-	if (mPlayer->GetCheckpointFlag())
+	if (mPlayer->GetEnableCheckpointFlag())
 	{
 		mState = ParticleState::PARTICLE_ACTIVE;
 	}

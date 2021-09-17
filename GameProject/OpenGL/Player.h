@@ -62,6 +62,11 @@ public:
 
 private:
 
+	/*
+    @fn	チェックポイントを制御
+    */
+	void CheckpointEffectControl();
+
 	//プレイヤーの球当たり判定を生成
 	SphereCollider*		mSelfSphereCollider;
 	//プレイヤーの球当たり判定の大きさ
@@ -97,8 +102,10 @@ private:
 	bool		mGroundFlag;
 	//当たり判定を行うか
 	bool		mCollisionFlag;
-	//チェックポイント通過したか
-	bool		mCheckpointFlag;
+	//チェックポイントを有効にするか
+	bool		mEnableCheckpointFlag;
+	//チェックポイントボードに当たったか
+	bool		mHitCheckpointFlag;
 	// リスポーンしたか
 	bool        mRespawnFlag;
 
@@ -123,7 +130,7 @@ public://ゲッターセッター
 
 	bool GetClearFlag() { return mClearFlag; };
 	bool GetDeathFlag() { return mDeathFlag; };
-    bool GetCheckpointFlag() { return mCheckpointFlag; };
+    bool GetEnableCheckpointFlag() { return mEnableCheckpointFlag; };
     int GetLife() { return mLife; };
 
 };
