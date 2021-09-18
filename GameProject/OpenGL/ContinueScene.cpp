@@ -27,15 +27,15 @@ ContinueScene::ContinueScene(const Scene& _NowScene, const Scene& _PreScene, con
 
 	switch (_PreScene)
 	{
-	case tutorial:
+	case eTutorial:
 
 		mTutorialTransitionFlag = _TransitionSceneFlag;
 		break;
-	case stage01:
+	case eStage01:
 
 		mStage01TransitionFlag = _TransitionSceneFlag;
 		break;
-	case stage02:
+	case eStage02:
 
 		mStage02TransitionFlag = _TransitionSceneFlag;
 		break;
@@ -57,38 +57,38 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 {
 	if (mTutorialTransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
+		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mTutorialTransitionFlag = false;
-			return new TutorialScene(SceneBase::tutorial);
+			return new TutorialScene(SceneBase::eTutorial);
 		}
 	}
 
 	if (mStage01TransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
+		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage01TransitionFlag = false;
-			return new Stage01Scene(SceneBase::stage01);
+			return new Stage01Scene(SceneBase::eStage01);
 		}
 	}
 
 	if (mStage02TransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == Released ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == Released)
+		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage02TransitionFlag = false;
-			return new Stage02Scene(SceneBase::stage02);
+			return new Stage02Scene(SceneBase::eStage02);
 		}
 	}
 
-	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == Released ||
-		_State.m_keyboard.GetKeyState(SDL_SCANCODE_E) == Released)
+	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::eReleased ||
+		_State.m_keyboard.GetKeyState(SDL_SCANCODE_E) == ButtonState::eReleased)
 	{
-		return new GameOver(SceneBase::gameOver);
+		return new GameOver(SceneBase::eGameOver);
 	}
 
 	return this;

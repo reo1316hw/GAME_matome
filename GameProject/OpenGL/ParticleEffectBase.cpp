@@ -49,7 +49,7 @@ void ParticleEffectBase::LifeCountDown()
 	if (mLifeCount <= 0)
 	{
 		mParticle->SetVisible(false);
-		SetState(State::Dead);
+		SetState(State::eDead);
 	}
 	else
 	{

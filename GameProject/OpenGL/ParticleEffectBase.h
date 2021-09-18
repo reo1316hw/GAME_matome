@@ -14,9 +14,9 @@
 enum ParticleState
 {
 	//アクティブ
-	PARTICLE_ACTIVE,
+	eParticleActive,
 	//無効にする
-	PARTICLE_DISABLE,
+	eParticleDisable,
 };
 
 class ParticleEffectBase : public GameObject

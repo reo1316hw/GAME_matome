@@ -20,7 +20,7 @@ CheckpointEffect::CheckpointEffect(const Vector3 _Pos, const Vector3 _Vel, const
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::sYELLOW);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAlpha);
 }
 
 /*

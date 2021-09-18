@@ -716,7 +716,7 @@ void Renderer::CreateParticleVerts()
 		0, 2, 1,
 		2, 0, 3
 	};
-	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+	mParticleVertex = new VertexArray(vertices, 4, VertexArray::ePosNormTex, indices, 6);
 }
 
 /*
@@ -732,7 +732,7 @@ void Renderer::DrawParticle()
 		return;
 	}
 	// ブレンドモード初期状態取得
-	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
+	ParticleComponent::ParticleBlendType blendType, prevType;
 	auto itr = mParticles.begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
@@ -863,17 +863,17 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _View)
 @fn		光源情報をシェーダーの変数にセットする
 @param  _blendType パーティクルに対するブレンドの種類
 */
-void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
+void Renderer::ChangeBlendMode(ParticleComponent::ParticleBlendType _blendType)
 {
 	switch (_blendType)
 	{
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ADD:
+	case ParticleComponent::eParticleBlendAdd:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA:
+	case ParticleComponent::eParticleBlendAlpha:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_MULT:
+	case ParticleComponent::eParticleBlendMult:
 		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
 		break;
 	default:

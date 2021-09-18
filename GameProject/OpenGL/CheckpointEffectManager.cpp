@@ -12,7 +12,7 @@
 CheckpointEffectManager::CheckpointEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	:GameObject(_SceneTag, _ObjectTag)
 {
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -28,21 +28,21 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 	//チェックポイントを通過したらチェックポイントエフェクトをアクティブにする
 	if (mPlayer->GetEnableCheckpointFlag())
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		mState = ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::eParticleDisable;
 	}
 
 	//チェックポイントのステートを調べてチェックポイントエフェクトの処理を行う
 	switch (mState)
 	{
 	//アクティブじゃないなら
-	case PARTICLE_DISABLE:
+	case ParticleState::eParticleDisable:
 		break;
 	//アクティブなら
-	case PARTICLE_ACTIVE:
+	case ParticleState::eParticleActive:
 		
 		//親のポジションを取得
 		mPosition = mPlayer->GetPosition();
@@ -56,7 +56,7 @@ void CheckpointEffectManager::UpdateGameObject(float _deltaTime)
 			mCheckpointEffect = new CheckpointEffect(mPosition, mVelocity, mTag, mSceneTag);
 		}
 
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::eParticleDisable;
 		break;
 	}
 }

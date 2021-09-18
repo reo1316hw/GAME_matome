@@ -67,6 +67,9 @@ private:
     */
 	void CheckpointEffectControl();
 
+	//地面のY座標
+	const float MGroundYPos;
+
 	//プレイヤーの球当たり判定を生成
 	SphereCollider*		mSelfSphereCollider;
 	//プレイヤーの球当たり判定の大きさ

@@ -53,11 +53,11 @@ struct DirectionalLight
 */
 enum class TextureStage
 {
-	DiffuseMap,
-	NormalMap,
-	SpecularMap,
-	EmissiveMap,
-	ShadowMap,
+	eDiffuseMap,
+	eNormalMap,
+	eSpecularMap,
+	eEmissiveMap,
+	eShadowMap,
 };
 
 class Renderer
@@ -217,7 +217,7 @@ private:
 	@fn		光源情報をシェーダーの変数にセットする
 	@param  _blendType パーティクルに対するブレンドの種類
 	*/
-	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType);
+	void ChangeBlendMode(ParticleComponent::ParticleBlendType _blendType);
 
 	/*
 	@fn		テクスチャの変更

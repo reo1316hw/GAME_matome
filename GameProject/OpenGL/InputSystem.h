@@ -10,13 +10,13 @@ enum ButtonState
 enum ButtonState
 {
 	//‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
-	None,		
+	eNone,		
 	//‰Ÿ‚µ‚½
-	Pressed,	
+	ePressed,	
 	//—£‚µ‚½
-	Released,	
+	eReleased,	
 	//‰Ÿ‚³‚ê‚Ä‚¢‚é
-	Held		
+	eHeld		
 };
 
 /*

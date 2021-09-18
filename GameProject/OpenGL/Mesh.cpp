@@ -37,10 +37,10 @@ Mesh::Mesh()
 	, mAlpha(1.0f)
 	, mBox(Vector3::sINFINITY, Vector3::sNEG_INFINITY)
 {
-	mStageDefTexture.emplace(TextureStage::DiffuseMap, 0);
-	mStageDefTexture.emplace(TextureStage::NormalMap, 0);
-	mStageDefTexture.emplace(TextureStage::SpecularMap, 0);
-	mStageDefTexture.emplace(TextureStage::EmissiveMap, 0);
+	mStageDefTexture.emplace(TextureStage::eDiffuseMap, 0);
+	mStageDefTexture.emplace(TextureStage::eNormalMap, 0);
+	mStageDefTexture.emplace(TextureStage::eSpecularMap, 0);
+	mStageDefTexture.emplace(TextureStage::eEmissiveMap, 0);
 }
 
 /*
@@ -85,13 +85,13 @@ bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 	// Skip the vertex format/shader for now
 	// (This is changed in a later chapter's code)
 	// 頂点レイアウトとサイズをファイルからセット
-	VertexArray::Layout layout = VertexArray::PosNormTex;
+	VertexArray::Layout layout = VertexArray::ePosNormTex;
 	size_t vertSize = 8;
 
 	std::string vertexFormat = doc["vertexformat"].GetString();
 	if (vertexFormat == "PosNormSkinTex")
 	{
-		layout = VertexArray::PosNormSkinTex;
+		layout = VertexArray::ePosNormSkinTex;
 		// This is the number of "Vertex" unions, which is 8 + 2 (for skinning)s　1個の頂点の集合の数　８　＋　２（スキニング分）
 		// 3 (位置xyz) + 3(法線xyz) + 2(Boneと重み）＋　2(UV)  の計　10個分（40byte) 　
 		vertSize = 10;
@@ -137,18 +137,18 @@ bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 
 		if (ReadTextures.Size() == 1)
 		{
-			mStageDefTexture[TextureStage::DiffuseMap] = t->GetTextureID();
+			mStageDefTexture[TextureStage::eDiffuseMap] = t->GetTextureID();
 		}
 	}
 
 	// テクスチャ読み込み(新ファイル形式)
 	if (IsExistMember(doc, "diffusemap"))
 	{
-		mStageDefTexture[TextureStage::DiffuseMap] = LoadStageTextures(doc, TextureStage::DiffuseMap, "diffusemap");
+		mStageDefTexture[TextureStage::eDiffuseMap] = LoadStageTextures(doc, TextureStage::eDiffuseMap, "diffusemap");
 	}
-	mStageDefTexture[TextureStage::NormalMap] = LoadStageTextures(doc, TextureStage::NormalMap, "normalmap");
-	mStageDefTexture[TextureStage::SpecularMap] = LoadStageTextures(doc, TextureStage::SpecularMap, "specularmap");
-	mStageDefTexture[TextureStage::EmissiveMap] = LoadStageTextures(doc, TextureStage::EmissiveMap, "emissivemap");
+	mStageDefTexture[TextureStage::eNormalMap] = LoadStageTextures(doc, TextureStage::eNormalMap, "normalmap");
+	mStageDefTexture[TextureStage::eSpecularMap] = LoadStageTextures(doc, TextureStage::eSpecularMap, "specularmap");
+	mStageDefTexture[TextureStage::eEmissiveMap] = LoadStageTextures(doc, TextureStage::eEmissiveMap, "emissivemap");
 
 	// 頂点配列データをロード
 	const rapidjson::Value& VertsJson = doc["vertices"];
@@ -184,7 +184,7 @@ bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 		mBox.UpdateMinMax(pos);
 
 		// 頂点レイアウトが PosNormTexなら（ボーンが無い）
-		if (layout == VertexArray::PosNormTex)
+		if (layout == VertexArray::ePosNormTex)
 		{
 			Vertex v;
 			// Add the floats　float値を追加

@@ -69,15 +69,15 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	for (auto pending : mPendingGameObjects)
 	{
 		pending->ComputeWorldTransform();
-		if (pending->GetScene() == SceneBase::Scene::tutorial)
+		if (pending->GetScene() == SceneBase::eTutorial)
 		{
 			mTutorialObjects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::stage01)
+		if (pending->GetScene() == SceneBase::eStage01)
 		{
 			mStage01Objects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::stage02)
+		if (pending->GetScene() == SceneBase::eStage02)
 		{
 			mStage02Objects.emplace_back(pending);
 		}
@@ -126,20 +126,20 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 	{
 		switch (_object->GetTag())
 		{
-		case Camera:
+		case Tag::eCameraTag:
 			mCameraObjects.emplace_back(_object);
 			break;
 		}
 
 		switch (_object->GetScene())
 		{
-		case SceneBase::tutorial:
+		case SceneBase::eTutorial:
 			mTutorialObjects.emplace_back(_object);
 			break;
-		case SceneBase::stage01:
+		case SceneBase::eStage01:
 			mStage01Objects.emplace_back(_object);
 			break;
-		case SceneBase::stage02:
+		case SceneBase::eStage02:
 			mStage02Objects.emplace_back(_object);
 			break;
 		}
@@ -191,7 +191,7 @@ void GameObjectManager::RemoveSceneGameObject(SceneBase::Scene _scene)
 {
 	switch (_scene)
 	{
-	case SceneBase::tutorial:
+	case SceneBase::eTutorial:
 
 		while (!mTutorialObjects.empty())
 		{
@@ -199,7 +199,7 @@ void GameObjectManager::RemoveSceneGameObject(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::stage01:
+	case SceneBase::eStage01:
 
 		while (!mStage01Objects.empty())
 		{
@@ -207,7 +207,7 @@ void GameObjectManager::RemoveSceneGameObject(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::stage02:
+	case SceneBase::eStage02:
 		while (!mStage02Objects.empty())
 		{
 			delete mStage02Objects.back();

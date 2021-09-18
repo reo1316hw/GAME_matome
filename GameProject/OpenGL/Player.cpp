@@ -22,7 +22,8 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mLife(0)
 	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
-	, mScene(SceneBase::other)
+	, MGroundYPos(120.0f)
+	, mScene(SceneBase::eOtherScene)
 	, mDeathFlag(false)
 	, mDamageFlag(false)
 	, mStopFlag(false)
@@ -88,7 +89,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	//ステージクリアしたらプレイヤーの更新を止める
 	if (mClearFlag)
 	{
-		SetState(State::Dead);
+		SetState(State::eDead);
 	}
 
 	//プレイヤーがある一定の座標まで落ちたらダメージを受ける
@@ -120,7 +121,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//チュートリアル
-	if (mScene == SceneBase::tutorial)
+	if (mScene == SceneBase::eTutorial)
 	{
 		//チュートリアル時の前方移動速度
 		mMoveSpeed = 13.0f;
@@ -143,7 +144,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//ステージ01
-	if (mScene == SceneBase::stage01)
+	if (mScene == SceneBase::eStage01)
 	{
 		//ステージ01のジャンプ力
 		if (mJumpFlag)
@@ -164,7 +165,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//ステージ02
-	if (mScene == SceneBase::stage02)
+	if (mScene == SceneBase::eStage02)
 	{
 		//ステージ02のジャンプ力
 		if (mJumpFlag)
@@ -222,22 +223,19 @@ void Player::UpdateGameObject(float _deltaTime)
 	if (mLife <= 0)
 	{
 		mDeathFlag = true;
-		SetState(State::Dead);
+		SetState(State::eDead);
 	}
-
-	//スケールを変える座標
-	const float ChangeScaleYPos = 120.0f;
 
 	///////////////////////////////////////////////////////
 	//スケール縮小処理
 	if (mScaleFlag)
 	{
 
-		mScale.y = 1.2f + (mPosition.y - ChangeScaleYPos) * 0.0015f;
-		mScale.z = 1.2f + (mPosition.y - ChangeScaleYPos) * 0.0015f;
+		mScale.y = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
+		mScale.z = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
 	}
 
-	if (mPosition.y <= ChangeScaleYPos && mVelocity.y <= 0.0f)
+	if (mPosition.y <= MGroundYPos && mVelocity.y <= 0.0f)
 	{
 		mScaleFlag = false;
 		mScale.x = 1.2f;
@@ -322,7 +320,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//当たり判定を無効にするy座標
-	const float OffCollisionYPos = 30.0f;
+	const float OffCollisionYPos = 90.0f;
 
 	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
 	if (mPosition.y < OffCollisionYPos)
@@ -424,27 +422,27 @@ void Player::OnCollision(const GameObject& _HitObject)
 		mTag = _HitObject.GetTag();
 
 		//ダメージ判定
-		if (mTag == block ||
-			mTag == verticalBlock ||
-			mTag == rightBlock ||
-			mTag == leftBlock ||
-			mTag == rightOneMoveBlock ||
-			mTag == leftOneMoveBlock ||
-			mTag == aerialBlock ||
-			mTag == upBlock)
+		if (mTag == eBlockTag ||
+			mTag == eVerticalBlockTag ||
+			mTag == eRightBlockTag ||
+			mTag == eLeftBlockTag ||
+			mTag == eRightOneMoveBlockTag ||
+			mTag == eLeftOneMoveBlockTag ||
+			mTag == eAerialBlockTag ||
+			mTag == eLowUpBlockTag)
 		{
 			mDamageFlag = true;
 		}
 
 		//接地判定
-		if (mTag == ground ||
-			mTag == glass ||
-			mTag == verticalMoveGround ||
-			mTag == rightGround ||
-			mTag == leftGround ||
-			mTag == lateralMoveGround ||
-			mTag == jump ||
-			mTag == downBlock)
+		if (mTag == eGroundTag ||
+			mTag == eGlassTag ||
+			mTag == eVerticalMoveGroundTag ||
+			mTag == eRightGroundTag ||
+			mTag == eLeftGroundTag ||
+			mTag == eLateralMoveGroundTag ||
+			mTag == eJumpTag ||
+			mTag == eDownBlockTag)
 		{
 			//重力を消す
 			mVelocity.y = 0;
@@ -452,13 +450,13 @@ void Player::OnCollision(const GameObject& _HitObject)
 		}
 
 		//ジャンプ判定
-		if (mTag == jump)
+		if (mTag == eJumpTag)
 		{
 			mJumpFlag = true;
 		}
 
 		//横移動床の判定
-		if (mTag == lateralMoveGround)
+		if (mTag == eLateralMoveGroundTag)
 		{
 			//重力を消す
 			mVelocity.y = 0;
@@ -471,10 +469,16 @@ void Player::OnCollision(const GameObject& _HitObject)
 		}
 
 		//チェックポイント通過判定
-		if (mTag == checkpoint)
+		if (mTag == eCheckpointTag)
 		{
+			mGroundFlag = false;
 			mHitCheckpointFlag = true;
 			mRespawnPos = _HitObject.GetPosition();
+
+			if (mPosition.y <= MGroundYPos)
+			{
+				mGroundFlag = true;
+			}
 		}
 	}
 }

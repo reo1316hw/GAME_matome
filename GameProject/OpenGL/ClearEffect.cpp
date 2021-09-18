@@ -18,7 +18,7 @@ ClearEffect::ClearEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Obj
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::sYELLOW);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAlpha);
 	mSpeed = 1.0f;
 }
 

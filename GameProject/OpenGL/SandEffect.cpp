@@ -19,7 +19,7 @@ SandEffect::SandEffect(const Vector3 _Pos, const Vector3 _Vel, const SceneBase::
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAlpha);
 	mSpeed = 1.0f;
 }
 

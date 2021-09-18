@@ -22,17 +22,17 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mGoalLine = new GoalLine(Vector3(800, 150, -2200), Vector3::sZERO, Tag::Other, Scene::stage02);
+	mGoalLine = new GoalLine(Vector3(800, 150, -2200), Vector3::sZERO, Tag::eOtherTag, Scene::eStage02);
 
 	for (int i = 0; i < 3; i++)
 	{
 		if (i <= 1)
 		{
-			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f,( -83100.0f + i * 22000.0f)), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::checkpoint, Scene::stage02);
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f,( -83100.0f + i * 22000.0f)), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::eCheckpointTag, Scene::eStage02);
 		}
 		else
 		{
-			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f, -29100.0f), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::checkpoint, Scene::stage02);
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f, -29100.0f), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::eCheckpointTag, Scene::eStage02);
 		}
 	}
 
@@ -43,7 +43,7 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::stage02, mPlayer);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::eOtherTag, Scene::eStage02, mPlayer);
 	}
 
 	mClearFlag = false;
@@ -55,7 +55,7 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 */
 Stage02Scene::~Stage02Scene()
 {
-	GAME_OBJECT_MANAGER->RemoveSceneGameObject(stage02);
+	GAME_OBJECT_MANAGER->RemoveSceneGameObject(Scene::eStage02);
 	delete mSprite;
 	delete mMapCreate;
 }
@@ -74,7 +74,7 @@ SceneBase* Stage02Scene::UpdateScene(const InputState& _State)
 
 		if (mNextSceneCount >= NextSceneTiming)
 		{
-			return new GameClear(gameClear);
+			return new GameClear(Scene::eGameClear);
 		}
 	}
 
@@ -85,7 +85,7 @@ SceneBase* Stage02Scene::UpdateScene(const InputState& _State)
 		if (mNextSceneCount >= NextSceneTiming)
 		{
 			mTransitionFlag = true;
-			return new ContinueScene(Continue, stage02, mTransitionFlag);
+			return new ContinueScene(Scene::eContinue, Scene::eStage02, mTransitionFlag);
 		}
 	}
 

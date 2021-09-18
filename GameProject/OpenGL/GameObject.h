@@ -24,11 +24,11 @@ struct InputState;
 enum State
 {
 	//アクティブ
-	Active,
+	eActive,
 	//更新が停止している
-	Paused,
+	ePaused,
 	//オブジェクトの更新が終了(外部からのみActiveに変更可能)
-	Dead,
+	eDead,
 };
 
 /*
@@ -37,29 +37,29 @@ enum State
 */
 enum Tag
 {
-	Other = 0,
-	Camera = 1,
-	player = 2,
-	ground = 3,
-	glass = 4,
-	block = 5,
-	verticalMoveGround = 6,
-	jump = 7,
-	lateralMoveGround = 8,
-	upBlock = 9,
-	upBlock_02 = 10,
-	verticalBlock = 11,
-	aerialBlock = 12,
-	rightBlock = 13,
-	leftBlock = 14,
-	rightGround = 15,
-	rightOneMoveBlock = 16,
-	leftGround = 17,
-	leftOneMoveBlock = 18,
-	downBlock = 19,
-	goalBlock = 20,
-	checkpoint = 21,
-	Swith = 22
+	eOtherTag = 0,
+	eCameraTag = 1,
+	ePlayerTag = 2,
+	eGroundTag = 3,
+	eGlassTag = 4,
+	eBlockTag = 5,
+	eVerticalMoveGroundTag = 6,
+	eJumpTag = 7,
+	eLateralMoveGroundTag = 8,
+	eLowUpBlockTag = 9,
+	eHighUpBlockTag = 10,
+	eVerticalBlockTag = 11,
+	eAerialBlockTag = 12,
+	eRightBlockTag = 13,
+	eLeftBlockTag = 14,
+	eRightGroundTag = 15,
+	eRightOneMoveBlockTag = 16,
+	eLeftGroundTag = 17,
+	eLeftOneMoveBlockTag = 18,
+	eDownBlockTag = 19,
+	eGoalBlockTag = 20,
+	eCheckpointTag = 21,
+	eSwithTag = 22
 };
 
 /*
@@ -68,15 +68,15 @@ enum Tag
 enum PauzingEvent
 {
 	//ボスの特殊演出
-	SummonMageEvent,
+	eSummonMageEvent,
 	//ポーズ画面中
-	PausingEvent,
+	ePausingEvent,
 	//プレイヤーが撃破されてしまった際の演出
-	DeadPlayerEvent,
+	eDeadPlayerEvent,
 	//ゲームオーバー時の演出 DeadPlayerEventと関連
-	GameOverEvent,
+	eGameOverEvent,
 	//ゲームオブジェクトの更新が行われている。
-	NoneEvent
+	eNoneEvent
 };
 
 class GameObject

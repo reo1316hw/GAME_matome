@@ -8,7 +8,7 @@ int GameObject::mGameObjectId = 0;
 //メインカメラの初期化　生成はGameObjectManager生成時に行われる
 MainCameraObject* GameObject::mMainCamera = nullptr;
 //ゲームオブジェクトの更新を止めるイベント状態の初期化
-PauzingEvent GameObject::mPauzingEvent = PauzingEvent::NoneEvent;
+PauzingEvent GameObject::mPauzingEvent = PauzingEvent::eNoneEvent;
 
 /*
 @fn		コンストラクタ
@@ -17,7 +17,7 @@ PauzingEvent GameObject::mPauzingEvent = PauzingEvent::NoneEvent;
 @param	_reUseGameObject
 */
 GameObject::GameObject(SceneBase::Scene _SceneTag,const Tag& _ObjectTag, bool _reUseGameObject)
-	: mState(Active)
+	: mState(State::eActive)
 	, mWorldTransform()
 	, mPosition(Vector3::sZERO)
 	, mVelocity(Vector3::sZERO)
@@ -59,9 +59,9 @@ GameObject::~GameObject()
 void GameObject::Update(float _deltaTime)
 {
 	//更新停止のイベント中でないか(ポーズ画面など)
-	if (mPauzingEvent == PauzingEvent::NoneEvent)
+	if (mPauzingEvent == PauzingEvent::eNoneEvent)
 	{
-		if (mState == Active)
+		if (mState == State::eActive)
 		{
 			//Transformのワールド変換
 			ComputeWorldTransform();
@@ -74,7 +74,7 @@ void GameObject::Update(float _deltaTime)
 		}
 	}
 	//ポーズ画面のときコンポーネントを更新させない(アニメーションなども止めるため)
-	else if(mPauzingEvent == PauzingEvent::PausingEvent)
+	else if(mPauzingEvent == PauzingEvent::ePausingEvent)
 	{
 		PausingUpdateGameObject();
 	}
@@ -91,7 +91,7 @@ void GameObject::Update(float _deltaTime)
 */
 void GameObject::UpdateComponents(float _deltaTime)
 {
-	if (mState != Dead)
+	if (mState != State::eDead)
 	{	
 		for (auto itr : mComponents)
 		{
@@ -123,7 +123,7 @@ void GameObject::PausingUpdateGameObject()
 */
 void GameObject::ProcessInput(const InputState& _KeyState)
 {
-	if (mState == Active)
+	if (mState == State::eActive)
 	{
 		//コンポーネントの入力関数にコントローラーの入力状態を
 		for (auto comp : mComponents)

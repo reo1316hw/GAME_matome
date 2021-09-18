@@ -39,23 +39,23 @@ public:
     enum Scene
     {
         // その他
-        other,
+        eOtherScene,
         // タイトル
-        title,
+        eTitle,
         // チュートリアル
-        tutorial,
+        eTutorial,
         // ステージセレクト画面
-        stageSelect,
+        eStageSelect,
         // ステージ1
-        stage01,
+        eStage01,
         // ステージ2
-        stage02,
+        eStage02,
         // ゲームクリア
-        gameClear,
+        eGameClear,
         // ゲームオーバー
-        gameOver,
+        eGameOver,
         // コンティニュー 
-        Continue
+        eContinue
     };
 
 protected:

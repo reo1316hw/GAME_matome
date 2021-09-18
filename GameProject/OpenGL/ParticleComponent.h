@@ -13,12 +13,12 @@ class ParticleComponent : public Component
 public:
 
 	//パーティクルに対するブレンドの種類
-	typedef enum PARTICLE_BLEND_ENUM
+	typedef enum ParticleBlendType
 	{
-		PARTICLE_BLEND_ENUM_ALPHA,
-		PARTICLE_BLEND_ENUM_ADD,
-		PARTICLE_BLEND_ENUM_MULT
-	}PARTICLE_ENUM;
+		eParticleBlendAlpha,
+		eParticleBlendAdd,
+		eParticleBlendMult
+	}ParticleEnum;
 
 	/*
 	@fn		コンストラクタ
@@ -63,7 +63,7 @@ private:
 	//テクスチャID
 	int mTextureID; 
 	//ブレンドタイプ
-	PARTICLE_ENUM mBlendType;
+	ParticleEnum mBlendType;
 	//描画を行うか
 	bool mVisible;
 	// ビルボード行列
@@ -83,9 +83,9 @@ public: //ゲッターセッター
 	int GetTextureID() { return mTextureID; }
 
 	/*
-	@return ブレンドタイプ(enum型 PARTICLE_ENUM)
+	@return ブレンドタイプ(enum型 ParticleEnum)
 	*/
-	PARTICLE_ENUM GetBlendType() { return mBlendType; }
+	ParticleEnum GetBlendType() { return mBlendType; }
 
 	/*
 	@fn		描画をするかどうかを取得する
@@ -126,7 +126,7 @@ public: //ゲッターセッター
 	/*
 	@param _brendType カメラのワールド座標
 	*/
-	void SetBlendMode(PARTICLE_ENUM _blendType){mBlendType = _blendType; }
+	void SetBlendMode(ParticleEnum _blendType){mBlendType = _blendType; }
 
 	/*
 	@fn		描画をするかどうかを設定

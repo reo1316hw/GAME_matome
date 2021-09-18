@@ -66,7 +66,7 @@ void PhysicsWorld::Initialize()
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_box->GetOwner()->GetState() != State::Active)
+	if (_box->GetOwner()->GetState() != State::eActive)
 	{
 		return;
 	}
@@ -74,7 +74,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 	for (auto itr : mSpheres)
 	{
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (itr->GetOwner()->GetState() != State::Active)
+		if (itr->GetOwner()->GetState() != State::eActive)
 		{
 			continue;
 		}
@@ -118,7 +118,7 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	float rangeHits = mRangeHitsBegin + DecideRangeHits;
 
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	if (_sphere->GetOwner()->GetState() != State::Active)
+	if (_sphere->GetOwner()->GetState() != State::eActive)
 	{
 		return;
 	}
@@ -142,7 +142,7 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 		rangeHits = mRangeHitsBegin + DecideRangeHits;
 
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
-		if (mBoxes[i]->GetOwner()->GetState() != State::Active)
+		if (mBoxes[i]->GetOwner()->GetState() != State::eActive)
 		{
 			continue;
 		}

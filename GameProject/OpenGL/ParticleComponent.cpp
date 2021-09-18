@@ -25,7 +25,7 @@ ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _Offset,
 	, mOffset(_Offset)
 	, mScale(_scale)
 	, mAlpha(1.0f)
-	, mBlendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
+	, mBlendType(ParticleEnum::eParticleBlendAlpha)
 	, mVisible(true)
 	, mDrawOrder(_updateOrder)
 	, mColor(Vector3(1, 1, 1))
@@ -53,7 +53,7 @@ ParticleComponent::~ParticleComponent()
 void ParticleComponent::Draw(Shader* _shader)
 {
 	//親オブジェクトが未更新状態でないか
-	if (mOwner->GetState() == State::Dead)
+	if (mOwner->GetState() == State::eDead)
 	{
 		return;
 	}

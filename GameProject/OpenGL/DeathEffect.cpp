@@ -18,7 +18,7 @@ DeathEffect::DeathEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Obj
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::sWHITE);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAlpha);
 	mVelocity = _Vel;
 	mSpeed = 1.15f;
 }

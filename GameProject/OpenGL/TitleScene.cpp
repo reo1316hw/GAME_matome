@@ -38,12 +38,12 @@ TitleScene::~TitleScene()
 */
 SceneBase* TitleScene::UpdateScene(const InputState& _State)
 {
-	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == Released ||
-		_State.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
+	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == ButtonState::eReleased ||
+		_State.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::eReleased)
 	{
-		return new TutorialScene(tutorial);
-		//return new Stage01Scene(stage01);
-		//return new Stage02Scene(stage02);
+		//return new TutorialScene(Scene::eTutorial);
+		return new Stage01Scene(Scene::eStage01);
+		//return new Stage02Scene(Scene::eStage02);
 	}
 
 	return this;

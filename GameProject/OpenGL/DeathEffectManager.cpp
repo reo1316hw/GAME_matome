@@ -13,7 +13,7 @@ DeathEffectManager::DeathEffectManager(const Tag& _ObjectTag, const SceneBase::S
 	:GameObject(_SceneTag, _ObjectTag)
 	, mRandVel(Vector3::sZERO)
 {
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -32,21 +32,21 @@ void DeathEffectManager::UpdateGameObject(float _deltaTime)
 {
 	if (mPlayer->GetDeathFlag() && OneCreateDeathFlag == true)
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		mState = ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::eParticleDisable;
 	}
 
 	switch (mState)
 	{
-	case PARTICLE_DISABLE:
+	case ParticleState::eParticleDisable:
 
 		mCreateDeathEffectCount = 0;
 
 		break;
-	case PARTICLE_ACTIVE:
+	case ParticleState::eParticleActive:
 
 		//デスエフェクトの個数
 		const int DeathEffectNum = 50;

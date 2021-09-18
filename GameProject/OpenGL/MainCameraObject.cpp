@@ -7,11 +7,11 @@
 @fn	コンストラクタ
 */
 MainCameraObject::MainCameraObject() 
-	: GameObject(SceneBase::other,Tag::Camera,true)
+	: GameObject(SceneBase::Scene::eOtherScene,Tag::eCameraTag,true)
 {
 	mInitPos = Vector3(0.0f, 0.0f, -100000.0f);
 	SetPosition(mInitPos);
-	mTag = Tag::Camera;
+	mTag = Tag::eCameraTag;
 }
 
 /*

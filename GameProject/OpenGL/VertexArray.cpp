@@ -77,7 +77,7 @@ VertexArray::VertexArray(const void * _Verts, unsigned int _numVerts, Layout _la
 
 	// 頂点レイアウトが スケルタルモデルなら　ボーンID、影響度分をサイズ増やす
 	unsigned vertexSize = 8 * sizeof(float);
-	if (_layout == PosNormSkinTex)
+	if (_layout == VertexArray::ePosNormSkinTex)
 	{
 		vertexSize = 8 * sizeof(float) + 8 * sizeof(char);
 	}
@@ -93,7 +93,7 @@ VertexArray::VertexArray(const void * _Verts, unsigned int _numVerts, Layout _la
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mNumIndices * sizeof(unsigned int), _Indices, GL_STATIC_DRAW);
 
 	// 頂点属性
-	if (_layout == PosNormTex)
+	if (_layout == ePosNormTex)
 	{
 		// float 3個分　→　位置 x,y,z　位置属性をセット
 		glEnableVertexAttribArray(0);
@@ -107,7 +107,7 @@ VertexArray::VertexArray(const void * _Verts, unsigned int _numVerts, Layout _la
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, vertexSize,
 			reinterpret_cast<void*>(sizeof(float) * 6));
 	}
-	else if (_layout == PosNormSkinTex)
+	else if (_layout == VertexArray::ePosNormSkinTex)
 	{
 		// float 3個分　→　位置 x,y,z　位置属性をセット
 		glEnableVertexAttribArray(0);

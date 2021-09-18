@@ -8,7 +8,7 @@
 @param _FileName 画像ファイルの名前
 */
 Sprite::Sprite(const std::string _FileName)
-	:GameObject(SceneBase::Scene::other, Tag::Other)
+	:GameObject(SceneBase::Scene::eOtherScene, Tag::eOtherTag)
 {
 	mSpriteComponent = new SpriteComponent(this);
 

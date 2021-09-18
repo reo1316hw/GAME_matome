@@ -12,7 +12,7 @@
 ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	:GameObject(_SceneTag, _ObjectTag)
 {
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -29,18 +29,18 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 {
 	if (mPlayer->GetClearFlag() && OneCreateClearFlag)
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		mState = ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::eParticleDisable;
 	}
 
 	switch (mState)
 	{
-	case PARTICLE_DISABLE:
+	case ParticleState::eParticleDisable:
 		break;
-	case PARTICLE_ACTIVE:
+	case ParticleState::eParticleActive:
 
 		//クリアエフェクトの個数
 		const int ClearEffectNum = 200;

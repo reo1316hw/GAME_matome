@@ -21,9 +21,9 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::Other, Scene::tutorial);
-	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200,-92000), Vector3::sZERO, Tag::Other, Scene::tutorial);
-	mGoalLine = new GoalLine(Vector3(800, 150, -75800), Vector3::sZERO, Tag::Other, Scene::tutorial);
+	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200,-92000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+	mGoalLine = new GoalLine(Vector3(800, 150, -75800), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
 
 	mSprite = new Sprite("Assets/forest.png");
 
@@ -32,7 +32,7 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 
 	for (int i = 0; i < 3; i++)
 	{
-		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::Other, Scene::tutorial, mPlayer);
+		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::eOtherTag, Scene::eTutorial, mPlayer);
 	}
 }
 
@@ -41,7 +41,7 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 */
 TutorialScene::~TutorialScene()
 {
-	GAME_OBJECT_MANAGER->RemoveSceneGameObject(tutorial);
+	GAME_OBJECT_MANAGER->RemoveSceneGameObject(Scene::eTutorial);
 	delete mSprite;
 	delete mMapCreate;
 }
@@ -60,7 +60,7 @@ SceneBase* TutorialScene::UpdateScene(const InputState& _State)
 
 		if (mNextSceneCount >= NextSceneTiming)
 		{
-			return new Stage01Scene(stage01);
+			return new Stage01Scene(Scene::eStage01);
 		}
 	}
 
@@ -71,7 +71,7 @@ SceneBase* TutorialScene::UpdateScene(const InputState& _State)
 		if (mNextSceneCount >= NextSceneTiming)
 		{
 			mTransitionFlag = true;
-			return new ContinueScene(Continue, tutorial, mTransitionFlag);
+			return new ContinueScene(Scene::eContinue, Scene::eTutorial, mTransitionFlag);
 		}
 	}
 

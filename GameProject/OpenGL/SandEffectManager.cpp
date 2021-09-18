@@ -13,7 +13,7 @@ SandEffectManager::SandEffectManager(GameObject* _owner, const Tag& _ObjectTag, 
 	:GameObject(_SceneTag, _ObjectTag)
 {
 	mOwner = _owner;
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleState::eParticleDisable;
 	mPos = Vector3::sZERO;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
@@ -27,20 +27,20 @@ void SandEffectManager::UpdateGameObject(float _deltaTime)
 {
 	if (mPos != mOwner->GetPosition())
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		mState = ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleState::eParticleDisable;
 	}
 
 	Vector3 vel = Vector3::sZERO;
 
 	switch (mState)
 	{
-	case PARTICLE_DISABLE:
+	case ParticleState::eParticleDisable:
 		break;
-	case PARTICLE_ACTIVE:
+	case ParticleState::eParticleActive:
 
 		//É|ÉWÉVÉáÉìÇÇ∏ÇÁÇ∑ÇΩÇﬂÇÃíËêî
 		const Vector3 ShittPos = Vector3(0.0f, 10.0f, 20.0f);

@@ -47,7 +47,7 @@ SceneBase* GameOver::UpdateScene(const InputState& _State)
 	mNextSceneCount++;
 	if (mNextSceneCount >= NextSceneTiming)
 	{
-		return new TitleScene(title);
+		return new TitleScene(Scene::eTitle);
 	}
 
 	return this;

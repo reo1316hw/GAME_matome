@@ -40,7 +40,7 @@ InvisibleMeshComponent::~InvisibleMeshComponent()
 */
 void InvisibleMeshComponent::Draw(Shader* _shader)
 {
-	if (mOwner->GetState() != State::Dead)
+	if (mOwner->GetState() != State::eDead)
 	{
 		if (mMesh)
 		{
@@ -79,28 +79,28 @@ void InvisibleMeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット
 	int texID, stageCount = 0;
-	texID = mMesh->GetTextureID(TextureStage::DiffuseMap); // ディフューズマップ
+	texID = mMesh->GetTextureID(TextureStage::eDiffuseMap); // ディフューズマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uDiffuseMap", stageCount);
 		stageCount++;
 	}
-	texID = mMesh->GetTextureID(TextureStage::NormalMap); // 法線マップ
+	texID = mMesh->GetTextureID(TextureStage::eNormalMap); // 法線マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uNormalMap", stageCount);
 		stageCount++;
 	}
-	texID = mMesh->GetTextureID(TextureStage::SpecularMap); // スペキュラーマップ
+	texID = mMesh->GetTextureID(TextureStage::eSpecularMap); // スペキュラーマップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		_shader->SetIntUniform("uSpecularMap", stageCount);
 		stageCount++;
 	}
-	texID = mMesh->GetTextureID(TextureStage::EmissiveMap); // 自己放射マップ
+	texID = mMesh->GetTextureID(TextureStage::eEmissiveMap); // 自己放射マップ
 	{
 		glActiveTexture(GL_TEXTURE0 + stageCount);
 		glBindTexture(GL_TEXTURE_2D, texID);
