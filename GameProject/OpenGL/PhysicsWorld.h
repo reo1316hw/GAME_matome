@@ -125,9 +125,6 @@ private:
 	//リスポーンしたか
 	bool  mRespawnFlag;
 
-	// プレイヤーのポインタ
-	Player* mPlayer;
-
 	OnCollisionMap mCollisionFunction;
 
 public://ゲッターセッター

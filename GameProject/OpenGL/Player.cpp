@@ -320,7 +320,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//当たり判定を無効にするy座標
-	const float OffCollisionYPos = 90.0f;
+	const float OffCollisionYPos = 70.0f;
 
 	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
 	if (mPosition.y < OffCollisionYPos)

@@ -129,7 +129,7 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	//プレイヤーの最小z座標から前方20個の範囲だけで当たり判定処理を行う
 	for (int i = mHitRangeBegin; i < hitRange; i++)
 	{
-		hitRange = mHitRangeBegin + mHitRangeCount;
+		hitRange = mHitRangeBegin + DecideHitRange;
 
 		//カウントが配列の範囲から超えたらループから抜ける
 		if (i == mBoxes.size())
@@ -174,9 +174,6 @@ void PhysicsWorld::SearchRespawnNum()
 	//リスポーン地点を最大最小の座標にずらすための数
 	const float ShiftPos = 100.0f;
 
-	//// リスポーン通過時の要素番号
-	//int respawnNum;
-
 	//リスポーン地点の最大z座標
 	float respawnZMax = mRespawnZPos + ShiftPos;
 	//リスポーン地点の最小z座標
@@ -187,13 +184,10 @@ void PhysicsWorld::SearchRespawnNum()
 		mHitRangeBegin = mRespawnNum;
 		mHitRangeCount = 0;
 	}
-	else
+	else if (mNextSphereZPos >= respawnZMin &&
+		     mNextSphereZPos <= respawnZMax)
 	{
-		if (mNextSphereZPos >= respawnZMin &&
-			mNextSphereZPos <= respawnZMax)
-		{
-			mRespawnNum = mHitRangeBegin;
-		}
+		mRespawnNum = mHitRangeBegin;
 	}
 }
 
