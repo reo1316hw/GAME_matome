@@ -78,29 +78,29 @@ void ClearEffectManager::DecideVelocity(const int _Quantity)
 
 	switch (_Quantity % DirectionNum)
 	{
-	case eLeftUpClear:
+	case DirectionClearEffect::eLeftUpClear:
 		direction = -0.6f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case eLeftUpUpClear:
+	case DirectionClearEffect::eLeftUpUpClear:
 		direction = -0.3f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case eUpClear:
+	case DirectionClearEffect::eUpClear:
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case eRightUpUpClear:
+	case DirectionClearEffect::eRightUpUpClear:
 		direction = 0.3f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;
 		mVelocity.y = direction * speed;
 		break;
-	case eRightUpClear:
+	case DirectionClearEffect::eRightUpClear:
 		direction = 0.6f;
 		mVelocity.x = direction * speed;
 		direction = 1.0f;

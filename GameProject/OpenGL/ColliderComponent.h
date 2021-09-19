@@ -19,38 +19,6 @@
 */
 class GameObject;
 
-/*
-@enum　GameObjectタグ
-衝突相手を判別するために使用
-*/
-enum class ColliderTag
-{
-	eOtherTag = 0,
-	eCameraTag = 1,
-	ePlayerTag = 2,
-	eGroundTag = 3,
-	eGlassTag = 4,
-	eBlockTag = 5,
-	eVerticalMoveGroundTag = 6,
-	eJumpTag = 7,
-	eLateralMoveGroundTag = 8,
-	eUpBlockTag = 9,
-	eUpBlock_02Tag = 10,
-	eVerticalBlockTag = 11,
-	eAerialBlockTag = 12,
-	eRightBlockTag = 13,
-	eLeftBlockTag = 14,
-	eRightGroundTag = 15,
-	eRightOneMoveBlockTag = 16,
-	eLeftGroundTag = 17,
-	eLeftOneMoveBlockTag = 18,
-	eDownBlockTag = 19,
-	eGoalBlockTag = 20,
-	eIsGroundtag = 21,
-	eCheckpoint = 22,
-	eSwithTag = 23
-};
-
 class ColliderComponent : public Component
 {
 public:
@@ -62,12 +30,7 @@ public:
     @param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
     @param  _collisionOrder 当たり判定時に、めり込みから動かす処理の優先度を決める数値
     */
-	ColliderComponent(GameObject* _owner, ColliderTag _tag, int _updateOrder = 200,int _collisionOrder = 100);
-
-protected:
-
-	//アタッチするゲームオブジェクトの当たり判定のタグ
-	ColliderTag mTag;
+	ColliderComponent(GameObject* _owner, int _updateOrder = 200,int _collisionOrder = 100);
 
 private:
 
@@ -83,11 +46,5 @@ public: //ゲッターセッター
 	@return 優先度を示す数値(int型)
 	*/
 	int GetCollisionOrder() const { return mCollisionOrder; }
-
-	/*
-	@fn		アタッチするゲームオブジェクトの当たり判定のタグを取得する
-	@return	タグの番号(enum型 ColliderTag)
-	*/
-	ColliderTag GetTag() const { return mTag; };
 };
 

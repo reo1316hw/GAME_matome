@@ -80,31 +80,31 @@ void CheckpointEffectManager::DecideVelocity(const int _Quantity)
 	//Še•ûŒü‚Ì‘¬“x‚ÆŒü‚«‚ðŒvŽZ
 	switch (_Quantity % DirectionNum)
 	{
-	case eRightCheckpoint:
+	case DirectionCheckpointEffect::eRightCheckpoint:
 		mVelocity.x = Direction * Speed;
 		break;
-	case eFrontCheckpoint:
+	case DirectionCheckpointEffect::eFrontCheckpoint:
 		mVelocity.z = Direction * Speed;
 		break;
-	case eLeftCheckpoint:
+	case DirectionCheckpointEffect::eLeftCheckpoint:
 		mVelocity.x = -Direction * Speed;
 		break;
-	case eBackCheckpoint:
+	case DirectionCheckpointEffect::eBackCheckpoint:
 		mVelocity.z = -Direction * Speed;
 		break;
-	case eRightFrontCheckpoint:
+	case DirectionCheckpointEffect::eRightFrontCheckpoint:
 		mVelocity.x = Direction * Speed;
 		mVelocity.z = Direction * Speed;
 		break;
-	case eLeftBackCheckpoint:
+	case DirectionCheckpointEffect::eLeftBackCheckpoint:
 		mVelocity.x = -Direction * Speed;
 		mVelocity.z = -Direction * Speed;
 		break;
-	case eRightBackCheckpoint:
+	case DirectionCheckpointEffect::eRightBackCheckpoint:
 		mVelocity.x = Direction * Speed;
 		mVelocity.z = -Direction * Speed;
 		break;
-	case eLeftFrontCheckpoint:
+	case DirectionCheckpointEffect::eLeftFrontCheckpoint:
 		mVelocity.x = -Direction * Speed;
 		mVelocity.z = Direction * Speed;
 		break;
