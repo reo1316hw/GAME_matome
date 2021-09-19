@@ -86,6 +86,18 @@ private:
 	*/
 	PhysicsWorld();
 
+	/*
+    @fn	リスポーン通過時の要素番号を検索
+    */
+	void SearchRespawnNum();
+
+	/*
+    @fn	当たる範囲の最初の番号を増加させる
+	@param _num 番号
+	@return true : 検索終了 , false : 検索続行
+    */
+	bool IncrementHitRange(const int _num);
+
 	//自分のインスタンス
 	static PhysicsWorld* mPhysics;
 
@@ -95,11 +107,24 @@ private:
 	std::vector<SphereCollider*> mSpheres;
 
 	// 衝突する可能性のある範囲の最初の番号
-	int mRangeHitsBegin;
+	int mHitRangeBegin;
 	// 衝突する可能性のある範囲にどれだけオブジェクトがあるか
-	int mRangeHitsCount;
+	int mHitRangeCount;
 	// リスポーン通過時の要素番号
 	int mRespawnNum;
+	//衝突する可能性のある範囲の要素数をカウント
+	int mCountHitRangeNum ;
+
+	//球状の当たり判定がアタッチされているオブジェクトのz座標
+	float mSphereZPos;
+	//リスポーンZ地点
+	float mRespawnZPos;
+	//球状の当たり判定がアタッチされている次のフレームのオブジェクトのz座標
+	float mNextSphereZPos;
+
+	//リスポーンしたか
+	bool  mRespawnFlag;
+
 	// プレイヤーのポインタ
 	Player* mPlayer;
 

@@ -16,8 +16,13 @@ PhysicsWorld* PhysicsWorld::mPhysics = nullptr;
 */
 PhysicsWorld::PhysicsWorld()
 	: mRespawnNum(0)
-	, mRangeHitsBegin(0)
-	, mRangeHitsCount(0)
+	, mHitRangeBegin(0)
+	, mHitRangeCount(0)
+	, mCountHitRangeNum(0)
+	, mSphereZPos(0)
+	, mRespawnZPos(0)
+	, mNextSphereZPos(0)
+	, mRespawnFlag(false)
 {
 }
 
@@ -49,7 +54,7 @@ void PhysicsWorld::DeleteInstance()
 */
 void PhysicsWorld::Initialize()
 {
-	mRangeHitsBegin = 0;
+	mHitRangeBegin = 0;
 
 	// 当たり判定用のデータ配列をワールド座標で手前にあるオブジェクトから順に並べていく
 	std::sort(mBoxes.begin(), mBoxes.end(), [](BoxCollider* _frontBox, BoxCollider* _behindBox)
@@ -101,21 +106,19 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 {
 	//衝突する可能性のある範囲を指定する数
-	const int DecideRangeHits = 20;
+	const int DecideHitRange = 20;
 
-	//衝突する可能性のある範囲の要素数をカウント
-	int countRangeHitsNum = 0;
+	//衝突する可能性のある範囲
+	int hitRange = mHitRangeBegin + DecideHitRange;
 
-	//球状の当たり判定がアタッチされているオブジェクトのz座標
-	float sphereZPos = _sphere->GetOwner()->GetPosition().z;
 	//球状の当たり判定がアタッチされているオブジェクトのz速度
 	float sphereZVel = _sphere->GetOwner()->GetVelocity().z;
-	//リスポーンZ地点
-	float respawnZPos = _sphere->GetOwner()->GetRespawnPos().z;
-	//リスポーンしたか
-	float respawnFlag = _sphere->GetOwner()->GetRespawnFlag();
-	//衝突する可能性のある範囲
-	float rangeHits = mRangeHitsBegin + DecideRangeHits;
+
+	mCountHitRangeNum = 0;
+	mSphereZPos = _sphere->GetOwner()->GetPosition().z;
+	mRespawnZPos = _sphere->GetOwner()->GetRespawnPos().z;
+    mRespawnFlag = _sphere->GetOwner()->GetRespawnFlag();
+	mNextSphereZPos = mSphereZPos + sphereZVel;
 
 	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::eActive)
@@ -124,22 +127,15 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	}
 
 	//プレイヤーの最小z座標から前方20個の範囲だけで当たり判定処理を行う
-	for (int i = mRangeHitsBegin; i < rangeHits; i++)
+	for (int i = mHitRangeBegin; i < hitRange; i++)
 	{
+		hitRange = mHitRangeBegin + mHitRangeCount;
+
 		//カウントが配列の範囲から超えたらループから抜ける
 		if (i == mBoxes.size())
 		{
 			break;
 		}
-
-		//矩形状の当たり判定の最大z座標
-		float boxZMax = mBoxes[i]->GetWorldBox().m_max.z;
-		//矩形状の当たり判定の最小z座標
-		float boxZMin = mBoxes[i]->GetWorldBox().m_min.z;
-		//矩形状の当たり判定がアタッチされているオブジェクトの初期座標から移動した距離の差
-		float boxZdif = abs(mBoxes[i]->GetOwner()->GetInitPosition().z - mBoxes[i]->GetOwner()->GetPosition().z);
-
-		rangeHits = mRangeHitsBegin + DecideRangeHits;
 
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (mBoxes[i]->GetOwner()->GetState() != State::eActive)
@@ -159,50 +155,84 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 			_sphere->Refresh();
 		}
 
-		//リスポーン地点を最大最小の座標にずらすための数
-		const float ShiftPos = 100.0f;
-		//球状の当たり判定がアタッチされている次のフレームのオブジェクトのz座標
-		float nextSphereZPos = sphereZPos + sphereZVel;
-		//リスポーン地点の最大z座標
-		float respawnZMax = respawnZPos + ShiftPos;
-		//リスポーン地点の最小z座標
-		float respawnZMin = respawnZPos - ShiftPos;
-		
-		if (respawnFlag)
-		{
-			mRangeHitsBegin = mRespawnNum;
-			mRangeHitsCount = 0;
-		}
-		else
-		{
-			if (nextSphereZPos >= respawnZMin &&
-				nextSphereZPos <= respawnZMax)
-			{
-				mRespawnNum = mRangeHitsBegin;
-			}
-		}
+		//リスポーン通過時の要素番号を検索
+		SearchRespawnNum();
 
-		// 矩形状の当たり判定の最大初期z座標
-		float boxInitZMax = boxZMax - boxZdif;
-		// 矩形状の当たり判定の最小初期z座標
-		float boxInitZMin = boxZMin - boxZdif;
-
-		if (sphereZPos >= boxInitZMin &&
-			sphereZPos <= boxInitZMax)
+		//当たる範囲の最初の番号を増加させる
+		if (IncrementHitRange(i))
 		{
-			mRangeHitsCount = ++countRangeHitsNum;
-		}
-		else if (nextSphereZPos >= boxInitZMin)
-		{
-			mRangeHitsBegin += mRangeHitsCount;
-
-			if (countRangeHitsNum == 0)
-			{
-				mRangeHitsCount = 0;
-			}
 			break;
 		}
 	}
+}
+
+/*
+@fn	リスポーン通過時の要素番号を検索
+*/
+void PhysicsWorld::SearchRespawnNum()
+{
+	//リスポーン地点を最大最小の座標にずらすための数
+	const float ShiftPos = 100.0f;
+
+	//// リスポーン通過時の要素番号
+	//int respawnNum;
+
+	//リスポーン地点の最大z座標
+	float respawnZMax = mRespawnZPos + ShiftPos;
+	//リスポーン地点の最小z座標
+	float respawnZMin = mRespawnZPos - ShiftPos;
+
+	if (mRespawnFlag)
+	{
+		mHitRangeBegin = mRespawnNum;
+		mHitRangeCount = 0;
+	}
+	else
+	{
+		if (mNextSphereZPos >= respawnZMin &&
+			mNextSphereZPos <= respawnZMax)
+		{
+			mRespawnNum = mHitRangeBegin;
+		}
+	}
+}
+
+/*
+@fn	当たる範囲の最初の番号を増加させる
+@param _num 番号
+@return true : 検索終了 , false : 検索続行
+*/
+bool PhysicsWorld::IncrementHitRange(const int _num)
+{
+	//矩形状の当たり判定の最大z座標
+	float boxZMax = mBoxes[_num]->GetWorldBox().m_max.z;
+	//矩形状の当たり判定の最小z座標
+	float boxZMin = mBoxes[_num]->GetWorldBox().m_min.z;
+	//矩形状の当たり判定がアタッチされているオブジェクトの初期座標から移動した距離の差
+	float boxZdif = abs(mBoxes[_num]->GetOwner()->GetInitPosition().z - mBoxes[_num]->GetOwner()->GetPosition().z);
+	// 矩形状の当たり判定の最大初期z座標
+	float boxInitZMax = boxZMax - boxZdif;
+	// 矩形状の当たり判定の最小初期z座標
+	float boxInitZMin = boxZMin - boxZdif;
+
+	if (mSphereZPos >= boxInitZMin &&
+		mSphereZPos <= boxInitZMax)
+	{
+		mHitRangeCount = ++mCountHitRangeNum;
+	}
+	else if (mNextSphereZPos >= boxInitZMin)
+	{
+		mHitRangeBegin += mHitRangeCount;
+
+		if (mCountHitRangeNum == 0)
+		{
+			mHitRangeCount = 0;
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 /*
