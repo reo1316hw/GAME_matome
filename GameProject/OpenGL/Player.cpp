@@ -23,7 +23,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
 	, MGroundYPos(120.0f)
-	, mScene(SceneBase::eOtherScene)
+	, mScene(SceneBase::Scene::eOtherScene)
 	, mDeathFlag(false)
 	, mDamageFlag(false)
 	, mStopFlag(false)
@@ -62,7 +62,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	mDeathEffectManager = new DeathEffectManager(_ObjectTag, _SceneTag , this);
 
 	//プレイヤー自身の当たり判定
-	mSelfSphereCollider = new SphereCollider(this, ColliderTag::ePlayerTag, GetOnCollisionFunc());
+	mSelfSphereCollider = new SphereCollider(this, GetOnCollisionFunc());
 	Sphere sphere = {Vector3::sZERO, 30.0f};
 	mSelfSphereCollider->SetObjectSphere(sphere);
 
@@ -121,7 +121,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//チュートリアル
-	if (mScene == SceneBase::eTutorial)
+	if (mScene == SceneBase::Scene::eTutorial)
 	{
 		//チュートリアル時の前方移動速度
 		mMoveSpeed = 13.0f;
@@ -144,7 +144,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//ステージ01
-	if (mScene == SceneBase::eStage01)
+	if (mScene == SceneBase::Scene::eStage01)
 	{
 		//ステージ01のジャンプ力
 		if (mJumpFlag)
@@ -165,7 +165,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//ステージ02
-	if (mScene == SceneBase::eStage02)
+	if (mScene == SceneBase::Scene::eStage02)
 	{
 		//ステージ02のジャンプ力
 		if (mJumpFlag)
@@ -196,10 +196,10 @@ void Player::UpdateGameObject(float _deltaTime)
 
 		switch (mVisibleFrameCount % VisibleTiming)
 		{
-		case eInvisible:
+		case VisibleType::eInvisible:
 			mMeshComponent->SetVisible(false);
 			break;
-		case eVisible:
+		case VisibleType::eVisible:
 			mMeshComponent->SetVisible(true);
 			break;
 		}
@@ -422,27 +422,27 @@ void Player::OnCollision(const GameObject& _HitObject)
 		mTag = _HitObject.GetTag();
 
 		//ダメージ判定
-		if (mTag == eBlockTag ||
-			mTag == eVerticalBlockTag ||
-			mTag == eRightBlockTag ||
-			mTag == eLeftBlockTag ||
-			mTag == eRightOneMoveBlockTag ||
-			mTag == eLeftOneMoveBlockTag ||
-			mTag == eAerialBlockTag ||
-			mTag == eLowUpBlockTag)
+		if (mTag == Tag::eBlockTag ||
+			mTag == Tag::eVerticalBlockTag ||
+			mTag == Tag::eRightBlockTag ||
+			mTag == Tag::eLeftBlockTag ||
+			mTag == Tag::eRightOneMoveBlockTag ||
+			mTag == Tag::eLeftOneMoveBlockTag ||
+			mTag == Tag::eAerialBlockTag ||
+			mTag == Tag::eLowUpBlockTag)
 		{
 			mDamageFlag = true;
 		}
 
 		//接地判定
-		if (mTag == eGroundTag ||
-			mTag == eGlassTag ||
-			mTag == eVerticalMoveGroundTag ||
-			mTag == eRightGroundTag ||
-			mTag == eLeftGroundTag ||
-			mTag == eLateralMoveGroundTag ||
-			mTag == eJumpTag ||
-			mTag == eDownBlockTag)
+		if (mTag == Tag::eGroundTag ||
+			mTag == Tag::eGlassTag ||
+			mTag == Tag::eVerticalMoveGroundTag ||
+			mTag == Tag::eRightGroundTag ||
+			mTag == Tag::eLeftGroundTag ||
+			mTag == Tag::eLateralMoveGroundTag ||
+			mTag == Tag::eJumpTag ||
+			mTag == Tag::eDownBlockTag)
 		{
 			//重力を消す
 			mVelocity.y = 0;
@@ -450,13 +450,13 @@ void Player::OnCollision(const GameObject& _HitObject)
 		}
 
 		//ジャンプ判定
-		if (mTag == eJumpTag)
+		if (mTag == Tag::eJumpTag)
 		{
 			mJumpFlag = true;
 		}
 
 		//横移動床の判定
-		if (mTag == eLateralMoveGroundTag)
+		if (mTag == Tag::eLateralMoveGroundTag)
 		{
 			//重力を消す
 			mVelocity.y = 0;
@@ -469,11 +469,13 @@ void Player::OnCollision(const GameObject& _HitObject)
 		}
 
 		//チェックポイント通過判定
-		if (mTag == eCheckpointTag)
+		if (mTag == Tag::eCheckpointTag)
 		{
+			//リスポーン地点を少し前にずらすための定数
+			const Vector3 ShiftZPos = Vector3(0.0f, 0.0f, 100.0f);
 			mGroundFlag = false;
 			mHitCheckpointFlag = true;
-			mRespawnPos = _HitObject.GetPosition();
+			mRespawnPos = _HitObject.GetPosition() + ShiftZPos;
 
 			if (mPosition.y <= MGroundYPos)
 			{

@@ -716,7 +716,7 @@ void Renderer::CreateParticleVerts()
 		0, 2, 1,
 		2, 0, 3
 	};
-	mParticleVertex = new VertexArray(vertices, 4, VertexArray::ePosNormTex, indices, 6);
+	mParticleVertex = new VertexArray(vertices, 4, VertexArray::Layout::ePosNormTex, indices, 6);
 }
 
 /*
@@ -867,13 +867,13 @@ void Renderer::ChangeBlendMode(ParticleComponent::ParticleBlendType _blendType)
 {
 	switch (_blendType)
 	{
-	case ParticleComponent::eParticleBlendAdd:
+	case ParticleComponent::ParticleBlendType::eParticleBlendAdd:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
 		break;
-	case ParticleComponent::eParticleBlendAlpha:
+	case ParticleComponent::ParticleBlendType::eParticleBlendAlpha:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
 		break;
-	case ParticleComponent::eParticleBlendMult:
+	case ParticleComponent::ParticleBlendType::eParticleBlendMult:
 		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
 		break;
 	default:

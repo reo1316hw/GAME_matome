@@ -44,8 +44,6 @@ public:
         eTitle,
         // チュートリアル
         eTutorial,
-        // ステージセレクト画面
-        eStageSelect,
         // ステージ1
         eStage01,
         // ステージ2

@@ -27,15 +27,15 @@ ContinueScene::ContinueScene(const Scene& _NowScene, const Scene& _PreScene, con
 
 	switch (_PreScene)
 	{
-	case eTutorial:
+	case Scene::eTutorial:
 
 		mTutorialTransitionFlag = _TransitionSceneFlag;
 		break;
-	case eStage01:
+	case Scene::eStage01:
 
 		mStage01TransitionFlag = _TransitionSceneFlag;
 		break;
-	case eStage02:
+	case Scene::eStage02:
 
 		mStage02TransitionFlag = _TransitionSceneFlag;
 		break;
@@ -61,7 +61,7 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mTutorialTransitionFlag = false;
-			return new TutorialScene(SceneBase::eTutorial);
+			return new TutorialScene(Scene::eTutorial);
 		}
 	}
 
@@ -71,7 +71,7 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage01TransitionFlag = false;
-			return new Stage01Scene(SceneBase::eStage01);
+			return new Stage01Scene(Scene::eStage01);
 		}
 	}
 
@@ -81,14 +81,14 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage02TransitionFlag = false;
-			return new Stage02Scene(SceneBase::eStage02);
+			return new Stage02Scene(Scene::eStage02);
 		}
 	}
 
 	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::eReleased ||
 		_State.m_keyboard.GetKeyState(SDL_SCANCODE_E) == ButtonState::eReleased)
 	{
-		return new GameOver(SceneBase::eGameOver);
+		return new GameOver(Scene::eGameOver);
 	}
 
 	return this;

@@ -85,13 +85,13 @@ bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 	// Skip the vertex format/shader for now
 	// (This is changed in a later chapter's code)
 	// 頂点レイアウトとサイズをファイルからセット
-	VertexArray::Layout layout = VertexArray::ePosNormTex;
+	VertexArray::Layout layout = VertexArray::Layout::ePosNormTex;
 	size_t vertSize = 8;
 
 	std::string vertexFormat = doc["vertexformat"].GetString();
 	if (vertexFormat == "PosNormSkinTex")
 	{
-		layout = VertexArray::ePosNormSkinTex;
+		layout = VertexArray::Layout::ePosNormSkinTex;
 		// This is the number of "Vertex" unions, which is 8 + 2 (for skinning)s　1個の頂点の集合の数　８　＋　２（スキニング分）
 		// 3 (位置xyz) + 3(法線xyz) + 2(Boneと重み）＋　2(UV)  の計　10個分（40byte) 　
 		vertSize = 10;
@@ -184,7 +184,7 @@ bool Mesh::Load(const std::string & _FileName, Renderer* _renderer)
 		mBox.UpdateMinMax(pos);
 
 		// 頂点レイアウトが PosNormTexなら（ボーンが無い）
-		if (layout == VertexArray::ePosNormTex)
+		if (layout == VertexArray::Layout::ePosNormTex)
 		{
 			Vertex v;
 			// Add the floats　float値を追加

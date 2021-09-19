@@ -33,7 +33,7 @@ DownBlock::DownBlock(const Vector3& _Pos, const Vector3& _Size, const std::strin
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::eDownBlockTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mPlayer = _playerPtr;

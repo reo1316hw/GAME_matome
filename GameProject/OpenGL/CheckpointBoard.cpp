@@ -23,6 +23,6 @@ CheckpointBoard::CheckpointBoard(const Vector3& _Pos, const Vector3& _Vel, const
 
 	mCehckpointBoardAABB = {Vector3(-1500.0f,-1500.0f,-100.0f),Vector3(1500.0f,1500.0f,100.0f)};
 
-	mBoxcollider = new BoxCollider(this, ColliderTag::eCheckpoint, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mCehckpointBoardAABB);
 }

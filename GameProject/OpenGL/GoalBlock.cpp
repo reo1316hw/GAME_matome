@@ -27,6 +27,6 @@ GoalBlock::GoalBlock(const Vector3& _Pos, const Vector3& _Size, const std::strin
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::eGoalBlockTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 }

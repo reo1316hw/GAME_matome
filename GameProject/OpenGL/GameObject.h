@@ -59,7 +59,6 @@ enum Tag
 	eDownBlockTag = 19,
 	eGoalBlockTag = 20,
 	eCheckpointTag = 21,
-	eSwithTag = 22
 };
 
 /*

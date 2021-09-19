@@ -35,7 +35,7 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _Pos, const Vector3& _Size
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::eVerticalMoveGroundTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;

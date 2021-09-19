@@ -82,13 +82,13 @@ void DeathEffectManager::DecideVelocity(const int _Quantity)
 
 	switch (_Quantity % DirectionNum)
 	{
-	case eLeftDeath:
+	case DirectionDeathEffect::eLeftDeath:
 		mRandVel.x *= -Direction;
 		break;
-	case eBackDeath:
+	case DirectionDeathEffect::eBackDeath:
 		mRandVel.z *= -Direction;
 		break;
-	case eLeftBackDeath:
+	case DirectionDeathEffect::eLeftBackDeath:
 		mRandVel.x *= -Direction;
 		mRandVel.z *= -Direction;
 		break;

@@ -33,7 +33,7 @@ LeftGround::LeftGround(const Vector3& _Pos, const Vector3& _Size, const std::str
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::eLeftGroundTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;

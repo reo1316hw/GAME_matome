@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-LeftBlock::LeftBlock(const Vector3& _Pos, const Vector3& _Size, const float _AddPosX, const std::string _GpmeshName, const Tag& _ObjectTag, const ColliderTag& _ColliderTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+LeftBlock::LeftBlock(const Vector3& _Pos, const Vector3& _Size, const float _AddPosX, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	: GameObject(_SceneTag, _ObjectTag)
 	, mElapseTime(0.0f)
 	, mDifferencePos(0.0f)
@@ -40,7 +40,7 @@ LeftBlock::LeftBlock(const Vector3& _Pos, const Vector3& _Size, const float _Add
 	// 当たり判定
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, _ColliderTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mOriginalPosFlag = false;

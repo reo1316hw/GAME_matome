@@ -30,7 +30,7 @@ Jump::Jump(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshN
 	// “–‚½‚è”»’è
 	mMesh = new Mesh;
 	mMesh = RENDERER->GetMesh(_GpmeshName);
-	mBoxcollider = new BoxCollider(this, ColliderTag::eJumpTag, GetOnCollisionFunc());
+	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
 	mBoxcollider->SetObjectBox(mMesh->GetBox());
 
 	mPlayer = _playerPtr;

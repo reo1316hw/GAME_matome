@@ -6,7 +6,7 @@
 /*
 @fn	コンストラクタ
 */
-MapCreate::MapCreate() :GameObject(SceneBase::eOtherScene,Tag::eOtherTag)
+MapCreate::MapCreate() :GameObject(SceneBase::Scene::eOtherScene,Tag::eOtherTag)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -249,57 +249,57 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 
 	switch (_Name)
 	{
-	    case(eGroundNum):
-        	new Ground(_ObjectPos, ObjectSize, "Assets/box.gpmesh", eGroundTag, SceneBase::eTutorial);
+	case(MapDataNum::eGroundNum):
+        	new Ground(_ObjectPos, ObjectSize, "Assets/box.gpmesh", Tag::eGroundTag, SceneBase::Scene::eTutorial);
         	break;
-        case(eGlassNum):
-        	new Glass(_ObjectPos, ObjectSize, "Assets/box_02.gpmesh", eGlassTag, SceneBase::eTutorial, mPlayer);
+        case(MapDataNum::eGlassNum):
+        	new Glass(_ObjectPos, ObjectSize, "Assets/box_02.gpmesh", Tag::eGlassTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
-        case(eBlockNum):
+        case(MapDataNum::eBlockNum):
         {
         	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
         	const Vector3 BlockPos = _ObjectPos + AddPos;
         
-        	new Block(BlockPos, ObstacleSize, "Assets/box_03.gpmesh", eBlockTag, SceneBase::eTutorial);
+        	new Block(BlockPos, ObstacleSize, "Assets/box_03.gpmesh", Tag::eBlockTag, SceneBase::Scene::eTutorial);
         	break;
         }
-        case(eVerticalMoveGroundNum):
-        	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_04.gpmesh", eVerticalMoveGroundTag, SceneBase::eTutorial, mPlayer);
+        case(MapDataNum::eVerticalMoveGroundNum):
+        	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_04.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
-        case(eJumpNum):
-        	new Jump(_ObjectPos, ObjectSize, "Assets/box_05.gpmesh", eJumpTag, SceneBase::eTutorial, mPlayer);
+        case(MapDataNum::eJumpNum):
+        	new Jump(_ObjectPos, ObjectSize, "Assets/box_05.gpmesh", Tag::eJumpTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
-        case(eLateralMoveGroundNum):
-        	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box.gpmesh", eLateralMoveGroundTag, SceneBase::eTutorial, 1000.0f, mPlayer);
+        case(MapDataNum::eLateralMoveGroundNum):
+        	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eTutorial, 1000.0f, mPlayer);
         	break;
-        case(ePlayerNum):
+        case(MapDataNum::ePlayerNum):
         {
         	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
         	const Vector3 PlayerPos = _ObjectPos + AddPos;
         	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
         
-        	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::eTutorial);
+        	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eTutorial);
         	break;
         }
-        case(eLowUpBlockNum):
+        case(MapDataNum::eLowUpBlockNum):
         {
         	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
         	const Vector3 UpBlockPos = _ObjectPos + AddPos;
         
-        	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_03.gpmesh", eLowUpBlockTag, SceneBase::eTutorial, mPlayer);
+        	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_03.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         }
-        case(eLeftGroundNum):
-        	new LeftGround(_ObjectPos, ObjectSize, "Assets/box_07.gpmesh", eLeftGroundTag, SceneBase::eTutorial, mPlayer);
+        case(MapDataNum::eLeftGroundNum):
+        	new LeftGround(_ObjectPos, ObjectSize, "Assets/box_07.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
-        case(eRightGroundNum):
-        	new RightGround(_ObjectPos, ObjectSize, "Assets/box_06.gpmesh", eRightGroundTag, SceneBase::eTutorial, mPlayer);
+        case(MapDataNum::eRightGroundNum):
+        	new RightGround(_ObjectPos, ObjectSize, "Assets/box_06.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
-        case(eGoalBlockNum):
+        case(MapDataNum::eGoalBlockNum):
         {
         	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
         
-        	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_03.gpmesh", eGoalBlockTag, SceneBase::eTutorial);
+        	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_03.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eTutorial);
         	break;
         }
 	}
@@ -317,43 +317,43 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 
 	switch (_Name)
 	{
-	    case(eGroundNum):
-	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", eGroundTag, SceneBase::eStage01);
+	    case(MapDataNum::eGroundNum):
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage01);
 	    	break;
-	    case(eGlassNum):
-			new Glass(_ObjectPos, ObjectSize, "Assets/box_09.gpmesh", eGlassTag,SceneBase::eStage01, mPlayer);
+	    case(MapDataNum::eGlassNum):
+			new Glass(_ObjectPos, ObjectSize, "Assets/box_09.gpmesh", Tag::eGlassTag,SceneBase::Scene::eStage01, mPlayer);
 			break;
-	    case(eBlockNum):
+	    case(MapDataNum::eBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-			new Block(BlockPos, ObstacleSize, "Assets/box_10.gpmesh", eBlockTag, SceneBase::eStage01);
+			new Block(BlockPos, ObstacleSize, "Assets/box_10.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage01);
 			break;
 	    }
-	    case(eVerticalMoveGroundNum):
-		    new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_11.gpmesh", eVerticalMoveGroundTag, SceneBase::eStage01, mPlayer);
+	    case(MapDataNum::eVerticalMoveGroundNum):
+		    new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_11.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
-	    case(eJumpNum):
-			new Jump(_ObjectPos, ObjectSize, "Assets/box_12.gpmesh", eJumpTag, SceneBase::eStage01, mPlayer);
+	    case(MapDataNum::eJumpNum):
+			new Jump(_ObjectPos, ObjectSize, "Assets/box_12.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
-		case(eLateralMoveGroundNum):
-			new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", eLateralMoveGroundTag, SceneBase::eStage01 ,1000.0f, mPlayer);
+		case(MapDataNum::eLateralMoveGroundNum):
+			new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage01 ,1000.0f, mPlayer);
 			break;
-	    case(ePlayerNum):
+	    case(MapDataNum::ePlayerNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-		    mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::eStage01);
+		    mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage01);
 			break;
 	    }
-	    case(eGoalBlockNum):
+	    case(MapDataNum::eGoalBlockNum):
 		{
 			const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 
-			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_10.gpmesh", eGoalBlockTag, SceneBase::eStage01);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_10.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage01);
 			break;
 		}
 	}
@@ -372,126 +372,126 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 
 	switch (_Name)
 	{
-	    case(eGroundNum):
-	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", eGroundTag, SceneBase::eStage02);
+	    case(MapDataNum::eGroundNum):
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage02);
 	    	break;
-	    case(eGlassNum):
-	    	new Glass(_ObjectPos, ObjectSize, "Assets/box_14.gpmesh", eGlassTag, SceneBase::eStage02, mPlayer);
+	    case(MapDataNum::eGlassNum):
+	    	new Glass(_ObjectPos, ObjectSize, "Assets/box_14.gpmesh", Tag::eGlassTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
-	    case(eBlockNum):
+	    case(MapDataNum::eBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-	    	new Block(BlockPos, ObstacleSize, "Assets/box_15.gpmesh", eBlockTag, SceneBase::eStage02);
+	    	new Block(BlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
-	    case(eVerticalMoveGroundNum):
-	    	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_16.gpmesh", eVerticalMoveGroundTag, SceneBase::eStage02, mPlayer);
+	    case(MapDataNum::eVerticalMoveGroundNum):
+	    	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_16.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
-	    case(eJumpNum):
-	    	new Jump(_ObjectPos, ObjectSize, "Assets/box_17.gpmesh", eJumpTag, SceneBase::eStage02, mPlayer);
+	    case(MapDataNum::eJumpNum):
+	    	new Jump(_ObjectPos, ObjectSize, "Assets/box_17.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
-	    case(eLateralMoveGroundNum):
-	    	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", eLateralMoveGroundTag, SceneBase::eStage02, 1000.0f, mPlayer);
+	    case(MapDataNum::eLateralMoveGroundNum):
+	    	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage02, 1000.0f, mPlayer);
 	    	break;
-	    case(ePlayerNum):
+	    case(MapDataNum::ePlayerNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-	    	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::eStage02);
+	    	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
-	    case(eLowUpBlockNum):
+	    case(MapDataNum::eLowUpBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
 	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", eLowUpBlockTag, SceneBase::eStage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    }
-	    case(eVerticalBlockNum):
+	    case(MapDataNum::eVerticalBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 VerticalBlockPos = _ObjectPos + AddPos;
 	    
-	    	new VerticalBlock(VerticalBlockPos, ObstacleSize, "Assets/box_15.gpmesh", eVerticalBlockTag, SceneBase::eStage02);
+	    	new VerticalBlock(VerticalBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eVerticalBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
-	    case(eAerialBlockNum):
+	    case(MapDataNum::eAerialBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
 	    	const Vector3 AerialBlockPos = _ObjectPos + AddPos;
 			const Vector3 AerialBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-	    	new AerialBlock(AerialBlockPos, AerialBlockSize, "Assets/box_15.gpmesh", eAerialBlockTag, SceneBase::eStage02);
+	    	new AerialBlock(AerialBlockPos, AerialBlockSize, "Assets/box_15.gpmesh", Tag::eAerialBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
-		case(eRightBlockNum):
+		case(MapDataNum::eRightBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 70.0f, 0.0f);
 			const Vector3 RightBlockPos = _ObjectPos + AddPos;
 			const float AddEndPosX = 600.0f;
 
-			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPosX, "Assets/box_15.gpmesh", eRightBlockTag, ColliderTag::eRightBlockTag, SceneBase::eStage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPosX, "Assets/box_15.gpmesh", Tag::eRightBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
-		case(eLeftBlockNum):
+		case(MapDataNum::eLeftBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 70.0f, 0.0f);
 			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 600.0f;
 
-			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", eLeftBlockTag, ColliderTag::eLeftBlockTag, SceneBase::eStage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eLeftBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
-		case(eLeftGroundNum):
-			new LeftGround(_ObjectPos, ObjectSize, "Assets/box_19.gpmesh", eLeftGroundTag, SceneBase::eStage02, mPlayer);
+		case(MapDataNum::eLeftGroundNum):
+			new LeftGround(_ObjectPos, ObjectSize, "Assets/box_19.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
-		case(eRightGroundNum):
-			new RightGround(_ObjectPos, ObjectSize, "Assets/box_18.gpmesh", eRightGroundTag, SceneBase::eStage02, mPlayer);
+		case(MapDataNum::eRightGroundNum):
+			new RightGround(_ObjectPos, ObjectSize, "Assets/box_18.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
-		case(eDownBlockNum):
+		case(MapDataNum::eDownBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 1600.0f, 0.0f);
 			const Vector3 DownBlockPos = _ObjectPos + AddPos;
 
-			new DownBlock(DownBlockPos, ObjectSize, "Assets/box_13.gpmesh", eDownBlockTag, SceneBase::eStage02, mPlayer);
+			new DownBlock(DownBlockPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eDownBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
-	    case(eHighUpBlockNum):
+	    case(MapDataNum::eHighUpBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", eHighUpBlockTag, SceneBase::eStage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eHighUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    }
-	    case(eGoalBlockNum):
+	    case(MapDataNum::eGoalBlockNum):
 	    {
 	    	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_15.gpmesh", eGoalBlockTag, SceneBase::eStage02);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_15.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage02);
 			break;
 	    }
-		case(eRightOneMoveBlockNum):
+		case(MapDataNum::eRightOneMoveBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 			const Vector3 RightBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 200.0f;
 
-			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", eRightOneMoveBlockTag, ColliderTag::eRightOneMoveBlockTag, SceneBase::eStage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eRightOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
-		case(eLeftOneMoveBlockNum):
+		case(MapDataNum::eLeftOneMoveBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 200.0f;
 
-			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", eLeftOneMoveBlockTag, ColliderTag::eLeftOneMoveBlockTag, SceneBase::eStage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eLeftOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 	}
