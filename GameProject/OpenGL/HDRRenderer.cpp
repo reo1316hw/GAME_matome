@@ -122,42 +122,42 @@ void HDRRenderer::HiBrightBlurCreate()
 		for (int horizontal = 0; horizontal < 2; horizontal++)
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, mBlurFBOs[i * 2 + horizontal]);
+			
+			glViewport(0, 0, reducex, reducey);
+			Vector2 dir;
+			if (horizontal)
 			{
-				glViewport(0, 0, reducex, reducey);
-				Vector2 dir;
-				if (horizontal)
-				{
-					dir = Vector2(0, 1);
-				}
-				else
-				{
-					dir = Vector2(1, 0);
-				}
-				CalcGaussBlurParam(reducex, reducey, dir, deviation);
-
-				// カラーバッファのクリア
-				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				//ガウスぼかしのサンプリング点
-				const int SampleCount = 15;
-
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, renderSource);
-				mGaussianBlurShader->SetActive();
-				mGaussianBlurShader->SetIntUniform("blursource", 0);
-				mGaussianBlurShader->SetIntUniform("param.SampleCount", SampleCount);
-
-				for (int i = 0; i < SampleCount; i++)
-				{
-					std::string s = "param.Offset[" + std::to_string(i) + "]";
-					mGaussianBlurShader->SetVectorUniform(s.c_str(), mOffset[i]);
-				}
-
-				glBindVertexArray(mQuadScreenVAO);
-				glDrawArrays(GL_TRIANGLES, 0, 6);
-				renderSource = mBlurBufferTexs[i * 2 + horizontal];
+				dir = Vector2(0, 1);
 			}
+			else
+			{
+				dir = Vector2(1, 0);
+			}
+			CalcGaussBlurParam(reducex, reducey, dir, deviation);
+
+			// カラーバッファのクリア
+			glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+
+			//ガウスぼかしのサンプリング点
+			const int SampleCount = 15;
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, renderSource);
+			mGaussianBlurShader->SetActive();
+			mGaussianBlurShader->SetIntUniform("blursource", 0);
+			mGaussianBlurShader->SetIntUniform("param.SampleCount", SampleCount);
+
+			for (int i = 0; i < SampleCount; i++)
+			{
+				std::string s = "param.Offset[" + std::to_string(i) + "]";
+				mGaussianBlurShader->SetVectorUniform(s.c_str(), mOffset[i]);
+			}
+
+			glBindVertexArray(mQuadScreenVAO);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			renderSource = mBlurBufferTexs[i * 2 + horizontal];
+			
 		}
 		// 回数ごとに偏差を上げる
 		//deviation *= deviation;
@@ -247,76 +247,76 @@ void HDRRenderer::InitHDRBuffers()
 	 * 2.バインドするフレームバッファ・オブジェクトの名前を指定
 	 */
 	glBindFramebuffer(GL_FRAMEBUFFER, mHdrFBO);
+	
+	/*
+	 * @fn テクスチャ名を生成する
+	 * 1.生成するテクスチャ名の数を指定
+	 * 2.生成されたテクスチャ名を格納する配列を指定
+	 */
+	glGenTextures(2, mHdrColorBuffers);
+	for (unsigned int i = 0; i < 2; i++)
 	{
 		/*
-		 * @fn テクスチャ名を生成する
-		 * 1.生成するテクスチャ名の数を指定
-		 * 2.生成されたテクスチャ名を格納する配列を指定
+		 * @fn 指定されたテクスチャをテクスチャリングターゲットにバインドする
+		 * 1.テクスチャーがバインドされるターゲットを指定
+		 * 2.テクスチャーの名前を指定
 		 */
-		glGenTextures(2, mHdrColorBuffers);
-		for (unsigned int i = 0; i < 2; i++)
-		{
-			/*
-			 * @fn 指定されたテクスチャをテクスチャリングターゲットにバインドする
-			 * 1.テクスチャーがバインドされるターゲットを指定
-			 * 2.テクスチャーの名前を指定
-			 */
-			glBindTexture(GL_TEXTURE_2D, mHdrColorBuffers[i]);
+		glBindTexture(GL_TEXTURE_2D, mHdrColorBuffers[i]);
 
-			/*
-			 * @fn 2次元のテクスチャ・イメージを指定
-			 * 1.ターゲットテクスチャを指定
-			 * 2.レベルオブディテールの番号を指定。レベル0はベース画像のレベル。レベルnは、n番目のミップマップ縮小画像。
-			 * 3.テクスチャー内の色成分の数を指定
-			 * 4.テクスチャイメージの幅を指定
-			 * 5.テクスチャ画像の高さ、またはテクスチャ配列のレイヤー数を指定
-			 * 6.この値は0でなければなりません。
-			 * 7.画素データのフォーマットを指定
-			 * 8.画素データのデータタイプを指定
-			 * 9.メモリ上の画像データへのポインタを指定
-			 */
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, mBufferWidth, mBufferHeight, 0, GL_RGBA, GL_FLOAT, NULL);
-			
-			/*
-			 * @fn テクスチャのパラメータを設定
-			 * 1.テクスチャをバインドするターゲットを指定
-			 * 2.テクスチャパラメータのシンボリック名を指定
-			 * 3.スカラコマンドの場合は、pnameの値を指定
-			 */
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			// attach texture to framebuffer
+		/*
+		 * @fn 2次元のテクスチャ・イメージを指定
+		 * 1.ターゲットテクスチャを指定
+		 * 2.レベルオブディテールの番号を指定。レベル0はベース画像のレベル。レベルnは、n番目のミップマップ縮小画像。
+		 * 3.テクスチャー内の色成分の数を指定
+		 * 4.テクスチャイメージの幅を指定
+		 * 5.テクスチャ画像の高さ、またはテクスチャ配列のレイヤー数を指定
+		 * 6.この値は0でなければなりません。
+		 * 7.画素データのフォーマットを指定
+		 * 8.画素データのデータタイプを指定
+		 * 9.メモリ上の画像データへのポインタを指定
+		 */
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, mBufferWidth, mBufferHeight, 0, GL_RGBA, GL_FLOAT, NULL);
+		
+		/*
+		 * @fn テクスチャのパラメータを設定
+		 * 1.テクスチャをバインドするターゲットを指定
+		 * 2.テクスチャパラメータのシンボリック名を指定
+		 * 3.スカラコマンドの場合は、pnameの値を指定
+		 */
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		// attach texture to framebuffer
 
-			/*
-			 * @fn フレームバッファ・オブジェクトにテクスチャ・イメージをアタッチする
-			 * 1.シンボリック定数はGL_FRAMEBUFFERでなければならない
-			 * 2.テクスチャからのイメージを添付するアタッチメントポイントを指定
-			 * 3.テクスチャーのターゲットを指定
-			 * 4.画像を添付するテクスチャオブジェクトを指定
-			 * 5.アタッチするテクスチャイメージのミップマップレベルを指定
-			 */
-			 // FBOにカラーテクスチャとしてframeColorTextureをアタッチする
-			glFramebufferTexture2D(
-				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mHdrColorBuffers[i], 0
-			);
-		}
-		// レンダーバッファーの作成
-		glGenRenderbuffers(1, &mHdrRBO);
-		glBindRenderbuffer(GL_RENDERBUFFER, mHdrRBO);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, mBufferWidth, mBufferHeight);
-		// FBOにレンダーバッファーをアタッチする
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, mHdrRBO);
-
-		unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-		glDrawBuffers(2, attachments);
-
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		{
-			printf( "HDRRenderer ERROR::FRAMEBUFFER:: Framebuffer is not complete! \n");
-		}
+		/*
+		 * @fn フレームバッファ・オブジェクトにテクスチャ・イメージをアタッチする
+		 * 1.シンボリック定数はGL_FRAMEBUFFERでなければならない
+		 * 2.テクスチャからのイメージを添付するアタッチメントポイントを指定
+		 * 3.テクスチャーのターゲットを指定
+		 * 4.画像を添付するテクスチャオブジェクトを指定
+		 * 5.アタッチするテクスチャイメージのミップマップレベルを指定
+		 */
+		 // FBOにカラーテクスチャとしてframeColorTextureをアタッチする
+		glFramebufferTexture2D(
+			GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mHdrColorBuffers[i], 0
+		);
 	}
+	// レンダーバッファーの作成
+	glGenRenderbuffers(1, &mHdrRBO);
+	glBindRenderbuffer(GL_RENDERBUFFER, mHdrRBO);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, mBufferWidth, mBufferHeight);
+	// FBOにレンダーバッファーをアタッチする
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, mHdrRBO);
+
+	unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glDrawBuffers(2, attachments);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		printf( "HDRRenderer ERROR::FRAMEBUFFER:: Framebuffer is not complete! \n");
+	}
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0); // デフォルトに戻す
 }
 
@@ -340,20 +340,20 @@ void HDRRenderer::InitBlurBuffers()
 		{
 			glGenFramebuffers(1, &mBlurFBOs[i * 2 + j]);
 			glGenTextures(1, &mBlurBufferTexs[i * 2 + j]);
-			{
-				glBindFramebuffer(GL_FRAMEBUFFER, mBlurFBOs[i * 2 + j]);
-				glBindTexture(GL_TEXTURE_2D, mBlurBufferTexs[i * 2 + j]);
-				glTexImage2D(
-					GL_TEXTURE_2D, 0, GL_RGBA16F, w, h, 0, GL_RGBA, GL_FLOAT, NULL
-				);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-				glFramebufferTexture2D(
-					GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mBlurBufferTexs[i * 2 + j], 0
-				);
-			}
+			
+			glBindFramebuffer(GL_FRAMEBUFFER, mBlurFBOs[i * 2 + j]);
+			glBindTexture(GL_TEXTURE_2D, mBlurBufferTexs[i * 2 + j]);
+			glTexImage2D(
+				GL_TEXTURE_2D, 0, GL_RGBA16F, w, h, 0, GL_RGBA, GL_FLOAT, NULL
+			);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glFramebufferTexture2D(
+				GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mBlurBufferTexs[i * 2 + j], 0
+			);
+			
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		}
 	}

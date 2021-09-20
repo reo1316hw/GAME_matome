@@ -328,7 +328,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		mCollisionFlag = false;
 	}
 
-	//チェックポイントを制御
+	//チェックポイントエフェクトを制御
 	CheckpointEffectControl();
 
 	// 常に座標に速度を足す
@@ -345,7 +345,7 @@ void Player::UpdateGameObject(float _deltaTime)
 }
 
 /*
-@fn	チェックポイントを制御
+@fn	チェックポイントエフェクトを制御
 */
 void Player::CheckpointEffectControl()
 {
@@ -468,19 +468,29 @@ void Player::OnCollision(const GameObject& _HitObject)
 			mLateralMoveVelocity = Vector3::sZERO;
 		}
 
-		//チェックポイント通過判定
-		if (mTag == Tag::eCheckpointTag)
-		{
-			//リスポーン地点を少し前にずらすための定数
-			const Vector3 ShiftZPos = Vector3(0.0f, 0.0f, 100.0f);
-			mGroundFlag = false;
-			mHitCheckpointFlag = true;
-			mRespawnPos = _HitObject.GetPosition() + ShiftZPos;
+		//チェックポイントに当たった時の処理
+		HitCheckPoint(_HitObject);
+	}
+}
 
-			if (mPosition.y <= MGroundYPos)
-			{
-				mGroundFlag = true;
-			}
+/*
+@fn	    チェックポイントに当たった時の処理
+@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
+void Player::HitCheckPoint(const GameObject& _HitObject)
+{
+	//チェックポイント通過判定
+	if (mTag == Tag::eCheckpointTag)
+	{
+		//リスポーン地点を少し前にずらすための定数
+		const Vector3 ShiftZPos = Vector3(0.0f, 0.0f, 100.0f);
+		mGroundFlag = false;
+		mHitCheckpointFlag = true;
+		mRespawnPos = _HitObject.GetPosition() + ShiftZPos;
+
+		if (mPosition.y <= MGroundYPos)
+		{
+			mGroundFlag = true;
 		}
 	}
 }

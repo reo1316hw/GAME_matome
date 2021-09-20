@@ -63,9 +63,21 @@ public:
 private:
 
 	/*
-    @fn	チェックポイントを制御
+    @fn	チェックポイントエフェクトを制御
     */
 	void CheckpointEffectControl();
+
+	/*
+    @fn		プレイヤーがヒットした時の処理
+    @param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
+    */
+	void OnCollision(const GameObject& _HitObject)override;
+
+	/*
+	@fn	    チェックポイントに当たった時の処理
+	@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
+	*/
+	void HitCheckPoint(const GameObject& _HitObject);
 
 	//地面のY座標
 	const float MGroundYPos;
@@ -122,12 +134,6 @@ private:
 	int			mCheckpointEffectCount;
 	//角度
 	float		mAngle;
-	
-	/*
-	@fn		プレイヤーがヒットした時の処理
-	@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
-	*/
-	void OnCollision(const GameObject& _HitObject)override;
 
 public://ゲッターセッター
 
