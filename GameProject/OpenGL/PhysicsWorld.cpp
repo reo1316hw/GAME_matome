@@ -158,9 +158,10 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 		//リスポーン通過時の要素番号を検索
 		SearchRespawnNum();
 
-		//当たる範囲の最初の番号を増加させる
+		//当たる可能性のある範囲の最初の番号を増加させる
 		if (IncrementHitRange(i))
 		{
+			//範囲をずらしたらループを抜ける
 			break;
 		}
 	}
@@ -179,11 +180,13 @@ void PhysicsWorld::SearchRespawnNum()
 	//リスポーン地点の最小z座標
 	float respawnZMin = mRespawnZPos - ShiftPos;
 
+	//リスポーン時に最初の番号にリスポーン時の要素数を代入
 	if (mRespawnFlag)
 	{
 		mHitRangeBegin = mRespawnNum;
 		mHitRangeCount = 0;
 	}
+	//リスポーンの要素数を検知
 	else if (mNextSphereZPos >= respawnZMin &&
 		     mNextSphereZPos <= respawnZMax)
 	{
@@ -192,7 +195,7 @@ void PhysicsWorld::SearchRespawnNum()
 }
 
 /*
-@fn	当たる範囲の最初の番号を増加させる
+@fn	当たる可能性のある範囲の最初の番号を増加させる
 @param _num 番号
 @return true : 検索終了 , false : 検索続行
 */
@@ -209,11 +212,13 @@ bool PhysicsWorld::IncrementHitRange(const int _num)
 	// 矩形状の当たり判定の最小初期z座標
 	float boxInitZMin = boxZMin - boxZdif;
 
+	//当たる可能性のある範囲内にあるオブジェクト数をカウント
 	if (mSphereZPos >= boxInitZMin &&
 		mSphereZPos <= boxInitZMax)
 	{
 		mHitRangeCount = ++mCountHitRangeNum;
 	}
+	//現在、当たる可能性のある範囲の最初の番号をカウント分足し、次に当たる可能性のある範囲にずらす
 	else if (mNextSphereZPos >= boxInitZMin)
 	{
 		mHitRangeBegin += mHitRangeCount;
