@@ -92,7 +92,7 @@ private:
 	void SearchRespawnNum();
 
 	/*
-    @fn	当たる範囲の最初の番号を増加させる
+    @fn	当たる可能性のある範囲の最初の番号を増加させる
 	@param _num 番号
 	@return true : 検索終了 , false : 検索続行
     */
@@ -101,16 +101,16 @@ private:
 	//自分のインスタンス
 	static PhysicsWorld* mPhysics;
 
-	// 矩形の当たり判定を全て格納するための可変長コンテナ
+	//矩形の当たり判定を全て格納するための可変長コンテナ
     std::vector<BoxCollider*> mBoxes;
-	// 球の当たり判定を全て格納するための可変長コンテナ
+	//球の当たり判定を全て格納するための可変長コンテナ
 	std::vector<SphereCollider*> mSpheres;
 
-	// 衝突する可能性のある範囲の最初の番号
+	//衝突する可能性のある範囲の最初の番号
 	int mHitRangeBegin;
-	// 衝突する可能性のある範囲にどれだけオブジェクトがあるか
+	//衝突する可能性のある範囲にどれだけオブジェクトがあるか
 	int mHitRangeCount;
-	// リスポーン通過時の要素番号
+	//リスポーン通過時の要素番号
 	int mRespawnNum;
 	//衝突する可能性のある範囲の要素数をカウント
 	int mCountHitRangeNum ;
