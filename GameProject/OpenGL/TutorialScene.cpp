@@ -47,9 +47,10 @@ TutorialScene::~TutorialScene()
 }
 
 /*
-@fn	現在のシーン時に毎フレーム更新処理をする
+@fn    現在のシーン時に毎フレーム更新処理をする
+@param _KeyState 各入力機器の入力状態
 */
-SceneBase* TutorialScene::UpdateScene(const InputState& _State)
+SceneBase* TutorialScene::UpdateScene(const InputState& _KeyState)
 {
 	//次のシーンに遷移するタイミング
 	const int NextSceneTiming = 80;

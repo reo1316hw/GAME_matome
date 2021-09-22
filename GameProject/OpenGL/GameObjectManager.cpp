@@ -87,26 +87,26 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 
 /*
 @fn		ゲームオブジェクトの入力処理
-@param	_State 各入力機器の入力状態
+@param	_KeyState 各入力機器の入力状態
 @brief	キーボード、マウス、コントローラー
 */
-void GameObjectManager::ProcessInput(const InputState& _State)
+void GameObjectManager::ProcessInput(const InputState& _KeyState)
 {
 	mUpdatingGameObject = true;
 
 	for (auto tutorialObject : mTutorialObjects)
 	{
-		tutorialObject->ProcessInput(_State);
+		tutorialObject->ProcessInput(_KeyState);
 	}
 
 	for (auto stage01Object : mStage01Objects)
 	{
-		stage01Object->ProcessInput(_State);
+		stage01Object->ProcessInput(_KeyState);
 	}
 
 	for (auto stage02Object : mStage02Objects)
 	{
-		stage02Object->ProcessInput(_State);
+		stage02Object->ProcessInput(_KeyState);
 	}
 
 	mUpdatingGameObject = false;

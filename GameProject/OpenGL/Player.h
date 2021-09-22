@@ -63,6 +63,18 @@ public:
 private:
 
 	/*
+	@fn コントローラー入力処理
+	@param	_KeyState 各入力機器の入力状態
+	*/
+	void InputController(const InputState& _KeyState);
+
+	/*
+	@fn アナログスティック入力処理
+	@param	_KeyState 各入力機器の入力状態
+	*/
+	void InputStick(const InputState& _KeyState);
+
+	/*
     @fn	チェックポイントエフェクトを制御
     */
 	void CheckpointEffectControl();
@@ -81,6 +93,9 @@ private:
 
 	//地面のY座標
 	const float MGroundYPos;
+
+	//加速度
+	const float MPlayerSpeedUp;
 
 	//プレイヤーの球当たり判定を生成
 	SphereCollider*		mSelfSphereCollider;

@@ -30,8 +30,9 @@ public:
 
     /*
     @fn	現在のシーン時に毎フレーム更新処理をする
+    @param	_KeyState 各入力機器の入力状態
     */
-    virtual SceneBase* UpdateScene(const InputState& _State) = 0;
+    virtual SceneBase* UpdateScene(const InputState& _KeyState) = 0;
 
     /*
     @enum シーンの種類

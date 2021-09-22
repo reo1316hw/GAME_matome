@@ -102,12 +102,12 @@ void Game::GameLoop()
 	while (mRunningFlag)
 	{
 		//入力関連の処理
-		const InputState& State = ProcessInput();
+		const InputState& KeyState = ProcessInput();
 
 		SceneBase* tmpScene;
 
 		// 実行中のシーンを更新処理
-		tmpScene = mNowScene->UpdateScene(State);
+		tmpScene = mNowScene->UpdateScene(KeyState);
 
 		// シーンの切り替えが発生した？
 		if (tmpScene != mNowScene)
@@ -169,17 +169,17 @@ InputState Game::ProcessInput()
 	}
 
 	mInputSystem->Update();
-	const InputState& state = mInputSystem->GetState();
+	const InputState& KeyState = mInputSystem->GetState();
 
-	if (state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_BACK) == ButtonState::eReleased ||
-		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::eReleased)
+	if (KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_BACK) == ButtonState::eReleased ||
+		KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::eReleased)
 	{
 		mRunningFlag = false;
 	}
 
-	GAME_OBJECT_MANAGER->ProcessInput(state);
+	GAME_OBJECT_MANAGER->ProcessInput(KeyState);
 
-	return state;
+	return KeyState;
 }
 
 /*

@@ -22,6 +22,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mLife(0)
 	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
+	, MPlayerSpeedUp(10.0f)
 	, MGroundYPos(120.0f)
 	, mScene(SceneBase::Scene::eOtherScene)
 	, mDeathFlag(false)
@@ -384,29 +385,62 @@ void Player::CheckpointEffectControl()
 */
 void Player::GameObjectInput(const InputState& _KeyState)
 {
-	//加速度
-	const float PlayerSpeedUp = 10.0f;
+	//コントローラー入力処理
+	InputController(_KeyState);
+	//アナログスティック入力処理
+	InputStick(_KeyState);
+}
 
-	 //コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
+/*
+@fn コントローラー入力処理
+@param	_KeyState 各入力機器の入力状態
+*/
+void Player::InputController(const InputState& _KeyState)
+{
+	//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
 		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
 	{
-		mVelocity.x += -PlayerSpeedUp;
+		mVelocity.x += -MPlayerSpeedUp;
 	}
 	// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
 	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
+		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
 	{
-		mVelocity.x += PlayerSpeedUp;
+		mVelocity.x += MPlayerSpeedUp;
 	}
 
 	// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
 	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
-		_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
+		     _KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
+		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
+		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
 	{
 		mButtonFlag = false;
+	}
+
+}
+
+/*
+@fn アナログスティック入力処理
+@param	_KeyState 各入力機器の入力状態
+*/
+void Player::InputStick(const InputState& _KeyState)
+{
+	//左スティックの入力値の値(-1~1)
+	Vector2 leftAxis = _KeyState.m_controller.GetLAxisVec();
+	//移動するための左スティックのしきい値
+	const float LeftAxisThreshold = 0.3f;
+
+	//左スティック入力時の左移動
+	if (leftAxis.x <= -LeftAxisThreshold)
+	{
+		mVelocity.x += -MPlayerSpeedUp;
+	}
+	//左スティック入力時の右移動
+	if (leftAxis.x >= LeftAxisThreshold)
+	{
+		mVelocity.x += MPlayerSpeedUp;
 	}
 }
 

@@ -159,7 +159,7 @@ public://ゲッターセッター
 	float GetAxisValue(const SDL_GameControllerAxis _IAxis) const;
 
 	/*
-	@fn		スティックの入力を0~1で返す
+	@fn     スティックの入力を-1~1で返す
 	@return スティックの入力情報(Vector2型)
 	*/
 	const Vector2& GetLAxisVec() const { return mLAxis; }

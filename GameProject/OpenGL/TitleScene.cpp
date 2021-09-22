@@ -34,12 +34,13 @@ TitleScene::~TitleScene()
 }
 
 /*
-@fn	現在のシーン時に毎フレーム更新処理をする
+@fn    現在のシーン時に毎フレーム更新処理をする
+@param _KeyState 各入力機器の入力状態
 */
-SceneBase* TitleScene::UpdateScene(const InputState& _State)
+SceneBase* TitleScene::UpdateScene(const InputState& _KeyState)
 {
-	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == ButtonState::eReleased ||
-		_State.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::eReleased)
+	if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == ButtonState::eReleased ||
+		_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::eReleased)
 	{
 		return new TutorialScene(Scene::eTutorial);
 	}

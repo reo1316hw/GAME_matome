@@ -51,14 +51,15 @@ ContinueScene::~ContinueScene()
 }
 
 /*
-@fn	現在のシーン時に毎フレーム更新処理をする
+@fn    現在のシーン時に毎フレーム更新処理をする
+@param _KeyState 各入力機器の入力状態
 */
-SceneBase* ContinueScene::UpdateScene(const InputState& _State)
+SceneBase* ContinueScene::UpdateScene(const InputState& _KeyState)
 {
 	if (mTutorialTransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
+		if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mTutorialTransitionFlag = false;
 			return new TutorialScene(Scene::eTutorial);
@@ -67,8 +68,8 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 
 	if (mStage01TransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
+		if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage01TransitionFlag = false;
 			return new Stage01Scene(Scene::eStage01);
@@ -77,16 +78,16 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _State)
 
 	if (mStage02TransitionFlag)
 	{
-		if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
-			_State.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
+		if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::eReleased ||
+			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage02TransitionFlag = false;
 			return new Stage02Scene(Scene::eStage02);
 		}
 	}
 
-	if (_State.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::eReleased ||
-		_State.m_keyboard.GetKeyState(SDL_SCANCODE_E) == ButtonState::eReleased)
+	if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::eReleased ||
+		_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_E) == ButtonState::eReleased)
 	{
 		return new GameOver(Scene::eGameOver);
 	}
