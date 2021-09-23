@@ -14,8 +14,11 @@ GoalLineRoot::GoalLineRoot(const Vector3& _TopLeftOrigin, Player* _playerPtr)
 , mPos(_TopLeftOrigin)
 , mVel(Vector3::sZERO)
 {
+	//ゴールラインのオブジェクト数
+	const int GoalLineNum = 22;
+
 	//ゴールライン生成
-	for (int i = 0; i < 22; i++)
+	for (int i = 0; i < GoalLineNum; i++)
 	{
 		mPos = _TopLeftOrigin;
 
@@ -41,15 +44,28 @@ GoalLineRoot::~GoalLineRoot()
 */
 void GoalLineRoot::SpecifyVel(const int _Quantity)
 {
+	//左側の初速度
+	const float LeftInitialVelocity = 2.0f;
+	//右側の初速度
+	const float RightInitialVelocity = 4.0f;
+	//各ゴールラインに追加する速度
+	float addVel = 0.1f * _Quantity;
+	//左側に配置されているゴールラインの速度
+	float leftVel = 0.0f;
+	//右側に配置されているゴールラインの速度
+	float rightVel = 0.0f;
+
 	//左側(中心含む)に配置されているゴールラインの速度指定
 	if (_Quantity < 12)
 	{
-		mVel.y = 2.0f + (0.1f * _Quantity);
+		leftVel = LeftInitialVelocity + addVel;
+		mVel.y = leftVel;
 	}
 	//右側(中心含まない)に配置されているゴールラインの速度指定
 	else
 	{
-		mVel.y = 4.0f - (0.1f * _Quantity);
+		rightVel = RightInitialVelocity - addVel;
+		mVel.y = rightVel;
 	}
 }
 
