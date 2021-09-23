@@ -10,14 +10,15 @@ public:
 	/*
 	@fn    コンストラクタ
 	@param _TopLeftOrigin 左上の原点
+	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	GoalLineRoot(const Vector3& _TopLeftOrigin, Player* _playerPtr);
+	GoalLineRoot(const Vector3& _TopLeftOrigin, const SceneBase::Scene _SceneTag, Player* _playerPtr);
 
 	/*
     @fn デストラクタ
     */
-	~GoalLineRoot();
+	~GoalLineRoot() {};
 
 private:
 
@@ -45,6 +46,9 @@ private:
 	@param _Quantity 個数
 	*/
 	void SpecifyTextureName(const int _Quantity);
+
+	//左側に配置されているゴールラインの数
+	const int LeftNum;
 
 	//ゴールラインのポインタ
 	GoalLine* mGoalLine;

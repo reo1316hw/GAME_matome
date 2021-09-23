@@ -29,12 +29,12 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 	//親ゴールラインの左上原点
 	const Vector3 TopLeftOriginGoalLine = Vector3(300.0f, 200.0f, -75800.0f);
 	//親ゴールラインを生成
-	mGoalLineRoot = new GoalLineRoot(TopLeftOriginGoalLine, mPlayer);
+	mGoalLineRoot = new GoalLineRoot(TopLeftOriginGoalLine, _NowScene, mPlayer);
 
 	//操作説明ボード生成
-	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, _NowScene);
 	//縦移動床説明ボード生成
-	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200, -92000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200, -92000), Vector3::sZERO, Tag::eOtherTag, _NowScene);
 
 	//体力UI生成
 	for (int i = 0; i < 3; i++)
