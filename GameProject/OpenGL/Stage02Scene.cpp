@@ -9,7 +9,6 @@
 */
 Stage02Scene::Stage02Scene(const Scene& _NowScene)
 	: mTransitionFlag(false)
-
 {
 	//環境光
 	const Vector3 AmbientLight = Vector3(0.4f, 0.4f, 0.4f);
@@ -22,13 +21,22 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mGoalLine = new GoalLine(Vector3(800, 150, -2200), Vector3::sZERO, Tag::eOtherTag, Scene::eStage02);
+	mSprite = new Sprite("Assets/stage04.png");
 
+	mMapCreate = new MapCreate();
+	mPlayer = mMapCreate->OpenStage02File();
+
+	//親ゴールラインの左上原点
+	const Vector3 TopLeftOriginGoalLine = Vector3(300.0f, 200.0f, -2200.0f);
+	//親ゴールラインを生成
+	mGoalLineRoot = new GoalLineRoot(TopLeftOriginGoalLine, mPlayer);
+
+	//チェックポイントボード生成
 	for (int i = 0; i < 3; i++)
 	{
 		if (i <= 1)
 		{
-			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f,( -83100.0f + i * 22000.0f)), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::eCheckpointTag, Scene::eStage02);
+			mCheckPointBoard = new CheckpointBoard(Vector3(800.0f, 500.0f, (-83100.0f + i * 22000.0f)), Vector3::sZERO, "Assets/checkpoint_stage02.png", Tag::eCheckpointTag, Scene::eStage02);
 		}
 		else
 		{
@@ -36,11 +44,7 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 		}
 	}
 
-	mSprite = new Sprite("Assets/stage04.png");
-
-	mMapCreate = new MapCreate();
-	mPlayer = mMapCreate->OpenStage02File();
-
+	//体力UI生成
 	for (int i = 0; i < 3; i++)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::eOtherTag, Scene::eStage02, mPlayer);
@@ -58,6 +62,7 @@ Stage02Scene::~Stage02Scene()
 	GAME_OBJECT_MANAGER->RemoveSceneGameObject(Scene::eStage02);
 	delete mSprite;
 	delete mMapCreate;
+	delete mGoalLineRoot;
 }
 
 /*

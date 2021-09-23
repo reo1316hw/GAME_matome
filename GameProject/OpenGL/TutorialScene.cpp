@@ -21,15 +21,22 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
-	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200,-92000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
-	mGoalLine = new GoalLine(Vector3(800, 150, -75800), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
-
 	mSprite = new Sprite("Assets/forest.png");
 
 	mMapCreate = new MapCreate();
 	mPlayer = mMapCreate->OpenTutorialFile();
 
+	//親ゴールラインの左上原点
+	const Vector3 TopLeftOriginGoalLine = Vector3(300.0f, 200.0f, -75800.0f);
+	//親ゴールラインを生成
+	mGoalLineRoot = new GoalLineRoot(TopLeftOriginGoalLine, mPlayer);
+
+	//操作説明ボード生成
+	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+	//縦移動床説明ボード生成
+	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200, -92000), Vector3::sZERO, Tag::eOtherTag, Scene::eTutorial);
+
+	//体力UI生成
 	for (int i = 0; i < 3; i++)
 	{
 		mHeartUI = new HeartUI(Vector2(i * 100.0f, 50.0f), Tag::eOtherTag, Scene::eTutorial, mPlayer);
@@ -44,6 +51,7 @@ TutorialScene::~TutorialScene()
 	GAME_OBJECT_MANAGER->RemoveSceneGameObject(Scene::eTutorial);
 	delete mSprite;
 	delete mMapCreate;
+	delete mGoalLineRoot;
 }
 
 /*

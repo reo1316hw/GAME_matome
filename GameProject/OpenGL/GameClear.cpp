@@ -20,9 +20,6 @@ GameClear::GameClear(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mInputSystem = new InputSystem();
-	mInputSystem->Initialize();
-
 	mSprite = new Sprite("Assets/GameClear.png");
 
 	mNextSceneCount = 0;

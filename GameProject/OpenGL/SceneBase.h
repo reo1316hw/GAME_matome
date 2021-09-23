@@ -10,7 +10,6 @@ class Sprite;
 class InputSystem;
 class MapCreate;
 class HeartUI;
-class GoalLine;
 class CheckpointBoard;
 class Player;
 
@@ -61,14 +60,10 @@ protected:
 
     //背景
     Sprite*      mSprite;
-    //入力管理クラス
-    InputSystem* mInputSystem;
     //マップ生成
     MapCreate*   mMapCreate;
     //プレイヤーのポインタ
     Player*      mPlayer;
-    //ゴールライン
-    GoalLine*        mGoalLine;
     //チェックポイントボード
     CheckpointBoard* mCheckPointBoard;
     //プレイヤーの体力UI

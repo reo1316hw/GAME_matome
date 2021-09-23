@@ -26,6 +26,9 @@ public:
 
 private:
 
+	//親ゴールラインのポインタ
+	GoalLineRoot* mGoalLineRoot;
+
 	// コンティニューシーンに移行するかのフラグ
 	bool mTransitionFlag;
 };

@@ -1,0 +1,59 @@
+/*
+@brief プリプロセッサ
+*/
+#pragma once
+
+class GoalLineRoot
+{
+public:
+
+	/*
+	@fn    コンストラクタ
+	@param _TopLeftOrigin 左上の原点
+	@param _playerPtr プレイヤーのポインタ
+	*/
+	GoalLineRoot(const Vector3& _TopLeftOrigin, Player* _playerPtr);
+
+	/*
+    @fn デストラクタ
+    */
+	~GoalLineRoot();
+
+private:
+
+	
+	/*
+	@fn    各ゴールラインの速度を指定
+	@param _Quantity 個数
+	*/
+	void SpecifyVel(const int _Quantity);
+	
+	/*
+	@fn    各ゴールラインの座標を指定
+	@param _Quantity 個数
+	*/
+	void SpecifyPos(const int _Quantity);
+	
+	/*
+	@fn    各ゴールラインの速度を補正
+	@param _Quantity 個数
+	*/
+	void CorrectVel(const int _Quantity);
+	
+	/*
+	@fn   各ゴールラインのテクスチャデータを指定
+	@param _Quantity 個数
+	*/
+	void SpecifyTextureName(const int _Quantity);
+
+	//ゴールラインのポインタ
+	GoalLine* mGoalLine;
+
+	//テクスチャデータのパス
+	std::string mTextureName;
+
+	//座標
+	Vector3 mPos;
+	//速度
+	Vector3 mVel;
+};

@@ -14,7 +14,6 @@ void GameObjectManager::CreateInstance()
 	if (mManager == nullptr)
 	{
 		mManager = new GameObjectManager();
-		GameObject::CreateMainCamera();
 	}
 }
 

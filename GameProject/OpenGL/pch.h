@@ -48,6 +48,7 @@
 #include "ParticleEffectBase.h"
 #include "CheckpointBoard.h"
 #include "GoalLine.h"
+#include "GoalLineRoot.h"
 #include "OperationExplanationBoard.h"
 #include "VerticalMoveGroundExplanationBoard.h"
 

@@ -36,6 +36,8 @@ private:
 	VerticalMoveGroundExplanationBoard* mVerticalMoveGroundExplanationBoard;
 	//チュートリアルシーン中の操作説明パネル
 	OperationExplanationBoard* mOperationExplanationBoard;
+	//親ゴールラインのポインタ
+	GoalLineRoot* mGoalLineRoot;
 
 	// コンティニューシーンに移行するかのフラグ
 	bool mTransitionFlag;

@@ -199,9 +199,6 @@
       <Filter>Map\Board</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="GoalLine.cpp">
-      <Filter>Map\Board</Filter>
-    </ClCompile>
     <ClCompile Include="MapCreate.cpp">
       <Filter>Map\MapCreate</Filter>
     </ClCompile>
@@ -210,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="DeathEffectManager.cpp">
       <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalLineRoot.cpp">
+      <Filter>Map\Board\GoalLine</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalLine.cpp">
+      <Filter>Map\Board\GoalLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -413,9 +416,6 @@
       <Filter>Map\Board</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="GoalLine.h">
-      <Filter>Map\Board</Filter>
-    </ClInclude>
     <ClInclude Include="MapCreate.h">
       <Filter>Map\MapCreate</Filter>
     </ClInclude>
@@ -424,6 +424,12 @@
     </ClInclude>
     <ClInclude Include="DeathEffectManager.h">
       <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalLineRoot.h">
+      <Filter>Map\Board\GoalLine</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalLine.h">
+      <Filter>Map\Board\GoalLine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -474,6 +480,9 @@
     </Filter>
     <Filter Include="Map\MapCreate">
       <UniqueIdentifier>{fb03b50a-c2b0-499c-a55f-e6d0b6a9dc40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Board\GoalLine">
+      <UniqueIdentifier>{e3650186-30b0-4554-8703-65052e868f9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

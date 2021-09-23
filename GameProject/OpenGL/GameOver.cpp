@@ -20,9 +20,6 @@ GameOver::GameOver(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mInputSystem = new InputSystem();
-	mInputSystem->Initialize();
-
 	mSprite = new Sprite("Assets/GameOver02.png");
 
 	mNextSceneCount = 0;

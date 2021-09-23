@@ -60,6 +60,8 @@ bool Game::Initialize()
 
     //ゲームオブジェクト管理クラスの初期化
     GameObjectManager::CreateInstance();
+	//カメラを生成
+	GameObject::CreateMainCamera();
 
 	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200,0, 0),Vector3::sUNIT_Y);
 	RENDERER->SetViewMatrix(v);
