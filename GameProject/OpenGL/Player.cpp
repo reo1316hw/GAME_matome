@@ -69,6 +69,8 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 
 	mLateralMoveVelocity = Vector3::sZERO;
 	mButtonFlag = false;
+
+	mMainCamera->SetPlayerPtr(this);
 }
 
 /*

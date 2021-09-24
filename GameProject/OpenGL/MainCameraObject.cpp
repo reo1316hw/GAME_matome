@@ -22,16 +22,32 @@ MainCameraObject::~MainCameraObject()
 }
 
 /*
-@fn		このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+@fn		カメラのアップデート
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
+	//速度の値
+	const Vector3 VelocityValue = Vector3(0.0f, 5.0f, -10.0f);
+	//加速度
+	const float Acceleration = 1.5f;
+	//速度
+	Vector3 vel = Vector3::sZERO;
+
+	//クリア時にカメラを引く
+	if (mPlayer != nullptr && mPlayer->GetClearFlag())
+	{
+		vel = VelocityValue;
+		vel *= Acceleration;
+		mOffsetPos += vel;
+	}
+
 	mPosition = mOffsetPos + mLerpObject;
 
-	SetPosition(mPosition);
 	Matrix4 view = Matrix4::CreateLookAt(mPosition, mLerpObject, Vector3::sUNIT_Y);
 	RENDERER->SetViewMatrix(view);
+
+	SetPosition(mPosition);
 }
 
 /*

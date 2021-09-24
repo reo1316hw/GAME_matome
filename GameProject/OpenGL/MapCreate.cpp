@@ -61,7 +61,7 @@ Player* MapCreate::OpenTutorialFile()
 	AccessTutorialMapData(mLowerMapData, mSizeY);
 	AccessTutorialMapData(mUpperMapData, mSizeY);
 	
-	mSizeY = 5;
+	mSizeY = 10;
 	AccessTutorialMapData(mGoalBlockMapData, mSizeY);
 
 	return mPlayer;
@@ -249,7 +249,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 
 	switch (_Name)
 	{
-	case(MapDataNum::eGroundNum):
+	    case(MapDataNum::eGroundNum):
         	new Ground(_ObjectPos, ObjectSize, "Assets/box.gpmesh", Tag::eGroundTag, SceneBase::Scene::eTutorial);
         	break;
         case(MapDataNum::eGlassNum):
@@ -302,6 +302,20 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
         	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_03.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eTutorial);
         	break;
         }
+		case(MapDataNum::eGoalWarpHoleNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(3.5f, 3.0f, 1.0f);
+
+			new GoalWarpHole(_ObjectPos + Vector3(0.0f,360.0f,0.0f), GoalBlockSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eTutorial);
+			break;
+		}
+		case(MapDataNum::eGoalCircleFrameNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(2.0f, 1.0f, 2.0f);
+
+			new GoalCircleFrame(_ObjectPos, GoalBlockSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eTutorial);
+			break;
+		}
 	}
 }
 
@@ -354,6 +368,20 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 
 			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_10.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage01);
+			break;
+		}
+		case(MapDataNum::eGoalWarpHoleNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(3.5f, 3.0f, 1.0f);
+
+			new GoalWarpHole(_ObjectPos + Vector3(0.0f, 360.0f, 0.0f), GoalBlockSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage01);
+			break;
+		}
+		case(MapDataNum::eGoalCircleFrameNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(2.0f, 1.0f, 2.0f);
+
+			new GoalCircleFrame(_ObjectPos, GoalBlockSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage01);
 			break;
 		}
 	}
@@ -476,6 +504,20 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_15.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage02);
 			break;
 	    }
+		case(MapDataNum::eGoalWarpHoleNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(3.5f, 3.0f, 1.0f);
+
+			new GoalWarpHole(_ObjectPos + Vector3(0.0f, 360.0f, 0.0f), GoalBlockSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage02);
+			break;
+		}
+		case(MapDataNum::eGoalCircleFrameNum):
+		{
+			const Vector3 GoalBlockSize = Vector3(2.0f, 1.0f, 2.0f);
+
+			new GoalCircleFrame(_ObjectPos, GoalBlockSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage02);
+			break;
+		}
 		case(MapDataNum::eRightOneMoveBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);

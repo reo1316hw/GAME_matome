@@ -24,12 +24,15 @@ public:
 	~MainCameraObject();
 
 	/*
-	@fn		このクラスはポーズ中に別クラスから更新関数を呼ばれることがある
+	@fn		カメラのアップデート
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime = 1.0f)override;
 
 private:
+
+	//プレイヤーのポインタ
+	Player* mPlayer;
 
 	//親オブジェクトとの差
 	Vector3 mOffsetPos;
@@ -46,5 +49,9 @@ public://ゲッターセッター
 	*/
 	void SetViewMatrixLerpObject(const Vector3& _Offset, const Vector3& _ParentPos);
 
+	/*
+    @param _player プレイヤーのポインタ
+    */
+	void SetPlayerPtr(Player* _playerPtr) { mPlayer = _playerPtr; };
 };
 

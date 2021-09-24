@@ -87,6 +87,8 @@
 #include "LeftGround.h"
 #include "DownBlock.h"
 #include "GoalBlock.h"
+#include "GoalCircleFrame.h"
+#include "GoalWarpHole.h"
 
 #include "SceneBase.h"
 #include "TitleScene.h"

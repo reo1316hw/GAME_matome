@@ -58,7 +58,9 @@ enum Tag
 	eLeftOneMoveBlockTag = 18,
 	eDownBlockTag = 19,
 	eGoalBlockTag = 20,
-	eCheckpointTag = 21,
+	eGoalWarpHoleTag = 21,
+	eGoalCircleFrameTag = 22,
+	eCheckpointTag = 23,
 };
 
 /*
@@ -177,6 +179,7 @@ public:
 	static void CreateMainCamera();
 
 protected:
+
 	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
 
 	/*

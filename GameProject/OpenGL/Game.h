@@ -99,4 +99,3 @@ public://ゲッターセッター
 	*/
 	void SetFirstScene(SceneBase* _firstScene);
 };
-

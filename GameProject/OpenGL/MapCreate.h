@@ -30,6 +30,8 @@ enum MapDataNum
 	eDownBlockNum = 16,
 	eHighUpBlockNum = 17,
 	eGoalBlockNum = 20,
+	eGoalWarpHoleNum = 22,
+	eGoalCircleFrameNum = 23,
 	eRightOneMoveBlockNum = 418,
 	eLeftOneMoveBlockNum = 419,
 

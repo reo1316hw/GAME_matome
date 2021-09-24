@@ -214,6 +214,12 @@
     <ClCompile Include="GoalLine.cpp">
       <Filter>Map\Board\GoalLine</Filter>
     </ClCompile>
+    <ClCompile Include="GoalCircleFrame.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalWarpHole.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -430,6 +436,12 @@
     </ClInclude>
     <ClInclude Include="GoalLine.h">
       <Filter>Map\Board\GoalLine</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalCircleFrame.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalWarpHole.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
