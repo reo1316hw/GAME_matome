@@ -15,13 +15,6 @@ MainCameraObject::MainCameraObject()
 }
 
 /*
-@fn	デストラクタ
-*/
-MainCameraObject::~MainCameraObject()
-{
-}
-
-/*
 @fn		カメラのアップデート
 @param	_deltaTime 最後のフレームを完了するのに要した時間
 */
@@ -35,7 +28,7 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 	Vector3 vel = Vector3::sZERO;
 
 	//クリア時にカメラを引く
-	if (mPlayer != nullptr && mPlayer->GetClearFlag())
+	if (mPlayer != nullptr && mPlayer->GetGoalProductionFlag())
 	{
 		vel = VelocityValue;
 		vel *= Acceleration;

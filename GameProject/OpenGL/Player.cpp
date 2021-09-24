@@ -28,6 +28,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mDeathFlag(false)
 	, mDamageFlag(false)
 	, mStopFlag(false)
+	, mGoalProductionFlag(false)
 	, mClearFlag(false)
 	, mJumpFlag(false)
 	, mScaleFlag(false)
@@ -90,7 +91,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
 
 	//ステージクリアしたらプレイヤーの更新を止める
-	if (mClearFlag)
+	if (mGoalProductionFlag)
 	{
 		SetState(State::eDead);
 	}
@@ -142,7 +143,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		//チュートリアル時のゴールの座標
 		if (mPosition.z >= goalZPos)
 		{
-			mClearFlag = true;
+			mGoalProductionFlag = true;
 		}
 	}
 
@@ -163,7 +164,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ01のゴール座標
 		if (mPosition.z >= goalZPos)
 		{
-			mClearFlag = true;
+			mGoalProductionFlag = true;
 		}
 	}
 
@@ -184,7 +185,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		//ステージ02のゴールの座標
 		if (mPosition.z >= goalZPos)
 		{
-			mClearFlag = true;
+			mGoalProductionFlag = true;	
 		}
 	}
 

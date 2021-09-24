@@ -119,7 +119,9 @@ private:
 	//ダメージを受けたか
 	bool		mDamageFlag;
 	//リスポーン後の待機フラグ
-	bool		mStopFlag;
+	bool		mStopFlag;		
+	//ゴール演出するか
+	bool        mGoalProductionFlag;
 	//クリアしたか
 	bool		mClearFlag;
 	//ジャンプするか
@@ -152,6 +154,7 @@ private:
 
 public://ゲッターセッター
 
+	bool GetGoalProductionFlag() { return mGoalProductionFlag; };
 	bool GetClearFlag() { return mClearFlag; };
 	bool GetDeathFlag() { return mDeathFlag; };
     bool GetEnableCheckpointFlag() { return mEnableCheckpointFlag; };

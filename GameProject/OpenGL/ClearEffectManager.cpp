@@ -27,7 +27,7 @@ ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::S
 */
 void ClearEffectManager::UpdateGameObject(float _deltaTime)
 {
-	if (mPlayer->GetClearFlag() && OneCreateClearFlag)
+	if (mPlayer->GetGoalProductionFlag() && OneCreateClearFlag)
 	{
 		mState = ParticleState::eParticleActive;
 	}

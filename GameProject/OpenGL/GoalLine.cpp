@@ -29,7 +29,7 @@ GoalLine::GoalLine(const Vector3& _Pos, const Vector3& _Vel, const std::string& 
 
 void GoalLine::UpdateGameObject(float _deltaTime)
 {
-	if (mPlayer->GetClearFlag())
+	if (mPlayer->GetGoalProductionFlag())
 	{
 		mVelocity *= 1.05f;
 		mPosition += mVelocity;
