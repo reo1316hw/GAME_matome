@@ -220,6 +220,9 @@
     <ClCompile Include="GoalWarpHole.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="GoalWarpBorard.cpp">
+      <Filter>Map\Board</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -442,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="GoalWarpHole.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalWarpBorard.h">
+      <Filter>Map\Board</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

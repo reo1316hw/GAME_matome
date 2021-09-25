@@ -28,6 +28,8 @@ private:
 
 	//親ゴールラインのポインタ
 	GoalLineRoot* mGoalLineRoot;
+	//ゴールワープ板
+	GoalWarpBorard* mGoalWarpBorard;
 
 	// コンティニューシーンに移行するかのフラグ
 	bool mTransitionFlag;

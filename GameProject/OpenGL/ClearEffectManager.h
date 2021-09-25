@@ -47,10 +47,9 @@ public:
 private:
 
 	/*
-	@fn    速度を決める
-	@param _Quantity 個数
+	@fn 速度を決める
 	*/
-	void DecideVelocity(const int _Quantity);
+	void DecideVelocity();
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
@@ -66,5 +65,7 @@ private:
 	Player* mPlayer;
 
 	//クリアエフェクトを一度だけ生成するためのフラグ
-	bool			 OneCreateClearFlag;
+	bool OneCreateClearFlag;
+	//角度
+	float mAngle;
 };

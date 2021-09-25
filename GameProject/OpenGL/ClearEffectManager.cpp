@@ -11,6 +11,7 @@
 */
 ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	:GameObject(_SceneTag, _ObjectTag)
+	, mAngle(0.0f)
 {
 	mState = ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
@@ -43,15 +44,23 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 	case ParticleState::eParticleActive:
 
 		//クリアエフェクトの個数
-		const int ClearEffectNum = 200;
+		const int ClearEffectNum = 360;
 		mPosition = mPlayer->GetPosition();
 		mPosition.z -= 200.0f;
 
+		//カラーの減速値
+		const Vector3 decColor = Vector3(0.002f, 0.002f, 0.0f);
+		//クリアエフェクトのカラー値
+		Vector3 color = Color::sWHITE;
+
 		for (int i = 0; i < ClearEffectNum; i++)
 		{
-			DecideVelocity(i);
+			//速度を決める
+			DecideVelocity();
 
-			mClearEffect = new ClearEffect(mPosition, mVelocity, mTag, mSceneTag);
+			color -= decColor;
+
+			mClearEffect = new ClearEffect(mPosition, mVelocity, color, mTag, mSceneTag);
 		}
 
 		OneCreateClearFlag = false;
@@ -62,50 +71,14 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 
 /*
 @fn    速度を決める
-@param _Quantity 個数
 */
-void ClearEffectManager::DecideVelocity(const int _Quantity)
+void ClearEffectManager::DecideVelocity()
 {
-	//方向の個数
-	const int DirectionNum = 5;
 	//向き
-	float direction = 0.0f;
+	Vector3 direction = Vector3(cosf(mAngle), sinf(mAngle), -0.3f);
 	//速度
-	float speed = 0.0f;
+	Vector3 speed = Vector3(2.0f, 2.0f, 1.1f);
 
-	//速度を初期化
-	mVelocity = Vector3::sZERO;
-	speed = _Quantity * 0.1f;
-
-	switch (_Quantity % DirectionNum)
-	{
-	case DirectionClearEffect::eLeftUpClear:
-		direction = -0.6f;
-		mVelocity.x = direction * speed;
-		direction = 1.0f;
-		mVelocity.y = direction * speed;
-		break;
-	case DirectionClearEffect::eLeftUpUpClear:
-		direction = -0.3f;
-		mVelocity.x = direction * speed;
-		direction = 1.0f;
-		mVelocity.y = direction * speed;
-		break;
-	case DirectionClearEffect::eUpClear:
-		direction = 1.0f;
-		mVelocity.y = direction * speed;
-		break;
-	case DirectionClearEffect::eRightUpUpClear:
-		direction = 0.3f;
-		mVelocity.x = direction * speed;
-		direction = 1.0f;
-		mVelocity.y = direction * speed;
-		break;
-	case DirectionClearEffect::eRightUpClear:
-		direction = 0.6f;
-		mVelocity.x = direction * speed;
-		direction = 1.0f;
-		mVelocity.y = direction * speed;
-		break;
-	}
+	mVelocity += direction * speed;
+	mAngle += 0.1f;
 }

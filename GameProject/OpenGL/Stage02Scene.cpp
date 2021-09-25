@@ -44,6 +44,9 @@ Stage02Scene::Stage02Scene(const Scene& _NowScene)
 		}
 	}
 
+	//ƒS[ƒ‹ƒ[ƒv”Â¶¬
+	mGoalWarpBorard = new GoalWarpBorard(Vector3(800.0f, 350.0f, -1000.0f), Vector3::sZERO, "Assets/Warp.png", Tag::eOtherTag, _NowScene);
+
 	//‘Ì—ÍUI¶¬
 	for (int i = 0; i < 3; i++)
 	{

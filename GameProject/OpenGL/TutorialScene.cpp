@@ -35,6 +35,8 @@ TutorialScene::TutorialScene(const Scene& _NowScene)
 	mOperationExplanationBoard = new OperationExplanationBoard(Vector3(0, 200, -96000), Vector3::sZERO, Tag::eOtherTag, _NowScene);
 	//縦移動床説明ボード生成
 	mVerticalMoveGroundExplanationBoard = new VerticalMoveGroundExplanationBoard(Vector3(0, 200, -92000), Vector3::sZERO, Tag::eOtherTag, _NowScene);
+	//ゴールワープ板生成
+	mGoalWarpBorard = new GoalWarpBorard(Vector3(800.0f, 350.0f, -74600.0f), Vector3::sZERO,"Assets/Warp.png" ,Tag::eOtherTag, _NowScene);
 
 	//体力UI生成
 	for (int i = 0; i < 3; i++)

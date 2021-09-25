@@ -132,19 +132,19 @@ void GoalLineRoot::SpecifyTextureName(const int _Quantity)
 	{
     //ç∂è„
 	case 0:
-		mTextureName = "Assets/heart.png";
+		mTextureName = "Assets/WhiteGoalLine.png";
 		break;
 	//ç∂â∫
 	case 1:
-		mTextureName = "Assets/checkpoint_stage01.png";
+		mTextureName = "Assets/BlackGoalLine.png";
 		break;
 	//âEè„
 	case 2:
-		mTextureName = "Assets/checkpoint_stage01.png";
+		mTextureName = "Assets/BlackGoalLine.png";
 		break;
     //âEâ∫
 	case 3:
-		mTextureName = "Assets/heart.png";
+		mTextureName = "Assets/WhiteGoalLine.png";
 		break;
 	}
 }

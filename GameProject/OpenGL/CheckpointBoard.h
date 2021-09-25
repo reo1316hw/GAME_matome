@@ -10,7 +10,7 @@ public:
 	/*
 	@fn		コンストラクタ
 	@param	_Pos チェックポイントボードの座標
-	@param	_Vel チェックポイントボード操作方法パネルの速度
+	@param	_Vel チェックポイントボードの速度
 	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 	@param	_SceneTag シーンのタグ
 	*/
@@ -22,7 +22,7 @@ public:
 	~CheckpointBoard() {};
 
 	/*
-	@fn		操作方法パネルのアップデート
+	@fn		チェックポイントボードのアップデート
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
 	void UpdateGameObject(float _deltaTime)override {};
