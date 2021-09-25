@@ -60,4 +60,10 @@ private:
 	Vector3 mPos;
 	//速度
 	Vector3 mVel;
+public://ゲッターセッター
+
+	/*
+	@return 座標
+	*/
+	Vector3 GetPos() { return mPos; };
 };

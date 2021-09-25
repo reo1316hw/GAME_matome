@@ -27,7 +27,7 @@ ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::S
 */
 void ClearEffectManager::UpdateGameObject(float _deltaTime)
 {
-	if (mPlayer->GetGoalProductionFlag() && OneCreateClearFlag)
+	if (mPlayer->GetClearFlag() && OneCreateClearFlag)
 	{
 		mState = ParticleState::eParticleActive;
 	}
@@ -45,6 +45,7 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 		//クリアエフェクトの個数
 		const int ClearEffectNum = 200;
 		mPosition = mPlayer->GetPosition();
+		mPosition.z -= 200.0f;
 
 		for (int i = 0; i < ClearEffectNum; i++)
 		{

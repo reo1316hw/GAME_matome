@@ -21,7 +21,7 @@ MainCameraObject::MainCameraObject()
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	//速度の値
-	const Vector3 VelocityValue = Vector3(0.0f, 5.0f, -10.0f);
+	const Vector3 VelocityValue = Vector3(0.0f, 3.0f, -6.0f);
 	//加速度
 	const float Acceleration = 1.5f;
 	//速度

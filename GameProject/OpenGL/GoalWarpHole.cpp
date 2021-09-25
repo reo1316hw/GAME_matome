@@ -9,8 +9,9 @@
 @param	_Size ゴールワ－プホールのサイズ
 @param	_ObjectTag ゴールワ－プホールのタグ
 @param	_SceneTag シーンのタグ
+@param  _playerPtr プレイヤーのポインタ
 */
-GoalWarpHole::GoalWarpHole(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
+GoalWarpHole::GoalWarpHole(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	: GameObject(_SceneTag, _ObjectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -23,4 +24,7 @@ GoalWarpHole::GoalWarpHole(const Vector3& _Pos, const Vector3& _Size, const std:
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
+
+	//自身のポインタをプレイヤークラスに設定
+	_playerPtr->SetGoalWarpHolePtr(this);
 }

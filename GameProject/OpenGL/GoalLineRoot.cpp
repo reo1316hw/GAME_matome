@@ -18,6 +18,8 @@ GoalLineRoot::GoalLineRoot(const Vector3& _TopLeftOrigin, const SceneBase::Scene
 {
 	//ゴールラインのオブジェクト数
 	const int GoalLineNum = 22;
+	//自身のポインタをプレイヤークラスに設定
+	_playerPtr->SetGoalLineRoot(this);
 
 	//ゴールライン生成
 	for (int i = 0; i < GoalLineNum; i++)

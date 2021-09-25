@@ -308,7 +308,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eTutorial);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eTutorial, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):
@@ -380,7 +380,7 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage01);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):
@@ -518,7 +518,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage02);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):

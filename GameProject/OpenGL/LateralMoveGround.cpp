@@ -43,6 +43,8 @@ LateralMoveGround::LateralMoveGround(const Vector3& _Pos, const Vector3& _Size, 
 	mOriginalPosFlag = false;
 
 	mPlayer = _playerPtr;
+	//自身のポインタをプレイヤークラスに設定
+	mPlayer->SetLateralMoveGroundPtr(this);
 }
 
 /*

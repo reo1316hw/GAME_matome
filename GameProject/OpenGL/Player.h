@@ -18,6 +18,8 @@ class DeathEffectManager;
 class CheckpointEffectManager;
 class SphereCollider;
 class LateralMoveGround;
+class GoalLineRoot;
+class GoalWarpHole;
 
 /*
 @brief 表示非表示
@@ -98,11 +100,11 @@ private:
 	const float MPlayerSpeedUp;
 
 	//プレイヤーの球当たり判定を生成
-	SphereCollider*		mSelfSphereCollider;
+	SphereCollider* mSelfSphereCollider;
 	//プレイヤーの球当たり判定の大きさ
-	Sphere				mPlayerSphere;
+	Sphere mPlayerSphere;
 	//プレイヤーの砂ぼこりエフェクト
-	SandEffectManager*  mSandEffectManager;
+	SandEffectManager* mSandEffectManager;
 	//プレイヤーのクリアエフェクト
 	ClearEffectManager* mClearEffectManager;
 	//プレイヤーのデスエフェクト
@@ -110,9 +112,15 @@ private:
 	//プレイヤーのチェックポイントエフェクト
 	CheckpointEffectManager* mCheckpointEffectManager;
 	//横移動床のポインタ
-	LateralMoveGround*	mLateral;
+	LateralMoveGround* mLateral;
+	//親ゴールラインのポインタ
+	GoalLineRoot* mGoalLineRoot;
+	//ゴールワープホールのポインタ
+	GoalWarpHole* mGoalWarpHole;
 	//横移動床にあたった時の速度
-	Vector3				mLateralMoveVelocity;
+	Vector3		  mLateralMoveVelocity;
+	//クリアのz地点
+	Vector3       mClearPos;
 
 	//死んだか
 	bool		mDeathFlag;
@@ -140,6 +148,10 @@ private:
 	bool		mHitCheckpointFlag;
 	// リスポーンしたか
 	bool        mRespawnFlag;
+	//1回だけ親ゴールラインのポインタを取得するためのフラグ
+	bool        mGetGoalLineRootFlag;
+	//1回だけゴールワープホールのポインタを取得するためのフラグ
+	bool        mGetGoalWarpHoleFlag;
 
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
@@ -151,6 +163,8 @@ private:
 	int			mCheckpointEffectCount;
 	//角度
 	float		mAngle;
+	//ゴールz座標
+	float       mGoalZPos;
 
 public://ゲッターセッター
 
@@ -158,7 +172,19 @@ public://ゲッターセッター
 	bool GetClearFlag() { return mClearFlag; };
 	bool GetDeathFlag() { return mDeathFlag; };
     bool GetEnableCheckpointFlag() { return mEnableCheckpointFlag; };
-    int GetLife() { return mLife; };
+    int  GetLife() { return mLife; };
 
+	/*
+	@param _lateralMoveGroundPtr 横移動床のポインタ
+	*/
+	void SetLateralMoveGroundPtr(LateralMoveGround* _lateralMoveGroundPtr) { mLateral = _lateralMoveGroundPtr; };
+	/*
+	@param	_goalLineRootPtr 親ゴールラインのポインタ
+	*/
+	void SetGoalLineRoot(GoalLineRoot* _goalLineRootPtr) { mGoalLineRoot = _goalLineRootPtr; };
+	/*
+	@param	_goalWarpHole ゴールワープホールのポインタ
+	*/
+	void SetGoalWarpHolePtr(GoalWarpHole* _goalWarpHole) { mGoalWarpHole = _goalWarpHole; };
 };
 

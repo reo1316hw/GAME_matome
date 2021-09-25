@@ -22,8 +22,10 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mLife(0)
 	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
+	, mGoalZPos(0.0f)
 	, MPlayerSpeedUp(10.0f)
 	, MGroundYPos(120.0f)
+	, mClearPos(Vector3::sZERO)
 	, mScene(SceneBase::Scene::eOtherScene)
 	, mDeathFlag(false)
 	, mDamageFlag(false)
@@ -36,6 +38,10 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mCollisionFlag(true)
 	, mEnableCheckpointFlag(false)
 	, mRespawnFlag(false)
+	, mGetGoalLineRootFlag(true)
+	, mGetGoalWarpHoleFlag(true)
+	, mLateral(nullptr)
+	, mGoalWarpHole(nullptr)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _ObjectTag;
@@ -84,16 +90,19 @@ void Player::UpdateGameObject(float _deltaTime)
 	const Vector3 CameraPos = Vector3(0, 500, -550);
 	//ダメージを受けるy座標
 	const float DamageYPos = -700.0f;
-	//ゴールz座標
-	float goalZPos = 0.0f;
 
-	//プレイヤーの斜め後ろにカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
-
-	//ステージクリアしたらプレイヤーの更新を止める
-	if (mGoalProductionFlag)
+	//1フレームだけ親ゴールラインのz座標を取得
+	if (mGoalLineRoot != nullptr && mGetGoalLineRootFlag)
 	{
-		SetState(State::eDead);
+		mGoalZPos = mGoalLineRoot->GetPos().z;
+		mGetGoalLineRootFlag = false;
+	}
+
+	//1フレームだけゴールワープホールのz座標を取得
+	if (mGoalWarpHole != nullptr && mGetGoalWarpHoleFlag)
+	{
+		mClearPos = mGoalWarpHole->GetPosition();
+		mGetGoalWarpHoleFlag = false;
 	}
 
 	//プレイヤーがある一定の座標まで落ちたらダメージを受ける
@@ -101,6 +110,45 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		mPosition.y = DamageYPos + 1.0f;
 		mDamageFlag = true;
+	}
+
+	//ゴールの座標に到達したらゴール演出を行う
+	if (mPosition.z >= mGoalZPos)
+	{
+		mGoalProductionFlag = true;
+	}
+
+	//クリア地点に到達したらクリアする
+	if (mPosition.z >= mClearPos.z)
+	{
+		mClearFlag = true;
+	}
+
+	//ゴール演出が開始されたらゴールワープホールに向かって自動で進む
+	if (mGoalProductionFlag)
+	{
+		/*const Vector3 ShiftPos = Vector3(0.0f, 0.0f, 1000.0f);
+		Vector3 centerPos = mClearPos - ShiftPos;
+
+		mPosition = Vector3::Lerp(centerPos, mPosition, 0.5f);
+
+		if (mPosition.z >= centerPos.z)
+		{
+			mVelocity.z = mMoveSpeed;
+		}*/
+	}
+	else
+	{
+		//プレイヤーの斜め後ろにカメラをセット
+		mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
+	}
+
+	//ステージクリアしたらプレイヤーの更新を止める
+	if (mClearFlag)
+	{
+		mGetGoalLineRootFlag = true;
+		mGetGoalWarpHoleFlag = true;
+		SetState(State::eDead);
 	}
 
 	//ダメージを受けたら体力を減らす
@@ -111,7 +159,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		mDamageFlag = false;
 	}
 
-	//全ステージ共通のリスポーン処理
+	//リスポーン処理
 	if (mRespawnFlag)
 	{
 		mLateralMoveVelocity = Vector3::sZERO;
@@ -137,14 +185,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
-
-		goalZPos = -75700.0f;
-
-		//チュートリアル時のゴールの座標
-		if (mPosition.z >= goalZPos)
-		{
-			mGoalProductionFlag = true;
-		}
 	}
 
 	//ステージ01
@@ -158,14 +198,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mScaleFlag = true;
 			mJumpFlag = false;
 		}
-
-		goalZPos = -8900.0f;
-
-		//ステージ01のゴール座標
-		if (mPosition.z >= goalZPos)
-		{
-			mGoalProductionFlag = true;
-		}
 	}
 
 	//ステージ02
@@ -178,14 +210,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mVelocity.y = 40.0f;
 			mScaleFlag = true;
 			mJumpFlag = false;
-		}
-
-		goalZPos = -2100.0f;
-
-		//ステージ02のゴールの座標
-		if (mPosition.z >= goalZPos)
-		{
-			mGoalProductionFlag = true;	
 		}
 	}
 
@@ -400,49 +424,51 @@ void Player::GameObjectInput(const InputState& _KeyState)
 */
 void Player::InputController(const InputState& _KeyState)
 {
-	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+	if (!mGoalProductionFlag)
 	{
-		mVelocity.z = mMoveSpeed;
-	}
-	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-			 _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	{
-		mVelocity.z = -mMoveSpeed;
-	}
-	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0  ||
-			 _KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0||
-			 _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-			 _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	{
-		mVelocity.z *= 0;
-	}
+		// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+		if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
+		{
+			mVelocity.z = mMoveSpeed;
+		}
+		// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+		{
+			mVelocity.z = -mMoveSpeed;
+		}
+		// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0 ||
+			_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+		{
+			mVelocity.z *= 0;
+		}
 
-	//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
-	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
-	{
-		mVelocity.x += -MPlayerSpeedUp;
-	}
-	// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
-		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
-	{
-		mVelocity.x += MPlayerSpeedUp;
-	}
+		//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
+		if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
+		{
+			mVelocity.x += -MPlayerSpeedUp;
+		}
+		// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
+		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
+		{
+			mVelocity.x += MPlayerSpeedUp;
+		}
 
-	// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
-		     _KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
-		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
-		     _KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
-	{
-		mButtonFlag = false;
+		// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
+		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
+			_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
+			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
+		{
+			mButtonFlag = false;
+		}
 	}
-
 }
 
 /*
@@ -518,8 +544,12 @@ void Player::OnCollision(const GameObject& _HitObject)
 		{
 			//重力を消す
 			mVelocity.y = 0;
-			//横移動床の速度を取得
-			mLateralMoveVelocity = mLateral->GetVelocity();
+
+			if (mLateral != nullptr)
+			{
+				//横移動床の速度を取得
+				mLateralMoveVelocity = mLateral->GetVelocity();
+			}
 		}
 		else
 		{
