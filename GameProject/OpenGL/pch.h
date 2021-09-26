@@ -59,7 +59,8 @@
 #include "DeathEffectManager.h"
 #include "CheckpointEffect.h"
 #include "SandEffect.h"
-#include "ClearEffect.h"
+#include "RippleClearEffect.h"
+#include "ParticleClearEffect.h"
 #include "DeathEffect.h"
 
 #include "MatrixPalette.h"

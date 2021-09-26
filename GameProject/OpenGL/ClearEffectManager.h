@@ -6,7 +6,7 @@
 /*
 @brief 前方宣言
 */
-class ClearEffect;
+class RippleClearEffect;
 class Player;
 
 /*
@@ -48,8 +48,9 @@ private:
 
 	/*
 	@fn 速度を決める
+	@param _Quantity 個数
 	*/
-	void DecideVelocity();
+	void DecideVelocity(const int _Quantity);
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
@@ -60,7 +61,7 @@ private:
 	//アタッチしたゲームオブジェクトのタグ
 	Tag				 mTag;
 	//チェックポイントエフェクト
-	ClearEffect* mClearEffect;
+	RippleClearEffect* mRippleClearEffect;
 	//プレイヤーのポインタ
 	Player* mPlayer;
 
@@ -68,4 +69,8 @@ private:
 	bool OneCreateClearFlag;
 	//角度
 	float mAngle;
+
+	int frameCount;
+	int generateFrameCount;
+	int generateCount;
 };

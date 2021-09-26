@@ -168,7 +168,7 @@
     <ClCompile Include="TutorialScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ClearEffect.cpp">
+    <ClCompile Include="RippleClearEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
     <ClCompile Include="DeathEffect.cpp">
@@ -222,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="GoalWarpBorard.cpp">
       <Filter>Map\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleClearEffect.cpp">
+      <Filter>ParticleEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,7 +397,7 @@
     <ClInclude Include="TutorialScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ClearEffect.h">
+    <ClInclude Include="RippleClearEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
     <ClInclude Include="DeathEffect.h">
@@ -448,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="GoalWarpBorard.h">
       <Filter>Map\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleClearEffect.h">
+      <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
