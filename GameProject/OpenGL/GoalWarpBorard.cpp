@@ -20,6 +20,8 @@ GoalWarpBorard::GoalWarpBorard(const Vector3& _Pos, const Vector3& _Vel, const s
 	mParticle->SetScale(mScale);
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetColor(Color::sWHITE);
+
+	mAngle = 0.5f;
 }
 
 /*
@@ -28,7 +30,6 @@ GoalWarpBorard::GoalWarpBorard(const Vector3& _Pos, const Vector3& _Vel, const s
 */
 void GoalWarpBorard::UpdateGameObject(float _deltaTime)
 {
-	mAngle += 10.0f;
 	//‰ñ“]ˆ—
 	float radian = Math::ToRadians(mAngle);
 	Quaternion rot = this->GetRotation();

@@ -101,7 +101,7 @@ void main()
         HiBrightBuffer = vec4(0.0f, 0.0f, 0.0f, 0.0f) + texture(uEmissiveMap, fragTexCoord) * uLuminance;
     }
 	// HDR成分はそのままHDRバッファへ出力
-//	HDRBuffer = vec4(result, 0.0f);
+    // HDRBuffer = vec4(result, 0.0f);
     HDRBuffer = vec4(result, uAlpha);
 }
 

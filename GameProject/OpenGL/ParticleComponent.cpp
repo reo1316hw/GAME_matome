@@ -65,9 +65,8 @@ void ParticleComponent::Draw(Shader* _shader)
 		reverceVec.x *= -1;
 	}
 	matScale = Matrix4::CreateScale(mScale*reverceVec* mOwner->GetScale());
-	mat = Matrix4::CreateTranslation(mOffset + mOwner->GetPosition());
 
-	_shader->SetMatrixUniform("uWorldTransform", matScale * mStaticBillboardMat * mat);
+	_shader->SetMatrixUniform("uWorldTransform", matScale * mStaticBillboardMat * mOwner->GetWorldTransform());
 	_shader->SetFloatUniform("uAlpha", mAlpha);
 	_shader->SetVectorUniform("uColor", mColor);
 

@@ -14,11 +14,10 @@ class Player;
 */
 enum DirectionClearEffect
 {
-	eLeftUpClear = 0,
-	eLeftUpUpClear = 1,
-	eUpClear = 2,
-	eRightUpUpClear = 3,
-	eRightUpClear = 4
+	eLeftUnderClear = 0,
+	eRightUpClear = 1,
+	eLeftUpClear = 2,
+	eRightUnderClear = 3,
 };
 
 class ClearEffectManager : public GameObject
@@ -47,10 +46,19 @@ public:
 private:
 
 	/*
-	@fn 速度を決める
-	@param _Quantity 個数
+	@fn 粒子のクリアエフェクト生成
 	*/
-	void DecideVelocity(const int _Quantity);
+	void CreateParticleClearEffect();
+
+	/*
+	@fn 波紋のクリアエフェクト生成
+	*/
+	void CreateRippleClearEffect();
+
+	/*
+	@fn 速度を決める
+	*/
+	void DecideVelocity();
 
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
@@ -70,7 +78,8 @@ private:
 	//角度
 	float mAngle;
 
-	int frameCount;
-	int generateFrameCount;
-	int generateCount;
+	//生成するタイミングのカウント
+	int mCreateTimingCount;
+	//生成した数をカウント
+	int mCreateCount;
 };

@@ -21,9 +21,7 @@ MainCameraObject::MainCameraObject()
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	//速度の値
-	const Vector3 VelocityValue = Vector3(0.0f, 3.0f, -6.0f);
-	//加速度
-	const float Acceleration = 1.5f;
+	const Vector3 VelocityValue = Vector3(0.0f, 6.0f, -8.0f);
 	//速度
 	Vector3 vel = Vector3::sZERO;
 
@@ -31,7 +29,6 @@ void MainCameraObject::UpdateGameObject(float _deltaTime)
 	if (mPlayer != nullptr && mPlayer->GetGoalProductionFlag())
 	{
 		vel = VelocityValue;
-		vel *= Acceleration;
 		mOffsetPos += vel;
 	}
 

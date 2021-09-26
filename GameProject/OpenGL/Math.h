@@ -1143,4 +1143,5 @@ namespace Color
 	static const Vector3 sLIGHT_BLUE(0.68f, 0.85f, 0.9f);
 	static const Vector3 sLIGHT_PINK(1.0f, 0.71f, 0.76f);
 	static const Vector3 sLIGHT_GREEN(0.56f, 0.93f, 0.56f);
+	static const Vector3 sNAVY(0.0f, 0.0f, 0.5f);
 }

@@ -16,7 +16,6 @@ CheckpointEffect::CheckpointEffect(const Vector3 _Pos, const Vector3 _Vel, const
 	mAlpha = 1.0f;
 	mScale = 0.0f;
 	mVelocity.y = 30.0f;
-	mSpeed = 1.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::sYELLOW);
@@ -37,19 +36,18 @@ void CheckpointEffect::UpdateGameObject(float _deltaTime)
 	{
 		//速度の減速値
 		const float VelocityMinusValue = 1.5f;
-		//スケールの加速値
-		const float ScalePlusValue = 4.0f;
+		//スケールの追加値
+		const float ScaleAddVal = 4.0f;
 		//スケールの最大値
-		const float ScaleMaxValue = 64.0f;
+		const float ScaleMaxVal = 64.0f;
 
-		mVelocity = mVelocity * mSpeed;
 		mPosition = mPosition + mVelocity;
 
 		mVelocity.y -= VelocityMinusValue;
 		
-		if (mScale <= ScaleMaxValue)
+		if (mScale <= ScaleMaxVal)
 		{
-			mScale += ScalePlusValue;
+			mScale += ScaleAddVal;
 		}
 
 		mParticle->SetScale(mScale);

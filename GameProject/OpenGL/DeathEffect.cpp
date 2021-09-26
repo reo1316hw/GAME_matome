@@ -31,15 +31,20 @@ void DeathEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();
 
+	//アルファ値の削減値
+	const float AlphaReductionVal = 0.01f;
+	//スケールの追加値
+	const float ScaleAddVal = 1.0f;
+
 	if (mLifeCount > 0)
 	{
-		mAlpha -= 0.01f;
-		mScale += 1.0f;
-		mParticle->SetAlpha(mAlpha);
-		mParticle->SetScale(mScale);
-
+		mAlpha -= AlphaReductionVal;
+		mScale += ScaleAddVal;
 		mVelocity = mVelocity * mSpeed;
 		mPosition = mPosition + mVelocity;
+
+		mParticle->SetAlpha(mAlpha);
+		mParticle->SetScale(mScale);
 		SetPosition(mPosition);
 	}
 

@@ -143,14 +143,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
 	}
 
-	//ステージクリアしたらプレイヤーの更新を止める
-	if (mClearFlag)
-	{
-		mGetGoalLineRootFlag = true;
-		mGetGoalWarpHoleFlag = true;
-		SetState(State::eDead);
-	}
-
 	//ダメージを受けたら体力を減らす
 	if (mDamageFlag)
 	{
@@ -288,12 +280,32 @@ void Player::UpdateGameObject(float _deltaTime)
 		mAngle = 10.0f;
 	}
 
-	//回転処理
-	float radian = Math::ToRadians(mAngle);
-	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::sUNIT_X, radian);
-	Quaternion target = Quaternion::Concatenate(rot, inc);
-	SetRotation(target);
+	//ステージクリアしたらプレイヤーの更新を止める
+	if (mClearFlag)
+	{
+		//スケール値の削減値
+		const Vector3 ScaleReductionVal = Vector3(0.015f, 0.015f, 0.015f);
+
+		mVelocity = Vector3::sZERO;
+		mGetGoalLineRootFlag = true;
+		mGetGoalWarpHoleFlag = true;
+
+		mScale -= ScaleReductionVal;
+
+		if (mScale.x <= 0.0f)
+		{
+			SetState(State::eDead);
+		}
+	}
+	else
+	{
+		//回転処理
+		float radian = Math::ToRadians(mAngle);
+		Quaternion rot = this->GetRotation();
+		Quaternion inc(Vector3::sUNIT_X, radian);
+		Quaternion target = Quaternion::Concatenate(rot, inc);
+		SetRotation(target);
+	}
 	
 	//最大速度
 	const float PlayerMaxSpeed = 25.0f;

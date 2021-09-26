@@ -20,7 +20,6 @@ SandEffect::SandEffect(const Vector3 _Pos, const Vector3 _Vel, const SceneBase::
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color);
 	mParticle->SetBlendMode(ParticleComponent::ParticleEnum::eParticleBlendAlpha);
-	mSpeed = 1.0f;
 }
 
 /*
@@ -31,14 +30,19 @@ void SandEffect::UpdateGameObject(float _deltaTime)
 {
 	ParticleEffectBase::LifeCountDown();
 
+	//アルファ値の削減値
+	const float AlphaReductionVal = 0.01f;
+	//スケールの追加値
+	const float ScaleAddVal = 10.0f;
+
 	if (mLifeCount > 0)
 	{
-		mAlpha -= 0.01f;
-		mScale += 10.0f;
+		mAlpha -= AlphaReductionVal;
+		mScale += ScaleAddVal;
+		mPosition = mPosition + mVelocity;
+
 		mParticle->SetAlpha(mAlpha);
 		mParticle->SetScale(mScale);
-		mVelocity = mVelocity * mSpeed;
-		mPosition = mPosition + mVelocity;
 		SetPosition(mPosition);
 	}
 

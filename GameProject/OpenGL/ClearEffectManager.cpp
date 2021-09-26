@@ -12,6 +12,8 @@
 ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
 	:GameObject(_SceneTag, _ObjectTag)
 	, mAngle(0.0f)
+	, mCreateTimingCount(0)
+	, mCreateCount(0)
 {
 	mState = ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
@@ -20,9 +22,6 @@ ClearEffectManager::ClearEffectManager(const Tag& _ObjectTag, const SceneBase::S
 	OneCreateClearFlag = true;
 
 	mPlayer = _playerPtr;
-	frameCount = 0;
-	generateFrameCount = 0;
-	generateCount = 0;
 }
 
 /*
@@ -46,83 +45,106 @@ void ClearEffectManager::UpdateGameObject(float _deltaTime)
 		break;
 	case ParticleState::eParticleActive:
 
-		mPosition = mPlayer->GetPosition();
-		mPosition.z -= 200.0f;
+		//粒子のクリアエフェクト生成
+		CreateParticleClearEffect();
 		
-		for (int i = 0; i < 50; i++)
-		{
-			//クリアエフェクトのカラー値
-			Vector3 randVec = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
-			randVec.Normalize();
-			randVec.z *= -1.0f;
-
-			switch (i % 4)
-			{
-			case 0:
-				randVec.x *= -1.0f;
-				randVec.y *= -1.0f;
-
-				break;
-			case 1:
-				randVec.x *= 1.0f;
-				randVec.y *= 1.0f;
-				break;
-			case 2:
-				randVec.x *= -1.0f;
-				randVec.y *= 1.0f;
-				break;
-			case 3:
-				randVec.x *= 1.0f;
-				randVec.y *= -1.0f;
-				break;
-			}
-
-			new ParticleClearEffect(mPosition, randVec, mTag, mSceneTag);
-		}
-
-		Vector3 color = Color::sLIGHT_BLUE;
-		++generateFrameCount;
-
-		if (generateFrameCount >= 5)
-		{
-			float scale = 256.0f;
-
-			//速度を決める
-			//DecideVelocity(i);
-			
-			//向き
-			Vector3 direction = Vector3(0.0f, 0.0f, -1.0f);
-			//速度
-			float speed = 10.0f;
-
-			mVelocity += direction * speed;
-
-			mRippleClearEffect = new RippleClearEffect(mPosition , mVelocity, color, scale, mTag, mSceneTag);
-			++generateCount;
-			generateFrameCount = 0;
-		}
-
-		if (generateCount == 3)
-		{
-			OneCreateClearFlag = false;
-		}
+		//波紋のクリアエフェクト生成
+		CreateRippleClearEffect();
 
 		break;
 	}
 }
 
 /*
-@fn 速度を決める
-@param _Quantity 個数
+@fn 粒子のクリアエフェクト生成
 */
-void ClearEffectManager::DecideVelocity(const int _Quantity)
+void ClearEffectManager::CreateParticleClearEffect()
+{
+	//速度
+	const float Speed = 30.0f;
+	//1フレームに発生する粒子のクリアエフェクトの個数
+	const int ParticleClearEffectNum = 4;
+
+	mPosition = mPlayer->GetPosition();
+	mPosition.z -= 200.0f;
+
+	for (int i = 0; i < ParticleClearEffectNum; i++)
+	{
+		//粒子のクリアエフェクトのランダムな向きベクトル
+		Vector3 randVec = Vector3(rand() % 100 + 1.0f, rand() % 100 + 1.0f, rand() % 100 + 1.0f);
+
+		randVec.Normalize();
+		randVec.z *= -Speed;
+
+		//方向の個数
+		const int DirectionNum = 4;
+
+		//後方だけに粒子のクリアエフェクトを飛ばすように向きを限定する
+		switch (i % DirectionNum)
+		{
+		case DirectionClearEffect::eLeftUnderClear:
+			randVec.x *= -Speed;
+			randVec.y *= -Speed;
+
+			break;
+		case DirectionClearEffect::eRightUpClear:
+			randVec.x *= Speed;
+			randVec.y *= Speed;
+			break;
+		case DirectionClearEffect::eLeftUpClear:
+			randVec.x *= -Speed;
+			randVec.y *= Speed;
+			break;
+		case DirectionClearEffect::eRightUnderClear:
+			randVec.x *= Speed;
+			randVec.y *= -Speed;
+			break;
+		}
+
+		new ParticleClearEffect(mPosition, randVec, mTag, mSceneTag);
+	}
+}
+
+/*
+@fn 波紋のクリアエフェクト生成
+*/
+void ClearEffectManager::CreateRippleClearEffect()
+{
+	//生成するタイミング
+	const int CreateTimingNum = 5;
+	//生成する最大個数
+	const int MaxCreateNum = 3;
+
+	++mCreateTimingCount;
+
+	if (mCreateTimingCount >= CreateTimingNum)
+	{
+		//速度を決める
+		DecideVelocity();
+
+		mRippleClearEffect = new RippleClearEffect(mPosition, mVelocity, mTag, mSceneTag);
+
+		++mCreateCount;
+		mCreateTimingCount = 0;
+	}
+
+	if (mCreateCount == MaxCreateNum)
+	{
+		OneCreateClearFlag = false;
+	}
+}
+
+/*
+@fn 速度を決める
+*/
+void ClearEffectManager::DecideVelocity()
 {
 	mVelocity = Vector3::sZERO;
 
 	//向き
 	Vector3 direction = Vector3(0.0f, 0.0f, -1.0f);
 	//速度
-	float speed = 1.0f;
+	float speed = 10.0f;
 
 	mVelocity += direction * speed;
 }
