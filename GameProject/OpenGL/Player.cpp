@@ -131,13 +131,20 @@ void Player::UpdateGameObject(float _deltaTime)
 		const Vector3 ShiftPos = Vector3(0.0f, 0.0f, 800.0f);
 		Vector3 centerPos = mClearPos - ShiftPos;
 
+		mVelocity = Vector3::sZERO;
+		mGravity = 0.0f;
+
 		if (mPosition.z > centerPos.z)
 		{
 			mVelocity.z = mMoveSpeed;
 		}
 		else
 		{
-			mPosition = Vector3::Lerp(mPosition, centerPos, 0.1f);
+			Vector3 next = Vector3::Lerp(mPosition, centerPos, 0.1f);
+			Vector3 a = next - mPosition;
+			a.Normalize();
+			mVelocity = a * 5.0f;
+			SetPosition(mPosition + mVelocity);
 		}
 	}
 	else
@@ -527,7 +534,8 @@ void Player::OnCollision(const GameObject& _HitObject)
 			mTag == Tag::eRightOneMoveBlockTag ||
 			mTag == Tag::eLeftOneMoveBlockTag ||
 			mTag == Tag::eAerialBlockTag ||
-			mTag == Tag::eLowUpBlockTag)
+			mTag == Tag::eLowUpBlockTag ||
+			mTag == Tag::eGoalBlockTag)
 		{
 			mDamageFlag = true;
 		}

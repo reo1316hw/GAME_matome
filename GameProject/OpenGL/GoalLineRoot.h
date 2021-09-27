@@ -22,7 +22,6 @@ public:
 
 private:
 
-	
 	/*
 	@fn    各ゴールラインの速度を指定
 	@param _Quantity 個数
@@ -60,6 +59,7 @@ private:
 	Vector3 mPos;
 	//速度
 	Vector3 mVel;
+
 public://ゲッターセッター
 
 	/*
