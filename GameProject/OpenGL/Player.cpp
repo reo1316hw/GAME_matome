@@ -40,6 +40,7 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	, mRespawnFlag(false)
 	, mGetGoalLineRootFlag(true)
 	, mGetGoalWarpHoleFlag(true)
+	, mInputPermissionFlag(true)
 	, mLateral(nullptr)
 	, mGoalWarpHole(nullptr)
 {
@@ -127,20 +128,40 @@ void Player::UpdateGameObject(float _deltaTime)
 	//ゴール演出が開始されたらゴールワープホールに向かって自動で進む
 	if (mGoalProductionFlag)
 	{
-		/*const Vector3 ShiftPos = Vector3(0.0f, 0.0f, 1000.0f);
+		const Vector3 ShiftPos = Vector3(0.0f, 0.0f, 800.0f);
 		Vector3 centerPos = mClearPos - ShiftPos;
 
-		mPosition = Vector3::Lerp(centerPos, mPosition, 0.5f);
-
-		if (mPosition.z >= centerPos.z)
+		if (mPosition.z > centerPos.z)
 		{
 			mVelocity.z = mMoveSpeed;
-		}*/
+		}
+		else
+		{
+			mPosition = Vector3::Lerp(mPosition, centerPos, 0.1f);
+		}
 	}
 	else
 	{
 		//プレイヤーの斜め後ろにカメラをセット
 		mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
+	}
+
+	//ステージクリアしたらプレイヤーの更新を止める
+	if (mClearFlag)
+	{
+		//スケール値の削減値
+		const Vector3 ScaleReductionVal = Vector3(0.015f, 0.015f, 0.015f);
+
+		mVelocity = Vector3::sZERO;
+		mGetGoalLineRootFlag = true;
+		mGetGoalWarpHoleFlag = true;
+
+		mScale -= ScaleReductionVal;
+
+		if (mScale.x <= 0.0f)
+		{
+			SetState(State::eDead);
+		}
 	}
 
 	//ダメージを受けたら体力を減らす
@@ -279,33 +300,14 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		mAngle = 10.0f;
 	}
-
-	//ステージクリアしたらプレイヤーの更新を止める
-	if (mClearFlag)
-	{
-		//スケール値の削減値
-		const Vector3 ScaleReductionVal = Vector3(0.015f, 0.015f, 0.015f);
-
-		mVelocity = Vector3::sZERO;
-		mGetGoalLineRootFlag = true;
-		mGetGoalWarpHoleFlag = true;
-
-		mScale -= ScaleReductionVal;
-
-		if (mScale.x <= 0.0f)
-		{
-			SetState(State::eDead);
-		}
-	}
-	else
-	{
-		//回転処理
-		float radian = Math::ToRadians(mAngle);
-		Quaternion rot = this->GetRotation();
-		Quaternion inc(Vector3::sUNIT_X, radian);
-		Quaternion target = Quaternion::Concatenate(rot, inc);
-		SetRotation(target);
-	}
+	
+	//回転処理
+	float radian = Math::ToRadians(mAngle);
+	Quaternion rot = this->GetRotation();
+	Quaternion inc(Vector3::sUNIT_X, radian);
+	Quaternion target = Quaternion::Concatenate(rot, inc);
+	SetRotation(target);
+	
 	
 	//最大速度
 	const float PlayerMaxSpeed = 25.0f;
@@ -321,11 +323,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.x = -PlayerMaxSpeed;
 	}
 
-	//// 常に前に進む
-	//if (!mStopFlag)
-	//{
-	//	mVelocity.z = mMoveSpeed;
-	//}
+	// 常に前に進む
+	if (!mStopFlag)
+	{
+		mVelocity.z = mMoveSpeed;
+	}
 
 	//ボタンを押していないときの減速処理
 	if (!mButtonFlag)
@@ -353,11 +355,11 @@ void Player::UpdateGameObject(float _deltaTime)
 
 	}
 
-	////接地していないかつリスポーン時の待機時間じゃない時に重力処理を行う
-	//if (!mGroundFlag && !mStopFlag)
-	//{
-	//	mVelocity.y -= mGravity;
-	//}
+	//接地していないかつリスポーン時の待機時間じゃない時に重力処理を行う
+	if (!mGroundFlag && !mStopFlag)
+	{
+		mVelocity.y -= mGravity;
+	}
 
 	//当たり判定を無効にするy座標
 	const float OffCollisionYPos = 50.0f;
@@ -424,10 +426,13 @@ void Player::CheckpointEffectControl()
 */
 void Player::GameObjectInput(const InputState& _KeyState)
 {
-	//コントローラー入力処理
-	InputController(_KeyState);
-	//アナログスティック入力処理
-	InputStick(_KeyState);
+	if (!mGoalProductionFlag)
+	{
+		//コントローラー入力処理
+		InputController(_KeyState);
+		//アナログスティック入力処理
+		InputStick(_KeyState);
+	}
 }
 
 /*
@@ -436,50 +441,47 @@ void Player::GameObjectInput(const InputState& _KeyState)
 */
 void Player::InputController(const InputState& _KeyState)
 {
-	if (!mGoalProductionFlag)
+	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
+	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
 	{
-		// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-		if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-		{
-			mVelocity.z = mMoveSpeed;
-		}
-		// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-		{
-			mVelocity.z = -mMoveSpeed;
-		}
-		// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0 ||
-			_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-		{
-			mVelocity.z *= 0;
-		}
+		mVelocity.z = mMoveSpeed;
+	}
+	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
+	{
+		mVelocity.z = -mMoveSpeed;
+	}
+	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0 ||
+		_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
+	{
+		mVelocity.z *= 0;
+	}
 
-		//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
-		if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
-		{
-			mVelocity.x += -MPlayerSpeedUp;
-		}
-		// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
-		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
-		{
-			mVelocity.x += MPlayerSpeedUp;
-		}
+	//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
+	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
+	{
+		mVelocity.x += -MPlayerSpeedUp;
+	}
+	// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
+	{
+		mVelocity.x += MPlayerSpeedUp;
+	}
 
-		// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
-		else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
-			_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
-			_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
-		{
-			mButtonFlag = false;
-		}
+	// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
+	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 0 ||
+		_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 0 ||
+		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 0)
+	{
+		mButtonFlag = false;
 	}
 }
 

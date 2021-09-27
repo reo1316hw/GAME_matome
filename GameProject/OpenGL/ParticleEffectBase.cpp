@@ -56,7 +56,6 @@ void ParticleEffectBase::LifeCountDown()
 		mParticle->SetVisible(true);
 		mLifeCount--;
 	}
-
 }
 
 /*

@@ -106,7 +106,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 {
 	//衝突する可能性のある範囲を指定する数
-	const int DecideHitRange = 20;
+	const int DecideHitRange = 40;
 
 	//衝突する可能性のある範囲
 	int hitRange = mHitRangeBegin + DecideHitRange;

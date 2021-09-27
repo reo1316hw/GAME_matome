@@ -274,7 +274,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
         	break;
         case(MapDataNum::ePlayerNum):
         {
-        	const Vector3 AddPos = Vector3(0.0f, 200.0f, 23000.0f);
+        	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
         	const Vector3 PlayerPos = _ObjectPos + AddPos;
         	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
         
@@ -360,7 +360,7 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 			break;
 	    case(MapDataNum::ePlayerNum):
 	    {
-	    	const Vector3 AddPos = Vector3(0.0f, 200.0f, 90000.0f);
+	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
@@ -433,7 +433,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	break;
 	    case(MapDataNum::ePlayerNum):
 	    {
-	    	const Vector3 AddPos = Vector3(0.0f, 200.0f, 97000.0f);
+	    	const Vector3 AddPos = Vector3(0.0f, 500.0f, 0.0f);
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    

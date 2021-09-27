@@ -138,6 +138,8 @@ private:
 	bool		mScaleFlag;
 	//ボタンが入力されたか
 	bool		mButtonFlag;
+	//入力を許可するか
+	bool        mInputPermissionFlag;
 	//接地したか
 	bool		mGroundFlag;
 	//当たり判定を行うか
