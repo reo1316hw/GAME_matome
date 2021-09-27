@@ -17,14 +17,17 @@
 */
 Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _GpmeshName, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
 	: GameObject(_SceneTag, _ObjectTag)
+	, MSpeedUp(10.0f)
+	, MGroundYPos(120.0f)
+	, MSpeedDown(0.1f)
+	, MOffCollisionYPos(50.0f)
 	, mPlayerSphere(Vector3::sZERO,0.0f)
 	, mVisibleFrameCount(0)
 	, mLife(0)
 	, mCheckpointEffectCount(0)
 	, mAngle(0.0f)
+	, mGoalMoveSpeed(13.0f)
 	, mGoalZPos(0.0f)
-	, MPlayerSpeedUp(10.0f)
-	, MGroundYPos(120.0f)
 	, mClearPos(Vector3::sZERO)
 	, mScene(SceneBase::Scene::eOtherScene)
 	, mDeathFlag(false)
@@ -114,7 +117,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	//ゴールの座標に到達したらゴール演出を行う
-	if (mPosition.z >= mGoalZPos)
+	if (mPosition.z >= mGoalZPos && mPosition.y >= MOffCollisionYPos)
 	{
 		mGoalProductionFlag = true;
 	}
@@ -123,73 +126,6 @@ void Player::UpdateGameObject(float _deltaTime)
 	if (mPosition.z >= mClearPos.z)
 	{
 		mClearFlag = true;
-	}
-
-	//ゴール演出が開始されたらゴールワープホールに向かって自動で進む
-	if (mGoalProductionFlag)
-	{
-		const Vector3 ShiftPos = Vector3(0.0f, 0.0f, 800.0f);
-		Vector3 centerPos = mClearPos - ShiftPos;
-
-		mVelocity = Vector3::sZERO;
-		mGravity = 0.0f;
-
-		if (mPosition.z > centerPos.z)
-		{
-			mVelocity.z = mMoveSpeed;
-		}
-		else
-		{
-			Vector3 next = Vector3::Lerp(mPosition, centerPos, 0.1f);
-			Vector3 a = next - mPosition;
-			a.Normalize();
-			mVelocity = a * 5.0f;
-			SetPosition(mPosition + mVelocity);
-		}
-	}
-	else
-	{
-		//プレイヤーの斜め後ろにカメラをセット
-		mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
-	}
-
-	//ステージクリアしたらプレイヤーの更新を止める
-	if (mClearFlag)
-	{
-		//スケール値の削減値
-		const Vector3 ScaleReductionVal = Vector3(0.015f, 0.015f, 0.015f);
-
-		mVelocity = Vector3::sZERO;
-		mGetGoalLineRootFlag = true;
-		mGetGoalWarpHoleFlag = true;
-
-		mScale -= ScaleReductionVal;
-
-		if (mScale.x <= 0.0f)
-		{
-			SetState(State::eDead);
-		}
-	}
-
-	//ダメージを受けたら体力を減らす
-	if (mDamageFlag)
-	{
-		mLife -= 1;
-		mRespawnFlag = true;
-		mDamageFlag = false;
-	}
-
-	//リスポーン処理
-	if (mRespawnFlag)
-	{
-		mLateralMoveVelocity = Vector3::sZERO;
-		mCollisionFlag = true;
-
-		if (mLife >= 1)
-		{
-			mPosition = mRespawnPos;
-			mStopFlag = true;
-		}
 	}
 
 	//チュートリアル
@@ -232,40 +168,6 @@ void Player::UpdateGameObject(float _deltaTime)
 			mJumpFlag = false;
 		}
 	}
-
-	//リスポーン後の待機時間中処理
-	if (mStopFlag)
-	{
-		//表示するタイミング
-		const int VisibleTiming = 10;
-
-		mAngle = 0.0f;
-		mVisibleFrameCount++;
-
-		switch (mVisibleFrameCount % VisibleTiming)
-		{
-		case VisibleType::eInvisible:
-			mMeshComponent->SetVisible(false);
-			break;
-		case VisibleType::eVisible:
-			mMeshComponent->SetVisible(true);
-			break;
-		}
-
-		//表示させるフレーム
-		const int VisibleFlame = 40;
-
-		mVelocity = Vector3::sZERO;
-		if (mVisibleFrameCount >= VisibleFlame)
-		{
-			mVisibleFrameCount = 0;
-			mVelocity.z = mMoveSpeed;
-			mVelocity.y = mMoveSpeed;
-			mStopFlag = false;
-
-			mMeshComponent->SetVisible(true);
-		}
-	}
 	
 	//体力0になった時の処理
 	if (mLife <= 0)
@@ -273,24 +175,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		mDeathFlag = true;
 		SetState(State::eDead);
 	}
-
-	///////////////////////////////////////////////////////
-	//スケール縮小処理
-	if (mScaleFlag)
-	{
-
-		mScale.y = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
-		mScale.z = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
-	}
-
-	if (mPosition.y <= MGroundYPos && mVelocity.y <= 0.0f)
-	{
-		mScaleFlag = false;
-		mScale.x = 1.2f;
-		mScale.y = 1.2f;
-		mScale.z = 1.2f;
-	}
-	///////////////////////////////////////////////////////
 
 	//回転するy座標
 	const float RotateYPos = 200.0f;
@@ -368,17 +252,144 @@ void Player::UpdateGameObject(float _deltaTime)
 		mVelocity.y -= mGravity;
 	}
 
-	//当たり判定を無効にするy座標
-	const float OffCollisionYPos = 50.0f;
-
 	//プレイヤーがある一定の座標まで落ちたら当たり判定を無効にする
-	if (mPosition.y < OffCollisionYPos)
+	if (mPosition.y < MOffCollisionYPos)
 	{
 		mCollisionFlag = false;
 	}
 
 	//チェックポイントエフェクトを制御
 	CheckpointEffectControl();
+
+	//ダメージを受けたら体力を減らす
+	if (mDamageFlag)
+	{
+		mLife -= 1;
+		mRespawnFlag = true;
+		mDamageFlag = false;
+	}
+
+	//リスポーン処理
+	if (mRespawnFlag)
+	{
+		mLateralMoveVelocity = Vector3::sZERO;
+		mCollisionFlag = true;
+
+		if (mLife >= 1)
+		{
+			mPosition = mRespawnPos;
+			mStopFlag = true;
+		}
+	}
+
+	//リスポーン後の待機時間中処理
+	if (mStopFlag)
+	{
+		//表示するタイミング
+		const int VisibleTiming = 10;
+
+		mAngle = 0.0f;
+		mVisibleFrameCount++;
+
+		switch (mVisibleFrameCount % VisibleTiming)
+		{
+		case VisibleType::eInvisible:
+			mMeshComponent->SetVisible(false);
+			break;
+		case VisibleType::eVisible:
+			mMeshComponent->SetVisible(true);
+			break;
+		}
+
+		//表示させるフレーム
+		const int VisibleFlame = 40;
+
+		mVelocity = Vector3::sZERO;
+		if (mVisibleFrameCount >= VisibleFlame)
+		{
+			mVisibleFrameCount = 0;
+			mVelocity.z = mMoveSpeed;
+			mVelocity.y = mMoveSpeed;
+			mStopFlag = false;
+
+			mMeshComponent->SetVisible(true);
+		}
+	}
+
+	//ゴール演出が開始されたらゴールワープホールに向かって自動で進む
+	if (mGoalProductionFlag)
+	{
+		//ゴールワープホールから中央のブロックの座標にずらすための変数
+		const Vector3 ShiftPos = Vector3(0.0f, 200.0f, 600.0f);
+		//中央のブロックの座標
+		Vector3 centerPos = mClearPos - ShiftPos;
+
+		mVelocity = Vector3::sZERO;
+		mGravity = 0.0f;
+
+		//プレイヤーが中央のブロックまできたら前進させる
+		if (mPosition.z > centerPos.z)
+		{
+			mMoveSpeed = 30.0f;
+			mVelocity.z = mMoveSpeed;
+		}
+		//中央のブロックに向けた移動処理
+		else
+		{
+			/*Vector3 next = Vector3::Lerp(mPosition, centerPos, 0.1f);
+			Vector3 a = next - mPosition;*/
+
+			//中央のブロックに向けたベクトル
+			Vector3 towardsCenter = centerPos - mPosition;
+
+			towardsCenter.Normalize();
+			mVelocity = towardsCenter * mGoalMoveSpeed;
+			mGoalMoveSpeed -= MSpeedDown;
+		}
+	}
+	else
+	{
+		//プレイヤーの斜め後ろにカメラをセット
+		mMainCamera->SetViewMatrixLerpObject(CameraPos, mPosition);
+	}
+
+	//ステージクリアしたらプレイヤーの更新を止める
+	if (mClearFlag)
+	{
+		//スケール値の削減値
+		const Vector3 ScaleReductionVal = Vector3(0.015f, 0.015f, 0.015f);
+
+		mVelocity = Vector3::sZERO;
+		mGetGoalLineRootFlag = true;
+		mGetGoalWarpHoleFlag = true;
+
+		mScale -= ScaleReductionVal;
+
+		if (mScale.x <= 0.0f)
+		{
+			SetState(State::eDead);
+		}
+	}
+	else
+	{
+		///////////////////////////////////////////////////////
+	    //スケール縮小処理
+		if (mScaleFlag)
+		{
+
+			mScale.y = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
+			mScale.z = 1.2f + (mPosition.y - MGroundYPos) * 0.0015f;
+		}
+
+		if (mPosition.y <= MGroundYPos && mVelocity.y <= 0.0f)
+		{
+			mScaleFlag = false;
+			mScale.x = 1.2f;
+			mScale.y = 1.2f;
+			mScale.z = 1.2f;
+		}
+		///////////////////////////////////////////////////////
+	}
 
 	// 常に座標に速度を足す
  	mPosition += mVelocity + mLateralMoveVelocity;
@@ -473,13 +484,13 @@ void Player::InputController(const InputState& _KeyState)
 	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
 		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
 	{
-		mVelocity.x += -MPlayerSpeedUp;
+		mVelocity.x += -MSpeedUp;
 	}
 	// コントローラーの十字右もしくは、キーボードDが入力されたらxを足す
 	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == 1 ||
 		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D) == 1)
 	{
-		mVelocity.x += MPlayerSpeedUp;
+		mVelocity.x += MSpeedUp;
 	}
 
 	// コントローラーの十字左かコントローラーの十字右かキーボードAかキーボードDが入力されなかったらmButtonFlagをfalseにする
@@ -506,12 +517,12 @@ void Player::InputStick(const InputState& _KeyState)
 	//左スティック入力時の左移動
 	if (leftAxis.x <= -LeftAxisThreshold)
 	{
-		mVelocity.x += -MPlayerSpeedUp;
+		mVelocity.x += -MSpeedUp;
 	}
 	//左スティック入力時の右移動
 	if (leftAxis.x >= LeftAxisThreshold)
 	{
-		mVelocity.x += MPlayerSpeedUp;
+		mVelocity.x += MSpeedUp;
 	}
 }
 

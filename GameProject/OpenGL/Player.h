@@ -95,9 +95,12 @@ private:
 
 	//地面のY座標
 	const float MGroundYPos;
-
 	//加速度
-	const float MPlayerSpeedUp;
+	const float MSpeedUp;
+	//減速度
+	const float MSpeedDown;
+	//当たり判定を無効にするy座標
+	const float MOffCollisionYPos;
 
 	//プレイヤーの球当たり判定を生成
 	SphereCollider* mSelfSphereCollider;
@@ -117,9 +120,10 @@ private:
 	GoalLineRoot* mGoalLineRoot;
 	//ゴールワープホールのポインタ
 	GoalWarpHole* mGoalWarpHole;
+
 	//横移動床にあたった時の速度
 	Vector3		  mLateralMoveVelocity;
-	//クリアのz地点
+	//クリア地点
 	Vector3       mClearPos;
 
 	//死んだか
@@ -155,6 +159,13 @@ private:
 	//1回だけゴールワープホールのポインタを取得するためのフラグ
 	bool        mGetGoalWarpHoleFlag;
 
+	//角度
+	float		mAngle;
+	//ゴール時の速度
+	float       mGoalMoveSpeed;
+	//ゴールz座標
+	float       mGoalZPos;
+
 	//プレイヤーが点滅するためのカウント
 	int			mVisibleFrameCount;
 	//現在のシーンはどれか
@@ -163,10 +174,6 @@ private:
 	int			mLife;
 	//チェックポイントエフェクトを生存時間
 	int			mCheckpointEffectCount;
-	//角度
-	float		mAngle;
-	//ゴールz座標
-	float       mGoalZPos;
 
 public://ゲッターセッター
 

@@ -43,7 +43,7 @@ Glass::Glass(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpmes
 void Glass::UpdateGameObject(float _deltaTime)
 {
 	// 落とすためのカウントの上限値
-	const int LimitDownCount = 15;
+	const int LimitDownCount = 16;
 
 	if (mPlayer->GetRespawnFlag())
 	{

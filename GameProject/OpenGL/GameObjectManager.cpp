@@ -38,12 +38,6 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 
 	mUpdatingGameObject = true;
 
-	// カメラを更新する
-	for (auto cameraObject : mCameraObjects)
-	{
-		cameraObject->Update(_deltaTime);
-	}
-
 	// チュートリアルを更新する
 	for (auto tutorialObject : mTutorialObjects)
 	{
@@ -60,6 +54,12 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	for (auto stage02Object : mStage02Objects)
 	{
 		stage02Object->Update(_deltaTime);
+	}
+
+	// カメラを更新する
+	for (auto cameraObject : mCameraObjects)
+	{
+		cameraObject->Update(_deltaTime);
 	}
 
 	mUpdatingGameObject = false;
