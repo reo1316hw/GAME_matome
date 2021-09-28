@@ -73,9 +73,10 @@ Player::Player(const Vector3& _Pos, const Vector3& _Size, const std::string _Gpm
 	mClearEffectManager = new ClearEffectManager(_ObjectTag, _SceneTag, this);
 	mDeathEffectManager = new DeathEffectManager(_ObjectTag, _SceneTag , this);
 
-	//プレイヤー自身の当たり判定
-	mSelfSphereCollider = new SphereCollider(this, GetOnCollisionFunc());
+	//球状当たり判定
 	Sphere sphere = {Vector3::sZERO, 30.0f};
+
+	mSelfSphereCollider = new SphereCollider(this, GetOnCollisionFunc());
 	mSelfSphereCollider->SetObjectSphere(sphere);
 
 	mLateralMoveVelocity = Vector3::sZERO;
@@ -456,27 +457,6 @@ void Player::GameObjectInput(const InputState& _KeyState)
 */
 void Player::InputController(const InputState& _KeyState)
 {
-	// コントローラーの十字上もしくはキーボード、Wが入力されたらzを足す
-	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 1 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 1)
-	{
-		mVelocity.z = mMoveSpeed;
-	}
-	// コントローラーの十字下もしくは、キーボードSが入力されたら-zを足す
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 1 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 1)
-	{
-		mVelocity.z = -mMoveSpeed;
-	}
-	// コントローラーの十字上かコントローラーの十字下かキーボードWかキーボードSが入力されなかったら速度を0にする
-	else if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_UP) == 0 ||
-		_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == 0 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) == 0 ||
-		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) == 0)
-	{
-		mVelocity.z *= 0;
-	}
-
 	//コントローラーの十字左もしくは、キーボードAが入力されたら-xを足す
 	if (_KeyState.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == 1 ||
 		_KeyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) == 1)
@@ -569,25 +549,33 @@ void Player::OnCollision(const GameObject& _HitObject)
 			mJumpFlag = true;
 		}
 
-		//横移動床の判定
-		if (mTag == Tag::eLateralMoveGroundTag)
-		{
-			//重力を消す
-			mVelocity.y = 0;
-
-			if (mLateral != nullptr)
-			{
-				//横移動床の速度を取得
-				mLateralMoveVelocity = mLateral->GetVelocity();
-			}
-		}
-		else
-		{
-			mLateralMoveVelocity = Vector3::sZERO;
-		}
-
+		//横移動床に当たった時の処理
+		HitLateralMoveGround();
 		//チェックポイントに当たった時の処理
 		HitCheckPoint(_HitObject);
+	}
+}
+
+/*
+@fn	横移動床に当たった時の処理
+*/
+void Player::HitLateralMoveGround()
+{
+	//横移動床の判定
+	if (mTag == Tag::eLateralMoveGroundTag)
+	{
+		//重力を消す
+		mVelocity.y = 0;
+
+		if (mLateral != nullptr)
+		{
+			//横移動床の速度を取得
+			mLateralMoveVelocity = mLateral->GetVelocity();
+		}
+	}
+	else
+	{
+		mLateralMoveVelocity = Vector3::sZERO;
 	}
 }
 

@@ -14,7 +14,7 @@ HeartUI::HeartUI(const Vector2& _Pos, const Tag& _ObjectTag, const SceneBase::Sc
 	:UIBase(_Pos, "Assets/heart02.png", _SceneTag, _ObjectTag)
 {
 	mUI = new UIComponent(this);
-	mUI->SetTexture(RENDERER->GetTexture("Assets/heart.png"));
+	mUI->SetTexture(RENDERER->GetTexture("Assets/UI/Heart.png"));
 
 	mPosition = Vector3(_Pos.x, _Pos.y, 0.0f);
 

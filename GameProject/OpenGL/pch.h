@@ -94,12 +94,12 @@
 
 #include "SceneBase.h"
 #include "TitleScene.h"
-#include "TutorialScene.h"
-#include "Stage01Scene.h"
-#include "Stage02Scene.h"
+#include "TutorialStageScene.h"
+#include "FirstStageScene.h"
+#include "SecondStageScene.h"
 #include "ContinueScene.h"
-#include "GameOver.h"
-#include "GameClear.h"
+#include "GameOverScene.h"
+#include "GameClearScene.h"
 
 #include "FPS.h"
 

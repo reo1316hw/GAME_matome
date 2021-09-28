@@ -32,11 +32,11 @@ VerticalMoveGround::VerticalMoveGround(const Vector3& _Pos, const Vector3& _Size
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
-	// 当たり判定
-	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh(_GpmeshName);
+	//矩形当たり判定
+	const AABB Box = AABB(Vector3(-1.0f, -1.0f, -1.0f), Vector3(1.0f, 1.0f, 1.0f));
+
 	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
-	mBoxcollider->SetObjectBox(mMesh->GetBox());
+	mBoxcollider->SetObjectBox(Box);
 
 	mOriginalPosFlag = false;
 

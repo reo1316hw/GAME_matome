@@ -36,11 +36,11 @@ RightBlock::RightBlock(const Vector3& _Pos, const Vector3& _Size, const float _A
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmMesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh(_GpmeshName));
 
-	// 当たり判定
-	mMesh = new Mesh;
-	mMesh = RENDERER->GetMesh(_GpmeshName);
+	//矩形当たり判定
+	const AABB Box = AABB(Vector3(-1.0f, -1.0f, -1.0f), Vector3(1.0f, 1.0f, 1.0f));
+
 	mBoxcollider = new BoxCollider(this, GetOnCollisionFunc());
-	mBoxcollider->SetObjectBox(mMesh->GetBox());
+	mBoxcollider->SetObjectBox(Box);
 
 	mOriginalPosFlag = false;
 

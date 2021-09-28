@@ -80,19 +80,7 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Stage01Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage02Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameClear.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOver.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="UIComponent.cpp">
@@ -158,16 +146,10 @@
     <ClCompile Include="HDRRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="invisibleMeshComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="TutorialScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="RippleClearEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
@@ -225,6 +207,24 @@
     </ClCompile>
     <ClCompile Include="ParticleClearEffect.cpp">
       <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialStageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="InvisibleMeshComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -309,19 +309,7 @@
     <ClInclude Include="SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Stage02Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage01Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameClear.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOver.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="UIComponent.h">
@@ -387,16 +375,10 @@
     <ClInclude Include="HDRRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="invisibleMeshComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="TutorialScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="RippleClearEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
@@ -454,6 +436,24 @@
     </ClInclude>
     <ClInclude Include="ParticleClearEffect.h">
       <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialStageScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="InvisibleMeshComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@ enum VisibleType
 	eVisible = 5
 };
 
-class Player:public GameObject
+class Player : public GameObject
 {
 public:
 
@@ -92,6 +92,11 @@ private:
 	@param	_HitObject ヒットした対象のゲームオブジェクトのアドレス
 	*/
 	void HitCheckPoint(const GameObject& _HitObject);
+
+	/*
+	@fn	    横移動床に当たった時の処理
+	*/
+	void HitLateralMoveGround();
 
 	//地面のY座標
 	const float MGroundYPos;

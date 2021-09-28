@@ -20,7 +20,7 @@ TitleScene::TitleScene(const Scene& _NowScene)
 
 	SetScene(_NowScene);
 
-	mSprite = new Sprite("Assets/title.png");
+	mSprite = new Sprite("Assets/BackGround/Title.png");
 
 	mNextSceneCount = 0;
 }
@@ -42,9 +42,7 @@ SceneBase* TitleScene::UpdateScene(const InputState& _KeyState)
 	if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_START) == ButtonState::eReleased ||
 		_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::eReleased)
 	{
-		return new TutorialScene(Scene::eTutorial);
-		//return new Stage01Scene(Scene::eStage01);
-		//return new Stage02Scene(Scene::eStage02);
+		return new TutorialStageScene(Scene::eTutorial);
 	}
 
 	return this;

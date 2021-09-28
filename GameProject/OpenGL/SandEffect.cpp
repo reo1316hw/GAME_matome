@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 SandEffect::SandEffect(const Vector3 _Pos, const Vector3 _Vel, const SceneBase::Scene _SceneTag,const Tag& _ObjectTag)
-	:ParticleEffectBase(_Pos,_Vel,30,"Assets/PhotonB.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos,_Vel,30,"Assets/Texture/Effect/Photon.png", _SceneTag, _ObjectTag)
 {
 	const Vector3 Color = Vector3(0.95f, 0.95f, 0.95f);
 	mAlpha = 0.5f;

@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 DeathEffect::DeathEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/miniGlass.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/Texture/Effect/MiniGlass.png", _SceneTag, _ObjectTag)
 {
 	mAlpha = 1.0f;
 	mScale = 16.0f;

@@ -8,8 +8,7 @@
 */
 #pragma once
 
-class MainCameraObject :
-	public GameObject
+class MainCameraObject : public GameObject
 {
 public:
 

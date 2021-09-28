@@ -23,7 +23,7 @@ ContinueScene::ContinueScene(const Scene& _NowScene, const Scene& _PreScene, con
 
 	SetScene(_NowScene);
 
-	mSprite = new Sprite("Assets/continue.png");
+	mSprite = new Sprite("Assets/BackGround/Continue.png");
 
 	switch (_PreScene)
 	{
@@ -62,7 +62,7 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _KeyState)
 			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mTutorialTransitionFlag = false;
-			return new TutorialScene(Scene::eTutorial);
+			return new TutorialStageScene(Scene::eTutorial);
 		}
 	}
 
@@ -72,7 +72,7 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _KeyState)
 			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage01TransitionFlag = false;
-			return new Stage01Scene(Scene::eStage01);
+			return new FirstStageScene(Scene::eStage01);
 		}
 	}
 
@@ -82,14 +82,14 @@ SceneBase* ContinueScene::UpdateScene(const InputState& _KeyState)
 			_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_Q) == ButtonState::eReleased)
 		{
 			mStage02TransitionFlag = false;
-			return new Stage02Scene(Scene::eStage02);
+			return new SecondStageScene(Scene::eStage02);
 		}
 	}
 
 	if (_KeyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::eReleased ||
 		_KeyState.m_keyboard.GetKeyState(SDL_SCANCODE_E) == ButtonState::eReleased)
 	{
-		return new GameOver(Scene::eGameOver);
+		return new GameOverScene(Scene::eGameOver);
 	}
 
 	return this;

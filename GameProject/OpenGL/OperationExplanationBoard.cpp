@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 OperationExplanationBoard::OperationExplanationBoard(const Vector3& _Pos, const Vector3& _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 0, "Assets/operation.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 0, "Assets/Texture/Board/Operation.png", _SceneTag, _ObjectTag)
 {
 	mInitPos = _Pos;
 	mScale = 400.0f;

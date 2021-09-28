@@ -310,7 +310,7 @@ int LoadStageTextures(const rapidjson::Document& _Doc, TextureStage _texStage, c
 			t = RENDERER->GetTexture(texName);
 			if (t == nullptr)
 			{
-				t = RENDERER->GetTexture("Assets/Default.png");
+				t = RENDERER->GetTexture("Assets/Texture/Object/NoneTexture.png");
 			}
 			return t->GetTextureID();
 		}

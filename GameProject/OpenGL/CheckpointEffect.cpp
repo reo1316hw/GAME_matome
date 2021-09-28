@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 CheckpointEffect::CheckpointEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 60, "Assets/star.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 60, "Assets/Texture/Effect/Star.png", _SceneTag, _ObjectTag)
 {
 	mAlpha = 1.0f;
 	mScale = 0.0f;

@@ -142,7 +142,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 		return false;
 	}
 	// 未定義テクスチャ
-	mUndefineTexID = GetTexture("Assets/noneTexture.png")->GetTextureID();
+	mUndefineTexID = GetTexture("Assets/Texture/Object/NoneTexture.png")->GetTextureID();
 
 	// HDRレンダラー初期化
 	mHDRRenderer = new HDRRenderer(mScreenWidth, mScreenHeight, 4);
@@ -580,7 +580,7 @@ Mesh* Renderer::GetMesh(const std::string& _FileName)
 	//作成済みでない場合、新しくメッシュを作成
 	else
 	{
-		m = new Mesh();
+ 		m = new Mesh();
 		if (m->Load(_FileName, this))
 		{
 			mMeshes.emplace(_FileName, m);

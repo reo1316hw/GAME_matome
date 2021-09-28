@@ -275,6 +275,11 @@ public://ゲッターセッター
 	const Vector3 GetRespawnPos() const { return mRespawnPos; };
 
 	/*
+	@return	オブジェクトのスケール(float型)
+	*/
+	const float GetScale() const { return mScale.z; }
+
+	/*
 	@return	ワールド変換の処理を行う必要性があるかのフラグ(bool型)
 	*/
 	bool GetRecomputeWorldTransform() { return mRecomputeWorldTransform; }
@@ -283,11 +288,6 @@ public://ゲッターセッター
     @return	リスポーンしたかのフラグ(bool型)
     */
 	bool GetRespawnFlag() { return mSaveRespawnFlag; };
-
-	/*
-	@return	オブジェクトのスケール(float型)
-	*/
-	float GetScale() const { return mScale.z; }
 
 	/*
 	@return	オブジェクトのクォータニオン(Quaternion型)

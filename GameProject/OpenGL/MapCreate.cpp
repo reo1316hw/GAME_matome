@@ -30,7 +30,7 @@ MapCreate::~MapCreate()
 Player* MapCreate::OpenTutorialFile()
 {
 	// プレイヤーのマップデータの読み込み
-	if (!readTiledJson(mPlayerMapData, "Assets/Config/tutorialFix.json", "Player"))
+	if (!readTiledJson(mPlayerMapData, "Assets/Config/TutorialStage.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
@@ -39,19 +39,19 @@ Player* MapCreate::OpenTutorialFile()
 	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
-	if (!readTiledJson(mLowerMapData, "Assets/Config/tutorialFix.json", "Lower"))
+	if (!readTiledJson(mLowerMapData, "Assets/Config/TutorialStage.json", "Lower"))
 	{
 		printf("don't have Layer/Lower\n");
 	}
 
 	// 上層のマップデータの読み込み
-	if (!readTiledJson(mUpperMapData, "Assets/Config/tutorialFix.json", "Upper"))
+	if (!readTiledJson(mUpperMapData, "Assets/Config/TutorialStage.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
 
 	// ゴールのマップデータの読み込み
-	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/tutorialFix.json", "Goal"))
+	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/TutorialStage.json", "Goal"))
 	{
 		printf("don't have Layer/Goal\n");
 	}
@@ -74,7 +74,7 @@ Player* MapCreate::OpenTutorialFile()
 Player* MapCreate::OpenStage01File()
 {
 	// プレイヤーのマップデータの読み込み
-	if (!readTiledJson(mPlayerMapData, "Assets/Config/stage01Fix.json", "Player"))
+	if (!readTiledJson(mPlayerMapData, "Assets/Config/FirstStage.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
@@ -83,19 +83,19 @@ Player* MapCreate::OpenStage01File()
 	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
-	if (!readTiledJson(mLowerMapData, "Assets/Config/stage01Fix.json", "Lower"))
+	if (!readTiledJson(mLowerMapData, "Assets/Config/FirstStage.json", "Lower"))
 	{
 		printf("don't have Layer/Lower\n");
 	}
 
 	// 上層のマップデータの読み込み
-	if (!readTiledJson(mUpperMapData, "Assets/Config/stage01Fix.json", "Upper"))
+	if (!readTiledJson(mUpperMapData, "Assets/Config/FirstStage.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
 
 	// ゴールのマップデータの読み込み
-	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/stage01Fix.json", "Goal"))
+	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/FirstStage.json", "Goal"))
 	{
 		printf("don't have Layer/Goal\n");
 	}
@@ -118,7 +118,7 @@ Player* MapCreate::OpenStage01File()
 Player* MapCreate::OpenStage02File()
 {
 	// プレイヤーのマップデータの読み込み
-	if (!readTiledJson(mPlayerMapData, "Assets/Config/stage02Fix.json", "Player"))
+	if (!readTiledJson(mPlayerMapData, "Assets/Config/SecondStage.json", "Player"))
 	{
 		printf("don't have Layer/Player\n");
 	}
@@ -127,31 +127,31 @@ Player* MapCreate::OpenStage02File()
 	mSizeZ = mPlayerMapData.size();
 
 	// 下層のマップデータの読み込み
-	if (!readTiledJson(mLowerMapData, "Assets/Config/stage02Fix.json", "Lower"))
+	if (!readTiledJson(mLowerMapData, "Assets/Config/SecondStage.json", "Lower"))
 	{
 		printf("don't have Layer/Lower\n");
 	}
 
 	// 上層のマップデータの読み込み
-	if (!readTiledJson(mUpperMapData, "Assets/Config/stage02Fix.json", "Upper"))
+	if (!readTiledJson(mUpperMapData, "Assets/Config/SecondStage.json", "Upper"))
 	{
 		printf("don't have Layer/Upper\n");
 	}
 
 	// ゴールのマップデータの読み込み
-	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/stage02Fix.json", "Goal"))
+	if (!readTiledJson(mGoalBlockMapData, "Assets/Config/SecondStage.json", "Goal"))
 	{
 		printf("don't have Layer/Goal\n");
 	}
 
 	// ゴールのマップデータの読み込み
-	if (!readTiledJson(mVerticalBlockMapData, "Assets/Config/stage02Fix.json", "VerticalBlock"))
+	if (!readTiledJson(mVerticalBlockMapData, "Assets/Config/SecondStage.json", "VerticalBlock"))
 	{
 		printf("don't have Layer/VerticalBlock\n");
 	}
 
 	// ゴールのマップデータの読み込み
-	if (!readTiledJson(mUpBlockMapData, "Assets/Config/stage02Fix.json", "UpBlock"))
+	if (!readTiledJson(mUpBlockMapData, "Assets/Config/SecondStage.json", "UpBlock"))
 	{
 		printf("don't have Layer/UpBlock\n");
 	}
@@ -250,27 +250,27 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 	switch (_Name)
 	{
 	    case(MapDataNum::eGroundNum):
-        	new Ground(_ObjectPos, ObjectSize, "Assets/box.gpmesh", Tag::eGroundTag, SceneBase::Scene::eTutorial);
+        	new Ground(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/Ground.gpmesh", Tag::eGroundTag, SceneBase::Scene::eTutorial);
         	break;
         case(MapDataNum::eGlassNum):
-        	new Glass(_ObjectPos, ObjectSize, "Assets/box_02.gpmesh", Tag::eGlassTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new Glass(_ObjectPos, ObjectSize, "Assets/GpMesh/Glass.gpmesh", Tag::eGlassTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         case(MapDataNum::eBlockNum):
         {
         	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
-        	const Vector3 BlockPos = _ObjectPos + AddPos;
+			const Vector3 BlockPos = _ObjectPos + AddPos;
         
-        	new Block(BlockPos, ObstacleSize, "Assets/box_03.gpmesh", Tag::eBlockTag, SceneBase::Scene::eTutorial);
+        	new Block(BlockPos, ObstacleSize, "Assets/GpMesh/TutorialStage/Block.gpmesh", Tag::eBlockTag, SceneBase::Scene::eTutorial);
         	break;
         }
         case(MapDataNum::eVerticalMoveGroundNum):
-        	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_04.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/VerticalMoveGround.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         case(MapDataNum::eJumpNum):
-        	new Jump(_ObjectPos, ObjectSize, "Assets/box_05.gpmesh", Tag::eJumpTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new Jump(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/Jump.gpmesh", Tag::eJumpTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         case(MapDataNum::eLateralMoveGroundNum):
-        	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eTutorial, 1000.0f, mPlayer);
+        	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/Ground.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eTutorial, 1000.0f, mPlayer);
         	break;
         case(MapDataNum::ePlayerNum):
         {
@@ -278,7 +278,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
         	const Vector3 PlayerPos = _ObjectPos + AddPos;
         	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
         
-        	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eTutorial);
+        	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/GpMesh/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eTutorial);
         	break;
         }
         case(MapDataNum::eLowUpBlockNum):
@@ -286,20 +286,20 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
         	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
         	const Vector3 UpBlockPos = _ObjectPos + AddPos;
         
-        	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_03.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new UpBlock(UpBlockPos, ObstacleSize, "Assets/GpMesh/TutorialStage/Block.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         }
         case(MapDataNum::eLeftGroundNum):
-        	new LeftGround(_ObjectPos, ObjectSize, "Assets/box_07.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new LeftGround(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/LeftGround.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         case(MapDataNum::eRightGroundNum):
-        	new RightGround(_ObjectPos, ObjectSize, "Assets/box_06.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eTutorial, mPlayer);
+        	new RightGround(_ObjectPos, ObjectSize, "Assets/GpMesh/TutorialStage/RightGround.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eTutorial, mPlayer);
         	break;
         case(MapDataNum::eGoalBlockNum):
         {
         	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
         
-        	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_03.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eTutorial);
+        	new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/GpMesh/TutorialStage/GoalBlock.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eTutorial);
         	break;
         }
 		case(MapDataNum::eGoalWarpHoleNum):
@@ -308,7 +308,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eTutorial, mPlayer);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/GpMesh/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eTutorial, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):
@@ -317,7 +317,7 @@ void MapCreate::CreateTutorialObject(const unsigned int _Name, const Vector3 _Ob
 			const Vector3 GoalCircleFramePos = _ObjectPos + AddPos;
 			const Vector3 GoalCircleFrameSize = Vector3(2.5f, 1.0f, 2.5f);
 
-			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eTutorial);
+			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/GpMesh/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eTutorial);
 			break;
 		}
 	}
@@ -336,27 +336,27 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 	switch (_Name)
 	{
 	    case(MapDataNum::eGroundNum):
-	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage01);
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/GpMesh/FirstStage/Ground.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage01);
 	    	break;
 	    case(MapDataNum::eGlassNum):
-			new Glass(_ObjectPos, ObjectSize, "Assets/box_09.gpmesh", Tag::eGlassTag,SceneBase::Scene::eStage01, mPlayer);
+			new Glass(_ObjectPos, ObjectSize, "Assets/GpMesh/Glass.gpmesh", Tag::eGlassTag,SceneBase::Scene::eStage01, mPlayer);
 			break;
 	    case(MapDataNum::eBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-			new Block(BlockPos, ObstacleSize, "Assets/box_10.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage01);
+			new Block(BlockPos, ObstacleSize, "Assets/GpMesh/FirstStage/Block.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage01);
 			break;
 	    }
 	    case(MapDataNum::eVerticalMoveGroundNum):
-		    new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_11.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage01, mPlayer);
+		    new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/FirstStage/VerticalMoveGround.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
 	    case(MapDataNum::eJumpNum):
-			new Jump(_ObjectPos, ObjectSize, "Assets/box_12.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage01, mPlayer);
+			new Jump(_ObjectPos, ObjectSize, "Assets/GpMesh/FirstStage/Jump.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
 		case(MapDataNum::eLateralMoveGroundNum):
-			new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_08.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage01 ,1000.0f, mPlayer);
+			new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/FirstStage/Ground.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage01 ,1000.0f, mPlayer);
 			break;
 	    case(MapDataNum::ePlayerNum):
 	    {
@@ -364,14 +364,14 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-		    mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage01);
+		    mPlayer = new Player(PlayerPos, PlayerSize, "Assets/GpMesh/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage01);
 			break;
 	    }
 	    case(MapDataNum::eGoalBlockNum):
 		{
 			const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 
-			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_10.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage01);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/GpMesh/FirstStage/GoalBlock.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage01);
 			break;
 		}
 		case(MapDataNum::eGoalWarpHoleNum):
@@ -380,7 +380,7 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage01, mPlayer);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/GpMesh/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage01, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):
@@ -389,7 +389,7 @@ void MapCreate::CreateStage01Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalCircleFramePos = _ObjectPos + AddPos;
 			const Vector3 GoalCircleFrameSize = Vector3(2.5f, 1.0f, 2.5f);
 
-			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage01);
+			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/GpMesh/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage01);
 			break;
 		}
 	}
@@ -409,27 +409,27 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	switch (_Name)
 	{
 	    case(MapDataNum::eGroundNum):
-	    	new Ground(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage02);
+	    	new Ground(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/Ground.gpmesh", Tag::eGroundTag, SceneBase::Scene::eStage02);
 	    	break;
 	    case(MapDataNum::eGlassNum):
-	    	new Glass(_ObjectPos, ObjectSize, "Assets/box_14.gpmesh", Tag::eGlassTag, SceneBase::Scene::eStage02, mPlayer);
+	    	new Glass(_ObjectPos, ObjectSize, "Assets/GpMesh/Glass.gpmesh", Tag::eGlassTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    case(MapDataNum::eBlockNum):
 	    {
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 BlockPos = _ObjectPos + AddPos;
 	    
-	    	new Block(BlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage02);
+	    	new Block(BlockPos, ObstacleSize, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
 	    case(MapDataNum::eVerticalMoveGroundNum):
-	    	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/box_16.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage02, mPlayer);
+	    	new VerticalMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/VerticalMoveGround.gpmesh", Tag::eVerticalMoveGroundTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    case(MapDataNum::eJumpNum):
-	    	new Jump(_ObjectPos, ObjectSize, "Assets/box_17.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage02, mPlayer);
+	    	new Jump(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/Jump.gpmesh", Tag::eJumpTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    case(MapDataNum::eLateralMoveGroundNum):
-	    	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage02, 1000.0f, mPlayer);
+	    	new LateralMoveGround(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/Ground.gpmesh", Tag::eLateralMoveGroundTag, SceneBase::Scene::eStage02, 1000.0f, mPlayer);
 	    	break;
 	    case(MapDataNum::ePlayerNum):
 	    {
@@ -437,7 +437,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 PlayerPos = _ObjectPos + AddPos;
 	    	const Vector3 PlayerSize = Vector3(1.2f, 1.2f, 1.2f);
 	    
-	    	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage02);
+	    	mPlayer = new Player(PlayerPos, PlayerSize, "Assets/GpMesh/Sphere.gpmesh", Tag::ePlayerTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
 	    case(MapDataNum::eLowUpBlockNum):
@@ -445,7 +445,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 AddPos = Vector3(0.0f, -100.0f, 0.0f);
 	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eLowUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    }
 	    case(MapDataNum::eVerticalBlockNum):
@@ -453,7 +453,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 VerticalBlockPos = _ObjectPos + AddPos;
 	    
-	    	new VerticalBlock(VerticalBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eVerticalBlockTag, SceneBase::Scene::eStage02);
+	    	new VerticalBlock(VerticalBlockPos, ObstacleSize, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eVerticalBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
 	    case(MapDataNum::eAerialBlockNum):
@@ -462,7 +462,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 AerialBlockPos = _ObjectPos + AddPos;
 			const Vector3 AerialBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-	    	new AerialBlock(AerialBlockPos, AerialBlockSize, "Assets/box_15.gpmesh", Tag::eAerialBlockTag, SceneBase::Scene::eStage02);
+	    	new AerialBlock(AerialBlockPos, AerialBlockSize, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eAerialBlockTag, SceneBase::Scene::eStage02);
 	    	break;
 	    }
 		case(MapDataNum::eRightBlockNum):
@@ -471,7 +471,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 RightBlockPos = _ObjectPos + AddPos;
 			const float AddEndPosX = 600.0f;
 
-			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPosX, "Assets/box_15.gpmesh", Tag::eRightBlockTag, SceneBase::Scene::eStage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPosX, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eRightBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 		case(MapDataNum::eLeftBlockNum):
@@ -480,21 +480,21 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 600.0f;
 
-			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eLeftBlockTag, SceneBase::Scene::eStage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eLeftBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 		case(MapDataNum::eLeftGroundNum):
-			new LeftGround(_ObjectPos, ObjectSize, "Assets/box_19.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eStage02, mPlayer);
+			new LeftGround(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/LeftGround.gpmesh", Tag::eLeftGroundTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		case(MapDataNum::eRightGroundNum):
-			new RightGround(_ObjectPos, ObjectSize, "Assets/box_18.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eStage02, mPlayer);
+			new RightGround(_ObjectPos, ObjectSize, "Assets/GpMesh/SecondStage/RightGround.gpmesh", Tag::eRightGroundTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		case(MapDataNum::eDownBlockNum):
 		{
 			const Vector3 AddPos = Vector3(0.0f, 1600.0f, 0.0f);
 			const Vector3 DownBlockPos = _ObjectPos + AddPos;
 
-			new DownBlock(DownBlockPos, ObjectSize, "Assets/box_13.gpmesh", Tag::eDownBlockTag, SceneBase::Scene::eStage02, mPlayer);
+			new DownBlock(DownBlockPos, ObjectSize, "Assets/GpMesh/SecondStage/Ground.gpmesh", Tag::eDownBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 	    case(MapDataNum::eHighUpBlockNum):
@@ -502,14 +502,14 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 	    	const Vector3 AddPos = Vector3(0.0f, 100.0f, 0.0f);
 	    	const Vector3 UpBlockPos = _ObjectPos + AddPos;
 	    
-	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/box_15.gpmesh", Tag::eHighUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
+	    	new UpBlock(UpBlockPos, ObstacleSize, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eHighUpBlockTag, SceneBase::Scene::eStage02, mPlayer);
 	    	break;
 	    }
 	    case(MapDataNum::eGoalBlockNum):
 	    {
 	    	const Vector3 GoalBlockSize = Vector3(100.0f, 100.0f, 100.0f);
 	    
-			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/box_15.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage02);
+			new GoalBlock(_ObjectPos, GoalBlockSize, "Assets/GpMesh/SecondStage/GoalBlock.gpmesh", Tag::eGoalBlockTag, SceneBase::Scene::eStage02);
 			break;
 	    }
 		case(MapDataNum::eGoalWarpHoleNum):
@@ -518,7 +518,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalWarpHolePos = _ObjectPos + AddPos;
 			const Vector3 GoalWarpHoleSize = Vector3(4.5f, 4.0f, 1.0f);
 
-			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage02, mPlayer);
+			new GoalWarpHole(GoalWarpHolePos, GoalWarpHoleSize, "Assets/GpMesh/Cylinder.gpmesh", Tag::eGoalWarpHoleTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 		case(MapDataNum::eGoalCircleFrameNum):
@@ -527,7 +527,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 GoalCircleFramePos = _ObjectPos + AddPos;
 			const Vector3 GoalCircleFrameSize = Vector3(2.5f, 1.0f, 2.5f);
 
-			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage02);
+			new GoalCircleFrame(GoalCircleFramePos, GoalCircleFrameSize, "Assets/GpMesh/CircleFrame.gpmesh", Tag::eGoalCircleFrameTag, SceneBase::Scene::eStage02);
 			break;
 		}
 		case(MapDataNum::eRightOneMoveBlockNum):
@@ -536,7 +536,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 RightBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 200.0f;
 
-			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eRightOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
+			new RightBlock(RightBlockPos, MoveObstacleSize, AddEndPos, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eRightOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 		case(MapDataNum::eLeftOneMoveBlockNum):
@@ -545,7 +545,7 @@ void MapCreate::CreateStage02Object(const unsigned int _Name, const Vector3 _Obj
 			const Vector3 LeftBlockPos = _ObjectPos + AddPos;
 			const float AddEndPos = 200.0f;
 
-			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/box_15.gpmesh", Tag::eLeftOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
+			new LeftBlock(LeftBlockPos, MoveObstacleSize, AddEndPos, "Assets/GpMesh/SecondStage/Block.gpmesh", Tag::eLeftOneMoveBlockTag, SceneBase::Scene::eStage02, mPlayer);
 			break;
 		}
 	}

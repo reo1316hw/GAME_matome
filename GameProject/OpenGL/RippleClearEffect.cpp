@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 RippleClearEffect::RippleClearEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 50, "Assets/Ripple.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 50, "Assets/Texture/Effect/Ripple.png", _SceneTag, _ObjectTag)
 {
 	mAlpha = 1.0f;
 	mScale = 0.0f;
