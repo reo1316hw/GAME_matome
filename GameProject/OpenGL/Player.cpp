@@ -336,9 +336,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		//中央のブロックに向けた移動処理
 		else
 		{
-			/*Vector3 next = Vector3::Lerp(mPosition, centerPos, 0.1f);
-			Vector3 a = next - mPosition;*/
-
 			//中央のブロックに向けたベクトル
 			Vector3 towardsCenter = centerPos - mPosition;
 
