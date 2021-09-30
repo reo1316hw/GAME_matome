@@ -724,7 +724,6 @@ void Renderer::CreateParticleVerts()
 */
 void Renderer::DrawParticle()
 {
-
 	std::sort(mParticles.begin(), mParticles.end(), std::greater<ParticleComponent*>());
 
 	if (mParticles.size() == 0)
@@ -765,7 +764,6 @@ void Renderer::DrawParticle()
 		if (particle->GetVisible())
 		{
 			//ブレンドモード変更が必要なら変更する
-			blendType = particle->GetBlendType();
 			blendType = particle->GetBlendType();
 			if (blendType != prevType)
 			{

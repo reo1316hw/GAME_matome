@@ -18,7 +18,7 @@ ParticleClearEffect::ParticleClearEffect(const Vector3 _Pos, const Vector3 _Vel,
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::sWHITE);
-	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAlpha);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eParticleBlendAdd);
 }
 
 /*
